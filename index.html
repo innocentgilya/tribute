@@ -564,45 +564,99 @@ function initGallery(IMAGES) {
 
 /* -------- TRIBUTES -------- */
 (function(){
-  const wall = document.getElementById('tribute-wall');
-  let tributes = JSON.parse(localStorage.getItem('tributes')||'[]');
-  function timeAgo(ts){
-    const s = Math.floor((Date.now()-ts)/1000);
-    if(s < 60) return 'just now';
-    if(s < 3600) return Math.floor(s/60)+'m ago';
-    if(s < 86400) return Math.floor(s/3600)+'h ago';
-    return Math.floor(s/86400)+'d ago';
+  const wall  = document.getElementById('tribute-wall');
+  const btn   = document.getElementById('submit-tribute');
+  const msg   = document.getElementById('t-message');
+  const toast = document.getElementById('toast');
+
+  function timeAgo(dateStr){
+    const s = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
+    if(s < 60)    return 'just now';
+    if(s < 3600)  return Math.floor(s/60)  + 'm ago';
+    if(s < 86400) return Math.floor(s/3600) + 'h ago';
+    return Math.floor(s/86400) + 'd ago';
   }
-  function render(){
-    if(!tributes.length){ wall.innerHTML = '<div class="empty-wall">Be the first to leave a tribute — your words bring comfort to those who grieve.</div>'; return; }
-    wall.innerHTML = tributes.slice().reverse().map((t,i) => `
+
+  function renderTributes(tributes){
+    if(!tributes.length){
+      wall.innerHTML = '<div class="empty-wall">Be the first to leave a tribute — your words bring comfort to those who grieve.</div>';
+      return;
+    }
+    wall.innerHTML = tributes.map((t,i) => `
       <div class="tribute-card" style="animation-delay:${i*.08}s">
         ${t.relation ? `<div class="tribute-relation">${t.relation}</div>` : ''}
         <p class="tribute-text">${t.message}</p>
         <div class="tribute-meta">
-          <span class="tribute-name">${t.name||'Anonymous'}</span>
-          <span class="tribute-time">${timeAgo(t.ts)}</span>
+          <span class="tribute-name">${t.name || 'Anonymous'}</span>
+          <span class="tribute-time">${timeAgo(t.created_at)}</span>
         </div>
       </div>`).join('');
   }
-  const msg = document.getElementById('t-message');
-  msg.addEventListener('input', () => { document.getElementById('char-used').textContent = msg.value.length; });
-  document.getElementById('submit-tribute').addEventListener('click', () => {
-    const name = document.getElementById('t-name').value.trim();
-    const relation = document.getElementById('t-relation').value;
-    const message = msg.value.trim();
-    if(!message){ msg.style.borderColor = '#c0392b'; msg.focus(); setTimeout(() => msg.style.borderColor = '', 1500); return; }
-    tributes.push({ name: name||'Anonymous', relation, message, ts: Date.now() });
-    api/tributes.setItem('tributes', JSON.stringify(tributes));
-    document.getElementById('t-name').value = '';
-    document.getElementById('t-relation').value = '';
-    msg.value = ''; document.getElementById('char-used').textContent = '0';
-    render();
-    const toast = document.getElementById('toast');
-    toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 3500);
-    document.getElementById('tribute-wall').scrollIntoView({behavior:'smooth', block:'start'});
+
+  function showToast(message){
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+  }
+
+  /* load approved tributes on page load */
+  function loadTributes(){
+    wall.innerHTML = '<div class="empty-wall">Loading tributes…</div>';
+    fetch('/api/tributes')
+      .then(r => r.json())
+      .then(data => renderTributes(data))
+      .catch(() => {
+        wall.innerHTML = '<div class="empty-wall">Could not load tributes. Please refresh the page.</div>';
+      });
+  }
+  loadTributes();
+
+  /* char counter */
+  msg.addEventListener('input', () => {
+    document.getElementById('char-used').textContent = msg.value.length;
   });
-  render();
+
+  /* submit tribute */
+  btn.addEventListener('click', async () => {
+    const name     = document.getElementById('t-name').value.trim();
+    const relation = document.getElementById('t-relation').value;
+    const message  = msg.value.trim();
+
+    if(!message){
+      msg.style.borderColor = '#c0392b';
+      msg.focus();
+      setTimeout(() => msg.style.borderColor = '', 1500);
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting…';
+
+    try {
+      const res  = await fetch('/api/tributes', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ name, relation, message })
+      });
+      const data = await res.json();
+
+      if(res.ok){
+        document.getElementById('t-name').value    = '';
+        document.getElementById('t-relation').value = '';
+        msg.value = '';
+        document.getElementById('char-used').textContent = '0';
+        showToast('Thank you! Your tribute has been submitted and will appear once approved.');
+        document.getElementById('tribute-wall').scrollIntoView({behavior:'smooth', block:'start'});
+      } else {
+        showToast(data.error || 'Something went wrong. Please try again.');
+      }
+    } catch(err){
+      showToast('Could not connect. Please check your internet and try again.');
+    }
+
+    btn.disabled = false;
+    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> Leave Your Tribute`;
+  });
 })();
 </script>
 </body>
