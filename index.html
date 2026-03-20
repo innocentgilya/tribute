@@ -593,7 +593,7 @@ function initGallery(IMAGES) {
     const message = msg.value.trim();
     if(!message){ msg.style.borderColor = '#c0392b'; msg.focus(); setTimeout(() => msg.style.borderColor = '', 1500); return; }
     tributes.push({ name: name||'Anonymous', relation, message, ts: Date.now() });
-    localStorage.setItem('tributes', JSON.stringify(tributes));
+    api/tributes.setItem('tributes', JSON.stringify(tributes));
     document.getElementById('t-name').value = '';
     document.getElementById('t-relation').value = '';
     msg.value = ''; document.getElementById('char-used').textContent = '0';
