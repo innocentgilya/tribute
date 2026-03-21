@@ -95,18 +95,38 @@
     text-align: center; padding: calc(var(--nav-h) + 60px) 24px 80px;
     z-index: 1; overflow: hidden;
   }
+
+  /* The image layer — set by JS, full cover */
   .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background-size: cover;
+    background-position: center 15%;
+    background-repeat: no-repeat;
+  }
+
+  /* Teal gradient tint sits directly on top of the image */
+  .hero-bg::after {
+    content: '';
     position: absolute; inset: 0;
-    background-size: cover; background-position: center 20%; background-repeat: no-repeat;
-    opacity: 0.28; z-index: 0;
-  }
-  .hero::before {
-    content: ''; position: absolute; inset: 0;
     background:
-      linear-gradient(to bottom, rgba(9,24,32,0.6) 0%, rgba(9,24,32,0.08) 45%, rgba(9,24,32,0.75) 100%),
-      radial-gradient(ellipse 80% 70% at 50% 38%, rgba(30,74,92,0.35) 0%, transparent 70%);
-    pointer-events: none; z-index: 1;
+      /* deep dark vignette top & bottom */
+      linear-gradient(to bottom,
+        rgba(9,24,32,0.82)  0%,
+        rgba(9,24,32,0.35) 30%,
+        rgba(13,37,53,0.25) 55%,
+        rgba(9,24,32,0.70) 80%,
+        rgba(9,24,32,0.92) 100%
+      ),
+      /* teal colour wash across the whole image */
+      linear-gradient(
+        135deg,
+        rgba(14,58,80,0.55) 0%,
+        rgba(26,74,92,0.40) 50%,
+        rgba(9,45,65,0.55) 100%
+      );
   }
+
+  /* Remove the old ::before gradient since hero-bg::after now handles it */
   .hero > * { position: relative; z-index: 2; }
 
   .divider-ornament {

@@ -4,32 +4,47 @@
 
 /* -------- HERO IMAGE -------- */
 (function () {
-  const FOLDERS = ['images/', 'Images/'];
-  const NAMES   = ['hero', 'Hero'];
-  const EXTS    = ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG', '.webp'];
-  const bg      = document.getElementById('hero-bg');
+  /* Exact filenames to try, in priority order */
+  const CANDIDATES = [
+    'images/hero.jpg',
+    'images/hero.jpeg',
+    'images/hero.JPG',
+    'images/hero.JPEG',
+    'images/hero.png',
+    'images/hero.PNG',
+    'images/hero.webp',
+    'Images/hero.jpg',
+    'Images/hero.jpeg',
+    'Images/hero.JPG',
+    'Images/hero.jpeg',
+    'Images/hero.png',
+    'Images/Hero.jpg',
+    'Images/Hero.jpeg',
+    'Images/Hero.png',
+  ];
+
+  const heroBg  = document.getElementById('hero-bg');
   const allBg   = document.getElementById('all-tributes-bg');
 
-  function tryHero(fi, ni, ei) {
-    if (fi >= FOLDERS.length) return;
-    if (ni >= NAMES.length)   { tryHero(fi + 1, 0, 0); return; }
-    if (ei >= EXTS.length)    { tryHero(fi, ni + 1, 0); return; }
-    const src = FOLDERS[fi] + NAMES[ni] + EXTS[ei];
+  function tryNext(i) {
+    if (i >= CANDIDATES.length) return;
+    const src = CANDIDATES[i];
     const img = new Image();
     img.onload = function () {
       const val = "url('" + src + "')";
-      if (bg)    bg.style.backgroundImage    = val;
-      if (allBg) allBg.style.backgroundImage = val;
+      if (heroBg) heroBg.style.backgroundImage = val;
+      if (allBg)  allBg.style.backgroundImage  = val;
     };
-    img.onerror = () => tryHero(fi, ni, ei + 1);
+    img.onerror = function () { tryNext(i + 1); };
     img.src = src;
   }
-  tryHero(0, 0, 0);
+
+  tryNext(0);
 })();
 
 /* -------- PARTICLES -------- */
 (function () {
-  const c   = document.getElementById('particles');
+  const c = document.getElementById('particles');
   if (!c) return;
   const ctx = c.getContext('2d');
   let W, H;
