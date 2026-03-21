@@ -1,29 +1,31 @@
 /* ================================================================
    main.js — Hero image, particles, nav
+   Uses the same image discovery logic as gallery.html
    ================================================================ */
 
 /* -------- HERO IMAGE -------- */
 (function () {
-  /* The gallery works with images/ (lowercase).
-     hero.jpg must be in the same folder.
-     Also trying common alternative names. */
-  var CANDIDATES = [
-    'images/hero.jpg',
-    'images/hero.jpeg',
-    'images/Hero.jpg',
-    'images/Hero.jpeg',
-    'images/philemon.jpg',
-    'images/philemon.jpeg',
-    'images/Philemon.jpg',
-    'images/Philemon.jpeg',
-  ];
+  /* Same folders and extensions the gallery uses successfully */
+  var FOLDERS = ['images/', 'Images/'];
+  var NAMES   = ['hero', 'Hero'];
+  var EXTS    = ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG', '.webp'];
 
   var heroBg = document.getElementById('hero-bg');
   var allBg  = document.getElementById('all-tributes-bg');
 
+  /* Build flat list of candidates */
+  var candidates = [];
+  FOLDERS.forEach(function (folder) {
+    NAMES.forEach(function (name) {
+      EXTS.forEach(function (ext) {
+        candidates.push(folder + name + ext);
+      });
+    });
+  });
+
   function tryNext(i) {
-    if (i >= CANDIDATES.length) return;
-    var src = CANDIDATES[i];
+    if (i >= candidates.length) return;
+    var src = candidates[i];
     var img = new Image();
     img.onload = function () {
       var val = "url('" + src + "')";
