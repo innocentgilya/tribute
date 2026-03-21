@@ -4,10 +4,18 @@
 
 /* -------- HERO IMAGE -------- */
 (function () {
-  /* Try both folder casings — Linux servers are case-sensitive */
+  /* The gallery works with images/ (lowercase).
+     hero.jpg must be in the same folder.
+     Also trying common alternative names. */
   var CANDIDATES = [
     'images/hero.jpg',
-    'Images/hero.jpg',
+    'images/hero.jpeg',
+    'images/Hero.jpg',
+    'images/Hero.jpeg',
+    'images/philemon.jpg',
+    'images/philemon.jpeg',
+    'images/Philemon.jpg',
+    'images/Philemon.jpeg',
   ];
 
   var heroBg = document.getElementById('hero-bg');
