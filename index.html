@@ -181,16 +181,30 @@
     box-shadow: 0 20px 60px rgba(9,24,32,0.18), 0 0 0 1px rgba(26,58,74,0.12);
   }
   .ss-stage {
-    position: relative; width: 100%; padding-top: 60%;
+    position: relative; width: 100%;
     background: #d8e8ee;
+    /* height driven by the active slide image — no fixed ratio */
   }
   .ss-slide {
     position: absolute; inset: 0;
     opacity: 0; transition: opacity 1.2s ease;
+    display: flex; align-items: center; justify-content: center;
   }
-  .ss-slide.active { opacity: 1; }
+  /* The first (active) slide is in normal flow to set stage height */
+  .ss-slide.active {
+    opacity: 1;
+    position: relative; inset: auto;
+  }
   .ss-slide img {
-    width: 100%; height: 100%; object-fit: cover; display: block;
+    width: 100%; height: auto; display: block;
+    max-height: 82vh; object-fit: contain;
+  }
+  /* All inactive slides overlay the active one */
+  .ss-slide:not(.active) {
+    position: absolute; inset: 0;
+  }
+  .ss-slide:not(.active) img {
+    width: 100%; height: 100%; object-fit: cover;
   }
   /* gradient overlay on slide */
   .ss-slide::after {
@@ -271,6 +285,114 @@
   .ss-loading-dots span:nth-child(2) { animation-delay: 0.2s; }
   .ss-loading-dots span:nth-child(3) { animation-delay: 0.4s; }
 
+  /* ====== BIOGRAPHY SECTION ====== */
+  .bio-section {
+    position: relative; z-index: 1;
+    background: var(--dark);
+    padding: 80px 24px 90px;
+    scroll-margin-top: var(--nav-h);
+  }
+  .bio-inner { max-width: 860px; margin: 0 auto; }
+
+  .bio-header { text-align: center; margin-bottom: 64px; }
+  .bio-label {
+    font-size: 0.62rem; letter-spacing: 4px; color: var(--gold);
+    text-transform: uppercase; font-weight: 400; margin-bottom: 14px;
+  }
+  .bio-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 300; font-style: italic;
+    color: var(--white); letter-spacing: 0.5px; line-height: 1.2;
+  }
+  .bio-title-line {
+    width: 80px; height: 1px; margin: 20px auto 0;
+    background: linear-gradient(to right, transparent, var(--accent), transparent);
+  }
+
+  /* Chapter grid */
+  .bio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+  }
+  @media (max-width: 640px) { .bio-grid { grid-template-columns: 1fr; } }
+
+  .bio-chapter {
+    padding: 36px 40px;
+    border: 1px solid var(--border);
+    position: relative;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .bio-chapter.visible { opacity: 1; transform: translateY(0); }
+
+  /* accent top bar on hover */
+  .bio-chapter::before {
+    content: '';
+    position: absolute; top: 0; left: 40px; right: 40px; height: 1px;
+    background: linear-gradient(to right, transparent, var(--accent), transparent);
+    opacity: 0; transition: opacity 0.4s;
+  }
+  .bio-chapter:hover::before { opacity: 1; }
+
+  /* chapter number */
+  .bio-chapter-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; font-weight: 300;
+    color: var(--accent); opacity: 0.12;
+    line-height: 1; margin-bottom: 4px;
+    letter-spacing: -1px;
+  }
+  .bio-chapter-icon {
+    font-size: 1.3rem; margin-bottom: 14px; display: block;
+  }
+  .bio-chapter-title {
+    font-size: 0.62rem; letter-spacing: 3.5px; color: var(--accent);
+    text-transform: uppercase; font-weight: 400; margin-bottom: 14px;
+  }
+  .bio-chapter-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; font-weight: 400; color: var(--white);
+    margin-bottom: 14px; line-height: 1.3;
+  }
+  .bio-chapter-text {
+    font-size: 0.88rem; line-height: 1.9; color: var(--muted);
+    font-weight: 300;
+  }
+  /* placeholder text style */
+  .bio-chapter-text em {
+    color: rgba(122,184,200,0.35);
+    font-style: italic;
+  }
+
+  /* Full-width closing quote */
+  .bio-quote-wrap {
+    margin-top: 2px;
+    border: 1px solid var(--border);
+    padding: 48px 40px;
+    text-align: center;
+    position: relative;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .bio-quote-wrap.visible { opacity: 1; transform: translateY(0); }
+  .bio-closing-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-style: italic; font-weight: 300;
+    color: var(--accent-soft); line-height: 1.8; max-width: 600px; margin: 0 auto;
+  }
+  .bio-closing-attr {
+    margin-top: 16px;
+    font-size: 0.62rem; letter-spacing: 3px; color: var(--muted);
+    text-transform: uppercase; font-weight: 400;
+  }
+
+  @media (max-width: 600px) {
+    .bio-chapter { padding: 28px 24px; }
+    .bio-quote-wrap { padding: 36px 24px; }
+  }
+
   /* ====== FOOTER ====== */
   footer {
     text-align: center; padding: 48px 24px;
@@ -295,6 +417,7 @@
   <a class="nav-brand" href="index.html">In Loving Memory</a>
   <ul class="nav-links" id="nav-links">
     <li><a href="index.html"    class="nav-link active">Home</a></li>
+    <li><a href="#biography"    class="nav-link">Biography</a></li>
     <li><a href="gallery.html"  class="nav-link">Gallery</a></li>
     <li><a href="tributes.html" class="nav-link">Tributes</a></li>
   </ul>
@@ -358,6 +481,95 @@
   </div>
 </section>
 
+<!-- ===== BIOGRAPHY SECTION ===== -->
+<section class="bio-section" id="biography">
+  <div class="bio-inner">
+
+    <div class="bio-header">
+      <p class="bio-label">✦ His Story</p>
+      <h2 class="bio-title">The Life of Dr. Philemon Odiwuor Yugi</h2>
+      <div class="bio-title-line"></div>
+    </div>
+
+    <div class="bio-grid">
+
+      <!-- Birth & Early Life -->
+      <div class="bio-chapter">
+        <div class="bio-chapter-num">01</div>
+        <span class="bio-chapter-icon">🕊️</span>
+        <p class="bio-chapter-title">Birth &amp; Early Life</p>
+        <h3 class="bio-chapter-heading">A Child Full of Promise</h3>
+        <p class="bio-chapter-text">
+          <em>[ Enter birth details here — date, place of birth, parents' names, and early childhood memories. Describe the community he was born into and the early signs of the remarkable person he would become. ]</em>
+        </p>
+      </div>
+
+      <!-- Schooling & Education -->
+      <div class="bio-chapter">
+        <div class="bio-chapter-num">02</div>
+        <span class="bio-chapter-icon">📚</span>
+        <p class="bio-chapter-title">Education &amp; Schooling</p>
+        <h3 class="bio-chapter-heading">A Pursuit of Knowledge</h3>
+        <p class="bio-chapter-text">
+          <em>[ Describe his academic journey — primary school, secondary school, university, and the path to earning his doctorate. Mention institutions attended, subjects of passion, achievements, and mentors who shaped him. ]</em>
+        </p>
+      </div>
+
+      <!-- Christian Life -->
+      <div class="bio-chapter">
+        <div class="bio-chapter-num">03</div>
+        <span class="bio-chapter-icon">✝️</span>
+        <p class="bio-chapter-title">Christian Life &amp; Faith</p>
+        <h3 class="bio-chapter-heading">Rooted in Faith</h3>
+        <p class="bio-chapter-text">
+          <em>[ Share his faith journey — when he came to faith, the church or fellowship he was part of, his role in ministry, and how his Christian values shaped every aspect of his life and relationships. ]</em>
+        </p>
+      </div>
+
+      <!-- Family -->
+      <div class="bio-chapter">
+        <div class="bio-chapter-num">04</div>
+        <span class="bio-chapter-icon">🏡</span>
+        <p class="bio-chapter-title">Family &amp; Home</p>
+        <h3 class="bio-chapter-heading">A Devoted Family Man</h3>
+        <p class="bio-chapter-text">
+          <em>[ Write about his family life — his spouse, children, and the home he built. Describe the kind of husband, father, and family member he was, and the love and warmth he brought to those closest to him. ]</em>
+        </p>
+      </div>
+
+      <!-- Work & Career -->
+      <div class="bio-chapter">
+        <div class="bio-chapter-num">05</div>
+        <span class="bio-chapter-icon">💼</span>
+        <p class="bio-chapter-title">Career &amp; Service</p>
+        <h3 class="bio-chapter-heading">A Life of Purpose &amp; Impact</h3>
+        <p class="bio-chapter-text">
+          <em>[ Describe his professional life — the field he worked in, organisations he served, positions he held, and the lasting impact of his work. Highlight the people he mentored, the lives he changed, and the legacy he leaves behind. ]</em>
+        </p>
+      </div>
+
+      <!-- Passing -->
+      <div class="bio-chapter">
+        <div class="bio-chapter-num">06</div>
+        <span class="bio-chapter-icon">🌅</span>
+        <p class="bio-chapter-title">Passing &amp; Legacy</p>
+        <h3 class="bio-chapter-heading">Gone But Never Forgotten</h3>
+        <p class="bio-chapter-text">
+          <em>[ Share the circumstances of his passing on March 19, 2026, and reflect on the legacy he leaves — in his family, his profession, his church, and his community. What will people remember most about Dr. Philemon Odiwuor Yugi? ]</em>
+        </p>
+      </div>
+
+    </div><!-- /bio-grid -->
+
+    <!-- Closing quote -->
+    <div class="bio-quote-wrap">
+      <p class="bio-closing-quote">"Be of good comfort in the hope of the resurrection morning"</p>
+      <p class="bio-closing-attr">May 25, 1968 &nbsp;✦&nbsp; March 19, 2026</p>
+    </div>
+
+  </div>
+</section>
+
 <!-- ===== FOOTER ===== -->
 <footer>
   <p class="footer-text">"Be of good comfort in the hope of the resurrection morning"</p>
@@ -365,6 +577,26 @@
 </footer>
 
 <script src="main.js"></script>
+<script>
+/* Biography scroll-reveal */
+(function () {
+  var els = document.querySelectorAll('.bio-chapter, .bio-quote-wrap');
+  if (!els.length) return;
+  var delay = 0;
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        var el = entry.target;
+        var d  = delay;
+        setTimeout(function () { el.classList.add('visible'); }, d);
+        delay = Math.min(delay + 80, 400);
+        obs.unobserve(el);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function (el) { obs.observe(el); });
+})();
+</script>
 <script>
 /* ================================================================
    Inline slideshow — discovers images from images/ folder
@@ -485,11 +717,17 @@
   }
 
   function goTo(n) {
-    slides[cur].classList.remove('active');
-    dotsEl.querySelectorAll('.ss-dot')[cur].classList.remove('active');
+    var prev = cur;
     cur = (n + slides.length) % slides.length;
+
+    /* Outgoing slide: keep it visible as absolute overlay during fade */
+    slides[prev].classList.remove('active');
+    dotsEl.querySelectorAll('.ss-dot')[prev].classList.remove('active');
+
+    /* Incoming slide: add active so stage resizes to its natural height */
     slides[cur].classList.add('active');
     dotsEl.querySelectorAll('.ss-dot')[cur].classList.add('active');
+
     updateCounter();
     startProgress();
   }
