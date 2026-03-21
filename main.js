@@ -4,17 +4,29 @@
 
 /* -------- HERO IMAGE -------- */
 (function () {
-  var src    = 'Images/hero.jpg';
+  /* Try both folder casings — Linux servers are case-sensitive */
+  var CANDIDATES = [
+    'images/hero.jpg',
+    'Images/hero.jpg',
+  ];
+
   var heroBg = document.getElementById('hero-bg');
   var allBg  = document.getElementById('all-tributes-bg');
 
-  var img = new Image();
-  img.onload = function () {
-    var val = "url('" + src + "')";
-    if (heroBg) heroBg.style.backgroundImage = val;
-    if (allBg)  allBg.style.backgroundImage  = val;
-  };
-  img.src = src;
+  function tryNext(i) {
+    if (i >= CANDIDATES.length) return;
+    var src = CANDIDATES[i];
+    var img = new Image();
+    img.onload = function () {
+      var val = "url('" + src + "')";
+      if (heroBg) heroBg.style.backgroundImage = val;
+      if (allBg)  allBg.style.backgroundImage  = val;
+    };
+    img.onerror = function () { tryNext(i + 1); };
+    img.src = src;
+  }
+
+  tryNext(0);
 })();
 
 /* -------- PARTICLES -------- */
