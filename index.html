@@ -91,83 +91,92 @@
   /* ====== HERO ====== */
   .hero {
     position: relative; min-height: 100vh;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; padding: calc(var(--nav-h) + 60px) 24px 80px;
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    text-align: center; padding: 0 24px 80px;
     z-index: 1; overflow: hidden;
   }
 
-  /* The image layer — set by JS, full cover */
+  /* The photo — fills the full hero as background */
   .hero-bg {
     position: absolute; inset: 0; z-index: 0;
     background-size: cover;
-    background-position: center 15%;
+    background-position: center top;
     background-repeat: no-repeat;
   }
 
-  /* Teal gradient tint sits directly on top of the image */
+  /* Multi-layer teal gradient — matches poster:
+     clear photo at top, teal wash mid, dark fade at bottom for text */
   .hero-bg::after {
     content: '';
     position: absolute; inset: 0;
     background:
-      /* deep dark vignette top & bottom */
-      linear-gradient(to bottom,
-        rgba(9,24,32,0.82)  0%,
-        rgba(9,24,32,0.35) 30%,
-        rgba(13,37,53,0.25) 55%,
-        rgba(9,24,32,0.70) 80%,
-        rgba(9,24,32,0.92) 100%
+      /* bottom dark-to-teal for text legibility */
+      linear-gradient(to top,
+        rgba(9,24,32,1.0)   0%,
+        rgba(9,24,32,0.92)  18%,
+        rgba(13,40,58,0.78) 35%,
+        rgba(15,50,70,0.50) 55%,
+        rgba(20,60,80,0.20) 72%,
+        rgba(20,60,80,0.05) 85%,
+        transparent         100%
       ),
-      /* teal colour wash across the whole image */
+      /* teal colour tint across the whole photo */
       linear-gradient(
-        135deg,
-        rgba(14,58,80,0.55) 0%,
-        rgba(26,74,92,0.40) 50%,
-        rgba(9,45,65,0.55) 100%
+        180deg,
+        rgba(10,45,65,0.15) 0%,
+        rgba(14,55,75,0.30) 50%,
+        rgba(9,24,32,0.10)  100%
       );
   }
 
-  /* Remove the old ::before gradient since hero-bg::after now handles it */
   .hero > * { position: relative; z-index: 2; }
+
+  /* Text block sits at the bottom, matching poster layout */
+  .hero-text-block {
+    width: 100%; max-width: 700px; margin: 0 auto;
+    padding-bottom: 20px;
+  }
 
   .divider-ornament {
     color: var(--accent); font-size: 1.1rem; letter-spacing: 10px;
-    opacity: 0.8; margin-bottom: 20px; animation: fadeDown 1.2s ease both;
+    opacity: 0.8; margin-bottom: 18px; animation: fadeDown 1.2s ease both;
   }
   .hero-intro {
     font-size: 0.85rem; font-weight: 300; color: var(--accent-soft);
-    letter-spacing: 4px; margin-bottom: 14px; text-transform: uppercase;
+    letter-spacing: 4px; margin-bottom: 10px; text-transform: uppercase;
     opacity: 0; animation: fadeDown 1.2s 0.15s ease forwards;
   }
   .hero-name {
-    font-size: clamp(2rem, 6vw, 4rem); font-weight: 600;
-    color: var(--white); line-height: 1.15; letter-spacing: 2px; text-transform: uppercase;
+    font-size: clamp(1.8rem, 5.5vw, 3.6rem); font-weight: 600;
+    color: var(--white); line-height: 1.1; letter-spacing: 2px; text-transform: uppercase;
     opacity: 0; animation: fadeDown 1.2s 0.3s ease forwards;
-    text-shadow: 0 0 60px rgba(122,184,200,0.3);
+    text-shadow: 0 2px 40px rgba(0,0,0,0.6), 0 0 80px rgba(122,184,200,0.2);
   }
   .hero-dates {
-    font-size: 1rem; font-weight: 300; color: var(--accent-soft);
-    letter-spacing: 3px; margin-top: 16px;
+    font-size: 0.95rem; font-weight: 300; color: var(--accent-soft);
+    letter-spacing: 3px; margin-top: 12px;
     opacity: 0; animation: fadeDown 1.2s 0.5s ease forwards;
   }
   .hero-line {
-    width: 120px; height: 1px;
+    width: 100px; height: 1px;
     background: linear-gradient(to right, transparent, var(--accent), transparent);
-    margin: 28px auto; opacity: 0; animation: fadeIn 1.4s 0.8s ease forwards;
+    margin: 20px auto; opacity: 0; animation: fadeIn 1.4s 0.7s ease forwards;
   }
   .hero-quote {
-    font-size: clamp(0.85rem, 1.8vw, 1.05rem); font-style: italic; font-weight: 300;
-    color: var(--accent-soft); max-width: 500px; line-height: 1.9;
-    opacity: 0; animation: fadeDown 1.2s 1s ease forwards;
+    font-size: clamp(0.8rem, 1.6vw, 0.98rem); font-style: italic; font-weight: 300;
+    color: rgba(176,216,228,0.85); max-width: 480px; line-height: 1.8;
+    margin: 0 auto;
+    opacity: 0; animation: fadeDown 1.2s 0.9s ease forwards;
   }
   .hero-scroll {
-    position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+    position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
     display: flex; flex-direction: column; align-items: center; gap: 8px;
-    opacity: 0; animation: fadeIn 1.4s 1.8s ease forwards;
+    opacity: 0; animation: fadeIn 1.4s 1.6s ease forwards;
     cursor: pointer; text-decoration: none; z-index: 2;
   }
   .hero-scroll span { font-size: 0.55rem; letter-spacing: 4px; color: var(--muted); }
   .hero-scroll-arrow {
-    width: 1px; height: 40px;
+    width: 1px; height: 36px;
     background: linear-gradient(to bottom, var(--accent), transparent);
     animation: scrollPulse 2s infinite;
   }
@@ -437,12 +446,14 @@
 <!-- ===== HERO ===== -->
 <header class="hero" id="home">
   <div class="hero-bg" id="hero-bg"></div>
-  <div class="divider-ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
-  <p class="hero-intro">In loving memory of</p>
-  <h1 class="hero-name">Dr. Philemon Odiwuor Yugi</h1>
-  <p class="hero-dates">May 25, 1968 &nbsp;–&nbsp; March 19, 2026</p>
-  <div class="hero-line"></div>
-  <p class="hero-quote">"Be of good comfort in the hope of the resurrection morning"</p>
+  <div class="hero-text-block">
+    <div class="divider-ornament">✦ &nbsp; ✦ &nbsp; ✦</div>
+    <p class="hero-intro">In loving memory of</p>
+    <h1 class="hero-name">Dr. Philemon Odiwuor Yugi</h1>
+    <p class="hero-dates">May 25, 1968 &nbsp;–&nbsp; March 19, 2026</p>
+    <div class="hero-line"></div>
+    <p class="hero-quote">"Be of good comfort in the hope of the resurrection morning"</p>
+  </div>
   <a class="hero-scroll" href="#slideshow">
     <span>Scroll</span>
     <div class="hero-scroll-arrow"></div>
