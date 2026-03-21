@@ -106,7 +106,7 @@
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background: url('images/hero.jpg') center 20% / cover no-repeat;
+    background-size: cover; background-position: center 20%; background-repeat: no-repeat;
     opacity: 0.28; z-index: 0;
   }
   .hero::before {
@@ -311,7 +311,7 @@
   .all-tributes-overlay.open { opacity: 1; pointer-events: all; }
   .all-tributes-bg {
     position: fixed; inset: 0; z-index: 0;
-    background: url('images/hero.jpg') center 20% / cover no-repeat;
+    background-size: cover; background-position: center 20%; background-repeat: no-repeat;
     opacity: 0.12;
   }
   .all-tributes-backdrop {
@@ -491,13 +491,29 @@
 <div class="toast" id="toast">Your tribute has been shared. Thank you.</div>
 
 <script>
-/* -------- HERO IMAGE FALLBACK -------- */
+/* -------- HERO IMAGE -------- */
 (function(){
-  const bg = document.getElementById('hero-bg');
-  const img = new Image();
-  img.onload = function(){ bg.style.backgroundImage = "url('images/hero.jpg')"; };
-  img.onerror = function(){ bg.style.backgroundImage = "url('images/hero.png')"; };
-  img.src = 'images/hero.jpg';
+  const FOLDERS = ['images/', 'Images/'];
+  const NAMES   = ['hero', 'Hero'];
+  const EXTS    = ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG', '.webp'];
+  const bg      = document.getElementById('hero-bg');
+  const allBg   = document.getElementById('all-tributes-bg');
+
+  function tryHero(fi, ni, ei) {
+    if (fi >= FOLDERS.length) return; // nothing found
+    if (ni >= NAMES.length)  { tryHero(fi + 1, 0, 0); return; }
+    if (ei >= EXTS.length)   { tryHero(fi, ni + 1, 0); return; }
+    const src = FOLDERS[fi] + NAMES[ni] + EXTS[ei];
+    const img = new Image();
+    img.onload = function() {
+      const val = "url('" + src + "')";
+      bg.style.backgroundImage    = val;
+      if (allBg) allBg.style.backgroundImage = val;
+    };
+    img.onerror = () => tryHero(fi, ni, ei + 1);
+    img.src = src;
+  }
+  tryHero(0, 0, 0);
 })();
 
 /* -------- PARTICLES -------- */
@@ -633,14 +649,6 @@
   let curPage      = 0;
   let totalPages   = 1;
   let timer, progressAnim;
-
-  /* hero image fallback for overlay bg */
-  (function(){
-    const img = new Image();
-    img.onload  = () => allBg.style.backgroundImage = "url('images/hero.jpg')";
-    img.onerror = () => allBg.style.backgroundImage = "url('images/hero.png')";
-    img.src = 'images/hero.jpg';
-  })();
 
   function timeAgo(dateStr){
     const s = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
