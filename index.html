@@ -552,14 +552,19 @@
     'Drphilemonyugi8'
   ];
 
-  /* Try each extension in order until one loads */
-  const EXTS = ['.jpg', '.jpeg', '.png', '.webp'];
+  /* Try every folder + extension combo until something loads */
+  const FOLDERS = ['images/', 'Images/'];
+  const EXTS    = ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG', '.webp'];
 
-  function tryLoad(img, name, extIndex){
-    if(extIndex >= EXTS.length){ img.style.display='none'; return; }
-    img.onerror = () => tryLoad(img, name, extIndex + 1);
-    /* Use encodeURIComponent but replace %20 back to space for servers that need it */
-    img.src = 'images/' + name + EXTS[extIndex];
+  function tryLoad(img, name, fi, ei) {
+    if (fi >= FOLDERS.length) {
+      /* nothing worked — show name as placeholder */
+      img.style.display = 'none';
+      return;
+    }
+    if (ei >= EXTS.length) { tryLoad(img, name, fi + 1, 0); return; }
+    img.onerror = () => tryLoad(img, name, fi, ei + 1);
+    img.src = FOLDERS[fi] + name + EXTS[ei];
   }
 
   const stage  = document.getElementById('stage');
@@ -570,10 +575,10 @@
     const s   = document.createElement('div');
     s.className = 'slide';
     const img = document.createElement('img');
-    img.alt   = 'Dr. Philemon Odiwuor Yugi';
-    tryLoad(img, name, 0);
+    img.alt = 'Dr. Philemon Odiwuor Yugi';
     s.appendChild(img);
     stage.appendChild(s);
+    tryLoad(img, name, 0, 0);
     return s;
   });
 
