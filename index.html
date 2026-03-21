@@ -285,8 +285,8 @@
   .ss-loading-dots span:nth-child(2) { animation-delay: 0.2s; }
   .ss-loading-dots span:nth-child(3) { animation-delay: 0.4s; }
 
-  /* ====== BIOGRAPHY SECTION ====== */
-  .bio-section {
+  /* ====== BIOGRAPHY TEASER ====== */
+  .bio-teaser {
     position: relative; z-index: 1;
     background: var(--dark);
     padding: 80px 24px 90px;
@@ -294,7 +294,7 @@
   }
   .bio-inner { max-width: 860px; margin: 0 auto; }
 
-  .bio-header { text-align: center; margin-bottom: 64px; }
+  .bio-header { text-align: center; margin-bottom: 56px; }
   .bio-label {
     font-size: 0.62rem; letter-spacing: 4px; color: var(--gold);
     text-transform: uppercase; font-weight: 400; margin-bottom: 14px;
@@ -309,43 +309,30 @@
     background: linear-gradient(to right, transparent, var(--accent), transparent);
   }
 
-  /* Chapter grid */
   .bio-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2px;
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
   }
   @media (max-width: 640px) { .bio-grid { grid-template-columns: 1fr; } }
 
   .bio-chapter {
-    padding: 36px 40px;
-    border: 1px solid var(--border);
-    position: relative;
+    padding: 36px 40px; border: 1px solid var(--border); position: relative;
     opacity: 0; transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
   .bio-chapter.visible { opacity: 1; transform: translateY(0); }
-
-  /* accent top bar on hover */
   .bio-chapter::before {
-    content: '';
-    position: absolute; top: 0; left: 40px; right: 40px; height: 1px;
+    content: ''; position: absolute; top: 0; left: 40px; right: 40px; height: 1px;
     background: linear-gradient(to right, transparent, var(--accent), transparent);
     opacity: 0; transition: opacity 0.4s;
   }
   .bio-chapter:hover::before { opacity: 1; }
 
-  /* chapter number */
   .bio-chapter-num {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 3rem; font-weight: 300;
-    color: var(--accent); opacity: 0.12;
-    line-height: 1; margin-bottom: 4px;
-    letter-spacing: -1px;
+    font-size: 3rem; font-weight: 300; color: var(--accent); opacity: 0.12;
+    line-height: 1; margin-bottom: 4px; letter-spacing: -1px;
   }
-  .bio-chapter-icon {
-    font-size: 1.3rem; margin-bottom: 14px; display: block;
-  }
+  .bio-chapter-icon { font-size: 1.3rem; margin-bottom: 14px; display: block; }
   .bio-chapter-title {
     font-size: 0.62rem; letter-spacing: 3.5px; color: var(--accent);
     text-transform: uppercase; font-weight: 400; margin-bottom: 14px;
@@ -356,41 +343,40 @@
     margin-bottom: 14px; line-height: 1.3;
   }
   .bio-chapter-text {
-    font-size: 0.88rem; line-height: 1.9; color: var(--muted);
-    font-weight: 300;
+    font-size: 0.88rem; line-height: 1.9; color: var(--muted); font-weight: 300;
   }
-  /* placeholder text style */
-  .bio-chapter-text em {
-    color: rgba(122,184,200,0.35);
-    font-style: italic;
-  }
+  .bio-chapter-text em { color: rgba(122,184,200,0.35); font-style: italic; }
 
-  /* Full-width closing quote */
-  .bio-quote-wrap {
-    margin-top: 2px;
-    border: 1px solid var(--border);
-    padding: 48px 40px;
-    text-align: center;
-    position: relative;
+  /* Read more row */
+  .bio-read-more {
+    margin-top: 2px; border: 1px solid var(--border);
+    padding: 36px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
     opacity: 0; transform: translateY(20px);
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
-  .bio-quote-wrap.visible { opacity: 1; transform: translateY(0); }
-  .bio-closing-quote {
+  .bio-read-more.visible { opacity: 1; transform: translateY(0); }
+  .bio-read-more-text {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-    font-style: italic; font-weight: 300;
-    color: var(--accent-soft); line-height: 1.8; max-width: 600px; margin: 0 auto;
+    font-style: italic; font-size: 1.05rem; color: var(--muted); line-height: 1.7;
+    max-width: 480px;
   }
-  .bio-closing-attr {
-    margin-top: 16px;
-    font-size: 0.62rem; letter-spacing: 3px; color: var(--muted);
-    text-transform: uppercase; font-weight: 400;
+  .bio-read-more-text strong { color: var(--accent-soft); font-weight: 400; font-style: normal; }
+  .bio-read-more-link {
+    display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0;
+    font-size: 0.68rem; letter-spacing: 2.5px; color: var(--accent);
+    text-transform: uppercase; text-decoration: none; font-weight: 400;
+    border: 1px solid var(--accent); border-radius: 3px;
+    padding: 12px 24px; transition: all 0.3s;
   }
+  .bio-read-more-link:hover { background: rgba(122,184,200,0.1); }
+  .bio-read-more-link svg { transition: transform 0.3s; }
+  .bio-read-more-link:hover svg { transform: translateX(4px); }
 
   @media (max-width: 600px) {
     .bio-chapter { padding: 28px 24px; }
-    .bio-quote-wrap { padding: 36px 24px; }
+    .bio-read-more { padding: 28px 24px; flex-direction: column; align-items: flex-start; }
   }
 
   /* ====== FOOTER ====== */
@@ -481,8 +467,8 @@
   </div>
 </section>
 
-<!-- ===== BIOGRAPHY SECTION ===== -->
-<section class="bio-section" id="biography">
+<!-- ===== BIOGRAPHY TEASER ===== -->
+<section class="bio-teaser" id="biography">
   <div class="bio-inner">
 
     <div class="bio-header">
@@ -515,56 +501,19 @@
         </p>
       </div>
 
-      <!-- Christian Life -->
-      <div class="bio-chapter">
-        <div class="bio-chapter-num">03</div>
-        <span class="bio-chapter-icon">✝️</span>
-        <p class="bio-chapter-title">Christian Life &amp; Faith</p>
-        <h3 class="bio-chapter-heading">Rooted in Faith</h3>
-        <p class="bio-chapter-text">
-          <em>[ Share his faith journey — when he came to faith, the church or fellowship he was part of, his role in ministry, and how his Christian values shaped every aspect of his life and relationships. ]</em>
-        </p>
-      </div>
+    </div>
 
-      <!-- Family -->
-      <div class="bio-chapter">
-        <div class="bio-chapter-num">04</div>
-        <span class="bio-chapter-icon">🏡</span>
-        <p class="bio-chapter-title">Family &amp; Home</p>
-        <h3 class="bio-chapter-heading">A Devoted Family Man</h3>
-        <p class="bio-chapter-text">
-          <em>[ Write about his family life — his spouse, children, and the home he built. Describe the kind of husband, father, and family member he was, and the love and warmth he brought to those closest to him. ]</em>
-        </p>
-      </div>
-
-      <!-- Work & Career -->
-      <div class="bio-chapter">
-        <div class="bio-chapter-num">05</div>
-        <span class="bio-chapter-icon">💼</span>
-        <p class="bio-chapter-title">Career &amp; Service</p>
-        <h3 class="bio-chapter-heading">A Life of Purpose &amp; Impact</h3>
-        <p class="bio-chapter-text">
-          <em>[ Describe his professional life — the field he worked in, organisations he served, positions he held, and the lasting impact of his work. Highlight the people he mentored, the lives he changed, and the legacy he leaves behind. ]</em>
-        </p>
-      </div>
-
-      <!-- Passing -->
-      <div class="bio-chapter">
-        <div class="bio-chapter-num">06</div>
-        <span class="bio-chapter-icon">🌅</span>
-        <p class="bio-chapter-title">Passing &amp; Legacy</p>
-        <h3 class="bio-chapter-heading">Gone But Never Forgotten</h3>
-        <p class="bio-chapter-text">
-          <em>[ Share the circumstances of his passing on March 19, 2026, and reflect on the legacy he leaves — in his family, his profession, his church, and his community. What will people remember most about Dr. Philemon Odiwuor Yugi? ]</em>
-        </p>
-      </div>
-
-    </div><!-- /bio-grid -->
-
-    <!-- Closing quote -->
-    <div class="bio-quote-wrap">
-      <p class="bio-closing-quote">"Be of good comfort in the hope of the resurrection morning"</p>
-      <p class="bio-closing-attr">May 25, 1968 &nbsp;✦&nbsp; March 19, 2026</p>
+    <!-- Read More -->
+    <div class="bio-read-more">
+      <p class="bio-read-more-text">
+        Continue reading about his <strong>Christian faith, family life, career</strong> and the lasting legacy he leaves behind.
+      </p>
+      <a class="bio-read-more-link" href="biography.html">
+        Read Full Biography
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
     </div>
 
   </div>
@@ -578,16 +527,15 @@
 
 <script src="main.js"></script>
 <script>
-/* Biography scroll-reveal */
+/* Biography teaser scroll-reveal */
 (function () {
-  var els = document.querySelectorAll('.bio-chapter, .bio-quote-wrap');
+  var els = document.querySelectorAll('.bio-chapter, .bio-read-more');
   if (!els.length) return;
   var delay = 0;
   var obs = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (entry.isIntersecting) {
-        var el = entry.target;
-        var d  = delay;
+        var el = entry.target, d = delay;
         setTimeout(function () { el.classList.add('visible'); }, d);
         delay = Math.min(delay + 80, 400);
         obs.unobserve(el);
