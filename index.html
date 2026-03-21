@@ -680,7 +680,61 @@
   <p class="footer-name">Dr. Philemon Odiwuor Yugi &nbsp;✦&nbsp; May 25, 1968 – March 19, 2026</p>
 </footer>
 
-<script src="main.js"></script>
+<script>
+/* ================================================================
+   HERO IMAGE — discovers images/hero.jpg using same logic as gallery
+   ================================================================ */
+(function () {
+  var FOLDERS = ['images/', 'Images/'];
+  var NAMES   = ['hero', 'Hero'];
+  var EXTS    = ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG', '.webp'];
+  var heroBg  = document.getElementById('hero-bg');
+  var allBg   = document.getElementById('all-tributes-bg');
+  var candidates = [];
+  FOLDERS.forEach(function (f) { NAMES.forEach(function (n) { EXTS.forEach(function (e) { candidates.push(f + n + e); }); }); });
+  function tryNext(i) {
+    if (i >= candidates.length) return;
+    var img = new Image();
+    img.onload = function () {
+      var val = "url('" + candidates[i] + "')";
+      if (heroBg) heroBg.style.backgroundImage = val;
+      if (allBg)  allBg.style.backgroundImage  = val;
+    };
+    img.onerror = function () { tryNext(i + 1); };
+    img.src = candidates[i];
+  }
+  tryNext(0);
+})();
+
+/* ================================================================
+   PARTICLES
+   ================================================================ */
+(function () {
+  var c = document.getElementById('particles');
+  if (!c) return;
+  var ctx = c.getContext('2d'), W, H;
+  var pts = [];
+  for (var i = 0; i < 50; i++) pts.push({ x: Math.random()*1920, y: Math.random()*1080, r: Math.random()*1.2+0.2, s: Math.random()*0.25+0.08, o: Math.random()*0.35+0.08, d: (Math.random()-0.5)*0.15 });
+  function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  (function draw() {
+    ctx.clearRect(0,0,W,H);
+    pts.forEach(function(p) { ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(122,184,200,'+p.o+')'; ctx.fill(); p.y-=p.s; p.x+=p.d; if(p.y<-10){p.y=H+10;p.x=Math.random()*W;} });
+    requestAnimationFrame(draw);
+  })();
+})();
+
+/* ================================================================
+   NAV TOGGLE
+   ================================================================ */
+(function () {
+  var toggle = document.getElementById('nav-toggle');
+  var links  = document.getElementById('nav-links');
+  if (!toggle || !links) return;
+  toggle.addEventListener('click', function () { toggle.classList.toggle('open'); links.classList.toggle('open'); });
+  links.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { toggle.classList.remove('open'); links.classList.remove('open'); }); });
+})();
+</script>
 <script>
 /* Biography teaser scroll-reveal */
 (function () {
