@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>In Loving Memory of Dr. Philemon Odiwuor Yugi</title>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -22,6 +22,7 @@
     --text:        #dff0f5;
     --muted:       #7a9eaa;
     --white:       #f0f8fa;
+    --gold:        #c9a96e;
     --nav-h:       64px;
   }
 
@@ -43,8 +44,7 @@
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 40px;
     background: rgba(9,24,32,0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
   }
   .nav-brand {
@@ -152,6 +152,125 @@
     animation: scrollPulse 2s infinite;
   }
 
+  /* ====== SLIDESHOW SECTION ====== */
+  .slideshow-section {
+    position: relative; z-index: 1;
+    background: #ffffff;
+    padding: 72px 0 80px;
+    scroll-margin-top: var(--nav-h);
+  }
+  .slideshow-inner {
+    max-width: 860px; margin: 0 auto; padding: 0 24px;
+  }
+
+  .ss-label {
+    font-size: 0.62rem; letter-spacing: 4px; color: var(--gold);
+    text-transform: uppercase; font-weight: 400;
+    text-align: center; margin-bottom: 12px;
+  }
+  .ss-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 300; font-style: italic;
+    color: var(--teal-deep); text-align: center; letter-spacing: 0.5px;
+    margin-bottom: 40px;
+  }
+
+  /* Stage */
+  .ss-stage-wrap {
+    position: relative; border-radius: 6px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(9,24,32,0.18), 0 0 0 1px rgba(26,58,74,0.12);
+  }
+  .ss-stage {
+    position: relative; width: 100%; padding-top: 60%;
+    background: #d8e8ee;
+  }
+  .ss-slide {
+    position: absolute; inset: 0;
+    opacity: 0; transition: opacity 1.2s ease;
+  }
+  .ss-slide.active { opacity: 1; }
+  .ss-slide img {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+  }
+  /* gradient overlay on slide */
+  .ss-slide::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(9,24,32,0.45) 0%, transparent 45%);
+    pointer-events: none;
+  }
+
+  /* Caption inside slide */
+  .ss-caption {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+    padding: 20px 24px 18px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1rem;
+    color: rgba(240,248,250,0.9); letter-spacing: 0.5px;
+  }
+
+  /* Progress bar */
+  .ss-progress {
+    height: 3px; background: rgba(26,58,74,0.12);
+  }
+  .ss-progress-bar {
+    height: 100%; width: 0%; background: var(--teal-mid); transition: width linear;
+  }
+
+  /* Controls */
+  .ss-controls {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 4px 0;
+  }
+  .ss-btn {
+    background: transparent; border: 1px solid rgba(26,58,74,0.25);
+    color: var(--teal-mid); width: 38px; height: 38px; border-radius: 50%;
+    cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s;
+  }
+  .ss-btn:hover { background: rgba(26,58,74,0.08); border-color: var(--teal-mid); }
+
+  .ss-dots { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .ss-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: rgba(26,58,74,0.2); cursor: pointer;
+    transition: all 0.3s; flex-shrink: 0;
+  }
+  .ss-dot.active { background: var(--teal-mid); transform: scale(1.35); }
+
+  .ss-counter {
+    font-size: 0.6rem; letter-spacing: 2px; color: var(--teal-light);
+    font-weight: 400; white-space: nowrap; min-width: 38px; text-align: right;
+  }
+
+  /* View gallery link */
+  .ss-footer {
+    text-align: center; margin-top: 28px;
+  }
+  .ss-gallery-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 0.68rem; letter-spacing: 2.5px; color: var(--teal-mid);
+    text-transform: uppercase; text-decoration: none; font-weight: 400;
+    border-bottom: 1px solid rgba(26,58,74,0.25); padding-bottom: 3px;
+    transition: all 0.3s;
+  }
+  .ss-gallery-link:hover { color: var(--teal-deep); border-color: var(--teal-deep); }
+  .ss-gallery-link svg { transition: transform 0.3s; }
+  .ss-gallery-link:hover svg { transform: translateX(4px); }
+
+  /* Loading state */
+  .ss-loading {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    background: #d8e8ee;
+  }
+  .ss-loading-dots { display: flex; gap: 8px; }
+  .ss-loading-dots span {
+    width: 8px; height: 8px; border-radius: 50%; background: rgba(26,58,74,0.3);
+    animation: loadPulse 1.2s ease-in-out infinite;
+  }
+  .ss-loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .ss-loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
   /* ====== FOOTER ====== */
   footer {
     text-align: center; padding: 48px 24px;
@@ -164,6 +283,7 @@
   @keyframes fadeDown  { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
   @keyframes fadeIn    { from { opacity:0; } to { opacity:1; } }
   @keyframes scrollPulse { 0%,100%{ opacity:0.3; } 50%{ opacity:1; } }
+  @keyframes loadPulse { 0%,100%{ opacity:0.3; transform:scale(0.8); } 50%{ opacity:1; transform:scale(1); } }
 
   @media (max-width: 600px) { .hero-name { letter-spacing: 1px; } }
 </style>
@@ -174,8 +294,8 @@
 <nav id="navbar">
   <a class="nav-brand" href="index.html">In Loving Memory</a>
   <ul class="nav-links" id="nav-links">
-    <li><a href="index.html"   class="nav-link active">Home</a></li>
-    <li><a href="gallery.html" class="nav-link">Gallery</a></li>
+    <li><a href="index.html"    class="nav-link active">Home</a></li>
+    <li><a href="gallery.html"  class="nav-link">Gallery</a></li>
     <li><a href="tributes.html" class="nav-link">Tributes</a></li>
   </ul>
   <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
@@ -194,11 +314,49 @@
   <p class="hero-dates">May 25, 1968 &nbsp;–&nbsp; March 19, 2026</p>
   <div class="hero-line"></div>
   <p class="hero-quote">"Be of good comfort in the hope of the resurrection morning"</p>
-  <a class="hero-scroll" href="gallery.html">
+  <a class="hero-scroll" href="#slideshow">
     <span>Scroll</span>
     <div class="hero-scroll-arrow"></div>
   </a>
 </header>
+
+<!-- ===== SLIDESHOW SECTION ===== -->
+<section class="slideshow-section" id="slideshow">
+  <div class="slideshow-inner">
+    <p class="ss-label">✦ A Life Beautifully Lived</p>
+    <h2 class="ss-title">Memories &amp; Moments</h2>
+
+    <div class="ss-stage-wrap">
+      <div class="ss-stage" id="ss-stage">
+        <!-- loading indicator -->
+        <div class="ss-loading" id="ss-loading">
+          <div class="ss-loading-dots">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+      <div class="ss-progress">
+        <div class="ss-progress-bar" id="ss-progress-bar"></div>
+      </div>
+    </div>
+
+    <div class="ss-controls">
+      <button class="ss-btn" id="ss-prev">&#8592;</button>
+      <div class="ss-dots" id="ss-dots"></div>
+      <button class="ss-btn" id="ss-next">&#8594;</button>
+    </div>
+
+    <div class="ss-footer">
+      <span class="ss-counter" id="ss-counter" style="color:var(--teal-light);font-size:0.6rem;letter-spacing:2px;margin-right:20px;"></span>
+      <a class="ss-gallery-link" href="gallery.html">
+        View Full Gallery
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
 
 <!-- ===== FOOTER ===== -->
 <footer>
@@ -207,5 +365,154 @@
 </footer>
 
 <script src="main.js"></script>
+<script>
+/* ================================================================
+   Inline slideshow — discovers images from images/ folder
+   Same names & discovery logic as gallery.html
+================================================================ */
+(function () {
+
+  var IMAGE_NAMES = [
+    'hero',
+    'Drphilemonyugi',
+    'Drphilemonyugi2',
+    'Drphilemonyugi3',
+    'Drphilemonyugi4',
+    'Drphilemonyugi5',
+    'Drphilemonyugi6',
+    'Drphilemonyugi7',
+    'Drphilemonyugi8'
+  ];
+
+  var FOLDERS = ['images/', 'Images/'];
+  var EXTS    = ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG', '.webp', '.WEBP'];
+  var INTERVAL = 5000; // 5 s per slide
+
+  /* --- Discover one image --- */
+  function discover(name) {
+    return new Promise(function (resolve) {
+      var fi = 0, ei = 0;
+      function next() {
+        if (fi >= FOLDERS.length) { resolve(null); return; }
+        if (ei >= EXTS.length)    { fi++; ei = 0; next(); return; }
+        var src = FOLDERS[fi] + name + EXTS[ei];
+        var img = new Image();
+        img.onload  = function () { resolve(src); };
+        img.onerror = function () { ei++; next(); };
+        img.src = src;
+      }
+      next();
+    });
+  }
+
+  /* --- Format name for caption --- */
+  function formatName(name) {
+    return name
+      .replace(/([a-z])([A-Z])/g, '$1 $2')
+      .replace(/(\D)(\d+)$/, '$1 $2')
+      .replace(/^\w/, function (c) { return c.toUpperCase(); })
+      .trim();
+  }
+
+  var stage    = document.getElementById('ss-stage');
+  var loading  = document.getElementById('ss-loading');
+  var dotsEl   = document.getElementById('ss-dots');
+  var counter  = document.getElementById('ss-counter');
+  var bar      = document.getElementById('ss-progress-bar');
+  var slides   = [];
+  var cur      = 0;
+  var timer;
+
+  /* --- Discover all images --- */
+  Promise.all(IMAGE_NAMES.map(function (name) {
+    return discover(name).then(function (src) { return { name: name, src: src }; });
+  })).then(function (results) {
+    var valid = results.filter(function (r) { return r.src !== null; });
+
+    /* Remove loading indicator */
+    if (loading) loading.remove();
+
+    if (!valid.length) {
+      stage.innerHTML = '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#6a8e9a;font-size:0.8rem;letter-spacing:2px;background:#d8e8ee;">No images found</div>';
+      return;
+    }
+
+    /* Build slides */
+    valid.forEach(function (item, idx) {
+      var slide = document.createElement('div');
+      slide.className = 'ss-slide';
+
+      var img = document.createElement('img');
+      img.src = item.src;
+      img.alt = formatName(item.name);
+
+      var caption = document.createElement('div');
+      caption.className = 'ss-caption';
+      caption.textContent = formatName(item.name);
+
+      slide.appendChild(img);
+      slide.appendChild(caption);
+      stage.appendChild(slide);
+      slides.push(slide);
+    });
+
+    /* Activate first slide */
+    slides[0].classList.add('active');
+    buildDots(valid.length);
+    updateCounter();
+    startProgress();
+
+    /* Controls */
+    document.getElementById('ss-prev').addEventListener('click', function () { goTo(cur - 1); });
+    document.getElementById('ss-next') && document.getElementById('ss-next').addEventListener('click', function () { goTo(cur + 1); });
+  });
+
+  function buildDots(total) {
+    dotsEl.innerHTML = '';
+    for (var i = 0; i < total; i++) {
+      var dot = document.createElement('div');
+      dot.className = 'ss-dot' + (i === 0 ? ' active' : '');
+      dot.dataset.i = i;
+      dot.addEventListener('click', (function (idx) {
+        return function () { goTo(idx); };
+      })(i));
+      dotsEl.appendChild(dot);
+    }
+  }
+
+  function updateCounter() {
+    counter.textContent = (cur + 1) + ' / ' + slides.length;
+  }
+
+  function goTo(n) {
+    slides[cur].classList.remove('active');
+    dotsEl.querySelectorAll('.ss-dot')[cur].classList.remove('active');
+    cur = (n + slides.length) % slides.length;
+    slides[cur].classList.add('active');
+    dotsEl.querySelectorAll('.ss-dot')[cur].classList.add('active');
+    updateCounter();
+    startProgress();
+  }
+
+  function startProgress() {
+    clearTimeout(timer);
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    void bar.offsetWidth; // force reflow
+    bar.style.transition = 'width ' + INTERVAL + 'ms linear';
+    bar.style.width = '100%';
+    if (slides.length > 1) {
+      timer = setTimeout(function () { goTo(cur + 1); }, INTERVAL);
+    }
+  }
+
+  /* Add next button wiring after DOM is ready */
+  document.addEventListener('DOMContentLoaded', function () {
+    var nextBtn = document.getElementById('ss-next');
+    if (nextBtn) nextBtn.addEventListener('click', function () { goTo(cur + 1); });
+  });
+
+})();
+</script>
 </body>
 </html>
