@@ -541,7 +541,7 @@
 
 /* -------- SLIDESHOW -------- */
 (function(){
-  const IMAGES = [
+  const NAMES = [
     'Drphilemonyugi (1)',
     'Drphilemonyugi (2)',
     'Drphilemonyugi (3)',
@@ -551,18 +551,27 @@
     'Drphilemonyugi (7)',
     'Drphilemonyugi (8)'
   ];
+
+  /* Try each extension in order until one loads */
+  const EXTS = ['.jpg', '.jpeg', '.png', '.webp'];
+
+  function tryLoad(img, name, extIndex){
+    if(extIndex >= EXTS.length){ img.style.display='none'; return; }
+    img.onerror = () => tryLoad(img, name, extIndex + 1);
+    /* Use encodeURIComponent but replace %20 back to space for servers that need it */
+    img.src = 'images/' + name.replace(/\(/g,'%28').replace(/\)/g,'%29').replace(/ /g,'%20') + EXTS[extIndex];
+  }
+
   const stage  = document.getElementById('stage');
   const dotsEl = document.getElementById('dots');
   let cur = 0, timer;
 
-  const slides = IMAGES.map(name => {
-    const s = document.createElement('div');
+  const slides = NAMES.map(name => {
+    const s   = document.createElement('div');
     s.className = 'slide';
     const img = document.createElement('img');
-    img.src = 'images/' + encodeURIComponent(name) + '.jpg';
-    img.alt = 'Dr. Philemon Odiwuor Yugi';
-    /* fallback to .png if .jpg fails */
-    img.onerror = function(){ if(!this.src.endsWith('.png')) this.src = 'images/' + encodeURIComponent(name) + '.png'; };
+    img.alt   = 'Dr. Philemon Odiwuor Yugi';
+    tryLoad(img, name, 0);
     s.appendChild(img);
     stage.appendChild(s);
     return s;
