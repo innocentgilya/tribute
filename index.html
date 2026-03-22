@@ -27,25 +27,15 @@
   /* ── NAV ── */
   nav {
     position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 100;
-    display: flex; align-items: center; justify-content: space-between; padding: 0 40px;
+    display: flex; align-items: center; justify-content: center; padding: 0 40px;
     background: rgba(9,24,32,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border);
   }
-  .nav-brand { font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; color: var(--accent-soft); white-space: nowrap; flex-shrink: 0; text-decoration: none; }
   .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
   .nav-links a { font-size: 0.72rem; letter-spacing: 2px; color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color 0.3s; position: relative; padding-bottom: 4px; font-weight: 300; }
   .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
   .nav-links a:hover { color: var(--accent); }
   .nav-links a:hover::after { width: 100%; }
-  .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-  .nav-toggle span { display: block; width: 22px; height: 1px; background: var(--accent); }
-  @media (max-width: 680px) {
-    nav { padding: 0 20px; }
-    .nav-toggle { display: flex; }
-    .nav-links { display: none; position: absolute; top: var(--nav-h); left: 0; right: 0; flex-direction: column; gap: 0; background: rgba(9,24,32,0.98); border-bottom: 1px solid var(--border); padding: 12px 0 20px; }
-    .nav-links.open { display: flex; }
-    .nav-links li { width: 100%; text-align: center; }
-    .nav-links a { display: block; padding: 14px 20px; }
-  }
+  @media (max-width: 680px) { nav { padding: 0 16px; } .nav-links { gap: 20px; } }
 
   #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.35; }
 
@@ -290,16 +280,12 @@
 <body>
 
 <nav id="navbar">
-  <a class="nav-brand" href="index.html">In Loving Memory</a>
   <ul class="nav-links" id="nav-links">
     <li><a href="index.html" class="nav-link">Home</a></li>
     <li><a href="#slideshow" class="nav-link">Gallery</a></li>
     <li><a href="#biography" class="nav-link">Biography</a></li>
     <li><a href="#tribute-preview" class="nav-link">Tributes</a></li>
   </ul>
-  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
 <canvas id="particles"></canvas>
@@ -436,11 +422,7 @@
   resize(); window.addEventListener('resize', resize);
   (function draw() { ctx.clearRect(0,0,W,H); pts.forEach(function(p){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(122,184,200,'+p.o+')'; ctx.fill(); p.y-=p.s; p.x+=p.d; if(p.y<-10){p.y=H+10;p.x=Math.random()*W;} }); requestAnimationFrame(draw); })();
 })();
-(function () {
-  var toggle = document.getElementById('nav-toggle'), links = document.getElementById('nav-links');
-  if (!toggle || !links) return;
-  toggle.addEventListener('click', function(){ toggle.classList.toggle('open'); links.classList.toggle('open'); });
-})();
+
 (function () {
   var els = document.querySelectorAll('.bio-chapter, .bio-read-more');
   if (!els.length) return;
