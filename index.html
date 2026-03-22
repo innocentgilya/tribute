@@ -57,11 +57,48 @@
     justify-content: flex-end;
   }
 
+  /* ── MOBILE: fill viewport, image large and centred ── */
+  @media (max-width: 768px) {
+    .hero {
+      justify-content: flex-end;
+      min-height: 100svh;
+    }
+    .hero-photo-wrap {
+      width: 100% !important;
+      max-width: 100% !important;
+      flex: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .hero-photo-wrap img {
+      width: 90vw !important;
+      max-width: 420px;
+      height: auto;
+      -webkit-mask-image:
+        radial-gradient(ellipse 95% 90% at 50% 40%, black 45%, transparent 82%),
+        linear-gradient(to bottom, black 55%, transparent 100%) !important;
+      mask-image:
+        radial-gradient(ellipse 95% 90% at 50% 40%, black 45%, transparent 82%),
+        linear-gradient(to bottom, black 55%, transparent 100%) !important;
+    }
+    .hero-text {
+      padding: 0 20px 40px !important;
+    }
+    .hero-text-name {
+      font-size: clamp(1.6rem, 7vw, 2.4rem) !important;
+    }
+    .hero-text-dates {
+      font-size: 0.72rem !important;
+      letter-spacing: 2px !important;
+    }
+  }
+
   /* The page-matching gradient — mirrors reference poster exactly */
   .hero-bg {
     position: absolute; inset: 0; z-index: 0;
     background:
-      radial-gradient(ellipse 110% 90% at 50% 30%,
+      radial-gradient(ellipse 110% 90% at 50% 40%,
         #1a4a5c 0%,
         #12303f 30%,
         #0d2535 55%,
@@ -80,8 +117,10 @@
   .hero-photo-wrap {
     position: relative; z-index: 2;
     width: min(520px, 88vw);
-    /* Let image set natural height */
     flex-shrink: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
   }
 
   .hero-photo-wrap img {
