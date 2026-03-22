@@ -54,7 +54,20 @@
   .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
   .nav-links a:hover { color: var(--accent); }
   .nav-links a:hover::after { width: 100%; }
-  @media (max-width: 680px) { nav { padding: 0 16px; } .nav-links { gap: 20px; } }
+  @media (max-width: 680px) {
+    nav { padding: 0 20px; justify-content: space-between !important; }
+    .nav-brand { display: block !important; }
+    .nav-toggle { display: flex !important; }
+    /* Hide inline links on mobile — hamburger only */
+    nav:not(.scrolled) .nav-links { display: none; }
+    nav:not(.scrolled) .nav-links.open {
+      display: flex; position: absolute; top: var(--nav-h); left: 0; right: 0;
+      flex-direction: column; gap: 0; background: rgba(9,24,32,0.98);
+      border-bottom: 1px solid var(--border); padding: 12px 0 20px;
+    }
+    nav:not(.scrolled) .nav-links.open li { width: 100%; text-align: center; }
+    nav:not(.scrolled) .nav-links.open a { display: block; padding: 14px 20px; font-size: 0.7rem; }
+  }
 
   #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.35; }
 
