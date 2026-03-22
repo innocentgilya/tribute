@@ -7,12 +7,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;1,200;1,300&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --teal:        #1a3a4a;
     --teal-deep:   #0d2535;
     --teal-mid:    #1e4a5c;
-    --teal-light:  #2a6070;
     --accent:      #7ab8c8;
     --accent-soft: #b0d8e4;
     --dark:        #091820;
@@ -24,32 +21,18 @@
     --white:       #f0f8fa;
     --nav-h:       64px;
   }
-
   html { scroll-behavior: smooth; }
+  body { background-color: var(--dark); color: var(--text); font-family: 'Montserrat', sans-serif; font-weight: 300; min-height: 100vh; overflow-x: hidden; }
 
-  body {
-    background-color: var(--dark);
-    color: var(--text);
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 300;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* ====== NAV ====== */
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0;
     height: var(--nav-h); z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; justify-content: center;
     padding: 0 40px;
     background: rgba(9,24,32,0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
-  }
-  .nav-brand {
-    font-size: 0.85rem; font-weight: 500; letter-spacing: 1px;
-    color: var(--accent-soft); white-space: nowrap; flex-shrink: 0; text-decoration: none;
   }
   .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
   .nav-links a {
@@ -57,219 +40,99 @@
     text-decoration: none; text-transform: uppercase;
     transition: color 0.3s; position: relative; padding-bottom: 4px; font-weight: 300;
   }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: 0; left: 0;
-    width: 0; height: 1px; background: var(--accent); transition: width 0.3s;
-  }
+  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
   .nav-links a:hover, .nav-links a.active { color: var(--accent); }
   .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-  .nav-toggle {
-    display: none; flex-direction: column; gap: 5px;
-    cursor: pointer; background: none; border: none; padding: 4px;
-  }
-  .nav-toggle span { display: block; width: 22px; height: 1px; background: var(--accent); transition: all 0.3s; }
-  .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-  .nav-toggle.open span:nth-child(2) { opacity: 0; }
-  .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-  @media (max-width: 680px) {
-    nav { padding: 0 20px; }
-    .nav-toggle { display: flex; }
-    .nav-links {
-      display: none; position: absolute; top: var(--nav-h); left: 0; right: 0;
-      flex-direction: column; gap: 0; background: rgba(9,24,32,0.98);
-      border-bottom: 1px solid var(--border); padding: 12px 0 20px;
-    }
-    .nav-links.open { display: flex; }
-    .nav-links li { width: 100%; text-align: center; }
-    .nav-links a { display: block; padding: 14px 20px; font-size: 0.7rem; }
-    .nav-links a::after { display: none; }
-  }
+  @media (max-width: 680px) { nav { padding: 0 16px; } .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; } }
 
-  /* ====== PARTICLES ====== */
+  /* PARTICLES */
   #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.4; }
 
-  /* ====== TRIBUTES PAGE ====== */
-  #tributes {
-    position: relative; z-index: 1;
-    max-width: 1060px; margin: 0 auto;
-    padding: calc(var(--nav-h) + 60px) 24px 80px;
-    scroll-margin-top: var(--nav-h);
-  }
-  .section-label {
-    font-size: 0.65rem; letter-spacing: 3px; color: var(--accent);
-    text-transform: uppercase; text-align: center; margin-bottom: 12px; font-weight: 400;
-  }
-  .section-title {
-    font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 500;
-    text-align: center; color: var(--white); margin-bottom: 48px; letter-spacing: 1px;
-  }
+  /* TRIBUTES PAGE */
+  #tributes { position: relative; z-index: 1; max-width: 1060px; margin: 0 auto; padding: calc(var(--nav-h) + 60px) 24px 80px; }
+  .section-label { font-size: 0.65rem; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; text-align: center; margin-bottom: 12px; font-weight: 400; }
+  .section-title { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 500; text-align: center; color: var(--white); margin-bottom: 48px; letter-spacing: 1px; }
 
-  /* ====== TRIBUTE SLIDESHOW WALL ====== */
+  /* TRIBUTE WALL */
   .tribute-wall-wrap { position: relative; min-height: 260px; }
-  .tribute-slide {
-    display: none;
-    grid-template-columns: repeat(3, 1fr); gap: 24px;
-    animation: fadeIn 0.7s ease;
-  }
+  .tribute-slide { display: none; grid-template-columns: repeat(3, 1fr); gap: 24px; animation: fadeIn 0.7s ease; }
   .tribute-slide.active { display: grid; }
-
-  .tribute-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 6px; padding: 28px; position: relative;
-    animation: riseIn 0.6s ease both;
-  }
-  .tribute-card::before {
-    content: '"'; position: absolute; top: 12px; left: 20px;
-    font-size: 4rem; color: var(--accent); opacity: 0.15; line-height: 1;
-  }
+  .tribute-card { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 28px; position: relative; animation: riseIn 0.6s ease both; }
+  .tribute-card::before { content: '"'; position: absolute; top: 12px; left: 20px; font-size: 4rem; color: var(--accent); opacity: 0.15; line-height: 1; }
   .tribute-relation { font-size: 0.6rem; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; margin-bottom: 12px; font-weight: 400; }
   .tribute-text { font-size: 0.95rem; line-height: 1.8; color: var(--text); margin-bottom: 20px; font-weight: 300; }
   .tribute-meta { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 14px; }
   .tribute-name { font-size: 0.78rem; color: var(--accent-soft); letter-spacing: 1px; font-weight: 400; }
   .tribute-time { font-size: 0.7rem; color: var(--muted); }
-
-  .tribute-wall-nav {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-top: 28px; gap: 16px; flex-wrap: wrap;
-  }
+  .tribute-wall-nav { display: flex; align-items: center; justify-content: space-between; margin-top: 28px; gap: 16px; flex-wrap: wrap; }
   .tribute-progress-wrap { flex: 1; height: 2px; background: var(--border); border-radius: 2px; min-width: 80px; }
   .tribute-progress-bar { height: 100%; width: 0%; background: var(--accent); border-radius: 2px; transition: width linear; }
   .tribute-page-label { font-size: 0.65rem; letter-spacing: 2px; color: var(--muted); white-space: nowrap; }
-  .tribute-view-all-btn {
-    background: transparent; border: 1px solid var(--accent); color: var(--accent);
-    font-family: 'Montserrat', sans-serif; font-size: 0.68rem; letter-spacing: 2px;
-    text-transform: uppercase; padding: 10px 22px; border-radius: 3px; cursor: pointer;
-    transition: all 0.3s; font-weight: 400; white-space: nowrap;
-  }
+  .tribute-view-all-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); font-family: 'Montserrat', sans-serif; font-size: 0.68rem; letter-spacing: 2px; text-transform: uppercase; padding: 10px 22px; border-radius: 3px; cursor: pointer; transition: all 0.3s; font-weight: 400; white-space: nowrap; }
   .tribute-view-all-btn:hover { background: rgba(122,184,200,0.12); }
-
   .empty-wall { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 1rem; font-weight: 300; }
 
-  /* ====== TRIBUTE FORM DIVIDER ====== */
-  .tribute-form-header {
-    display: flex; align-items: center; gap: 16px;
-    margin: 56px 0 32px;
-  }
-  .tribute-form-divider {
-    flex: 1; height: 1px;
-    background: linear-gradient(to right, transparent, var(--border), transparent);
-  }
-  .tribute-form-label {
-    font-size: 0.68rem; letter-spacing: 3px; color: var(--accent);
-    text-transform: uppercase; font-weight: 400; white-space: nowrap;
-  }
+  /* FORM DIVIDER */
+  .tribute-form-header { display: flex; align-items: center; gap: 16px; margin: 56px 0 32px; }
+  .tribute-form-divider { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); }
+  .tribute-form-label { font-size: 0.68rem; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; font-weight: 400; white-space: nowrap; }
 
-  /* ====== TRIBUTE FORM ====== */
+  /* FORM */
   .tribute-form-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 6px; padding: 40px; }
   .form-row { display: flex; gap: 20px; flex-wrap: wrap; }
   .form-group { flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
   label { font-size: 0.65rem; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; font-weight: 400; }
-  input[type="text"], textarea, select {
-    background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 3px;
-    color: var(--text); font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 0.92rem;
-    padding: 12px 16px; outline: none; transition: border-color 0.3s; width: 100%;
-  }
+  input[type="text"], textarea, select { background: rgba(0,0,0,0.3); border: 1px solid var(--border); border-radius: 3px; color: var(--text); font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: 0.92rem; padding: 12px 16px; outline: none; transition: border-color 0.3s; width: 100%; }
   input:focus, textarea:focus, select:focus { border-color: var(--accent); }
   textarea { resize: vertical; min-height: 120px; }
   select option { background: var(--surface); }
   .char-count { font-size: 0.72rem; color: var(--muted); text-align: right; }
-  .submit-btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: transparent; border: 1px solid var(--accent); color: var(--accent);
-    font-family: 'Montserrat', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase;
-    padding: 14px 36px; border-radius: 3px; cursor: pointer; transition: all 0.3s; margin-top: 8px; font-weight: 400;
-  }
+  .submit-btn { display: inline-flex; align-items: center; gap: 10px; background: transparent; border: 1px solid var(--accent); color: var(--accent); font-family: 'Montserrat', sans-serif; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; padding: 14px 36px; border-radius: 3px; cursor: pointer; transition: all 0.3s; margin-top: 8px; font-weight: 400; }
   .submit-btn:hover { background: rgba(122,184,200,0.12); }
-  .submit-btn:active { transform: scale(0.98); }
 
-  /* ====== ALL TRIBUTES OVERLAY ====== */
-  .all-tributes-overlay {
-    position: fixed; inset: 0; z-index: 300;
-    opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-    overflow-y: auto;
-  }
+  /* ALL TRIBUTES OVERLAY */
+  .all-tributes-overlay { position: fixed; inset: 0; z-index: 300; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; overflow-y: auto; }
   .all-tributes-overlay.open { opacity: 1; pointer-events: all; }
-  .all-tributes-bg {
-    position: fixed; inset: 0; z-index: 0;
-    background-size: cover; background-position: center 20%; background-repeat: no-repeat;
-    opacity: 0.12;
-  }
-  .all-tributes-backdrop {
-    position: fixed; inset: 0; z-index: 1;
-    background: linear-gradient(to bottom, rgba(9,24,32,0.93) 0%, rgba(9,24,32,0.84) 50%, rgba(9,24,32,0.96) 100%);
-  }
-  .all-tributes-inner {
-    position: relative; z-index: 2;
-    max-width: 1060px; margin: 0 auto; padding: 80px 24px;
-  }
-  .all-tributes-header {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    margin-bottom: 48px; flex-wrap: wrap; gap: 16px;
-  }
+  .all-tributes-bg { position: fixed; inset: 0; z-index: 0; background-size: cover; background-position: center 20%; background-repeat: no-repeat; opacity: 0.12; }
+  .all-tributes-backdrop { position: fixed; inset: 0; z-index: 1; background: linear-gradient(to bottom, rgba(9,24,32,0.93) 0%, rgba(9,24,32,0.84) 50%, rgba(9,24,32,0.96) 100%); }
+  .all-tributes-inner { position: relative; z-index: 2; max-width: 1060px; margin: 0 auto; padding: 80px 24px; }
+  .all-tributes-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 48px; flex-wrap: wrap; gap: 16px; }
   .all-tributes-label { font-size: 0.65rem; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; font-weight: 400; margin-bottom: 8px; }
   .all-tributes-title { font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 500; color: var(--white); letter-spacing: 1px; }
-  .all-tributes-close {
-    background: transparent; border: 1px solid var(--border); color: var(--accent);
-    width: 44px; height: 44px; border-radius: 50%; font-size: 1.1rem; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; transition: all 0.3s; flex-shrink: 0;
-  }
+  .all-tributes-close { background: transparent; border: 1px solid var(--border); color: var(--accent); width: 44px; height: 44px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; flex-shrink: 0; }
   .all-tributes-close:hover { background: rgba(122,184,200,0.12); border-color: var(--accent); }
   .all-tributes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
 
-  /* ====== TOAST ====== */
-  .toast {
-    position: fixed; bottom: 30px; right: 30px; background: var(--card);
-    border: 1px solid var(--accent); color: var(--accent-soft);
-    padding: 14px 24px; border-radius: 4px; font-size: 0.9rem; font-weight: 300;
-    z-index: 999; opacity: 0; transform: translateY(20px); transition: all 0.4s; pointer-events: none;
-  }
+  /* TOAST */
+  .toast { position: fixed; bottom: 30px; right: 30px; background: var(--card); border: 1px solid var(--accent); color: var(--accent-soft); padding: 14px 24px; border-radius: 4px; font-size: 0.9rem; font-weight: 300; z-index: 999; opacity: 0; transform: translateY(20px); transition: all 0.4s; pointer-events: none; }
   .toast.show { opacity: 1; transform: translateY(0); }
 
-  /* ====== FOOTER ====== */
-  footer {
-    text-align: center; padding: 48px 24px;
-    border-top: 1px solid var(--border); position: relative; z-index: 1;
-  }
+  /* FOOTER */
+  footer { text-align: center; padding: 48px 24px; border-top: 1px solid var(--border); position: relative; z-index: 1; }
   .footer-text { font-weight: 300; color: var(--muted); font-size: 0.9rem; letter-spacing: 1px; font-style: italic; }
   .footer-name { font-weight: 500; color: var(--accent); font-size: 0.82rem; letter-spacing: 2px; margin-top: 12px; text-transform: uppercase; }
 
-  /* ====== ANIMATIONS ====== */
   @keyframes fadeIn  { from { opacity:0; } to { opacity:1; } }
   @keyframes riseIn  { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
 
-  /* ====== RESPONSIVE ====== */
-  @media (max-width: 800px) {
-    .tribute-slide     { grid-template-columns: repeat(2,1fr); }
-    .all-tributes-grid { grid-template-columns: repeat(2,1fr); }
-  }
-  @media (max-width: 600px) {
-    .tribute-form-wrap { padding: 24px; }
-    .form-row          { flex-direction: column; }
-  }
-  @media (max-width: 520px) {
-    .tribute-slide     { grid-template-columns: 1fr; }
-    .all-tributes-grid { grid-template-columns: 1fr; }
-  }
+  @media (max-width: 800px) { .tribute-slide { grid-template-columns: repeat(2,1fr); } .all-tributes-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 600px) { .tribute-form-wrap { padding: 24px; } .form-row { flex-direction: column; } }
+  @media (max-width: 520px) { .tribute-slide { grid-template-columns: 1fr; } .all-tributes-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
-<!-- ===== NAV ===== -->
 <nav id="navbar">
-  <a class="nav-brand" href="index.html">In Loving Memory</a>
   <ul class="nav-links" id="nav-links">
-    <li><a href="index.html"     class="nav-link">Home</a></li>
-    <li><a href="gallery.html"   class="nav-link">Gallery</a></li>
-    <li><a href="tributes.html"  class="nav-link active">Tributes</a></li>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="biography.html">Biography</a></li>
+    <li><a href="tributes.html" class="active">Tributes</a></li>
   </ul>
-  <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
 <canvas id="particles"></canvas>
 
-<!-- ===== TRIBUTES ===== -->
 <section id="tributes">
   <p class="section-label">✦ Tributes</p>
   <h2 class="section-title">Words of Remembrance</h2>
@@ -325,7 +188,6 @@
   </div>
 </section>
 
-<!-- ===== ALL TRIBUTES OVERLAY ===== -->
 <div class="all-tributes-overlay" id="all-tributes-overlay">
   <div class="all-tributes-bg" id="all-tributes-bg"></div>
   <div class="all-tributes-backdrop"></div>
@@ -341,7 +203,6 @@
   </div>
 </div>
 
-<!-- ===== FOOTER ===== -->
 <footer>
   <p class="footer-text">"Be of good comfort in the hope of the resurrection morning"</p>
   <p class="footer-name">Dr. Philemon Odiwuor Yugi &nbsp;✦&nbsp; May 25, 1968 – March 19, 2026</p>
@@ -350,9 +211,6 @@
 <div class="toast" id="toast"></div>
 
 <script>
-/* ================================================================
-   HERO IMAGE — sets faded background on all-tributes overlay
-   ================================================================ */
 (function () {
   var FOLDERS = ['images/', 'Images/'];
   var NAMES   = ['Drphilemonyugi', 'hero', 'Hero'];
@@ -360,169 +218,79 @@
   var allBg   = document.getElementById('all-tributes-bg');
   if (!allBg) return;
   var candidates = [];
-  FOLDERS.forEach(function (f) { NAMES.forEach(function (n) { EXTS.forEach(function (e) { candidates.push(f + n + e); }); }); });
-  function tryNext(i) {
-    if (i >= candidates.length) return;
-    var img = new Image();
-    img.onload = function () { allBg.style.backgroundImage = "url('" + candidates[i] + "')"; };
-    img.onerror = function () { tryNext(i + 1); };
-    img.src = candidates[i];
-  }
+  FOLDERS.forEach(function(f){ NAMES.forEach(function(n){ EXTS.forEach(function(e){ candidates.push(f+n+e); }); }); });
+  function tryNext(i) { if(i>=candidates.length)return; var img=new Image(); img.onload=function(){allBg.style.backgroundImage="url('"+candidates[i]+"')";}; img.onerror=function(){tryNext(i+1);}; img.src=candidates[i]; }
   tryNext(0);
 })();
 
-/* ================================================================
-   PARTICLES
-   ================================================================ */
 (function () {
   var c = document.getElementById('particles');
   if (!c) return;
-  var ctx = c.getContext('2d'), W, H;
-  var pts = [];
+  var ctx = c.getContext('2d'), W, H, pts = [];
   for (var i = 0; i < 50; i++) pts.push({ x: Math.random()*1920, y: Math.random()*1080, r: Math.random()*1.2+0.2, s: Math.random()*0.25+0.08, o: Math.random()*0.35+0.08, d: (Math.random()-0.5)*0.15 });
   function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
   resize(); window.addEventListener('resize', resize);
-  (function draw() {
-    ctx.clearRect(0,0,W,H);
-    pts.forEach(function(p) { ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(122,184,200,'+p.o+')'; ctx.fill(); p.y-=p.s; p.x+=p.d; if(p.y<-10){p.y=H+10;p.x=Math.random()*W;} });
-    requestAnimationFrame(draw);
-  })();
+  (function draw() { ctx.clearRect(0,0,W,H); pts.forEach(function(p){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(122,184,200,'+p.o+')'; ctx.fill(); p.y-=p.s; p.x+=p.d; if(p.y<-10){p.y=H+10;p.x=Math.random()*W;} }); requestAnimationFrame(draw); })();
 })();
 
-/* ================================================================
-   NAV TOGGLE
-   ================================================================ */
 (function () {
-  var toggle = document.getElementById('nav-toggle');
-  var links  = document.getElementById('nav-links');
-  if (!toggle || !links) return;
-  toggle.addEventListener('click', function () { toggle.classList.toggle('open'); links.classList.toggle('open'); });
-  links.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', function () { toggle.classList.remove('open'); links.classList.remove('open'); }); });
-})();
+  var wall=document.getElementById('tribute-wall');
+  var navRow=document.getElementById('tribute-wall-nav');
+  var pageLabel=document.getElementById('tribute-page-label');
+  var progressBar=document.getElementById('tribute-progress-bar');
+  var viewAllBtn=document.getElementById('tribute-view-all-btn');
+  var overlay=document.getElementById('all-tributes-overlay');
+  var overlayGrid=document.getElementById('all-tributes-grid');
+  var closeBtn=document.getElementById('all-tributes-close');
+  var btn=document.getElementById('submit-tribute');
+  var msg=document.getElementById('t-message');
+  var toast=document.getElementById('toast');
+  var PER_PAGE=3, DURATION=15000, allTributes=[], curPage=0, totalPages=1, timer;
 
-/* ================================================================
-   TRIBUTES — slideshow wall, form, overlay
-   ================================================================ */
-(function () {
-  var wall        = document.getElementById('tribute-wall');
-  var navRow      = document.getElementById('tribute-wall-nav');
-  var pageLabel   = document.getElementById('tribute-page-label');
-  var progressBar = document.getElementById('tribute-progress-bar');
-  var viewAllBtn  = document.getElementById('tribute-view-all-btn');
-  var overlay     = document.getElementById('all-tributes-overlay');
-  var overlayGrid = document.getElementById('all-tributes-grid');
-  var closeBtn    = document.getElementById('all-tributes-close');
-  var btn         = document.getElementById('submit-tribute');
-  var msg         = document.getElementById('t-message');
-  var toast       = document.getElementById('toast');
+  function timeAgo(d){ var s=Math.floor((Date.now()-new Date(d).getTime())/1000); if(s<60)return 'just now'; if(s<3600)return Math.floor(s/60)+'m ago'; if(s<86400)return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago'; }
 
-  var PER_PAGE    = 3;
-  var DURATION    = 15000;
-  var allTributes = [];
-  var curPage     = 0;
-  var totalPages  = 1;
-  var timer;
+  function cardHTML(t,delay){ return '<div class="tribute-card" style="animation-delay:'+delay+'s">'+(t.relation?'<div class="tribute-relation">'+t.relation+'</div>':'')+'<p class="tribute-text">'+t.message+'</p><div class="tribute-meta"><span class="tribute-name">'+(t.name||'Anonymous')+'</span><span class="tribute-time">'+timeAgo(t.created_at)+'</span></div></div>'; }
 
-  function timeAgo(dateStr) {
-    var s = Math.floor((Date.now() - new Date(dateStr).getTime()) / 1000);
-    if (s < 60)    return 'just now';
-    if (s < 3600)  return Math.floor(s/60) + 'm ago';
-    if (s < 86400) return Math.floor(s/3600) + 'h ago';
-    return Math.floor(s/86400) + 'd ago';
-  }
+  function showToast(m){ toast.textContent=m; toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');},4000); }
 
-  function cardHTML(t, delay) {
-    return '<div class="tribute-card" style="animation-delay:' + delay + 's">' +
-      (t.relation ? '<div class="tribute-relation">' + t.relation + '</div>' : '') +
-      '<p class="tribute-text">' + t.message + '</p>' +
-      '<div class="tribute-meta"><span class="tribute-name">' + (t.name || 'Anonymous') + '</span><span class="tribute-time">' + timeAgo(t.created_at) + '</span></div>' +
-      '</div>';
-  }
-
-  function showToast(message) {
-    toast.textContent = message;
-    toast.classList.add('show');
-    setTimeout(function () { toast.classList.remove('show'); }, 4000);
-  }
-
-  function showPage(page) {
-    curPage = (page + totalPages) % totalPages;
-    var slice = allTributes.slice(curPage * PER_PAGE, curPage * PER_PAGE + PER_PAGE);
-    wall.querySelectorAll('.tribute-slide').forEach(function (el) { el.remove(); });
-    var slide = document.createElement('div');
-    slide.className = 'tribute-slide active';
-    slide.innerHTML = slice.map(function (t, i) { return cardHTML(t, i * 0.08); }).join('');
+  function showPage(page){
+    curPage=(page+totalPages)%totalPages;
+    var slice=allTributes.slice(curPage*PER_PAGE,curPage*PER_PAGE+PER_PAGE);
+    wall.querySelectorAll('.tribute-slide').forEach(function(el){el.remove();});
+    var slide=document.createElement('div'); slide.className='tribute-slide active';
+    slide.innerHTML=slice.map(function(t,i){return cardHTML(t,i*0.08);}).join('');
     wall.appendChild(slide);
-    pageLabel.textContent = (curPage + 1) + ' / ' + totalPages;
+    pageLabel.textContent=(curPage+1)+' / '+totalPages;
     startProgress();
   }
 
-  function startProgress() {
-    clearTimeout(timer);
-    progressBar.style.transition = 'none';
-    progressBar.style.width = '0%';
-    void progressBar.offsetWidth;
-    progressBar.style.transition = 'width ' + DURATION + 'ms linear';
-    progressBar.style.width = '100%';
-    if (totalPages > 1) timer = setTimeout(function () { showPage(curPage + 1); }, DURATION);
-  }
+  function startProgress(){ clearTimeout(timer); progressBar.style.transition='none'; progressBar.style.width='0%'; void progressBar.offsetWidth; progressBar.style.transition='width '+DURATION+'ms linear'; progressBar.style.width='100%'; if(totalPages>1)timer=setTimeout(function(){showPage(curPage+1);},DURATION); }
 
-  function renderSlideshow(tributes) {
-    allTributes = tributes;
-    wall.innerHTML = '';
-    if (!tributes.length) {
-      wall.innerHTML = '<div class="empty-wall">Be the first to leave a tribute — your words bring comfort to those who grieve.</div>';
-      navRow.style.display = 'none';
-      return;
-    }
-    totalPages = Math.ceil(tributes.length / PER_PAGE);
-    navRow.style.display = 'flex';
-    showPage(0);
-  }
+  function renderSlideshow(tributes){ allTributes=tributes; wall.innerHTML=''; if(!tributes.length){wall.innerHTML='<div class="empty-wall">Be the first to leave a tribute — your words bring comfort to those who grieve.</div>'; navRow.style.display='none'; return;} totalPages=Math.ceil(tributes.length/PER_PAGE); navRow.style.display='flex'; showPage(0); }
 
-  function openOverlay() {
-    overlayGrid.innerHTML = allTributes.map(function (t, i) { return cardHTML(t, i * 0.04); }).join('');
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
+  function openOverlay(){ overlayGrid.innerHTML=allTributes.map(function(t,i){return cardHTML(t,i*0.04);}).join(''); overlay.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeOverlay(){ overlay.classList.remove('open'); document.body.style.overflow=''; }
 
-  function closeOverlay() {
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
+  viewAllBtn.addEventListener('click',openOverlay);
+  closeBtn.addEventListener('click',closeOverlay);
+  overlay.addEventListener('click',function(e){if(e.target===overlay)closeOverlay();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlay.classList.contains('open'))closeOverlay();});
 
-  viewAllBtn.addEventListener('click', openOverlay);
-  closeBtn.addEventListener('click', closeOverlay);
-  overlay.addEventListener('click', function (e) { if (e.target === overlay) closeOverlay(); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) closeOverlay(); });
+  fetch('/api/tributes').then(function(r){return r.json();}).then(function(data){renderSlideshow(data);}).catch(function(){wall.innerHTML='<div class="empty-wall">Could not load tributes. Please refresh the page.</div>';});
 
-  fetch('/api/tributes')
-    .then(function (r) { return r.json(); })
-    .then(function (data) { renderSlideshow(data); })
-    .catch(function () { wall.innerHTML = '<div class="empty-wall">Could not load tributes. Please refresh the page.</div>'; });
+  msg.addEventListener('input',function(){document.getElementById('char-used').textContent=msg.value.length;});
 
-  msg.addEventListener('input', function () { document.getElementById('char-used').textContent = msg.value.length; });
-
-  btn.addEventListener('click', function () {
-    var name     = document.getElementById('t-name').value.trim();
-    var relation = document.getElementById('t-relation').value;
-    var message  = msg.value.trim();
-    if (!message) { msg.style.borderColor = '#c0392b'; msg.focus(); setTimeout(function () { msg.style.borderColor = ''; }, 1500); return; }
-    btn.disabled = true; btn.textContent = 'Submitting…';
-    fetch('/api/tributes', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name: name, relation: relation, message: message }) })
-      .then(function (r) { return r.json().then(function (data) { return { ok: r.ok, data: data }; }); })
-      .then(function (res) {
-        if (res.ok) {
-          document.getElementById('t-name').value = ''; document.getElementById('t-relation').value = ''; msg.value = ''; document.getElementById('char-used').textContent = '0';
-          showToast('Thank you! Your tribute has been submitted and will appear once approved.');
-          wall.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else { showToast(res.data.error || 'Something went wrong. Please try again.'); }
-      })
-      .catch(function () { showToast('Could not connect. Please check your internet and try again.'); })
-      .finally(function () {
-        btn.disabled = false;
-        btn.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> Leave Your Tribute';
-      });
+  btn.addEventListener('click',function(){
+    var name=document.getElementById('t-name').value.trim();
+    var relation=document.getElementById('t-relation').value;
+    var message=msg.value.trim();
+    if(!message){msg.style.borderColor='#c0392b';msg.focus();setTimeout(function(){msg.style.borderColor='';},1500);return;}
+    btn.disabled=true; btn.textContent='Submitting…';
+    fetch('/api/tributes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,relation:relation,message:message})})
+      .then(function(r){return r.json().then(function(data){return{ok:r.ok,data:data};});})
+      .then(function(res){ if(res.ok){document.getElementById('t-name').value='';document.getElementById('t-relation').value='';msg.value='';document.getElementById('char-used').textContent='0';showToast('Thank you! Your tribute has been submitted and will appear once approved.');wall.scrollIntoView({behavior:'smooth',block:'start'});}else{showToast(res.data.error||'Something went wrong. Please try again.');}})
+      .catch(function(){showToast('Could not connect. Please check your internet and try again.');})
+      .finally(function(){btn.disabled=false;btn.innerHTML='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> Leave Your Tribute';});
   });
 })();
 </script>
