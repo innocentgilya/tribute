@@ -62,14 +62,8 @@
   .nav-links a:hover, .nav-links a.active { color: var(--teal-mid); }
   .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
   @media (max-width: 680px) {
-    nav { padding: 0 20px; }
-    .nav-links {
-      display: none; position: absolute; top: var(--nav-h); left: 0; right: 0;
-      flex-direction: column; gap: 0; background: rgba(255,255,255,0.99);
-      border-bottom: 1px solid var(--nav-border); padding: 12px 0 20px;
-    }
-    .nav-links a { display: block; padding: 14px 20px; font-size: 0.7rem; }
-    .nav-links a::after { display: none; }
+    nav { padding: 0 16px; }
+    .nav-links { gap: 20px; flex-wrap: wrap; justify-content: center; }
   }
 
   /* ====== PAGE HEADER ====== */
