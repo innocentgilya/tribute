@@ -67,21 +67,35 @@
   }
 
   .hero-photo-wrap {
-    width: min(520px, 92vw);
+    /* Fill full width so image fills the screen */
+    width: 100%;
+    max-width: 800px;
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
     margin-bottom: 12px;
-    flex-shrink: 0;
     position: relative;
     z-index: 2;
+    min-height: 0;
   }
 
   .hero-photo-wrap img {
     width: 100%;
+    max-width: 800px;
     height: auto;
     display: block;
+    object-fit: contain;
+    object-position: center bottom;
     -webkit-mask-image: linear-gradient(to bottom, black 0%, black 78%, transparent 100%);
     mask-image: linear-gradient(to bottom, black 0%, black 78%, transparent 100%);
     opacity: 0;
     animation: photoFade 1.2s 0.3s ease forwards;
+  }
+
+  @media (max-width: 480px) {
+    .hero-photo-wrap { width: 100%; max-width: 100%; }
+    .hero { padding: 0 16px 48px; }
   }
 
   .hero-text { position: relative; z-index: 2; opacity: 0; animation: fadeUp 1s 0.7s ease forwards; }
@@ -92,19 +106,27 @@
   .hero-quote { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(0.82rem, 1.5vw, 0.96rem); color: rgba(176,216,228,0.7); margin-bottom: 16px; }
   .hero-scroll { font-size: 0.55rem; letter-spacing: 4px; opacity: 0.5; text-transform: uppercase; animation: fadePulse 2s infinite; }
 
-  /* ── BURIAL BANNER ── */
-  .burial-banner {
-    position: relative; z-index: 1;
-    background: var(--teal-mid);
-    color: var(--teal-deep);
-    text-align: center;
-    padding: 18px 24px;
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1rem, 2.5vw, 1.3rem);
-    font-weight: 600;
-    letter-spacing: 1px;
+  /* ── FUNERAL SERVICE (inside hero) ── */
+  .hero-funeral {
+    position: relative; z-index: 2;
+    margin-top: 20px;
+    border: 1px solid rgba(127,212,219,0.35);
+    border-radius: 4px;
+    padding: 14px 32px;
+    background: rgba(31,92,99,0.25);
+    backdrop-filter: blur(8px);
+    display: inline-block;
   }
-  .burial-banner span { opacity: 0.75; font-size: 0.75em; font-family: 'Inter', sans-serif; font-weight: 300; letter-spacing: 3px; text-transform: uppercase; display: block; margin-bottom: 4px; }
+  .hero-funeral-label {
+    font-size: 0.58rem; letter-spacing: 3.5px; text-transform: uppercase;
+    color: var(--teal-light); opacity: 0.8; margin-bottom: 4px;
+  }
+  .hero-funeral-date {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    font-weight: 600; letter-spacing: 1px;
+    color: var(--white);
+  }
 
   /* ── SLIDESHOW ── */
   .slideshow-section { position: relative; z-index: 1; background: #ffffff; padding: 72px 0 80px; scroll-margin-top: var(--nav-h); }
@@ -230,14 +252,12 @@
     <div class="hero-divider"></div>
     <p class="hero-quote">Be of good comfort in the hope of the resurrection morning</p>
     <p class="hero-scroll">&#9662; Scroll</p>
+    <div class="hero-funeral">
+      <p class="hero-funeral-label">Funeral Service</p>
+      <p class="hero-funeral-date">Burial Date: April 7, 2026</p>
+    </div>
   </div>
 </section>
-
-<!-- BURIAL BANNER -->
-<div class="burial-banner fade-in">
-  <span>Funeral Service</span>
-  Burial Date: April 7, 2026
-</div>
 
 <!-- ===== SLIDESHOW SECTION ===== -->
 <section class="slideshow-section" id="slideshow">
