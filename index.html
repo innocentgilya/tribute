@@ -54,7 +54,8 @@
     min-height: 100vh;
     z-index: 1;
     overflow: hidden;
-    padding-top: var(--nav-h);
+    /* No padding-top — image fills from very top, nav floats over */
+    padding-top: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,17 +64,12 @@
 
   @media (max-width: 768px) {
     .hero {
-      min-height: 100svh !important;
-      justify-content: flex-end !important;
-      padding-top: 0 !important;
-      margin-top: 0 !important;
+      min-height: 100svh;
     }
     .hero-photo-wrap {
       width: 100% !important;
       max-width: 100% !important;
       padding-top: 0 !important;
-      margin-top: 0 !important;
-      flex: none !important;
     }
     .hero-photo-wrap img {
       width: 100% !important;
@@ -112,7 +108,7 @@
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    flex: 1;
+    /* flex:1 removed — let image natural size drive height */
     padding-top: 0;
   }
 
