@@ -29,44 +29,16 @@
     position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 100;
     display: flex; align-items: center; justify-content: center; padding: 0 40px;
     background: transparent; backdrop-filter: none; border-bottom: none;
-    transition: background 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
   }
-  /* Scrolled state — solid nav with hamburger */
-  nav.scrolled {
-    background: rgba(9,24,32,0.95);
-    backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-    justify-content: space-between;
-    padding: 0 40px;
-  }
-  nav.scrolled .nav-brand { display: block; }
-  nav.scrolled .nav-links { display: none; }
-  nav.scrolled .nav-toggle { display: flex; }
-  nav.scrolled .nav-links.open { display: flex; }
-  .nav-brand { display: none; font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; color: var(--accent-soft); white-space: nowrap; flex-shrink: 0; text-decoration: none; }
-  .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-  .nav-toggle span { display: block; width: 22px; height: 1px; background: var(--accent); transition: all 0.3s; }
-  .nav-toggle.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
-  .nav-toggle.open span:nth-child(2) { opacity: 0; }
-  .nav-toggle.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
   .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
   .nav-links a { font-size: 0.72rem; letter-spacing: 2px; color: var(--muted); text-decoration: none; text-transform: uppercase; transition: color 0.3s; position: relative; padding-bottom: 4px; font-weight: 300; }
   .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--accent); transition: width 0.3s; }
   .nav-links a:hover { color: var(--accent); }
   .nav-links a:hover::after { width: 100%; }
   @media (max-width: 680px) {
-    nav { padding: 0 20px; justify-content: space-between !important; }
-    .nav-brand { display: block !important; }
-    .nav-toggle { display: flex !important; }
-    /* Hide inline links on mobile — hamburger only */
-    nav:not(.scrolled) .nav-links { display: none; }
-    nav:not(.scrolled) .nav-links.open {
-      display: flex; position: absolute; top: var(--nav-h); left: 0; right: 0;
-      flex-direction: column; gap: 0; background: rgba(9,24,32,0.98);
-      border-bottom: 1px solid var(--border); padding: 12px 0 20px;
-    }
-    nav:not(.scrolled) .nav-links.open li { width: 100%; text-align: center; }
-    nav:not(.scrolled) .nav-links.open a { display: block; padding: 14px 20px; font-size: 0.7rem; }
+    nav { padding: 0 16px; }
+    .nav-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
   }
 
   #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.35; }
@@ -469,40 +441,6 @@
 </footer>
 
 <script>
-/* ── SCROLL NAV: transparent at top, hamburger when scrolling ── */
-(function () {
-  var nav = document.getElementById('navbar');
-  var toggle = document.getElementById('nav-toggle');
-  var links  = document.getElementById('nav-links');
-
-  function updateNav() {
-    if (window.scrollY > 10) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-      // Close menu if back at top
-      if (links) links.classList.remove('open');
-      if (toggle) toggle.classList.remove('open');
-    }
-  }
-
-  window.addEventListener('scroll', updateNav, { passive: true });
-  updateNav(); // run on load
-
-  if (toggle && links) {
-    toggle.addEventListener('click', function () {
-      toggle.classList.toggle('open');
-      links.classList.toggle('open');
-    });
-    links.querySelectorAll('a').forEach(function (a) {
-      a.addEventListener('click', function () {
-        toggle.classList.remove('open');
-        links.classList.remove('open');
-      });
-    });
-  }
-})();
-
 (function () {
   var c = document.getElementById('particles');
   if (!c) return;
