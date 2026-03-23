@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Tributes — Dr. Philemon Odiwuor Yugi</title>
+<title>Biography — Dr. Philemon Odiwuor Yugi</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,7 +12,6 @@
     --teal-deep:   #071e22;
     --teal-mid:    #3c8d94;
     --teal-light:  #7fd4db;
-    --accent:      #7ab8c8;
     --border:      #d0dfe3;
     --text:        #0d1f24;
     --muted:       #4a6b75;
@@ -24,7 +23,7 @@
   html { scroll-behavior: smooth; }
   body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 400; min-height: 100vh; overflow-x: hidden; }
 
-  /* ── NAV ── */
+  /* NAV */
   nav {
     position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 100;
     display: flex; align-items: center; justify-content: center; padding: 0 40px;
@@ -38,396 +37,200 @@
   .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
   @media (max-width: 680px) { nav { padding: 0 16px; } .nav-links { gap: 18px; flex-wrap: wrap; justify-content: center; } .nav-links a { font-size: 0.62rem; } }
 
-  /* ── PAGE HEADER ── */
+  /* PAGE HEADER */
   .page-header {
     background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 100%);
-    padding: calc(var(--nav-h) + 48px) 24px 48px;
-    text-align: center;
-    color: #fff;
+    padding: calc(var(--nav-h) + 56px) 24px 56px;
+    text-align: center; color: #fff;
   }
-  .page-header-label { font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--teal-light); margin-bottom: 12px; opacity: 0.9; }
-  .page-header-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 600; margin-bottom: 8px; }
+  .page-header-label { font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--teal-light); margin-bottom: 14px; opacity: 0.9; }
+  .page-header-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 600; margin-bottom: 10px; line-height: 1.15; }
   .page-header-dates { font-size: 0.85rem; letter-spacing: 3px; opacity: 0.7; text-transform: uppercase; }
+  .page-header-divider { width: 60px; height: 1px; background: rgba(127,212,219,0.5); margin: 18px auto; }
+  .page-header-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; opacity: 0.75; max-width: 480px; margin: 0 auto; line-height: 1.8; }
 
-  /* ── MAIN LAYOUT ── */
-  .page-body { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  /* MAIN */
+  .page-body { max-width: 780px; margin: 0 auto; padding: 56px 24px 90px; }
 
-  /* ── MEMORIES HEADER ── */
-  .memories-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 32px; flex-wrap: wrap; gap: 12px;
-  }
-  .memories-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem; font-weight: 600; color: var(--text);
-  }
-  .memories-count {
-    font-size: 0.78rem; color: var(--muted); letter-spacing: 1px;
-  }
-
-  /* ── TRIBUTE CARD — ForeverMissed style ── */
-  .tribute-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 48px; }
-
-  .tribute-card {
+  /* CHAPTER CARD */
+  .bio-chapter {
     background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px 28px 24px;
-    display: grid;
-    grid-template-columns: 52px 1fr;
-    gap: 0 20px;
-    box-shadow: 0 2px 12px rgba(31,92,99,0.08); border: 1px solid #c8d8dc;
-    transition: box-shadow 0.3s;
-    opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s;
-  }
-  .tribute-card.visible { opacity: 1; transform: translateY(0); }
-  .tribute-card:hover { box-shadow: 0 4px 24px rgba(31,92,99,0.12); }
-
-  /* Avatar circle with initials */
-  .tribute-avatar {
-    width: 52px; height: 52px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
-    display: flex; align-items: center; justify-content: center;
-    color: #fff; font-weight: 600; font-size: 1.1rem;
-    flex-shrink: 0; align-self: flex-start;
-    letter-spacing: 0.5px;
-  }
-
-  .tribute-body { min-width: 0; }
-
-  .tribute-header-row {
-    display: flex; align-items: baseline; justify-content: space-between;
-    flex-wrap: wrap; gap: 4px; margin-bottom: 4px;
-  }
-  .tribute-name {
-    font-weight: 600; font-size: 1rem; color: var(--text); letter-spacing: 0.2px;
-  }
-  .tribute-time {
-    font-size: 0.75rem; color: var(--muted); white-space: nowrap; flex-shrink: 0;
-  }
-  .tribute-relation {
-    font-size: 0.72rem; color: var(--teal-mid); font-weight: 500;
-    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px;
-  }
-  .tribute-message {
-    font-size: 0.95rem; line-height: 1.85; color: #0d1f24;
-    font-weight: 400; white-space: pre-line;
-  }
-
-  /* Expand/collapse for long messages */
-  .tribute-message.clamped {
-    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
-  }
-  .tribute-read-more {
-    background: none; border: none; cursor: pointer;
-    color: var(--teal-mid); font-size: 0.82rem; font-weight: 500;
-    padding: 6px 0 0; display: inline-block; text-decoration: underline;
-    font-family: 'Inter', sans-serif;
-  }
-
-  /* Empty state */
-  .empty-state {
-    text-align: center; padding: 60px 20px;
-    color: var(--muted); font-size: 1rem; line-height: 1.8;
-    background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px;
-  }
-  .empty-state p { margin-bottom: 8px; }
-
-  /* ── DIVIDER ── */
-  .section-divider {
-    display: flex; align-items: center; gap: 16px; margin: 48px 0 36px;
-  }
-  .section-divider-line { flex: 1; height: 1px; background: var(--border); }
-  .section-divider-label {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem; color: var(--text); white-space: nowrap; font-style: italic;
-  }
-
-  /* ── SHARE A STORY FORM ── */
-  .story-form-wrap {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
+    border: 1px solid #c8d8dc;
     border-radius: 12px;
     padding: 36px;
-    box-shadow: 0 2px 12px rgba(31,92,99,0.08); border: 1px solid #c8d8dc;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(31,92,99,0.07);
+    opacity: 0; transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.3s;
   }
-  .story-form-title {
+  .bio-chapter.visible { opacity: 1; transform: translateY(0); }
+  .bio-chapter:hover { box-shadow: 0 4px 24px rgba(31,92,99,0.11); }
+
+  .bio-chapter-num {
     font-family: 'Playfair Display', serif;
-    font-size: 1.4rem; font-weight: 600; color: var(--text);
-    margin-bottom: 6px;
+    font-size: 2.6rem; font-weight: 600;
+    color: var(--teal); opacity: 0.1;
+    line-height: 1; margin-bottom: 2px;
+    user-select: none;
   }
-  .story-form-subtitle {
-    font-size: 0.88rem; color: var(--muted); margin-bottom: 28px; line-height: 1.6;
+  .bio-chapter-tag {
+    font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+    font-weight: 600; color: var(--teal-mid); margin-bottom: 10px;
+  }
+  .bio-chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem; font-weight: 600;
+    color: var(--text); margin-bottom: 16px; line-height: 1.3;
+  }
+  .bio-chapter-body {
+    font-size: 0.97rem; line-height: 1.9;
+    color: #1a3038; font-weight: 400;
+  }
+  .bio-chapter-body p { margin-bottom: 14px; }
+  .bio-chapter-body p:last-child { margin-bottom: 0; }
+
+  /* CLOSING QUOTE */
+  .bio-closing {
+    background: linear-gradient(135deg, #eaf4f6 0%, #f4f9fa 100%);
+    border: 1px solid #c8d8dc;
+    border-radius: 12px;
+    padding: 48px 36px;
+    text-align: center;
+    margin-top: 8px;
+    opacity: 0; transform: translateY(18px);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+  .bio-closing.visible { opacity: 1; transform: translateY(0); }
+  .bio-closing-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    font-style: italic; font-weight: 400;
+    color: var(--teal); line-height: 1.8; max-width: 520px; margin: 0 auto 16px;
+  }
+  .bio-closing-attr {
+    font-size: 0.72rem; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--muted); font-weight: 500;
   }
 
-  .form-row { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 0; }
-  .form-group { flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
-  .form-group label { font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
-  .form-group input, .form-group textarea, .form-group select {
-    background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px;
-    color: var(--text); font-family: 'Inter', sans-serif; font-weight: 400;
-    font-size: 0.95rem; padding: 11px 14px; outline: none;
-    transition: border-color 0.25s, box-shadow 0.25s; width: 100%;
-  }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
-    border-color: var(--teal-mid); box-shadow: 0 0 0 3px rgba(60,141,148,0.12);
-  }
-  .form-group textarea { resize: vertical; min-height: 130px; line-height: 1.7; }
-  .form-group select option { background: #fff; }
-  .char-count { font-size: 0.72rem; color: var(--muted); text-align: right; margin-top: 4px; }
-
-  .submit-btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    background: var(--teal); color: #fff;
-    border: none; border-radius: 8px; cursor: pointer;
-    font-family: 'Inter', sans-serif; font-size: 0.9rem;
-    font-weight: 600; letter-spacing: 0.5px;
-    padding: 13px 32px; transition: background 0.25s, transform 0.15s;
-    margin-top: 4px;
-  }
-  .submit-btn:hover { background: var(--teal-mid); transform: translateY(-1px); }
-  .submit-btn:active { transform: translateY(0); }
-
-  /* ── TOAST ── */
-  .toast { position: fixed; bottom: 28px; right: 28px; background: var(--teal-deep); color: var(--teal-light); padding: 14px 24px; border-radius: 8px; font-size: 0.88rem; font-weight: 400; z-index: 999; opacity: 0; transform: translateY(16px); transition: all 0.35s; pointer-events: none; box-shadow: 0 4px 20px rgba(0,0,0,0.25); max-width: 360px; line-height: 1.5; }
-  .toast.show { opacity: 1; transform: translateY(0); }
-
-  /* ── FOOTER ── */
+  /* FOOTER */
   footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); background: var(--card-bg); }
   .footer-text { color: var(--muted); font-size: 0.88rem; letter-spacing: 0.5px; font-style: italic; }
   .footer-name { font-weight: 600; color: var(--teal); font-size: 0.82rem; letter-spacing: 1px; margin-top: 8px; text-transform: uppercase; }
 
-  @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+  @media (max-width: 600px) { .bio-chapter { padding: 24px; } .bio-closing { padding: 36px 24px; } }
+
+  .updating {
+    font-size: 0.88rem; font-style: italic;
+    color: var(--muted); letter-spacing: 0.3px;
+    padding: 10px 0;
+  }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav id="navbar">
+<nav>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="gallery.html">Gallery</a></li>
-    <li><a href="biography.html">Biography</a></li>
-    <li><a href="tributes.html" class="active">Tributes</a></li>
+    <li><a href="biography.html" class="active">Biography</a></li>
+    <li><a href="tributes.html">Tributes</a></li>
   </ul>
 </nav>
 
 <!-- PAGE HEADER -->
 <div class="page-header">
-  <p class="page-header-label">✦ In Loving Memory</p>
+  <p class="page-header-label">His Story</p>
   <h1 class="page-header-title">Dr. Philemon Odiwuor Yugi</h1>
-  <p class="page-header-dates">May 25, 1968 &nbsp;–&nbsp; March 19, 2026</p>
+  <p class="page-header-dates">May 25, 1968 &ndash; March 19, 2026</p>
+  <div class="page-header-divider"></div>
+  <p class="page-header-quote">Be of good comfort in the hope of the resurrection morning</p>
 </div>
 
-<!-- MAIN -->
+<!-- BIOGRAPHY -->
 <main class="page-body">
 
-  <!-- Memories list -->
-  <div class="memories-header">
-    <h2 class="memories-title">Memories &amp; Tributes</h2>
-    <span class="memories-count" id="memories-count"></span>
-  </div>
-
-  <div class="tribute-list" id="tribute-list">
-    <div class="empty-state"><p>Loading tributes…</p></div>
-  </div>
-
-  <!-- Share a Story -->
-  <div class="section-divider">
-    <div class="section-divider-line"></div>
-    <span class="section-divider-label">Share a Story</span>
-    <div class="section-divider-line"></div>
-  </div>
-
-  <div class="story-form-wrap">
-    <h3 class="story-form-title">Leave a Memory or Message</h3>
-    <p class="story-form-subtitle">Share a fond memory, a word of comfort, or a message to the family. Your tribute will appear here once approved.</p>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label for="t-name">Your Name</label>
-        <input type="text" id="t-name" placeholder="e.g. Sarah Odhiambo" maxlength="60"/>
-      </div>
-      <div class="form-group">
-        <label for="t-relation">Your Relationship</label>
-        <select id="t-relation">
-          <option value="">— Select —</option>
-          <option>Family Member</option>
-          <option>Friend</option>
-          <option>Colleague</option>
-          <option>Neighbour</option>
-          <option>Fellow Worshipper</option>
-          <option>Former Student</option>
-          <option>Other</option>
-        </select>
-      </div>
+  <!-- 01 · Birth & Early Life -->
+  <div class="bio-chapter">
+    <div class="bio-chapter-num">01</div>
+    <p class="bio-chapter-tag">Birth &amp; Early Life</p>
+    <h2 class="bio-chapter-title">A Child Full of Promise</h2>
+        <div class="bio-chapter-body">
+      <p class="updating">This section is currently being updated.</p>
     </div>
+  </div>
 
-    <div class="form-group">
-      <label for="t-message">Your Tribute or Memory</label>
-      <textarea id="t-message" placeholder="Share a memory, a kind word, or a message to the family…" maxlength="600"></textarea>
-      <div class="char-count"><span id="char-used">0</span> / 600</div>
+  <!-- 02 · Education -->
+  <div class="bio-chapter">
+    <div class="bio-chapter-num">02</div>
+    <p class="bio-chapter-tag">Education &amp; Schooling</p>
+    <h2 class="bio-chapter-title">A Pursuit of Knowledge</h2>
+        <div class="bio-chapter-body">
+      <p class="updating">This section is currently being updated.</p>
     </div>
+  </div>
 
-    <button class="submit-btn" id="submit-tribute">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-      </svg>
-      Submit Your Tribute
-    </button>
+  <!-- 03 · Christian Faith -->
+  <div class="bio-chapter">
+    <div class="bio-chapter-num">03</div>
+    <p class="bio-chapter-tag">Faith &amp; Christian Life</p>
+    <h2 class="bio-chapter-title">Rooted in Faith</h2>
+        <div class="bio-chapter-body">
+      <p class="updating">This section is currently being updated.</p>
+    </div>
+  </div>
+
+  <!-- 04 · Family -->
+  <div class="bio-chapter">
+    <div class="bio-chapter-num">04</div>
+    <p class="bio-chapter-tag">Family &amp; Home</p>
+    <h2 class="bio-chapter-title">A Devoted Family Man</h2>
+        <div class="bio-chapter-body">
+      <p class="updating">This section is currently being updated.</p>
+    </div>
+  </div>
+
+  <!-- 05 · Career -->
+  <div class="bio-chapter">
+    <div class="bio-chapter-num">05</div>
+    <p class="bio-chapter-tag">Career &amp; Service</p>
+    <h2 class="bio-chapter-title">A Life of Purpose &amp; Impact</h2>
+        <div class="bio-chapter-body">
+      <p class="updating">This section is currently being updated.</p>
+    </div>
+  </div>
+
+  <!-- 06 · Legacy -->
+  <div class="bio-chapter">
+    <div class="bio-chapter-num">06</div>
+    <p class="bio-chapter-tag">Passing &amp; Legacy</p>
+    <h2 class="bio-chapter-title">Gone But Never Forgotten</h2>
+        <div class="bio-chapter-body">
+      <p class="updating">This section is currently being updated.</p>
+    </div>
+  </div>
+
+  <!-- Closing Quote -->
+  <div class="bio-closing">
+    <p class="bio-closing-quote">&ldquo;Be of good comfort in the hope of the resurrection morning&rdquo;</p>
+    <p class="bio-closing-attr">May 25, 1968 &mdash; March 19, 2026</p>
   </div>
 
 </main>
 
-<!-- FOOTER -->
 <footer>
-  <p class="footer-text">"Be of good comfort in the hope of the resurrection morning"</p>
-  <p class="footer-name">Dr. Philemon Odiwuor Yugi &nbsp;✦&nbsp; May 25, 1968 – March 19, 2026</p>
+  <p class="footer-text">&ldquo;Be of good comfort in the hope of the resurrection morning&rdquo;</p>
+  <p class="footer-name">Dr. Philemon Odiwuor Yugi &nbsp;&mdash;&nbsp; May 25, 1968 &ndash; March 19, 2026</p>
 </footer>
-
-<div class="toast" id="toast"></div>
 
 <script>
 (function () {
-  var list    = document.getElementById('tribute-list');
-  var countEl = document.getElementById('memories-count');
-  var msg     = document.getElementById('t-message');
-  var btn     = document.getElementById('submit-tribute');
-  var toast   = document.getElementById('toast');
-
-  /* ── Helpers ── */
-  function timeAgo(d) {
-    var s = Math.floor((Date.now() - new Date(d).getTime()) / 1000);
-    if (s < 60)    return 'just now';
-    if (s < 3600)  return Math.floor(s/60) + 'm ago';
-    if (s < 86400) return Math.floor(s/3600) + 'h ago';
-    var days = Math.floor(s/86400);
-    if (days < 30) return days + 'd ago';
-    var months = Math.floor(days/30);
-    if (months < 12) return months + ' month' + (months>1?'s':'') + ' ago';
-    return Math.floor(months/12) + ' year' + (Math.floor(months/12)>1?'s':'') + ' ago';
-  }
-
-  function getInitials(name) {
-    if (!name || name.trim() === '') return '?';
-    var parts = name.trim().split(/\s+/);
-    if (parts.length === 1) return parts[0][0].toUpperCase();
-    return (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
-  }
-
-  /* Avatar background colours — cycle through teal shades */
-  var avatarColors = [
-    'linear-gradient(135deg,#1f5c63,#3c8d94)',
-    'linear-gradient(135deg,#0d2535,#1e4a5c)',
-    'linear-gradient(135deg,#2a7a82,#56b0b8)',
-    'linear-gradient(135deg,#143845,#2a6070)',
-    'linear-gradient(135deg,#1a4a55,#4a9aa5)',
-  ];
-
-  function makeCard(t, idx) {
-    var name     = t.name || 'Anonymous';
-    var initials = getInitials(name);
-    var color    = avatarColors[idx % avatarColors.length];
-    var relation = t.relation || '';
-    var message  = t.message  || '';
-    var timeStr  = t.created_at ? timeAgo(t.created_at) : '';
-    var isLong   = message.length > 280;
-
-    var card = document.createElement('div');
-    card.className = 'tribute-card';
-    card.innerHTML =
-      '<div class="tribute-avatar" style="background:' + color + '">' + initials + '</div>' +
-      '<div class="tribute-body">' +
-        '<div class="tribute-header-row">' +
-          '<span class="tribute-name">' + name + '</span>' +
-          (timeStr ? '<span class="tribute-time">' + timeStr + '</span>' : '') +
-        '</div>' +
-        (relation ? '<div class="tribute-relation">' + relation + '</div>' : '') +
-        '<p class="tribute-message' + (isLong ? ' clamped' : '') + '">' + message + '</p>' +
-        (isLong ? '<button class="tribute-read-more" onclick="this.previousSibling.classList.toggle(\'clamped\');this.textContent=this.previousSibling.classList.contains(\'clamped\')?\'Read more\':\'Show less\'">Read more</button>' : '') +
-      '</div>';
-
-    return card;
-  }
-
-  /* ── Scroll reveal ── */
-  var observer = new IntersectionObserver(function(entries) {
+  var els = document.querySelectorAll('.bio-chapter, .bio-closing');
+  var obs = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
     });
-  }, { threshold: 0.06 });
-
-  /* ── Render tributes ── */
-  function render(tributes) {
-    list.innerHTML = '';
-    if (!tributes.length) {
-      list.innerHTML = '<div class="empty-state"><p>No tributes yet.</p><p>Be the first to share a memory below.</p></div>';
-      countEl.textContent = '';
-      return;
-    }
-    countEl.textContent = tributes.length + ' ' + (tributes.length === 1 ? 'memory' : 'memories');
-    tributes.forEach(function(t, i) {
-      var card = makeCard(t, i);
-      list.appendChild(card);
-      setTimeout(function() { observer.observe(card); }, i * 30);
-    });
-  }
-
-  /* ── Fetch ── */
-  fetch('/api/tributes')
-    .then(function(r) { return r.json(); })
-    .then(function(data) { render(data); })
-    .catch(function() {
-      list.innerHTML = '<div class="empty-state"><p>Could not load tributes.</p><p>Please refresh the page to try again.</p></div>';
-    });
-
-  /* ── Char count ── */
-  msg.addEventListener('input', function() {
-    document.getElementById('char-used').textContent = msg.value.length;
-  });
-
-  /* ── Submit ── */
-  function showToast(m) { toast.textContent = m; toast.classList.add('show'); setTimeout(function(){toast.classList.remove('show');}, 5000); }
-
-  btn.addEventListener('click', function() {
-    var name     = document.getElementById('t-name').value.trim();
-    var relation = document.getElementById('t-relation').value;
-    var message  = msg.value.trim();
-    if (!message) {
-      msg.style.borderColor = '#c0392b';
-      msg.focus();
-      setTimeout(function() { msg.style.borderColor = ''; }, 1500);
-      return;
-    }
-    btn.disabled = true;
-    btn.innerHTML = 'Submitting…';
-
-    fetch('/api/tributes', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: name, relation: relation, message: message })
-    })
-    .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
-    .then(function(res) {
-      if (res.ok) {
-        document.getElementById('t-name').value = '';
-        document.getElementById('t-relation').value = '';
-        msg.value = '';
-        document.getElementById('char-used').textContent = '0';
-        showToast('Thank you — your tribute has been received and will appear once approved.');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        showToast(res.data.error || 'Something went wrong. Please try again.');
-      }
-    })
-    .catch(function() { showToast('Could not connect. Please check your internet and try again.'); })
-    .finally(function() {
-      btn.disabled = false;
-      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg> Submit Your Tribute';
-    });
-  });
+  }, { threshold: 0.07 });
+  els.forEach(function(el) { obs.observe(el); });
 })();
 </script>
 </body>
