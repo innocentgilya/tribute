@@ -15,8 +15,8 @@
     --teal-light:  #7fd4db;
     --accent:      #7ab8c8;
     --accent-soft: #b0d8e4;
-    --dark:        #091820;
-    --surface:     #102030;
+    --dark:        #082026;
+    --surface:     #082026;
     --card:        #152535;
     --border:      rgba(122,184,200,0.2);
     --text:        #e8f1f2;
@@ -192,7 +192,7 @@
   .ss-loading-dots span:nth-child(3) { animation-delay: 0.4s; }
 
   /* ── BIO ── */
-  .bio-teaser { position: relative; z-index: 1; background: var(--dark); padding: 80px 24px 90px; }
+  .bio-teaser { position: relative; z-index: 1; background: radial-gradient(circle at 50% 25%, #1f5c63 0%, #0d2a38 55%, #071e22 100%); padding: 80px 24px 90px; }
   .bio-inner { max-width: 860px; margin: 0 auto; }
   .bio-header { text-align: center; margin-bottom: 56px; }
   .bio-label { font-size: 0.62rem; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 400; margin-bottom: 14px; }
@@ -216,7 +216,7 @@
   @media (max-width: 600px) { .bio-chapter { padding: 28px 24px; } .bio-read-more { padding: 28px 24px; flex-direction: column; align-items: flex-start; } }
 
   /* ── TRIBUTE ── */
-  .tribute-preview { position: relative; z-index: 1; background: var(--surface); padding: 80px 24px 90px; border-top: 1px solid var(--border); }
+  .tribute-preview { position: relative; z-index: 1; background: #082026; padding: 80px 24px 90px; border-top: none; }
   .tribute-preview-inner { max-width: 1060px; margin: 0 auto; }
   .tp-header { text-align: center; margin-bottom: 48px; }
   .tp-label { font-size: 0.62rem; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 400; margin-bottom: 14px; }
@@ -230,7 +230,7 @@
   .tp-card:hover { border-color: rgba(122,184,200,0.5); }
   .tp-card::before { content: '\201C'; position: absolute; top: 10px; left: 18px; font-family: 'Playfair Display', serif; font-size: 4.5rem; color: var(--accent); opacity: 0.12; line-height: 1; pointer-events: none; }
   .tp-card-relation { font-size: 0.58rem; letter-spacing: 3px; color: var(--accent); text-transform: uppercase; font-weight: 400; margin-bottom: 12px; }
-  .tp-card-text { font-size: 0.9rem; line-height: 1.85; color: var(--text); font-weight: 300; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
+  .tp-card-text { font-size: 0.9rem; line-height: 1.85; color: var(--text); font-weight: 300; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 5; line-clamp: 5; -webkit-box-orient: vertical; overflow: hidden; }
   .tp-card-meta { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 14px; }
   .tp-card-name { font-size: 0.78rem; color: var(--accent-soft); letter-spacing: 1px; font-weight: 400; }
   .tp-card-time { font-size: 0.68rem; color: var(--muted); }
@@ -259,6 +259,7 @@
   @media (prefers-reduced-motion: reduce) {
     .hero__bg, .hero__content { animation: none !important; opacity: 1 !important; }
   }
+
 </style>
 
   <!-- ── Open Graph / Social Share Thumbnail ── -->
@@ -365,23 +366,16 @@
 <section class="bio-teaser" id="biography">
   <div class="bio-inner">
     <div class="bio-header">
-      <p class="bio-label">✦ His Story</p>
+      <p class="bio-label">His Story</p>
       <h2 class="bio-title">The Life of Dr. Philemon Odiwuor Yugi</h2>
       <div class="bio-title-line"></div>
     </div>
-    <div class="bio-grid" style="grid-template-columns: 1fr;">
-      <div class="bio-chapter">
-        <div class="bio-chapter-num">01</div>
-        <span class="bio-chapter-icon">🕊️</span>
-        <p class="bio-chapter-title">Birth &amp; Early Life</p>
-        <h3 class="bio-chapter-heading">A Child Full of Promise</h3>
-        <p class="bio-chapter-text"><em>[ Enter birth details here — date, place of birth, parents' names, and early childhood memories. Describe the community he was born into and the early signs of the remarkable person he would become. ]</em></p>
-      </div>
-    </div>
-    <div class="bio-read-more">
-      <p class="bio-read-more-text">Continue reading about his <strong>Christian faith, family life, career</strong> and the lasting legacy he leaves behind.</p>
+    <div class="bio-read-more visible" style="justify-content:center; border:1px solid var(--border); padding:40px; text-align:center; flex-direction:column; align-items:center; gap:24px;">
+      <p style="font-family:'Playfair Display',serif; font-style:italic; font-size:1.05rem; color:var(--muted); line-height:1.8;">
+        The biography of Dr. Philemon Odiwuor Yugi is currently being updated.<br>Please check back soon.
+      </p>
       <a class="bio-read-more-link" href="biography.html">
-        Read Full Biography
+        View Biography
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
     </div>
@@ -394,8 +388,8 @@
 <section class="tribute-preview" id="tribute-preview">
   <div class="tribute-preview-inner">
     <div class="tp-header">
-      <p class="tp-label">✦ Words of Remembrance</p>
-      <h2 class="tp-title">What People Are Saying</h2>
+      <p class="tp-label">Words of Remembrance</p>
+      <h2 class="tp-title">Tributes</h2>
       <div class="tp-title-line"></div>
     </div>
     <div id="tp-stage"></div>
@@ -413,10 +407,7 @@
 </section>
 
 
-<footer>
-  <p class="footer-text">"Be of good comfort in the hope of the resurrection morning"</p>
-  <p class="footer-name">Dr. Philemon Odiwuor Yugi &nbsp;✦&nbsp; May 25, 1968 – March 19, 2026</p>
-</footer>
+
 
 <script>
 (function () {
@@ -564,8 +555,10 @@
   });
 })();
 </script>
+
 </body>
 </html>
+
 </body>
 </html>
 
@@ -588,8 +581,10 @@
 })();
 </script>
 
+
 </body>
 </html>
+
 </body>
 </html>
 
@@ -650,5 +645,6 @@
   els.forEach(function(el) { obs.observe(el); });
 })();
 </script>
+
 </body>
 </html>
