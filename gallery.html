@@ -57,7 +57,8 @@
   @media (max-width: 1200px) { .masonry-grid { columns: 3; } }
   @media (max-width: 800px)  { .masonry-grid { columns: 2; } }
   @media (max-width: 460px)  { .masonry-grid { columns: 1; } }
-  .masonry-item { break-inside: avoid; margin-bottom: 14px; position: relative; border-radius: 4px; overflow: hidden; cursor: pointer; border: 1px solid var(--border); opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.3s; }
+  .masonry-item { break-inside: avoid; margin-bottom: 14px; position: relative; border-radius: 4px; overflow: hidden; cursor: pointer; border: 1px solid var(--border); opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.3s; content-visibility: auto; contain-intrinsic-size: 300px; }
+  .masonry-item picture, .masonry-item img { display: block; width: 100%; height: auto; }
   .masonry-item.visible { opacity: 1; transform: translateY(0); }
   .masonry-item:hover { border-color: rgba(122,184,200,0.5); }
   .masonry-item img { width: 100%; display: block; transition: transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s ease; filter: brightness(0.85) saturate(0.85); }
@@ -152,43 +153,85 @@
   const FOLDERS = ['images/', 'Images/'];
   const EXTS    = ['.jpg','.jpeg','.JPG','.JPEG','.png','.PNG','.webp','.WEBP'];
 
-  function discover(name) {
-    return new Promise(function(resolve) {
-      var fi=0,ei=0;
-      function next() {
-        if(fi>=FOLDERS.length){resolve(null);return;}
-        if(ei>=EXTS.length){fi++;ei=0;next();return;}
-        var src=FOLDERS[fi]+name+EXTS[ei];
-        var img=new Image();
-        img.onload=function(){resolve(src);};
-        img.onerror=function(){ei++;next();};
-        img.src=src;
-      }
-      next();
-    });
-  }
-
   function formatName(n){ return n.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/([^\d])(\d+)$/,'$1 $2').replace(/^\w/,function(c){return c.toUpperCase();}).trim(); }
 
   var grid=document.getElementById('masonry-grid');
   var countEl=document.getElementById('header-count');
   var found=[], lbIdx=0;
 
-  Promise.all(IMAGE_NAMES.map(function(name){ return discover(name).then(function(src){return{name:name,src:src};}); }))
-  .then(function(results){
-    var valid=results.filter(function(r){return r.src!==null;});
-    grid.innerHTML='';
-    if(!valid.length){
-      grid.innerHTML='<div class="gallery-empty">No images found in the <strong>images/</strong> folder.</div>';
-      countEl.textContent='0 Photos'; return;
+  /* ── Optimized image manifest with WebP + JPEG srcsets ── */
+  var OPTIMIZED = [
+    {
+      name: 'Drphilemonyugi',
+      webp: 'images/webp/Drphilemonyugi-1024w.webp',
+      jpeg: 'images/jpeg/Drphilemonyugi-1024w.jpg',
+      srcsetWebp: 'images/webp/Drphilemonyugi-480w.webp 480w, images/webp/Drphilemonyugi-768w.webp 768w, images/webp/Drphilemonyugi-1024w.webp 1024w',
+      srcsetJpeg: 'images/jpeg/Drphilemonyugi-480w.jpg 480w, images/jpeg/Drphilemonyugi-768w.jpg 768w, images/jpeg/Drphilemonyugi-1024w.jpg 1024w',
+    },
+    {
+      name: 'philemon',
+      webp: 'images/webp/philemon-1024w.webp',
+      jpeg: 'images/jpeg/philemon-1024w.jpg',
+      srcsetWebp: 'images/webp/philemon-480w.webp 480w, images/webp/philemon-768w.webp 768w, images/webp/philemon-1024w.webp 1024w',
+      srcsetJpeg: 'images/jpeg/philemon-480w.jpg 480w, images/jpeg/philemon-768w.jpg 768w, images/jpeg/philemon-1024w.jpg 1024w',
     }
-    countEl.textContent=valid.length+' Photo'+(valid.length!==1?'s':'');
-    valid.forEach(function(item,idx){
-      var label=formatName(item.name);
-      var el=document.createElement('div'); el.className='masonry-item';
-      el.innerHTML='<img src="'+item.src+'" alt="'+label+'" loading="lazy"/><div class="masonry-overlay"><span class="masonry-label">'+label+'</span><span class="masonry-zoom"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span></div>';
-      el.addEventListener('click',function(){openLB(idx);});
-      grid.appendChild(el); found.push({src:item.src,label:label}); observer.observe(el);
+  ];
+
+  /* Also discover any additional images in images/ folder the old way */
+  function discover(name) {
+    return new Promise(function(resolve) {
+      var folders=['images/','Images/'], exts=['.jpg','.jpeg','.JPG','.JPEG','.png','.PNG','.webp','.WEBP'];
+      var fi=0,ei=0;
+      function next() {
+        if(fi>=folders.length){resolve(null);return;}
+        if(ei>=exts.length){fi++;ei=0;next();return;}
+        var src=folders[fi]+name+exts[ei];
+        var img=new Image(); img.onload=function(){resolve(src);}; img.onerror=function(){ei++;next();}; img.src=src;
+      }
+      next();
+    });
+  }
+
+  /* Render optimized images first */
+  grid.innerHTML = '';
+  countEl.textContent = OPTIMIZED.length + ' Photo' + (OPTIMIZED.length !== 1 ? 's' : '');
+
+  OPTIMIZED.forEach(function(item, idx) {
+    var label = formatName(item.name);
+    var el = document.createElement('div');
+    el.className = 'masonry-item';
+    /* <picture> with WebP + JPEG fallback, srcset, lazy loading */
+    el.innerHTML =
+      '<picture>' +
+        '<source type="image/webp" srcset="' + item.srcsetWebp + '" sizes="(max-width:480px) 480px, (max-width:768px) 768px, 1024px"/>' +
+        '<img src="' + item.jpeg + '" srcset="' + item.srcsetJpeg + '" sizes="(max-width:480px) 480px, (max-width:768px) 768px, 1024px" alt="' + label + '" loading="lazy" decoding="async" width="1024"/>' +
+      '</picture>' +
+      '<div class="masonry-overlay"><span class="masonry-label">' + label + '</span><span class="masonry-zoom"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span></div>';
+    el.addEventListener('click', function(){ openLB(idx); });
+    grid.appendChild(el);
+    found.push({ src: item.jpeg, label: label });
+    observer.observe(el);
+  });
+
+  /* Also try to discover extra images (Drphilemonyugi2–8) */
+  var EXTRA_NAMES = ['Drphilemonyugi2','Drphilemonyugi3','Drphilemonyugi4','Drphilemonyugi5','Drphilemonyugi6','Drphilemonyugi7','Drphilemonyugi8','hero'];
+  Promise.all(EXTRA_NAMES.map(function(name){ return discover(name).then(function(src){return{name:name,src:src};}); }))
+  .then(function(results){
+    var valid = results.filter(function(r){ return r.src !== null; });
+    if (!valid.length) return;
+    countEl.textContent = (OPTIMIZED.length + valid.length) + ' Photos';
+    valid.forEach(function(item, idx) {
+      var label = formatName(item.name);
+      var el = document.createElement('div');
+      el.className = 'masonry-item';
+      el.innerHTML =
+        '<img src="' + item.src + '" alt="' + label + '" loading="lazy" decoding="async"/>' +
+        '<div class="masonry-overlay"><span class="masonry-label">' + label + '</span><span class="masonry-zoom"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span></div>';
+      var lbIndex = OPTIMIZED.length + idx;
+      el.addEventListener('click', function(){ openLB(lbIndex); });
+      grid.appendChild(el);
+      found.push({ src: item.src, label: label });
+      observer.observe(el);
     });
   });
 
