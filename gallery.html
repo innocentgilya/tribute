@@ -119,19 +119,18 @@ nav {
 .gallery-section { padding: 64px 28px 100px; max-width: 1480px; margin: 0 auto; }
 
 /* Loading state */
-.gallery-loading {
-  text-align: center; margin-bottom: 48px; min-height: 32px;
-  opacity: 0; animation: fadeUp 0.6s 0.9s ease forwards;
-}
+.gallery-loading { display: none !important; }
 .progress-bar-wrap { width: 220px; height: 2px; background: var(--border-dim); margin: 0 auto 12px; border-radius: 2px; overflow: hidden; }
 .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(to right, var(--accent), var(--accent-soft)); transition: width 0.2s ease; border-radius: 2px; }
 .loading-text { font-size: 0.57rem; letter-spacing: 2.5px; color: var(--silver-dim); text-transform: uppercase; }
 
 /* Masonry */
 .masonry-grid { 
+  visibility: hidden;
   columns: 4; column-gap: 16px; 
   contain: layout style; /* Performance containment */
 }
+.masonry-grid.ready { visibility: visible; }
 @media (max-width: 1280px) { .masonry-grid { columns: 3; } }
 @media (max-width: 840px)  { .masonry-grid { columns: 2; } }
 @media (max-width: 460px)  { .masonry-grid { columns: 1; } }
@@ -410,7 +409,8 @@ footer::before {
     maxScan: 200,
     stopAfterMisses: 12,
     batchSize: 8,
-    preloadRange: 1
+    preloadRange: 1,
+    lightboxAutoAdvanceMs: 10000
   };
 
   const state = {
@@ -418,7 +418,8 @@ footer::before {
     currentIndex: 0,
     observer: null,
     preloadCache: new Map(),
-    sourceLayout: 'flat'
+    sourceLayout: 'flat',
+    lightboxTimer: null
   };
 
   const els = {
@@ -723,9 +724,11 @@ footer::before {
     els.lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
     loadLightboxImage(index, 0);
+    scheduleLightboxAutoplay();
   }
 
   function closeLightbox() {
+    stopLightboxAutoplay();
     els.lightbox.classList.remove('open');
     document.body.style.overflow = '';
     setTimeout(() => {
@@ -734,11 +737,36 @@ footer::before {
     }, 420);
   }
 
-  function navigateLightbox(direction) {
-    const nextIndex = state.currentIndex + direction;
+  function navigateLightbox(direction, options = {}) {
+    const wrap = Boolean(options.wrap);
+    let nextIndex = state.currentIndex + direction;
+
+    if (wrap && state.photos.length) {
+      nextIndex = (nextIndex + state.photos.length) % state.photos.length;
+    }
+
     if (nextIndex < 0 || nextIndex >= state.photos.length) return;
     state.currentIndex = nextIndex;
     loadLightboxImage(nextIndex, direction);
+    scheduleLightboxAutoplay();
+  }
+
+  function stopLightboxAutoplay() {
+    if (state.lightboxTimer) {
+      clearTimeout(state.lightboxTimer);
+      state.lightboxTimer = null;
+    }
+  }
+
+  function scheduleLightboxAutoplay() {
+    stopLightboxAutoplay();
+    if (!els.lightbox.classList.contains('open')) return;
+    if (state.photos.length < 2) return;
+
+    state.lightboxTimer = setTimeout(() => {
+      if (!els.lightbox.classList.contains('open')) return;
+      navigateLightbox(1, { wrap: true });
+    }, CONFIG.lightboxAutoAdvanceMs);
   }
 
   function updateLightboxProgress(index) {
@@ -761,6 +789,7 @@ footer::before {
         const direction = i > state.currentIndex ? 1 : -1;
         state.currentIndex = i;
         loadLightboxImage(i, direction);
+        scheduleLightboxAutoplay();
       });
       els.lbDots.appendChild(dot);
     });
@@ -808,6 +837,7 @@ footer::before {
       state.sourceLayout = await detectSourceLayout(state.photos, manifest.generated);
 
       await renderGallery();
+      els.grid.classList.add('ready');
       renderLightboxDots();
 
       els.progress.style.width = '100%';
@@ -819,6 +849,7 @@ footer::before {
       }, 300);
     } catch (error) {
       console.error('Gallery initialization failed:', error);
+      els.grid.classList.add('ready');
       els.grid.innerHTML = `
         <div style="text-align:center;padding:80px 20px;font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--silver-dim);line-height:2;">
           Unable to load gallery.<br>
