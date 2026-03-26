@@ -1,328 +1,316 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Gallery &ndash; Dr. Philemon Odiwuor Yugi</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400&family=IM+Fell+English:ital@1&display=swap" rel="stylesheet"/>
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery &ndash; Dr. Philemon Odiwuor Yugi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400&family=IM+Fell+English:ital@1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-:root {
-  --bg:          #0a0c0f;
-  --accent:      #b8956a;
-  --accent-soft: #d4b896;
-  --accent-pale: rgba(184,149,106,0.12);
-  --silver:      #a8b4be;
-  --silver-dim:  #5a6670;
-  --border:      rgba(184,149,106,0.18);
-  --border-dim:  rgba(255,255,255,0.05);
-  --text:        #d8dfe5;
-  --white:       #eef2f5;
-  --nav-h:       68px;
-  --ease-expo:   cubic-bezier(0.19, 1, 0.22, 1);
-}
+    :root {
+      --bg:           #0a0c0f;
+      --accent:       #b8956a;
+      --accent-soft:  #d4b896;
+      --accent-pale:  rgba(184,149,106,0.12);
+      --silver:       #a8b4be;
+      --silver-dim:   #5a6670;
+      --border:       rgba(184,149,106,0.18);
+      --border-dim:   rgba(255,255,255,0.05);
+      --text:         #d8dfe5;
+      --white:        #eef2f5;
+      --nav-h:        68px;
+      --ease-expo:    cubic-bezier(0.19, 1, 0.22, 1);
+    }
 
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg); color: var(--text);
-  font-family: 'Jost', sans-serif; font-weight: 300;
-  min-height: 100vh; overflow-x: hidden;
-}
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text);
+      font-family: 'Jost', sans-serif; font-weight: 300;
+      min-height: 100vh; overflow-x: hidden;
+    }
 
-/* Film grain */
-body::before {
-  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  opacity: 0.4;
-}
+    /* Film grain overlay */
+    body::before {
+      content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+    }
 
-/* NAV */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 200;
-  display: flex; align-items: center; justify-content: space-between; padding: 0 48px;
-  background: rgba(10,12,15,0.93);
-  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  border-bottom: 1px solid var(--border-dim);
-}
-.nav-monogram {
-  font-family: 'Playfair Display', serif; font-style: italic;
-  font-size: 1rem; color: var(--accent); letter-spacing: 1px; opacity: 0.85;
-}
-.nav-links { display: flex; gap: 38px; list-style: none; align-items: center; }
-.nav-links a {
-  font-size: 0.62rem; letter-spacing: 3px; color: var(--silver-dim);
-  text-decoration: none; text-transform: uppercase; font-weight: 400;
-  transition: color 0.3s; position: relative; padding-bottom: 4px;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
-  background: linear-gradient(to right, var(--accent), transparent);
-  transition: width 0.4s var(--ease-expo);
-}
-.nav-links a:hover, .nav-links a.active { color: var(--accent-soft); }
-.nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-@media (max-width: 680px) {
-  nav { padding: 0 20px; } .nav-monogram { display: none; } .nav-links { gap: 20px; }
-}
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 200;
+      display: flex; align-items: center; justify-content: space-between; padding: 0 48px;
+      background: rgba(10,12,15,0.93);
+      backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-dim);
+    }
+    .nav-monogram {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 1rem; color: var(--accent); letter-spacing: 1px; opacity: 0.85;
+    }
+    .nav-links { display: flex; gap: 38px; list-style: none; align-items: center; }
+    .nav-links a {
+      font-size: 0.62rem; letter-spacing: 3px; color: var(--silver-dim);
+      text-decoration: none; text-transform: uppercase; font-weight: 400;
+      transition: color 0.3s; position: relative; padding-bottom: 4px;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+      background: linear-gradient(to right, var(--accent), transparent);
+      transition: width 0.4s var(--ease-expo);
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--accent-soft); }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+    @media (max-width: 680px) {
+      nav { padding: 0 20px; } .nav-monogram { display: none; } .nav-links { gap: 20px; }
+    }
 
-/* PAGE HEADER */
-.page-header {
-  padding: calc(var(--nav-h) + 76px) 40px 70px;
-  text-align: center; position: relative; overflow: hidden;
-}
-.page-header-bg {
-  position: absolute; inset: 0; pointer-events: none;
-  background: radial-gradient(ellipse 90% 60% at 50% 0%, rgba(184,149,106,0.08) 0%, transparent 70%);
-}
-.header-ornament {
-  display: flex; align-items: center; justify-content: center; gap: 18px;
-  margin-bottom: 24px; opacity: 0; animation: fadeUp 1s 0.1s ease forwards;
-}
-.ornament-line { width: 52px; height: 1px; background: linear-gradient(to right, transparent, var(--accent)); }
-.ornament-line:last-child { background: linear-gradient(to left, transparent, var(--accent)); }
-.ornament-diamond { width: 7px; height: 7px; background: var(--accent); transform: rotate(45deg); }
-.header-label {
-  font-size: 0.6rem; letter-spacing: 5px; color: var(--accent);
-  text-transform: uppercase; font-weight: 400; margin-bottom: 20px;
-  opacity: 0; animation: fadeUp 1s 0.2s ease forwards;
-}
-.header-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 400; font-style: italic;
-  color: var(--white); letter-spacing: 0.5px; line-height: 1.15;
-  opacity: 0; animation: fadeUp 1s 0.35s ease forwards;
-}
-.header-title span {
-  display: block; font-family: 'IM Fell English', serif; font-size: 0.37em;
-  font-style: italic; color: var(--accent-soft); letter-spacing: 3px;
-  margin-top: 12px; font-weight: 400;
-}
-.header-dates {
-  font-size: 0.65rem; letter-spacing: 3px; color: var(--silver-dim);
-  margin-top: 20px; opacity: 0; animation: fadeUp 1s 0.5s ease forwards;
-}
-.header-count {
-  display: inline-flex; align-items: center; gap: 10px; margin-top: 28px;
-  font-size: 0.58rem; letter-spacing: 3.5px; color: var(--accent);
-  text-transform: uppercase; font-weight: 400;
-  border: 1px solid var(--border); border-radius: 2px; padding: 8px 22px;
-  opacity: 0; animation: fadeUp 1s 0.65s ease forwards;
-}
-.header-count::before, .header-count::after { content: '-'; opacity: 0.4; font-size: 0.55rem; }
-.page-header::after {
-  content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
-  width: 1px; height: 44px; background: linear-gradient(to bottom, var(--accent), transparent);
-}
+    /* PAGE HEADER */
+    .page-header {
+      padding: calc(var(--nav-h) + 76px) 40px 70px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    .page-header-bg {
+      position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 90% 60% at 50% 0%, rgba(184,149,106,0.08) 0%, transparent 70%);
+    }
+    .header-ornament {
+      display: flex; align-items: center; justify-content: center; gap: 18px;
+      margin-bottom: 24px; opacity: 0; animation: fadeUp 1s 0.1s ease forwards;
+    }
+    .ornament-line { width: 52px; height: 1px; background: linear-gradient(to right, transparent, var(--accent)); }
+    .ornament-line:last-child { background: linear-gradient(to left, transparent, var(--accent)); }
+    .ornament-diamond { width: 7px; height: 7px; background: var(--accent); transform: rotate(45deg); }
+    .header-label {
+      font-size: 0.6rem; letter-spacing: 5px; color: var(--accent);
+      text-transform: uppercase; font-weight: 400; margin-bottom: 20px;
+      opacity: 0; animation: fadeUp 1s 0.2s ease forwards;
+    }
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4rem); font-weight: 400; font-style: italic;
+      color: var(--white); letter-spacing: 0.5px; line-height: 1.15;
+      opacity: 0; animation: fadeUp 1s 0.35s ease forwards;
+    }
+    .header-title span {
+      display: block; font-family: 'IM Fell English', serif; font-size: 0.37em;
+      font-style: italic; color: var(--accent-soft); letter-spacing: 3px;
+      margin-top: 12px; font-weight: 400;
+    }
+    .header-dates {
+      font-size: 0.65rem; letter-spacing: 3px; color: var(--silver-dim);
+      margin-top: 20px; opacity: 0; animation: fadeUp 1s 0.5s ease forwards;
+    }
+    .header-count {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 28px;
+      font-size: 0.58rem; letter-spacing: 3.5px; color: var(--accent);
+      text-transform: uppercase; font-weight: 400;
+      border: 1px solid var(--border); border-radius: 2px; padding: 8px 22px;
+      opacity: 0; animation: fadeUp 1s 0.65s ease forwards;
+    }
+    .header-count::before, .header-count::after { content: '-'; opacity: 0.4; font-size: 0.55rem; }
+    .page-header::after {
+      content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 1px; height: 44px; background: linear-gradient(to bottom, var(--accent), transparent);
+    }
 
-/* GALLERY */
-.gallery-section { padding: 64px 28px 100px; max-width: 1480px; margin: 0 auto; }
+    /* GALLERY */
+    .gallery-section { padding: 64px 28px 100px; max-width: 1480px; margin: 0 auto; }
 
-.gallery-loading { text-align: center; padding: 24px 0 40px; }
-.progress-bar-wrap { width: 220px; height: 2px; background: var(--border-dim); margin: 0 auto 12px; border-radius: 2px; overflow: hidden; }
-.progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(to right, var(--accent), var(--accent-soft)); transition: width 0.2s ease; border-radius: 2px; }
-.loading-text { font-size: 0.57rem; letter-spacing: 2.5px; color: var(--silver-dim); text-transform: uppercase; }
+    .gallery-loading { text-align: center; padding: 24px 0 40px; transition: opacity 0.6s ease; }
+    .progress-bar-wrap { width: 220px; height: 2px; background: var(--border-dim); margin: 0 auto 12px; border-radius: 2px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(to right, var(--accent), var(--accent-soft)); transition: width 0.3s ease; border-radius: 2px; }
+    .loading-text { font-size: 0.57rem; letter-spacing: 2.5px; color: var(--silver-dim); text-transform: uppercase; }
 
-/* Masonry */
-.masonry-grid {
-  visibility: hidden;
-  columns: 4; column-gap: 16px;
-}
-.masonry-grid.ready { visibility: visible; }
-@media (max-width: 1280px) { .masonry-grid { columns: 3; } }
-@media (max-width: 840px)  { .masonry-grid { columns: 2; } }
-@media (max-width: 460px)  { .masonry-grid { columns: 1; } }
+    /* Modern Masonry Grid */
+    .masonry-grid {
+      visibility: hidden;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-auto-rows: 10px;
+      gap: 20px;
+    }
+    .masonry-grid.ready { visibility: visible; }
 
-.masonry-item {
-  break-inside: avoid; margin-bottom: 16px;
-  position: relative; border-radius: 3px; overflow: hidden; cursor: pointer;
-  border: 1px solid var(--border-dim);
-  opacity: 0; transform: translateY(36px) scale(0.98);
-  transition: opacity 0.7s ease, transform 0.75s var(--ease-expo),
-              border-color 0.4s ease, box-shadow 0.5s ease;
-  background: linear-gradient(135deg, #0f1318 0%, #1a2028 100%);
-}
-.masonry-item.visible { opacity: 1; transform: translateY(0) scale(1); }
-.masonry-item:hover {
-  border-color: rgba(184,149,106,0.4);
-  box-shadow: 0 20px 70px rgba(0,0,0,0.65), 0 0 0 1px rgba(184,149,106,0.1);
-  z-index: 2;
-}
+    .masonry-item {
+      grid-row-end: span 25; /* Default span, will be adjusted by JS if needed */
+      position: relative; border-radius: 3px; overflow: hidden; cursor: pointer;
+      border: 1px solid var(--border-dim);
+      opacity: 0; transform: translateY(36px) scale(0.98);
+      transition: opacity 0.7s ease, transform 0.75s var(--ease-expo), border-color 0.4s ease, box-shadow 0.5s ease;
+      background: linear-gradient(135deg, #0f1318 0%, #1a2028 100%);
+      outline: none;
+    }
+    .masonry-item:focus-visible { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent-pale); }
+    .masonry-item.visible { opacity: 1; transform: translateY(0) scale(1); }
+    .masonry-item:hover {
+      border-color: rgba(184,149,106,0.4);
+      box-shadow: 0 20px 70px rgba(0,0,0,0.65), 0 0 0 1px rgba(184,149,106,0.1);
+      z-index: 2;
+    }
 
-.masonry-item picture,
-.masonry-item img {
-  width: 100%; height: auto; display: block;
-  filter: contrast(1.08) brightness(0.9) saturate(1.25) sepia(0.06);
-  transition: transform 0.85s var(--ease-expo), filter 0.5s ease;
-  will-change: transform;
-}
-.masonry-item:hover picture,
-.masonry-item:hover img {
-  transform: scale(1.07);
-  filter: contrast(1.12) brightness(1.0) saturate(1.3) sepia(0);
-}
+    .masonry-item picture, .masonry-item img {
+      width: 100%; height: auto; display: block;
+      filter: contrast(1.08) brightness(0.9) saturate(1.25) sepia(0.06);
+      transition: transform 0.85s var(--ease-expo), filter 0.5s ease;
+      will-change: transform;
+    }
+    .masonry-item:hover picture, .masonry-item:hover img {
+      transform: scale(1.07);
+      filter: contrast(1.12) brightness(1.0) saturate(1.3) sepia(0);
+    }
 
-.masonry-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(10,12,15,0.93) 0%, rgba(10,12,15,0.45) 30%, transparent 65%);
-  opacity: 0; transition: opacity 0.4s ease;
-  display: flex; flex-direction: column; justify-content: flex-end; padding: 18px 16px 16px;
-  pointer-events: none;
-}
-.masonry-item:hover .masonry-overlay { opacity: 1; }
+    .masonry-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(10,12,15,0.93) 0%, rgba(10,12,15,0.45) 30%, transparent 65%);
+      opacity: 0; transition: opacity 0.4s ease;
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 18px 16px 16px;
+      pointer-events: none;
+    }
+    .masonry-item:hover .masonry-overlay { opacity: 1; }
 
-.masonry-zoom {
-  position: absolute; top: 12px; right: 12px; width: 32px; height: 32px;
-  border-radius: 50%; background: rgba(10,12,15,0.7);
-  border: 1px solid rgba(184,149,106,0.35);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--accent); opacity: 0;
-  transform: scale(0.6) rotate(-15deg);
-  transition: opacity 0.3s 0.05s ease, transform 0.45s var(--ease-expo);
-  backdrop-filter: blur(8px);
-  pointer-events: none;
-}
-.masonry-item:hover .masonry-zoom { opacity: 1; transform: scale(1) rotate(0deg); }
+    .masonry-zoom {
+      position: absolute; top: 12px; right: 12px; width: 32px; height: 32px;
+      border-radius: 50%; background: rgba(10,12,15,0.7);
+      border: 1px solid rgba(184,149,106,0.35);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--accent); opacity: 0;
+      transform: scale(0.6) rotate(-15deg);
+      transition: opacity 0.3s 0.05s ease, transform 0.45s var(--ease-expo);
+      backdrop-filter: blur(8px);
+    }
+    .masonry-item:hover .masonry-zoom { opacity: 1; transform: scale(1) rotate(0deg); }
 
-.masonry-num {
-  font-size: 0.53rem; letter-spacing: 2.5px; color: var(--silver-dim);
-  text-transform: uppercase; margin-bottom: 4px;
-  opacity: 0; transform: translateY(8px);
-  transition: opacity 0.35s ease, transform 0.4s var(--ease-expo);
-}
-.masonry-item:hover .masonry-num { opacity: 1; transform: translateY(0); }
+    .masonry-num {
+      font-size: 0.53rem; letter-spacing: 2.5px; color: var(--silver-dim);
+      text-transform: uppercase; margin-bottom: 4px;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.35s ease, transform 0.4s var(--ease-expo);
+    }
+    .masonry-item:hover .masonry-num { opacity: 1; transform: translateY(0); }
 
-.masonry-label {
-  font-family: 'Playfair Display', serif; font-style: italic;
-  font-size: 0.9rem; color: var(--accent-soft); letter-spacing: 0.3px;
-  transform: translateY(6px); line-height: 1.3;
-  transition: transform 0.4s var(--ease-expo);
-}
-.masonry-item:hover .masonry-label { transform: translateY(0); }
+    .masonry-label {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 0.9rem; color: var(--accent-soft); letter-spacing: 0.3px;
+      transform: translateY(6px); line-height: 1.3;
+      transition: transform 0.4s var(--ease-expo);
+    }
+    .masonry-item:hover .masonry-label { transform: translateY(0); }
 
-/* Skeleton shimmer */
-.shimmer {
-  background: linear-gradient(90deg, #0f1318 25%, #17202b 50%, #0f1318 75%);
-  background-size: 400% 100%; animation: shimmer 1.8s infinite;
-  border-radius: 3px; margin-bottom: 16px; break-inside: avoid;
-  border: 1px solid var(--border-dim);
-}
-@keyframes shimmer { 0%{background-position:100% 0} 100%{background-position:-100% 0} }
+    /* Skeleton shimmer */
+    .shimmer {
+      background: linear-gradient(90deg, #0f1318 25%, #17202b 50%, #0f1318 75%);
+      background-size: 400% 100%; animation: shimmer 1.8s infinite;
+      border-radius: 3px; border: 1px solid var(--border-dim);
+    }
+    @keyframes shimmer { 0%{background-position:100% 0} 100%{background-position:-100% 0} }
 
-/* LIGHTBOX */
-.lightbox {
-  position: fixed; inset: 0; z-index: 500;
-  background: rgba(5,7,10,0.97);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-}
-.lightbox.open { opacity: 1; pointer-events: all; }
-.lightbox::before {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background-image:
-    linear-gradient(rgba(184,149,106,0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(184,149,106,0.025) 1px, transparent 1px);
-  background-size: 64px 64px;
-}
-.lb-img-wrap {
-  display: flex; align-items: center; justify-content: center;
-  max-width: 90vw; max-height: 83vh; position: relative;
-}
-.lb-img-wrap img {
-  max-width: 88vw; max-height: 81vh; object-fit: contain; border-radius: 2px;
-  box-shadow: 0 0 0 1px rgba(184,149,106,0.14), 0 48px 128px rgba(0,0,0,0.96);
-  transform: scale(0.93) translateY(14px);
-  transition: transform 0.55s var(--ease-expo), opacity 0.25s ease; opacity: 0;
-  filter: contrast(1.1) brightness(1.02) saturate(1.18);
-}
-.lightbox.open .lb-img-wrap img { transform: scale(1) translateY(0); opacity: 1; }
+    /* LIGHTBOX */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(5,7,10,0.97);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(184,149,106,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(184,149,106,0.025) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+    .lb-img-wrap {
+      display: flex; align-items: center; justify-content: center;
+      max-width: 90vw; max-height: 83vh; position: relative;
+    }
+    .lb-img-wrap img {
+      max-width: 88vw; max-height: 81vh; object-fit: contain; border-radius: 2px;
+      box-shadow: 0 0 0 1px rgba(184,149,106,0.14), 0 48px 128px rgba(0,0,0,0.96);
+      transform: scale(0.93) translateY(14px);
+      transition: transform 0.55s var(--ease-expo), opacity 0.25s ease; opacity: 0;
+      filter: contrast(1.1) brightness(1.02) saturate(1.18);
+    }
+    .lightbox.open .lb-img-wrap img { transform: scale(1) translateY(0); opacity: 1; }
 
-.lb-corner { position: absolute; width: 22px; height: 22px; pointer-events: none; opacity: 0.45; }
-.lb-corner svg { fill: none; stroke: var(--accent); stroke-width: 1.5; }
-.lb-corner-tl { top: -9px; left: -9px; }
-.lb-corner-tr { top: -9px; right: -9px; transform: scaleX(-1); }
-.lb-corner-bl { bottom: -9px; left: -9px; transform: scaleY(-1); }
-.lb-corner-br { bottom: -9px; right: -9px; transform: scale(-1); }
+    .lb-corner { position: absolute; width: 22px; height: 22px; pointer-events: none; opacity: 0.45; }
+    .lb-corner svg { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+    .lb-corner-tl { top: -9px; left: -9px; }
+    .lb-corner-tr { top: -9px; right: -9px; transform: scaleX(-1); }
+    .lb-corner-bl { bottom: -9px; left: -9px; transform: scaleY(-1); }
+    .lb-corner-br { bottom: -9px; right: -9px; transform: scale(-1); }
 
-.lb-progress {
-  position: fixed; top: 0; left: 0; height: 2px;
-  background: linear-gradient(to right, var(--accent), var(--accent-soft));
-  transition: width 0.35s ease; z-index: 600; width: 0%;
-}
-.lb-close {
-  position: fixed; top: 22px; right: 26px;
-  background: rgba(10,12,15,0.85); border: 1px solid var(--border);
-  color: var(--accent); width: 42px; height: 42px; border-radius: 2px;
-  font-size: 1.1rem; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.3s; z-index: 10; backdrop-filter: blur(12px);
-  font-family: sans-serif;
-}
-.lb-close:hover { background: var(--accent-pale); border-color: rgba(184,149,106,0.5); color: var(--accent-soft); }
+    .lb-progress {
+      position: fixed; top: 0; left: 0; height: 2px;
+      background: linear-gradient(to right, var(--accent), var(--accent-soft));
+      transition: width 0.35s ease; z-index: 600; width: 0%;
+    }
+    .lb-close {
+      position: fixed; top: 22px; right: 26px;
+      background: rgba(10,12,15,0.85); border: 1px solid var(--border);
+      color: var(--accent); width: 42px; height: 42px; border-radius: 2px;
+      font-size: 1.1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s; z-index: 10; backdrop-filter: blur(12px);
+    }
+    .lb-close:hover { background: var(--accent-pale); border-color: rgba(184,149,106,0.5); color: var(--accent-soft); }
 
-.lb-nav {
-  position: fixed; top: 50%; transform: translateY(-50%);
-  background: transparent; border: none; color: var(--silver-dim);
-  width: 56px; height: 80px; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 5px; transition: color 0.3s; z-index: 10;
-}
-.lb-nav:hover { color: var(--accent-soft); }
-.lb-nav svg { transition: transform 0.3s var(--ease-expo); }
-.lb-nav-label { font-size: 0.5rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0; transition: opacity 0.3s; font-family: 'Jost', sans-serif; }
-.lb-nav:hover .lb-nav-label { opacity: 1; }
-#lb-prev { left: 18px; } #lb-next { right: 18px; }
-#lb-prev:hover svg { transform: translateX(-5px); } #lb-next:hover svg { transform: translateX(5px); }
-@media (max-width: 520px) { #lb-prev { left: 4px; } #lb-next { right: 4px; } .lb-nav-label { display: none; } }
+    .lb-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      background: transparent; border: none; color: var(--silver-dim);
+      width: 56px; height: 80px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column; gap: 5px; transition: color 0.3s; z-index: 10;
+    }
+    .lb-nav:hover { color: var(--accent-soft); }
+    .lb-nav svg { transition: transform 0.3s var(--ease-expo); }
+    .lb-nav-label { font-size: 0.5rem; letter-spacing: 2px; text-transform: uppercase; opacity: 0; transition: opacity 0.3s; }
+    .lb-nav:hover .lb-nav-label { opacity: 1; }
+    #lb-prev { left: 18px; } #lb-next { right: 18px; }
+    #lb-prev:hover svg { transform: translateX(-5px); } #lb-next:hover svg { transform: translateX(5px); }
 
-.lb-footer {
-  position: fixed; bottom: 0; left: 0; right: 0; padding: 26px 24px 30px;
-  text-align: center;
-  background: linear-gradient(to top, rgba(5,7,10,0.96) 0%, rgba(5,7,10,0.55) 60%, transparent 100%);
-}
-.lb-caption {
-  font-family: 'Playfair Display', serif; font-style: italic;
-  font-size: 1.05rem; color: var(--accent-soft); letter-spacing: 0.5px; margin-bottom: 10px;
-}
-.lb-meta { display: flex; align-items: center; justify-content: center; gap: 18px; }
-.lb-counter { font-size: 0.55rem; letter-spacing: 3px; color: var(--silver-dim); text-transform: uppercase; }
-.lb-dots { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; justify-content: center; max-width: 320px; }
-.lb-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--silver-dim); transition: all 0.35s; cursor: pointer; flex-shrink: 0; }
-.lb-dot.active { background: var(--accent); width: 18px; border-radius: 2px; }
-.lb-dot:hover:not(.active) { background: var(--accent-soft); }
+    .lb-footer {
+      position: fixed; bottom: 0; left: 0; right: 0; padding: 26px 24px 30px;
+      text-align: center;
+      background: linear-gradient(to top, rgba(5,7,10,0.96) 0%, rgba(5,7,10,0.55) 60%, transparent 100%);
+    }
+    .lb-caption {
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 1.05rem; color: var(--accent-soft); letter-spacing: 0.5px; margin-bottom: 10px;
+    }
+    .lb-meta { display: flex; align-items: center; justify-content: center; gap: 18px; }
+    .lb-counter { font-size: 0.55rem; letter-spacing: 3px; color: var(--silver-dim); text-transform: uppercase; }
+    .lb-dots { display: flex; gap: 5px; align-items: center; flex-wrap: wrap; justify-content: center; max-width: 320px; }
+    .lb-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--silver-dim); transition: all 0.35s; cursor: pointer; }
+    .lb-dot.active { background: var(--accent); width: 18px; border-radius: 2px; }
 
-/* No images state */
-.gallery-empty {
-  text-align: center; padding: 80px 20px;
-  font-family: 'Playfair Display', serif; font-style: italic;
-  font-size: 1.1rem; color: var(--silver-dim); line-height: 2;
-}
-.gallery-empty small { display: block; font-family: 'Jost', sans-serif; font-size: 0.65rem; letter-spacing: 2px; font-style: normal; margin-top: 12px; }
+    footer {
+      text-align: center; padding: 56px 24px 48px;
+      border-top: 1px solid var(--border-dim); position: relative;
+    }
+    footer::before {
+      content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 90px; height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent), transparent);
+    }
+    .footer-ornament { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--accent); opacity: 0.5; margin-bottom: 16px; }
+    .footer-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--silver); letter-spacing: 0.5px; max-width: 460px; margin: 0 auto; line-height: 1.8; }
+    .footer-name { font-size: 0.57rem; letter-spacing: 3.5px; color: var(--accent); text-transform: uppercase; font-weight: 400; margin-top: 20px; opacity: 0.7; }
 
-/* FOOTER */
-footer {
-  text-align: center; padding: 56px 24px 48px;
-  border-top: 1px solid var(--border-dim); position: relative;
-}
-footer::before {
-  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
-  width: 90px; height: 1px;
-  background: linear-gradient(to right, transparent, var(--accent), transparent);
-}
-.footer-ornament { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.3rem; color: var(--accent); opacity: 0.5; margin-bottom: 16px; }
-.footer-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: var(--silver); letter-spacing: 0.5px; max-width: 460px; margin: 0 auto; line-height: 1.8; }
-.footer-name { font-size: 0.57rem; letter-spacing: 3.5px; color: var(--accent); text-transform: uppercase; font-weight: 400; margin-top: 20px; opacity: 0.7; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+    @media (max-width: 520px) {
+      .lb-nav-label { display: none; }
+      #lb-prev { left: 4px; } #lb-next { right: 4px; }
+    }
 
-@media (prefers-reduced-motion: reduce) {
-  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
-}
-</style>
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+  </style>
 </head>
 <body>
-
-<!-- NOTE: <base target="_blank"> removed — it broke all internal navigation links -->
 
 <nav>
   <span class="nav-monogram">P. O. Yugi</span>
@@ -354,16 +342,13 @@ footer::before {
     <div class="loading-text" id="loading-text">Discovering photos&hellip;</div>
   </div>
   <div class="masonry-grid" id="masonry-grid">
-    <div class="shimmer" style="height:240px"></div><div class="shimmer" style="height:175px"></div>
-    <div class="shimmer" style="height:295px"></div><div class="shimmer" style="height:210px"></div>
-    <div class="shimmer" style="height:255px"></div><div class="shimmer" style="height:190px"></div>
-    <div class="shimmer" style="height:270px"></div><div class="shimmer" style="height:160px"></div>
-    <div class="shimmer" style="height:230px"></div><div class="shimmer" style="height:200px"></div>
-    <div class="shimmer" style="height:280px"></div><div class="shimmer" style="height:175px"></div>
+    <div class="shimmer" style="grid-row-end: span 20"></div>
+    <div class="shimmer" style="grid-row-end: span 15"></div>
+    <div class="shimmer" style="grid-row-end: span 25"></div>
+    <div class="shimmer" style="grid-row-end: span 18"></div>
   </div>
 </div>
 
-<!-- Lightbox -->
 <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
   <div class="lb-progress" id="lb-progress"></div>
   <button class="lb-close" id="lb-close" aria-label="Close">&times;</button>
@@ -406,10 +391,10 @@ footer::before {
     imageDir: 'images',
     fallbackPattern: 'Dr Philemon Yugi',
     maxScan: 200,
-    stopAfterMisses: 12,
+    stopAfterMisses: 20, // Increased to handle larger numbering gaps
     batchSize: 8,
     preloadRange: 1,
-    lightboxAutoAdvanceMs: 10000
+    lightboxAutoAdvanceMs: 12000
   };
 
   const state = {
@@ -443,127 +428,86 @@ footer::before {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         const el = entry.target;
-        const delay = Math.min((parseInt(el.dataset.index || '0', 10) || 0) * 50, 400);
+        const delay = Math.min((parseInt(el.dataset.index || '0', 10) % 8) * 60, 400);
         setTimeout(() => el.classList.add('visible'), delay);
         state.observer.unobserve(el);
       });
-    }, { root: null, rootMargin: '50px', threshold: 0.04 });
+    }, { rootMargin: '100px', threshold: 0.01 });
   }
 
   function probeImageMeta(src) {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => resolve({ exists: true, width: img.naturalWidth, height: img.naturalHeight });
-      img.onerror = () => resolve({ exists: false, width: 0, height: 0 });
+      img.onerror = () => resolve({ exists: false });
       img.src = src;
     });
   }
 
-  function probeImage(src) {
-    return probeImageMeta(src).then((r) => r.exists);
-  }
-
-  function normalizePhoto(photo, index) {
-    const baseName = photo.baseName || photo.name || photo.filename?.replace(/\.[^/.]+$/, '') || `${CONFIG.fallbackPattern} (${index + 1})`;
-    const width  = Number(photo.width)  || 800;
-    const height = Number(photo.height) || 600;
-    const ratio  = Number(photo.ratio)  || (height ? width / height : 4 / 3);
-    return { ...photo, id: photo.id || index + 1, baseName, label: photo.label || 'Dr Philemon Yugi', width, height, ratio, useResized: Boolean(photo.useResized) };
-  }
-
   async function generateFallbackManifest() {
     const photos = [];
-    let misses = 0;
+    let consecutiveMisses = 0;
     for (let i = 1; i <= CONFIG.maxScan; i++) {
       const baseName = `${CONFIG.fallbackPattern} (${i})`;
       const meta = await probeImageMeta(`${CONFIG.imageDir}/${baseName}.jpg`);
       if (meta.exists) {
-        misses = 0;
-        photos.push({ id: i, baseName, label: 'Dr Philemon Yugi', width: meta.width || 800, height: meta.height || 600, ratio: (meta.width && meta.height) ? (meta.width / meta.height) : (4 / 3), useResized: false });
+        consecutiveMisses = 0;
+        photos.push({ id: i, baseName, label: 'Dr. Philemon Yugi', width: meta.width, height: meta.height });
       } else {
-        misses++;
-        if (i > 12 && misses >= CONFIG.stopAfterMisses) break;
+        consecutiveMisses++;
+        if (consecutiveMisses >= CONFIG.stopAfterMisses) break;
       }
     }
-    return { photos, generated: true };
+    return { photos };
   }
 
   async function loadManifest() {
     try {
-      const response = await fetch(CONFIG.manifestPath, { cache: 'no-cache', headers: { Accept: 'application/json' } });
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      const data = await response.json();
-      return { ...data, generated: false };
-    } catch (error) {
-      console.warn('Manifest not found, using fallback discovery:', error.message);
+      const res = await fetch(CONFIG.manifestPath, { cache: 'no-cache' });
+      if (!res.ok) throw new Error();
+      return await res.json();
+    } catch {
       return generateFallbackManifest();
     }
   }
 
-  async function detectSourceLayout(photos, manifestGenerated) {
-    if (photos.some((p) => p.useResized)) return 'resized';
-    const sample = photos.slice(0, 3);
-    for (const p of sample) { if (await probeImage(`${CONFIG.imageDir}/medium/${p.baseName}.jpg`)) return 'resized'; }
-    for (const p of sample) { if (await probeImage(`${CONFIG.imageDir}/${p.baseName}.jpg`)) return 'flat'; }
-    return manifestGenerated ? 'flat' : 'resized';
-  }
-
   function getPhotoSources(photo) {
+    const b = photo.baseName;
     if (state.sourceLayout === 'resized') {
-      const b = photo.baseName;
       return {
-        displaySrc:        `${CONFIG.imageDir}/medium/${b}.jpg`,
-        displaySrcset:     `${CONFIG.imageDir}/thumbs/${b}.jpg 400w, ${CONFIG.imageDir}/medium/${b}.jpg 800w, ${CONFIG.imageDir}/large/${b}.jpg 1200w`,
-        displayWebpSrcset: `${CONFIG.imageDir}/thumbs/${b}.webp 400w, ${CONFIG.imageDir}/medium/${b}.webp 800w, ${CONFIG.imageDir}/large/${b}.webp 1200w`,
-        lightboxWebp:      `${CONFIG.imageDir}/large/${b}.webp`,
-        lightboxJpg:       `${CONFIG.imageDir}/large/${b}.jpg`
+        displaySrc: `${CONFIG.imageDir}/medium/${b}.jpg`,
+        displaySrcset: `${CONFIG.imageDir}/thumbs/${b}.jpg 400w, ${CONFIG.imageDir}/medium/${b}.jpg 800w`,
+        lightboxJpg: `${CONFIG.imageDir}/large/${b}.jpg`
       };
     }
-    return {
-      displaySrc:        `${CONFIG.imageDir}/${photo.baseName}.jpg`,
-      displaySrcset:     '',
-      displayWebpSrcset: `${CONFIG.imageDir}/${photo.baseName}.webp 1200w`,
-      lightboxWebp:      `${CONFIG.imageDir}/${photo.baseName}.webp`,
-      lightboxJpg:       `${CONFIG.imageDir}/${photo.baseName}.jpg`
-    };
+    return { displaySrc: `${CONFIG.imageDir}/${b}.jpg`, lightboxJpg: `${CONFIG.imageDir}/${b}.jpg` };
   }
 
-  function createPictureElement(photo, index) {
+  function createPhotoElement(photo, index) {
     const item = document.createElement('div');
     item.className = 'masonry-item';
     item.dataset.index = index;
-    item.dataset.id = photo.id;
-    if (photo.ratio) item.style.aspectRatio = String(photo.ratio);
+    item.tabIndex = 0;
+    item.setAttribute('role', 'button');
+    item.setAttribute('aria-label', `View photo ${index + 1}`);
 
-    const num   = String(index + 1).padStart(2, '0');
-    const sizes = '(max-width: 460px) 100vw, (max-width: 840px) 50vw, (max-width: 1280px) 33vw, 25vw';
-    const src   = getPhotoSources(photo);
+    // Dynamic grid span based on aspect ratio
+    const ratio = photo.width / photo.height;
+    const span = Math.ceil(30 / ratio); 
+    item.style.gridRowEnd = `span ${span}`;
 
-    const picture = document.createElement('picture');
-    if (src.displayWebpSrcset) {
-      const source = document.createElement('source');
-      source.type = 'image/webp'; source.srcset = src.displayWebpSrcset; source.sizes = sizes;
-      picture.appendChild(source);
-    }
-    const img = document.createElement('img');
-    img.src = src.displaySrc;
-    if (src.displaySrcset) img.srcset = src.displaySrcset;
-    img.sizes = sizes; img.width = photo.width || 800; img.height = photo.height || 600;
-    img.alt = photo.label; img.loading = index < 4 ? 'eager' : 'lazy'; img.decoding = 'async';
-    picture.appendChild(img);
-    item.appendChild(picture);
-
-    item.insertAdjacentHTML('beforeend', `
-      <div class="masonry-zoom">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </div>
+    const src = getPhotoSources(photo);
+    item.innerHTML = `
+      <img src="${src.displaySrc}" loading="lazy" alt="${photo.label}">
+      <div class="masonry-zoom"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
       <div class="masonry-overlay">
-        <div class="masonry-num">Photo ${num}</div>
+        <div class="masonry-num">Photo ${String(index + 1).padStart(2, '0')}</div>
         <div class="masonry-label">${photo.label}</div>
       </div>
-    `);
+    `;
 
     item.addEventListener('click', () => openLightbox(index));
+    item.addEventListener('keydown', (e) => { if (e.key === 'Enter') openLightbox(index); });
     return item;
   }
 
@@ -571,68 +515,18 @@ footer::before {
     els.grid.innerHTML = '';
     const total = state.photos.length;
     for (let i = 0; i < total; i += CONFIG.batchSize) {
-      const batch    = state.photos.slice(i, i + CONFIG.batchSize);
       const fragment = document.createDocumentFragment();
-      batch.forEach((photo, bi) => {
-        const el = createPictureElement(photo, i + bi);
+      state.photos.slice(i, i + CONFIG.batchSize).forEach((p, idx) => {
+        const el = createPhotoElement(p, i + idx);
         fragment.appendChild(el);
         state.observer.observe(el);
       });
       els.grid.appendChild(fragment);
-      const loaded = i + batch.length;
-      els.progress.style.width = `${Math.min((loaded / total) * 100, 100)}%`;
-      els.loadingText.textContent = `Loading ${loaded} of ${total} photos\u2026`;
+      
+      const progress = Math.round(((i + CONFIG.batchSize) / total) * 100);
+      els.progress.style.width = `${Math.min(progress, 100)}%`;
       els.count.textContent = `${total} Photos`;
-      if (loaded < total) await new Promise((res) => requestAnimationFrame(res));
-    }
-  }
-
-  function createLightboxLoader(photo) {
-    const src = getPhotoSources(photo);
-    return new Promise((resolve, reject) => {
-      const webp = new Image();
-      webp.onload = () => resolve(webp.src);
-      webp.onerror = () => {
-        const jpg = new Image();
-        jpg.onload = () => resolve(jpg.src);
-        jpg.onerror = reject;
-        jpg.src = src.lightboxJpg;
-      };
-      webp.src = src.lightboxWebp;
-    });
-  }
-
-  function loadLightboxImage(index, direction) {
-    const photo = state.photos[index];
-    if (!photo) return;
-    const movement = Number(direction) || 0;
-    els.lbImg.style.opacity = '0';
-    els.lbImg.style.transform = `scale(0.96) translateX(${movement * -22}px)`;
-
-    const cacheKey = `large-${photo.id}`;
-    let loader = state.preloadCache.get(cacheKey);
-    if (!loader) { loader = createLightboxLoader(photo); state.preloadCache.set(cacheKey, loader); }
-
-    loader.then((resolvedSrc) => {
-      els.lbImg.src = resolvedSrc; els.lbImg.alt = photo.label;
-      els.lbCaption.textContent = photo.label;
-      els.lbCounter.textContent = `${index + 1} of ${state.photos.length}`;
-      requestAnimationFrame(() => { els.lbImg.style.opacity = '1'; els.lbImg.style.transform = 'scale(1) translateX(0)'; });
-      updateLightboxProgress(index); updateLightboxDots(index); preloadAdjacent(index);
-    }).catch(() => { els.lbCaption.textContent = 'Error loading image'; });
-  }
-
-  function preloadAdjacent(ci) {
-    for (let o = -CONFIG.preloadRange; o <= CONFIG.preloadRange; o++) {
-      if (o === 0) continue;
-      const idx = ci + o;
-      if (idx < 0 || idx >= state.photos.length) continue;
-      const p = state.photos[idx], k = `large-${p.id}`;
-      if (!state.preloadCache.has(k)) state.preloadCache.set(k, createLightboxLoader(p).catch(() => null));
-    }
-    if (state.preloadCache.size > 15) {
-      const keys = Array.from(state.preloadCache.keys());
-      keys.slice(0, keys.length - 15).forEach((k) => state.preloadCache.delete(k));
+      await new Promise(r => requestAnimationFrame(r));
     }
   }
 
@@ -640,97 +534,99 @@ footer::before {
     state.currentIndex = index;
     els.lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
-    loadLightboxImage(index, 0);
-    scheduleLightboxAutoplay();
+    loadLightboxImage(index);
+    els.lbClose.focus();
+    scheduleAutoplay();
   }
 
   function closeLightbox() {
-    stopLightboxAutoplay();
     els.lightbox.classList.remove('open');
     document.body.style.overflow = '';
-    setTimeout(() => { els.lbImg.src = ''; els.lbImg.alt = ''; }, 420);
+    stopAutoplay();
   }
 
-  function navigateLightbox(direction, opts = {}) {
-    let next = state.currentIndex + direction;
-    if (opts.wrap && state.photos.length) next = (next + state.photos.length) % state.photos.length;
-    if (next < 0 || next >= state.photos.length) return;
-    state.currentIndex = next; loadLightboxImage(next, direction); scheduleLightboxAutoplay();
-  }
+  function loadLightboxImage(index) {
+    const photo = state.photos[index];
+    if (!photo) return;
+    const src = getPhotoSources(photo);
+    
+    els.lbImg.style.opacity = '0';
+    const temp = new Image();
+    temp.onload = () => {
+      els.lbImg.src = src.lightboxJpg;
+      els.lbImg.style.opacity = '1';
+    };
+    temp.src = src.lightboxJpg;
 
-  function stopLightboxAutoplay() { if (state.lightboxTimer) { clearTimeout(state.lightboxTimer); state.lightboxTimer = null; } }
-  function scheduleLightboxAutoplay() {
-    stopLightboxAutoplay();
-    if (!els.lightbox.classList.contains('open') || state.photos.length < 2) return;
-    state.lightboxTimer = setTimeout(() => { if (els.lightbox.classList.contains('open')) navigateLightbox(1, { wrap: true }); }, CONFIG.lightboxAutoAdvanceMs);
-  }
-
-  function updateLightboxProgress(index) {
-    const pct = state.photos.length > 1 ? (index / (state.photos.length - 1)) * 100 : 100;
+    els.lbCaption.textContent = photo.label;
+    els.lbCounter.textContent = `${index + 1} / ${state.photos.length}`;
+    updateDots(index);
+    
+    const pct = (index / (state.photos.length - 1)) * 100;
     els.lbProgress.style.width = `${pct}%`;
   }
 
-  function updateLightboxDots(activeIndex) {
-    els.lbDots.querySelectorAll('.lb-dot').forEach((dot, i) => dot.classList.toggle('active', i === activeIndex));
+  function navigate(dir) {
+    state.currentIndex = (state.currentIndex + dir + state.photos.length) % state.photos.length;
+    loadLightboxImage(state.currentIndex);
+    scheduleAutoplay();
   }
 
-  function renderLightboxDots() {
+  function scheduleAutoplay() {
+    stopAutoplay();
+    state.lightboxTimer = setTimeout(() => navigate(1), CONFIG.lightboxAutoAdvanceMs);
+  }
+
+  function stopAutoplay() { clearTimeout(state.lightboxTimer); }
+
+  function updateDots(activeIdx) {
     els.lbDots.innerHTML = '';
-    state.photos.forEach((_, i) => {
+    // Limit dots to prevent overflow if many photos exist
+    const maxDots = 20;
+    const start = Math.max(0, Math.min(activeIdx - 10, state.photos.length - maxDots));
+    const end = Math.min(start + maxDots, state.photos.length);
+
+    for (let i = start; i < end; i++) {
       const dot = document.createElement('span');
-      dot.className = 'lb-dot';
-      dot.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const dir = i > state.currentIndex ? 1 : -1;
-        state.currentIndex = i; loadLightboxImage(i, dir); scheduleLightboxAutoplay();
-      });
+      dot.className = `lb-dot ${i === activeIdx ? 'active' : ''}`;
+      dot.onclick = () => { state.currentIndex = i; loadLightboxImage(i); };
       els.lbDots.appendChild(dot);
-    });
+    }
   }
 
-  function initEventListeners() {
-    els.lbClose.addEventListener('click', closeLightbox);
-    els.lbPrev.addEventListener('click', () => navigateLightbox(-1));
-    els.lbNext.addEventListener('click', () => navigateLightbox(1));
-    els.lightbox.addEventListener('click', (e) => { if (e.target === els.lightbox) closeLightbox(); });
+  function initEvents() {
+    els.lbClose.onclick = closeLightbox;
+    els.lbPrev.onclick = () => navigate(-1);
+    els.lbNext.onclick = () => navigate(1);
+    
     document.addEventListener('keydown', (e) => {
       if (!els.lightbox.classList.contains('open')) return;
       if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') navigateLightbox(-1);
-      if (e.key === 'ArrowRight') navigateLightbox(1);
+      if (e.key === 'ArrowLeft') navigate(-1);
+      if (e.key === 'ArrowRight') navigate(1);
     });
-    let touchStartX = 0;
-    els.lightbox.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
-    els.lightbox.addEventListener('touchend', (e) => { const diff = touchStartX - e.changedTouches[0].clientX; if (Math.abs(diff) > 50) navigateLightbox(diff > 0 ? 1 : -1); }, { passive: true });
+
+    els.lightbox.onclick = (e) => { if (e.target === els.lightbox) closeLightbox(); };
   }
 
   async function init() {
     initObserver();
-    initEventListeners();
-    try {
-      const manifest = await loadManifest();
-      state.photos = (manifest.photos || []).map(normalizePhoto);
-      if (!state.photos.length) throw new Error('No photos found');
-      state.sourceLayout = await detectSourceLayout(state.photos, manifest.generated);
+    initEvents();
+    const manifest = await loadManifest();
+    state.photos = manifest.photos || [];
+    
+    if (state.photos.length > 0) {
       await renderGallery();
       els.grid.classList.add('ready');
-      renderLightboxDots();
-      els.progress.style.width = '100%';
-      setTimeout(() => {
-        els.loadingWrap.style.opacity = '0';
-        setTimeout(() => { els.loadingWrap.style.display = 'none'; }, 650);
-      }, 300);
-    } catch (error) {
-      console.error('Gallery initialization failed:', error);
-      els.grid.classList.add('ready');
-      els.grid.innerHTML = `<div class="gallery-empty">No photos found.<small>Add images named &ldquo;Dr Philemon Yugi (1).jpg&rdquo; to the images/ folder.</small></div>`;
+      els.loadingWrap.style.opacity = '0';
+      setTimeout(() => els.loadingWrap.style.display = 'none', 600);
+    } else {
+      els.grid.innerHTML = '<div class="gallery-empty">No photos found.</div>';
       els.loadingWrap.style.display = 'none';
-      els.count.textContent = '0 Photos';
     }
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-  else init();
+  init();
 })();
 </script>
 </body>
