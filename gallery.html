@@ -29,6 +29,7 @@ body {
   font-family: 'Jost', sans-serif; font-weight: 300;
   min-height: 100vh; overflow-x: hidden;
 }
+
 /* Film grain overlay */
 body::before {
   content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 999;
@@ -127,7 +128,10 @@ nav {
 .loading-text { font-size: 0.57rem; letter-spacing: 2.5px; color: var(--silver-dim); text-transform: uppercase; }
 
 /* Masonry */
-.masonry-grid { columns: 4; column-gap: 16px; }
+.masonry-grid { 
+  columns: 4; column-gap: 16px; 
+  contain: layout style; /* Performance containment */
+}
 @media (max-width: 1280px) { .masonry-grid { columns: 3; } }
 @media (max-width: 840px)  { .masonry-grid { columns: 2; } }
 @media (max-width: 460px)  { .masonry-grid { columns: 1; } }
@@ -139,6 +143,10 @@ nav {
   opacity: 0; transform: translateY(36px) scale(0.98);
   transition: opacity 0.7s ease, transform 0.75s var(--ease-expo),
               border-color 0.4s ease, box-shadow 0.5s ease;
+  /* Prevent layout shift - reserve space */
+  aspect-ratio: attr(data-ratio);
+  background: linear-gradient(135deg, #0f1318 0%, #1a2028 100%);
+  contain: layout style paint;
 }
 .masonry-item.visible { opacity: 1; transform: translateY(0) scale(1); }
 .masonry-item:hover {
@@ -147,19 +155,15 @@ nav {
   z-index: 2;
 }
 
-/*
- * IMAGE QUALITY ENHANCEMENT:
- * contrast(1.08)  → punchy shadows & highlights
- * brightness(0.9) → prevents washed-out look
- * saturate(1.25)  → richer, more vibrant colours
- * sepia(0.06)     → subtle warm film tone
- */
+.masonry-item picture,
 .masonry-item img {
-  width: 100%; display: block; height: auto;
+  width: 100%; height: auto; display: block;
   filter: contrast(1.08) brightness(0.9) saturate(1.25) sepia(0.06);
   transition: transform 0.85s var(--ease-expo), filter 0.5s ease;
-  will-change: transform; image-rendering: high-quality;
+  will-change: transform;
 }
+
+.masonry-item:hover picture,
 .masonry-item:hover img {
   transform: scale(1.07);
   filter: contrast(1.12) brightness(1.0) saturate(1.3) sepia(0);
@@ -170,6 +174,7 @@ nav {
   background: linear-gradient(to top, rgba(10,12,15,0.93) 0%, rgba(10,12,15,0.45) 30%, transparent 65%);
   opacity: 0; transition: opacity 0.4s ease;
   display: flex; flex-direction: column; justify-content: flex-end; padding: 18px 16px 16px;
+  pointer-events: none;
 }
 .masonry-item:hover .masonry-overlay { opacity: 1; }
 
@@ -182,6 +187,7 @@ nav {
   transform: scale(0.6) rotate(-15deg);
   transition: opacity 0.3s 0.05s ease, transform 0.45s var(--ease-expo);
   backdrop-filter: blur(8px);
+  pointer-events: none;
 }
 .masonry-item:hover .masonry-zoom { opacity: 1; transform: scale(1) rotate(0deg); }
 
@@ -216,6 +222,7 @@ nav {
   background: rgba(5,7,10,0.97);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+  contain: strict;
 }
 .lightbox.open { opacity: 1; pointer-events: all; }
 .lightbox::before {
@@ -228,8 +235,8 @@ nav {
 .lb-img-wrap {
   display: flex; align-items: center; justify-content: center;
   max-width: 90vw; max-height: 83vh; position: relative;
+  contain: layout style;
 }
-/* Lightbox quality: full contrast + saturation at large size */
 .lb-img-wrap img {
   max-width: 88vw; max-height: 81vh; object-fit: contain; border-radius: 2px;
   box-shadow: 0 0 0 1px rgba(184,149,106,0.14), 0 48px 128px rgba(0,0,0,0.96);
@@ -308,7 +315,13 @@ footer::before {
 .footer-name { font-size: 0.57rem; letter-spacing: 3.5px; color: var(--accent); text-transform: uppercase; font-weight: 400; margin-top: 20px; opacity: 0.7; }
 
 @keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
 </style>
+<base target="_blank">
 </head>
 <body>
 
@@ -333,13 +346,13 @@ footer::before {
     <span>Dr. Philemon Odiwuor Yugi</span>
   </h1>
   <p class="header-dates">May 25, 1968 &nbsp;—&nbsp; March 19, 2026</p>
-  <span class="header-count" id="header-count">41 Photos</span>
+  <span class="header-count" id="header-count">Loading…</span>
 </div>
 
 <div class="gallery-section">
   <div class="gallery-loading" id="gallery-loading">
     <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-bar"></div></div>
-    <div class="loading-text" id="loading-text">Loading photos…</div>
+    <div class="loading-text" id="loading-text">Discovering photos…</div>
   </div>
   <div class="masonry-grid" id="masonry-grid">
     <!-- Skeleton placeholders -->
@@ -355,8 +368,8 @@ footer::before {
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <div class="lb-progress" id="lb-progress"></div>
-  <button class="lb-close" id="lb-close">✕</button>
-  <button class="lb-nav" id="lb-prev">
+  <button class="lb-close" id="lb-close" aria-label="Close">✕</button>
+  <button class="lb-nav" id="lb-prev" aria-label="Previous">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
     <span class="lb-nav-label">Prev</span>
   </button>
@@ -367,7 +380,7 @@ footer::before {
     <span class="lb-corner lb-corner-bl"><svg viewBox="0 0 24 24"><polyline points="1 8 1 1 8 1"/></svg></span>
     <span class="lb-corner lb-corner-br"><svg viewBox="0 0 24 24"><polyline points="1 8 1 1 8 1"/></svg></span>
   </div>
-  <button class="lb-nav" id="lb-next">
+  <button class="lb-nav" id="lb-next" aria-label="Next">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
     <span class="lb-nav-label">Next</span>
   </button>
@@ -387,272 +400,464 @@ footer::before {
 </footer>
 
 <script>
-(function () {
+/**
+ * ═══════════════════════════════════════════════════════════════════════════════
+ * OPTIMIZED GALLERY SYSTEM
+ * 
+ * Features:
+ * • JSON manifest auto-discovery (no hardcoding)
+ * • Multi-resolution images (thumb/medium/large)
+ * • WebP with JPEG fallback
+ * • Responsive srcset/sizes
+ * • Lazy loading + async decoding
+ * • Lightbox with smart preloading (prev/next only)
+ * • Intersection Observer for reveal animations
+ * • Performance optimized (CLS prevention, containment)
+ * ═══════════════════════════════════════════════════════════════════════════════
+ */
+
+(function() {
   'use strict';
 
-  /*
-   * ═══════════════════════════════════════════════════════════
-   *  IMAGE MANIFEST
-   *  Files are named exactly: "Dr Philemon Yugi (1).jpg" … "(41).jpg"
-   *  We probe each number 1–41 across multiple extensions and
-   *  folder cases to handle any server case-sensitivity quirks.
-   *
-   *  The gallery also tries a few bonus names (hero, cover, etc.)
-   *  in case additional images exist alongside the numbered set.
-   * ═══════════════════════════════════════════════════════════
-   */
+  // ── Configuration ──
+  const CONFIG = {
+    manifestPath: 'images/manifest.json',  // Auto-generated manifest
+    fallbackPattern: 'Dr Philemon Yugi',   // Fallback if no manifest
+    maxRetries: 3,
+    batchSize: 8,  // Images to load per batch for progressive rendering
+    preloadRange: 1  // Preload adjacent images in lightbox
+  };
 
-  /* Primary pattern: "Dr Philemon Yugi (N)" — exact filename from server */
-  var PRIMARY_BASE   = 'Dr Philemon Yugi';
-  var TOTAL_PRIMARY  = 41;
+  // ── State ──
+  const state = {
+    photos: [],           // { id, thumb, medium, large, webp, jpeg, width, height, label, ratio }
+    currentIndex: 0,
+    isLoading: true,
+    observer: null,
+    preloadCache: new Map()
+  };
 
-  /* Fallback bonus names */
-  var BONUS_NAMES = [
-    'hero', 'Hero', 'cover', 'Cover', 'portrait', 'Portrait',
-    'philemon', 'Philemon', 'Drphilemonyugi', 'drphilemonyugi',
-    'DrPhilemonYugi', 'profile', 'Profile', 'family', 'Family'
-  ];
+  // ── DOM Elements ──
+  const els = {
+    grid: document.getElementById('masonry-grid'),
+    count: document.getElementById('header-count'),
+    loadingWrap: document.getElementById('gallery-loading'),
+    loadingText: document.getElementById('loading-text'),
+    progress: document.getElementById('progress-bar'),
+    lightbox: document.getElementById('lightbox'),
+    lbImg: document.getElementById('lb-img'),
+    lbCaption: document.getElementById('lb-caption'),
+    lbCounter: document.getElementById('lb-counter'),
+    lbDots: document.getElementById('lb-dots'),
+    lbProgress: document.getElementById('lb-progress'),
+    lbPrev: document.getElementById('lb-prev'),
+    lbNext: document.getElementById('lb-next'),
+    lbClose: document.getElementById('lb-close')
+  };
 
-  /* Folders (handles server case-sensitivity) */
-  var FOLDERS = ['images/', 'Images/', 'photos/', 'Photos/'];
+  // ── Intersection Observer for staggered reveal ──
+  function initObserver() {
+    const options = {
+      root: null,
+      rootMargin: '50px',
+      threshold: 0.04
+    };
 
-  /* Extensions */
-  var EXTS = ['.jpg', '.jpeg', '.JPG', '.JPEG', '.png', '.PNG', '.webp', '.WEBP'];
+    state.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          // Stagger delay based on index
+          const delay = Math.min(parseInt(el.dataset.index || 0) * 50, 400);
+          setTimeout(() => el.classList.add('visible'), delay);
+          state.observer.unobserve(el);
+        }
+      });
+    }, options);
+  }
 
-  /* ── State ── */
-  var photos   = [];   /* [{src, label}] */
-  var lbIdx    = 0;
-  var seenSrcs = {};
-
-  var grid       = document.getElementById('masonry-grid');
-  var countEl    = document.getElementById('header-count');
-  var loadingWrap= document.getElementById('gallery-loading');
-  var loadingText= document.getElementById('loading-text');
-  var progressEl = document.getElementById('progress-bar');
-
-  /* ── Staggered reveal observer ── */
-  var revDelay = 0;
-  var observer = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        var el = entry.target, d = revDelay;
-        setTimeout(function () { el.classList.add('visible'); }, d);
-        revDelay = Math.min(revDelay + 50, 400);
-        observer.unobserve(el);
+  // ── Utility: Generate fallback manifest from pattern ──
+  async function generateFallbackManifest() {
+    const photos = [];
+    const maxScan = 100; // Safety limit
+    
+    for (let i = 1; i <= maxScan; i++) {
+      const num = i.toString().padStart(2, '0');
+      const baseName = `${CONFIG.fallbackPattern} (${i})`;
+      
+      // Test if any resolution exists
+      const testSrc = `images/thumbs/${baseName}.webp`;
+      
+      try {
+        const exists = await probeImage(testSrc);
+        if (exists) {
+          photos.push({
+            id: i,
+            baseName: baseName,
+            label: 'Dr Philemon Yugi',
+            // Assume standard sizes if not in manifest
+            width: 800,
+            height: 600,
+            ratio: 1.33
+          });
+        } else if (i > 41) {
+          // Stop after checking reasonable range
+          break;
+        }
+      } catch (e) {
+        if (i > 41) break;
       }
-    });
-  }, { threshold: 0.04 });
+    }
+    
+    return { photos, generated: true };
+  }
 
-  /* ── Probe a URL ── */
-  function probe(src) {
-    return new Promise(function (resolve) {
-      var i = new Image();
-      i.onload  = function () { resolve(src); };
-      i.onerror = function () { resolve(null); };
-      i.src = src;
+  // ── Utility: Probe if image exists ──
+  function probeImage(src) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve(true);
+      img.onerror = () => resolve(false);
+      img.src = src;
     });
   }
 
-  /* ── Try all folder/ext combos for one filename ── */
-  function probeFilename(name) {
-    var candidates = [];
-    FOLDERS.forEach(function (f) {
-      EXTS.forEach(function (e) {
-        candidates.push(f + name + e);
+  // ── Load Manifest ──
+  async function loadManifest() {
+    try {
+      const response = await fetch(CONFIG.manifestPath, {
+        cache: 'no-cache',
+        headers: { 'Accept': 'application/json' }
       });
+      
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      
+      const data = await response.json();
+      return { ...data, generated: false };
+    } catch (error) {
+      console.warn('Manifest not found, using fallback discovery:', error.message);
+      return generateFallbackManifest();
+    }
+  }
+
+  // ── Create Responsive Picture Element ──
+  function createPictureElement(photo, index) {
+    const item = document.createElement('div');
+    item.className = 'masonry-item';
+    item.dataset.index = index;
+    item.dataset.id = photo.id;
+    
+    // Aspect ratio for CLS prevention
+    if (photo.ratio) {
+      item.style.aspectRatio = photo.ratio;
+    }
+
+    const num = String(index + 1).padStart(2, '0');
+    
+    // Build srcset strings
+    const srcsetWebP = `
+      images/thumbs/${photo.baseName}.webp 400w,
+      images/medium/${photo.baseName}.webp 800w,
+      images/large/${photo.baseName}.webp 1200w
+    `.trim();
+    
+    const srcsetJPEG = `
+      images/thumbs/${photo.baseName}.jpg 400w,
+      images/medium/${photo.baseName}.jpg 800w,
+      images/large/${photo.baseName}.jpg 1200w
+    `.trim();
+
+    // Responsive sizes: mobile gets smaller images
+    const sizes = `
+      (max-width: 460px) 100vw,
+      (max-width: 840px) 50vw,
+      (max-width: 1280px) 33vw,
+      25vw
+    `.trim();
+
+    // Use picture element for format switching
+    item.innerHTML = `
+      <picture>
+        <source 
+          type="image/webp" 
+          srcset="${srcsetWebP}"
+          sizes="${sizes}"
+        >
+        <img 
+          src="images/medium/${photo.baseName}.jpg"
+          srcset="${srcsetJPEG}"
+          sizes="${sizes}"
+          width="${photo.width || 800}"
+          height="${photo.height || 600}"
+          alt="${photo.label}"
+          loading="${index < 4 ? 'eager' : 'lazy'}"
+          decoding="async"
+          fetchpriority="${index < 2 ? 'high' : 'auto'}"
+        >
+      </picture>
+      <div class="masonry-zoom">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </div>
+      <div class="masonry-overlay">
+        <div class="masonry-num">Photo ${num}</div>
+        <div class="masonry-label">${photo.label}</div>
+      </div>
+    `;
+
+    // Click handler for lightbox
+    item.addEventListener('click', () => openLightbox(index));
+    
+    return item;
+  }
+
+  // ── Render Gallery ──
+  async function renderGallery() {
+    els.grid.innerHTML = '';
+    
+    // Batch rendering for performance
+    const batchSize = CONFIG.batchSize;
+    const total = state.photos.length;
+    
+    for (let i = 0; i < total; i += batchSize) {
+      const batch = state.photos.slice(i, i + batchSize);
+      const fragment = document.createDocumentFragment();
+      
+      batch.forEach((photo, batchIndex) => {
+        const el = createPictureElement(photo, i + batchIndex);
+        fragment.appendChild(el);
+        state.observer.observe(el);
+      });
+      
+      els.grid.appendChild(fragment);
+      
+      // Update progress
+      const progress = Math.min(((i + batch.length) / total) * 100, 100);
+      els.progress.style.width = `${progress}%`;
+      els.loadingText.textContent = `Loading ${i + batch.length} of ${total} photos…`;
+      els.count.textContent = `${total} Photos`;
+      
+      // Yield to main thread
+      if (i + batchSize < total) {
+        await new Promise(r => requestAnimationFrame(r));
+      }
+    }
+  }
+
+  // ── Lightbox: Smart Image Loading ──
+  function loadLightboxImage(index, direction = 0) {
+    const photo = state.photos[index];
+    if (!photo) return;
+
+    // Use large WebP, fallback to JPEG
+    const largeSrc = `images/large/${photo.baseName}.webp`;
+    const fallbackSrc = `images/large/${photo.baseName}.jpg`;
+    
+    els.lbImg.style.opacity = '0';
+    els.lbImg.style.transform = `scale(0.96) translateX(${direction * -22}px)`;
+    
+    // Check cache first
+    const cacheKey = `large-${photo.id}`;
+    let imgLoader = state.preloadCache.get(cacheKey);
+    
+    if (!imgLoader) {
+      imgLoader = new Promise((resolve, reject) => {
+        const img = new Image();
+        img.onload = () => resolve(img.src);
+        img.onerror = () => {
+          // Fallback to JPEG if WebP fails
+          const fb = new Image();
+          fb.onload = () => resolve(fb.src);
+          fb.onerror = reject;
+          fb.src = fallbackSrc;
+        };
+        img.src = largeSrc;
+      });
+      state.preloadCache.set(cacheKey, imgLoader);
+    }
+    
+    imgLoader.then(src => {
+      els.lbImg.src = src;
+      els.lbImg.alt = photo.label;
+      els.lbCaption.textContent = photo.label;
+      els.lbCounter.textContent = `${index + 1} of ${state.photos.length}`;
+      
+      // Animate in
+      requestAnimationFrame(() => {
+        els.lbImg.style.opacity = '1';
+        els.lbImg.style.transform = 'scale(1) translateX(0)';
+      });
+      
+      updateLightboxProgress(index);
+      updateLightboxDots(index);
+      
+      // Preload adjacent
+      preloadAdjacent(index);
+    }).catch(() => {
+      els.lbCaption.textContent = 'Error loading image';
     });
-    /* Resolve with first successful hit */
-    return new Promise(function (resolve) {
-      var i = 0;
-      function next() {
-        if (i >= candidates.length) { resolve(null); return; }
-        var src = candidates[i++];
-        probe(src).then(function (result) {
-          if (result) { resolve(result); } else { next(); }
+  }
+
+  // ── Preload Adjacent Images ──
+  function preloadAdjacent(currentIndex) {
+    const range = CONFIG.preloadRange;
+    
+    for (let offset = -range; offset <= range; offset++) {
+      if (offset === 0) continue;
+      
+      const idx = currentIndex + offset;
+      if (idx < 0 || idx >= state.photos.length) continue;
+      
+      const photo = state.photos[idx];
+      const cacheKey = `large-${photo.id}`;
+      
+      if (!state.preloadCache.has(cacheKey)) {
+        const preloadPromise = new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(img.src);
+          img.onerror = () => resolve(null);
+          img.src = `images/large/${photo.baseName}.webp`;
         });
+        state.preloadCache.set(cacheKey, preloadPromise);
       }
-      next();
-    });
-  }
-
-  /* ── Render a card ── */
-  function renderCard(src, label, idx) {
-    var el  = document.createElement('div');
-    el.className = 'masonry-item';
-    var num = String(idx + 1).padStart(2, '0');
-    el.innerHTML =
-      '<img src="' + src + '" alt="' + label + '" loading="lazy" decoding="async"/>' +
-      '<div class="masonry-zoom">' +
-        '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">' +
-          '<circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>' +
-        '</svg></div>' +
-      '<div class="masonry-overlay">' +
-        '<div class="masonry-num">Photo ' + num + '</div>' +
-        '<div class="masonry-label">' + label + '</div>' +
-      '</div>';
-    el.addEventListener('click', (function (i) { return function () { openLB(i); }; })(idx));
-    return el;
-  }
-
-  /* ── Add a found image ── */
-  function addPhoto(src, label) {
-    if (!src || seenSrcs[src]) return;
-    seenSrcs[src] = true;
-    var idx  = photos.length;
-    photos.push({ src: src, label: label });
-    var card = renderCard(src, label, idx);
-    grid.appendChild(card);
-    observer.observe(card);
-  }
-
-  /* ── Main loading routine ── */
-  function loadGallery() {
-    grid.innerHTML = ''; /* clear skeletons */
-
-    /* Build primary candidates: 1–41 numbered images */
-    var primary = [];
-    for (var n = 1; n <= TOTAL_PRIMARY; n++) {
-      primary.push({ name: PRIMARY_BASE + ' (' + n + ')', label: 'Dr Philemon Yugi' });
     }
-
-    var total = primary.length + BONUS_NAMES.length;
-    var done  = 0;
-
-    function tick() {
-      done++;
-      var pct = Math.min(Math.round((done / total) * 100), 100);
-      progressEl.style.width = pct + '%';
-      loadingText.textContent = photos.length + ' of ' + total + ' checked…';
-      countEl.textContent = photos.length + ' Photo' + (photos.length !== 1 ? 's' : '');
-    }
-
-    /* Load primary images sequentially (preserves order 1→41) */
-    function loadPrimary(i) {
-      if (i >= primary.length) {
-        loadBonus(0);
-        return;
-      }
-      var item = primary[i];
-      probeFilename(item.name).then(function (src) {
-        tick();
-        if (src) addPhoto(src, item.label);
-        loadPrimary(i + 1);
-      });
-    }
-
-    /* Load bonus images in parallel (order doesn't matter) */
-    function loadBonus(start) {
-      var promises = BONUS_NAMES.map(function (name) {
-        return probeFilename(name).then(function (src) {
-          tick();
-          if (src) addPhoto(src, name.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/^\w/,function(c){return c.toUpperCase();}));
-        });
-      });
-      Promise.all(promises).then(finish);
-    }
-
-    loadPrimary(0);
-  }
-
-  function finish() {
-    progressEl.style.width = '100%';
-    countEl.textContent = photos.length + ' Photo' + (photos.length !== 1 ? 's' : '');
-    if (photos.length === 0) {
-      grid.innerHTML =
-        '<div style="text-align:center;padding:80px 20px;font-family:\'Playfair Display\',serif;' +
-        'font-style:italic;font-size:1.1rem;color:var(--silver-dim);line-height:2;">' +
-        'No photos were found.<br/>' +
-        '<span style="font-size:0.65rem;letter-spacing:2px;font-style:normal;">' +
-        'Ensure images named <em>Dr Philemon Yugi (1).jpg</em> … <em>(41).jpg</em><br/>' +
-        'are in the <code>images/</code> folder.</span></div>';
-    }
-    setTimeout(function () {
-      loadingWrap.style.transition = 'opacity 0.6s ease';
-      loadingWrap.style.opacity = '0';
-      setTimeout(function () { loadingWrap.style.display = 'none'; }, 650);
-    }, 300);
-    renderDots();
-  }
-
-  /* ── LIGHTBOX ── */
-  var lb     = document.getElementById('lightbox');
-  var lbImg  = document.getElementById('lb-img');
-  var lbCap  = document.getElementById('lb-caption');
-  var lbCtr  = document.getElementById('lb-counter');
-  var lbDots = document.getElementById('lb-dots');
-  var lbProg = document.getElementById('lb-progress');
-
-  lbImg.style.transition = 'opacity 0.22s ease, transform 0.5s cubic-bezier(0.19,1,0.22,1)';
-
-  function renderDots() {
-    lbDots.innerHTML = '';
-    for (var i = 0; i < photos.length; i++) {
-      var d = document.createElement('span');
-      d.className = 'lb-dot' + (i === lbIdx ? ' active' : '');
-      (function (ii) { d.addEventListener('click', function (e) { e.stopPropagation(); setLB(ii); }); })(i);
-      lbDots.appendChild(d);
+    
+    // Clean up distant cache entries (keep last 10)
+    if (state.preloadCache.size > 15) {
+      const keys = Array.from(state.preloadCache.keys());
+      keys.slice(0, keys.length - 15).forEach(k => state.preloadCache.delete(k));
     }
   }
 
-  function updateDots() {
-    var dots = lbDots.querySelectorAll('.lb-dot');
-    dots.forEach(function (d, i) { d.classList.toggle('active', i === lbIdx); });
-  }
-
-  function updateProgress() {
-    lbProg.style.width = (photos.length > 1 ? (lbIdx / (photos.length - 1)) * 100 : 100) + '%';
-  }
-
-  function openLB(idx) {
-    lbIdx = idx;
-    lbImg.src = photos[idx].src;
-    lbImg.alt = photos[idx].label;
-    lbCap.textContent = photos[idx].label;
-    lbCtr.textContent = (idx + 1) + ' of ' + photos.length;
-    lb.classList.add('open');
+  // ── Lightbox Controls ──
+  function openLightbox(index) {
+    state.currentIndex = index;
+    els.lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
-    renderDots(); updateProgress();
+    loadLightboxImage(index);
   }
 
-  function closeLB() {
-    lb.classList.remove('open');
+  function closeLightbox() {
+    els.lightbox.classList.remove('open');
     document.body.style.overflow = '';
-    setTimeout(function () { lbImg.src = ''; }, 420);
+    setTimeout(() => {
+      els.lbImg.src = '';
+      els.lbImg.alt = '';
+    }, 420);
   }
 
-  function setLB(idx) {
-    var dir = idx >= lbIdx ? 1 : -1;
-    lbIdx = ((idx % photos.length) + photos.length) % photos.length;
-    lbImg.style.opacity = '0';
-    lbImg.style.transform = 'scale(0.96) translateX(' + (dir > 0 ? '-22px' : '22px') + ')';
-    setTimeout(function () {
-      lbImg.src = photos[lbIdx].src; lbImg.alt = photos[lbIdx].label;
-      lbCap.textContent = photos[lbIdx].label;
-      lbCtr.textContent = (lbIdx + 1) + ' of ' + photos.length;
-      lbImg.style.opacity = '1'; lbImg.style.transform = 'scale(1) translateX(0)';
-      updateDots(); updateProgress();
-    }, 215);
+  function navigateLightbox(direction) {
+    const newIndex = state.currentIndex + direction;
+    if (newIndex < 0 || newIndex >= state.photos.length) return;
+    
+    state.currentIndex = newIndex;
+    loadLightboxImage(newIndex, direction);
   }
 
-  document.getElementById('lb-close').addEventListener('click', closeLB);
-  document.getElementById('lb-prev').addEventListener('click', function () { setLB(lbIdx - 1); });
-  document.getElementById('lb-next').addEventListener('click', function () { setLB(lbIdx + 1); });
-  lb.addEventListener('click', function (e) { if (e.target === lb) closeLB(); });
-  document.addEventListener('keydown', function (e) {
-    if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape')     closeLB();
-    if (e.key === 'ArrowLeft')  setLB(lbIdx - 1);
-    if (e.key === 'ArrowRight') setLB(lbIdx + 1);
-  });
-  var tx = 0;
-  lb.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
-  lb.addEventListener('touchend',   function (e) {
-    var d = tx - e.changedTouches[0].clientX;
-    if (Math.abs(d) > 50) setLB(d > 0 ? lbIdx + 1 : lbIdx - 1);
-  });
+  function updateLightboxProgress(index) {
+    const pct = state.photos.length > 1 ? (index / (state.photos.length - 1)) * 100 : 100;
+    els.lbProgress.style.width = `${pct}%`;
+  }
 
-  /* ── GO ── */
-  loadGallery();
+  function updateLightboxDots(activeIndex) {
+    const dots = els.lbDots.querySelectorAll('.lb-dot');
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === activeIndex);
+    });
+  }
+
+  function renderLightboxDots() {
+    els.lbDots.innerHTML = '';
+    state.photos.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.className = 'lb-dot';
+      dot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const direction = i > state.currentIndex ? 1 : -1;
+        state.currentIndex = i;
+        loadLightboxImage(i, direction);
+      });
+      els.lbDots.appendChild(dot);
+    });
+  }
+
+  // ── Event Listeners ──
+  function initEventListeners() {
+    els.lbClose.addEventListener('click', closeLightbox);
+    els.lbPrev.addEventListener('click', () => navigateLightbox(-1));
+    els.lbNext.addEventListener('click', () => navigateLightbox(1));
+    
+    els.lightbox.addEventListener('click', (e) => {
+      if (e.target === els.lightbox) closeLightbox();
+    });
+    
+    document.addEventListener('keydown', (e) => {
+      if (!els.lightbox.classList.contains('open')) return;
+      switch(e.key) {
+        case 'Escape': closeLightbox(); break;
+        case 'ArrowLeft': navigateLightbox(-1); break;
+        case 'ArrowRight': navigateLightbox(1); break;
+      }
+    });
+    
+    // Touch/swipe support
+    let touchStartX = 0;
+    els.lightbox.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    
+    els.lightbox.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        navigateLightbox(diff > 0 ? 1 : -1);
+      }
+    }, { passive: true });
+  }
+
+  // ── Initialization ──
+  async function init() {
+    initObserver();
+    initEventListeners();
+    
+    try {
+      const manifest = await loadManifest();
+      state.photos = manifest.photos || [];
+      
+      if (state.photos.length === 0) {
+        throw new Error('No photos found');
+      }
+      
+      await renderGallery();
+      renderLightboxDots();
+      
+      // Hide loading
+      els.progress.style.width = '100%';
+      setTimeout(() => {
+        els.loadingWrap.style.opacity = '0';
+        setTimeout(() => els.loadingWrap.style.display = 'none', 650);
+      }, 300);
+      
+    } catch (error) {
+      console.error('Gallery initialization failed:', error);
+      els.grid.innerHTML = `
+        <div style="text-align:center;padding:80px 20px;font-family:'Playfair Display',serif;
+          font-style:italic;font-size:1.1rem;color:var(--silver-dim);line-height:2;">
+          Unable to load gallery.<br>
+          <span style="font-size:0.65rem;letter-spacing:2px;font-style:normal;">
+          Please ensure images are in the correct folder structure.</span>
+        </div>
+      `;
+      els.loadingWrap.style.display = 'none';
+    }
+  }
+
+  // Start
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
 })();
 </script>
