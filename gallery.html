@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Gallery â€” Dr. Philemon Odiwuor Yugi</title>
+<title>Gallery - Dr. Philemon Odiwuor Yugi</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@200;300;400&family=IM+Fell+English:ital@1&display=swap" rel="stylesheet"/>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,7 +37,7 @@ body::before {
   opacity: 0.4;
 }
 
-/* â”€â”€ NAV â”€â”€ */
+/*  NAV  */
 nav {
   position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 200;
   display: flex; align-items: center; justify-content: space-between; padding: 0 48px;
@@ -66,7 +66,7 @@ nav {
   nav { padding: 0 20px; } .nav-monogram { display: none; } .nav-links { gap: 20px; }
 }
 
-/* â”€â”€ PAGE HEADER â”€â”€ */
+/*  PAGE HEADER  */
 .page-header {
   padding: calc(var(--nav-h) + 76px) 40px 70px;
   text-align: center; position: relative; overflow: hidden;
@@ -109,13 +109,13 @@ nav {
   border: 1px solid var(--border); border-radius: 2px; padding: 8px 22px;
   opacity: 0; animation: fadeUp 1s 0.65s ease forwards;
 }
-.header-count::before, .header-count::after { content: 'â€“'; opacity: 0.4; font-size: 0.55rem; }
+.header-count::before, .header-count::after { content: '-'; opacity: 0.4; font-size: 0.55rem; }
 .page-header::after {
   content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
   width: 1px; height: 44px; background: linear-gradient(to bottom, var(--accent), transparent);
 }
 
-/* â”€â”€ GALLERY â”€â”€ */
+/*  GALLERY  */
 .gallery-section { padding: 64px 28px 100px; max-width: 1480px; margin: 0 auto; }
 
 /* Loading state */
@@ -216,7 +216,7 @@ nav {
 }
 @keyframes shimmer { 0%{background-position:100% 0} 100%{background-position:-100% 0} }
 
-/* â”€â”€ LIGHTBOX â”€â”€ */
+/*  LIGHTBOX  */
 .lightbox {
   position: fixed; inset: 0; z-index: 500;
   background: rgba(5,7,10,0.97);
@@ -300,7 +300,7 @@ nav {
 .lb-dot.active { background: var(--accent); width: 18px; border-radius: 2px; }
 .lb-dot:hover:not(.active) { background: var(--accent-soft); }
 
-/* â”€â”€ FOOTER â”€â”€ */
+/*  FOOTER  */
 footer {
   text-align: center; padding: 56px 24px 48px;
   border-top: 1px solid var(--border-dim); position: relative;
@@ -345,14 +345,14 @@ footer::before {
     Memories &amp; Moments
     <span>Dr. Philemon Odiwuor Yugi</span>
   </h1>
-  <p class="header-dates">May 25, 1968 &nbsp;â€”&nbsp; March 19, 2026</p>
-  <span class="header-count" id="header-count">Loadingâ€¦</span>
+    <p class="header-dates">May 25, 1968 &nbsp;&mdash;&nbsp; March 19, 2026</p>
+    <span class="header-count" id="header-count">Loading...</span>
 </div>
 
 <div class="gallery-section">
   <div class="gallery-loading" id="gallery-loading">
     <div class="progress-bar-wrap"><div class="progress-bar-fill" id="progress-bar"></div></div>
-    <div class="loading-text" id="loading-text">Discovering photosâ€¦</div>
+        <div class="loading-text" id="loading-text">Discovering photos...</div>
   </div>
   <div class="masonry-grid" id="masonry-grid">
     <!-- Skeleton placeholders -->
@@ -368,7 +368,7 @@ footer::before {
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox">
   <div class="lb-progress" id="lb-progress"></div>
-  <button class="lb-close" id="lb-close" aria-label="Close">âœ•</button>
+    <button class="lb-close" id="lb-close" aria-label="Close">X</button>
   <button class="lb-nav" id="lb-prev" aria-label="Previous">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
     <span class="lb-nav-label">Prev</span>
@@ -394,9 +394,9 @@ footer::before {
 </div>
 
 <footer>
-  <p class="footer-ornament">âœ¦</p>
+    <p class="footer-ornament">*</p>
   <p class="footer-quote">"Be of good comfort in the hope of the resurrection morning"</p>
-  <p class="footer-name">Dr. Philemon Odiwuor Yugi &nbsp;Â·&nbsp; 1968 â€“ 2026</p>
+    <p class="footer-name">Dr. Philemon Odiwuor Yugi &nbsp;&middot;&nbsp; 1968 - 2026</p>
 </footer>
 
 <script>
@@ -839,3 +839,4 @@ footer::before {
 </script>
 </body>
 </html>
+
