@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Tributes — Dr. Philemon Odiwuor Yugi</title>
+<title>Tributes &mdash; Dr. Philemon Odiwuor Yugi</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -79,12 +79,21 @@
   .tribute-name { font-weight: 600; font-size: 1rem; color: var(--text); }
   .tribute-time { font-size: 0.75rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
   .tribute-relation { font-size: 0.72rem; color: var(--teal-mid); font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
-  .tribute-message { font-size: 0.95rem; line-height: 1.85; color: #0d1f24; font-weight: 400; white-space: pre-line; }
+  .tribute-message { font-size: 0.95rem; line-height: 1.85; color: #0d1f24; font-weight: 400; white-space: pre-line; word-break: break-word; }
   .tribute-message.clamped { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
   .tribute-read-more { background: none; border: none; cursor: pointer; color: var(--teal-mid); font-size: 0.82rem; font-weight: 500; padding: 6px 0 0; display: inline-block; text-decoration: underline; font-family: 'Inter', sans-serif; }
 
   .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 1rem; line-height: 1.8; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; }
   .empty-state p { margin-bottom: 8px; }
+
+  /* NOTICE BANNER */
+  .notice-banner {
+    background: #f0f9ff; border: 1px solid #bde0ed; border-radius: 8px;
+    padding: 14px 18px; margin-bottom: 28px;
+    font-size: 0.82rem; color: var(--teal); line-height: 1.6;
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .notice-banner svg { flex-shrink: 0; margin-top: 2px; }
 
   /* DIVIDER */
   .section-divider { display: flex; align-items: center; gap: 16px; margin: 48px 0 36px; }
@@ -98,27 +107,45 @@
   .form-row { display: flex; gap: 16px; flex-wrap: wrap; }
   .form-group { flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
   .form-group label { font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
-  .form-group input, .form-group textarea, .form-group select { background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.95rem; padding: 11px 14px; outline: none; transition: border-color 0.25s, box-shadow 0.25s; width: 100%; }
+  .form-group input, .form-group textarea, .form-group select {
+    background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px;
+    color: var(--text); font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.95rem;
+    padding: 11px 14px; outline: none; transition: border-color 0.25s, box-shadow 0.25s; width: 100%;
+  }
   .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--teal-mid); box-shadow: 0 0 0 3px rgba(60,141,148,0.12); }
   .form-group textarea { resize: vertical; min-height: 130px; line-height: 1.7; }
-  .form-group select option { background: #fff; }
   .char-count { font-size: 0.72rem; color: var(--muted); text-align: right; margin-top: 4px; }
-  .submit-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--teal); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; padding: 13px 32px; transition: background 0.25s, transform 0.15s; margin-top: 4px; }
-  .submit-btn:hover { background: var(--teal-mid); transform: translateY(-1px); }
+  .submit-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--teal); color: #fff; border: none; border-radius: 8px;
+    cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600;
+    letter-spacing: 0.5px; padding: 13px 32px; transition: background 0.25s, transform 0.15s; margin-top: 4px;
+  }
+  .submit-btn:hover:not(:disabled) { background: var(--teal-mid); transform: translateY(-1px); }
+  .submit-btn:disabled { opacity: 0.65; cursor: not-allowed; }
 
   /* TOAST */
-  .toast { position: fixed; bottom: 28px; right: 28px; background: var(--teal-deep); color: var(--teal-light); padding: 14px 24px; border-radius: 8px; font-size: 0.88rem; font-weight: 400; z-index: 999; opacity: 0; transform: translateY(16px); transition: all 0.35s; pointer-events: none; box-shadow: 0 4px 20px rgba(0,0,0,0.25); max-width: 360px; line-height: 1.5; }
+  .toast {
+    position: fixed; bottom: 28px; right: 28px;
+    background: var(--teal-deep); color: var(--teal-light);
+    padding: 14px 24px; border-radius: 8px; font-size: 0.88rem; font-weight: 400;
+    z-index: 999; opacity: 0; transform: translateY(16px);
+    transition: all 0.35s; pointer-events: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.25); max-width: 360px; line-height: 1.5;
+  }
   .toast.show { opacity: 1; transform: translateY(0); }
 
   /* FOOTER */
   footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); background: var(--card-bg); }
   .footer-text { color: var(--muted); font-size: 0.88rem; letter-spacing: 0.5px; font-style: italic; }
   .footer-name { font-weight: 600; color: var(--teal); font-size: 0.82rem; letter-spacing: 1px; margin-top: 8px; text-transform: uppercase; }
+
+  @media (max-width: 600px) { .story-form-wrap { padding: 24px; } }
 </style>
 </head>
 <body>
 
-<nav id="navbar">
+<nav>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="gallery.html">Gallery</a></li>
@@ -140,6 +167,11 @@
     <span class="memories-count" id="memories-count"></span>
   </div>
 
+  <div class="notice-banner">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <span>Tributes are saved in your browser and visible to anyone who opens this page on the same device. They will appear immediately after submission.</span>
+  </div>
+
   <div class="tribute-list" id="tribute-list">
     <div class="empty-state"><p>Loading tributes&hellip;</p></div>
   </div>
@@ -152,7 +184,7 @@
 
   <div class="story-form-wrap">
     <h3 class="story-form-title">Leave a Memory or Message</h3>
-    <p class="story-form-subtitle">Share a fond memory, a word of comfort, or a message to the family. Your tribute will appear here once approved.</p>
+    <p class="story-form-subtitle">Share a fond memory, a word of comfort, or a message to the family. Your tribute will appear immediately.</p>
 
     <div class="form-row">
       <div class="form-group">
@@ -162,7 +194,7 @@
       <div class="form-group">
         <label for="t-relation">Your Relationship</label>
         <select id="t-relation">
-          <option value="">— Select —</option>
+          <option value="">&#8212; Select &#8212;</option>
           <option>Family Member</option>
           <option>Friend</option>
           <option>Colleague</option>
@@ -194,28 +226,38 @@
 
 <script>
 (function () {
-  var list    = document.getElementById('tribute-list');
-  var countEl = document.getElementById('memories-count');
-  var msg     = document.getElementById('t-message');
-  var btn     = document.getElementById('submit-tribute');
-  var toast   = document.getElementById('toast');
+  'use strict';
+
+  var STORAGE_KEY = 'philemon_tributes';
+
+  var listEl    = document.getElementById('tribute-list');
+  var countEl   = document.getElementById('memories-count');
+  var msgEl     = document.getElementById('t-message');
+  var btnEl     = document.getElementById('submit-tribute');
+  var toastEl   = document.getElementById('toast');
+  var charUsed  = document.getElementById('char-used');
+
+  /* ── Helpers ── */
+  function esc(s) {
+    return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
 
   function timeAgo(d) {
     var s = Math.floor((Date.now() - new Date(d).getTime()) / 1000);
     if (s < 60)    return 'just now';
-    if (s < 3600)  return Math.floor(s/60) + 'm ago';
-    if (s < 86400) return Math.floor(s/3600) + 'h ago';
-    var days = Math.floor(s/86400);
+    if (s < 3600)  return Math.floor(s / 60) + 'm ago';
+    if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+    var days = Math.floor(s / 86400);
     if (days < 30) return days + 'd ago';
-    var months = Math.floor(days/30);
+    var months = Math.floor(days / 30);
     if (months < 12) return months + ' month' + (months > 1 ? 's' : '') + ' ago';
-    return Math.floor(months/12) + ' year' + (Math.floor(months/12) > 1 ? 's' : '') + ' ago';
+    return Math.floor(months / 12) + ' year' + (Math.floor(months / 12) > 1 ? 's' : '') + ' ago';
   }
 
   function getInitials(name) {
     if (!name || !name.trim()) return '?';
     var parts = name.trim().split(/\s+/);
-    return parts.length === 1 ? parts[0][0].toUpperCase() : (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
+    return parts.length === 1 ? parts[0][0].toUpperCase() : (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
   }
 
   var avatarColors = [
@@ -226,105 +268,142 @@
     'linear-gradient(135deg,#1a4a55,#4a9aa5)'
   ];
 
-  function makeCard(t, idx) {
-    var name     = t.name || 'Anonymous';
-    var initials = getInitials(name);
-    var color    = avatarColors[idx % avatarColors.length];
-    var relation = t.relation || '';
-    var message  = t.message  || '';
-    var timeStr  = t.created_at ? timeAgo(t.created_at) : '';
-    var isLong   = message.length > 280;
-
-    var card = document.createElement('div');
-    card.className = 'tribute-card';
-    card.innerHTML =
-      '<div class="tribute-avatar" style="background:' + color + '">' + initials + '</div>' +
-      '<div class="tribute-body">' +
-        '<div class="tribute-header-row">' +
-          '<span class="tribute-name">' + name + '</span>' +
-          (timeStr ? '<span class="tribute-time">' + timeStr + '</span>' : '') +
-        '</div>' +
-        (relation ? '<div class="tribute-relation">' + relation + '</div>' : '') +
-        '<p class="tribute-message' + (isLong ? ' clamped' : '') + '">' + message + '</p>' +
-        (isLong ? '<button class="tribute-read-more" onclick="this.previousSibling.classList.toggle(\'clamped\');this.textContent=this.previousSibling.classList.contains(\'clamped\')?\'Read more\':\'Show less\'">Read more</button>' : '') +
-      '</div>';
-    return card;
+  /* ── Storage ── */
+  function loadTributes() {
+    try {
+      var stored = localStorage.getItem(STORAGE_KEY);
+      var list = stored ? JSON.parse(stored) : [];
+      if (!Array.isArray(list)) list = [];
+      /* Newest first */
+      return list.slice().sort(function(a, b) {
+        return new Date(b.created_at) - new Date(a.created_at);
+      });
+    } catch (e) {
+      return [];
+    }
   }
 
+  function saveTribute(tribute) {
+    try {
+      var stored = localStorage.getItem(STORAGE_KEY);
+      var list = stored ? JSON.parse(stored) : [];
+      if (!Array.isArray(list)) list = [];
+      list.unshift(tribute);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /* ── Render ── */
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
       if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
     });
   }, { threshold: 0.06 });
 
+  function makeCard(t, idx) {
+    var name     = esc(t.name || 'Anonymous');
+    var initials = getInitials(t.name || '');
+    var color    = avatarColors[idx % avatarColors.length];
+    var relation = esc(t.relation || '');
+    var message  = esc(t.message  || '');
+    var timeStr  = t.created_at ? timeAgo(t.created_at) : '';
+    var isLong   = (t.message || '').length > 280;
+
+    var card = document.createElement('div');
+    card.className = 'tribute-card';
+    card.innerHTML =
+      '<div class="tribute-avatar" style="background:' + color + '">' + esc(initials) + '</div>' +
+      '<div class="tribute-body">' +
+        '<div class="tribute-header-row">' +
+          '<span class="tribute-name">' + name + '</span>' +
+          (timeStr ? '<span class="tribute-time">' + esc(timeStr) + '</span>' : '') +
+        '</div>' +
+        (relation ? '<div class="tribute-relation">' + relation + '</div>' : '') +
+        '<p class="tribute-message' + (isLong ? ' clamped' : '') + '">' + message + '</p>' +
+        (isLong ? '<button class="tribute-read-more">Read more</button>' : '') +
+      '</div>';
+
+    if (isLong) {
+      var btn = card.querySelector('.tribute-read-more');
+      var p   = card.querySelector('.tribute-message');
+      btn.addEventListener('click', function() {
+        p.classList.toggle('clamped');
+        btn.textContent = p.classList.contains('clamped') ? 'Read more' : 'Show less';
+      });
+    }
+
+    return card;
+  }
+
   function render(tributes) {
-    list.innerHTML = '';
+    listEl.innerHTML = '';
     if (!tributes.length) {
-      list.innerHTML = '<div class="empty-state"><p>No tributes yet.</p><p>Be the first to share a memory below.</p></div>';
+      listEl.innerHTML = '<div class="empty-state"><p>No tributes yet.</p><p>Be the first to share a memory below.</p></div>';
       countEl.textContent = '';
       return;
     }
     countEl.textContent = tributes.length + ' ' + (tributes.length === 1 ? 'memory' : 'memories');
     tributes.forEach(function(t, i) {
       var card = makeCard(t, i);
-      list.appendChild(card);
+      listEl.appendChild(card);
       setTimeout(function() { observer.observe(card); }, i * 30);
     });
   }
 
-  fetch('/api/tributes')
-    .then(function(r) { return r.json(); })
-    .then(function(data) { render(data); })
-    .catch(function() {
-      list.innerHTML = '<div class="empty-state"><p>Could not load tributes.</p><p>Please refresh the page to try again.</p></div>';
-    });
-
-  msg.addEventListener('input', function() {
-    document.getElementById('char-used').textContent = msg.value.length;
-  });
-
-  function showToast(m) {
-    toast.textContent = m;
-    toast.classList.add('show');
-    setTimeout(function() { toast.classList.remove('show'); }, 5000);
+  /* ── Toast ── */
+  var toastTimer;
+  function showToast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function() { toastEl.classList.remove('show'); }, 5000);
   }
 
-  btn.addEventListener('click', function() {
+  /* ── Init ── */
+  render(loadTributes());
+
+  msgEl.addEventListener('input', function() {
+    charUsed.textContent = msgEl.value.length;
+  });
+
+  btnEl.addEventListener('click', function() {
     var name     = document.getElementById('t-name').value.trim();
     var relation = document.getElementById('t-relation').value;
-    var message  = msg.value.trim();
+    var message  = msgEl.value.trim();
+
     if (!message) {
-      msg.style.borderColor = '#c0392b';
-      msg.focus();
-      setTimeout(function() { msg.style.borderColor = ''; }, 1500);
+      msgEl.style.borderColor = '#c0392b';
+      msgEl.focus();
+      setTimeout(function() { msgEl.style.borderColor = ''; }, 1500);
+      showToast('Please write a tribute before submitting.');
       return;
     }
-    btn.disabled = true;
-    btn.textContent = 'Submitting\u2026';
 
-    fetch('/api/tributes', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: name, relation: relation, message: message })
-    })
-    .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
-    .then(function(res) {
-      if (res.ok) {
-        document.getElementById('t-name').value = '';
-        document.getElementById('t-relation').value = '';
-        msg.value = '';
-        document.getElementById('char-used').textContent = '0';
-        showToast('Thank you \u2014 your tribute has been received and will appear once approved.');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        showToast(res.data.error || 'Something went wrong. Please try again.');
-      }
-    })
-    .catch(function() { showToast('Could not connect. Please check your internet and try again.'); })
-    .finally(function() {
-      btn.disabled = false;
-      btn.textContent = 'Submit Your Tribute';
-    });
+    var tribute = {
+      id:         Date.now() + Math.random(),
+      name:       name || 'Anonymous',
+      relation:   relation,
+      message:    message,
+      created_at: new Date().toISOString(),
+      approved:   true
+    };
+
+    var saved = saveTribute(tribute);
+
+    if (saved) {
+      document.getElementById('t-name').value    = '';
+      document.getElementById('t-relation').value = '';
+      msgEl.value = '';
+      charUsed.textContent = '0';
+      showToast('Thank you \u2014 your tribute has been saved and is now visible.');
+      render(loadTributes());
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      showToast('Unable to save your tribute. Your browser storage may be full or disabled.');
+    }
   });
 })();
 </script>
