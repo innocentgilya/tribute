@@ -1,9 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<<<<<<< HEAD
 <title>In Loving Memory – Dr. Philemon Odiwuor Yugi</title>
+=======
+<title>In Loving Memory — Dr. Philemon Odiwuor Yugi</title>
+>>>>>>> parent of 3445629 (index slideshow)
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,7 +35,14 @@
 
   #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.3; }
 
+<<<<<<< HEAD
   /* HERO */
+=======
+  /* ══════════════════════════════════════
+     HERO — full bleed, image IS background
+     Nav lives INSIDE the hero (ACC pattern)
+  ══════════════════════════════════════ */
+>>>>>>> parent of 3445629 (index slideshow)
   .hero {
     position: relative;
     min-height: 100svh;
@@ -42,6 +53,10 @@
     z-index: 1;
   }
 
+<<<<<<< HEAD
+=======
+  /* Background image fills entire hero — same as ACC */
+>>>>>>> parent of 3445629 (index slideshow)
   .hero__bg {
     position: absolute;
     inset: 0;
@@ -54,6 +69,10 @@
     animation: bgFade 1.4s 0.1s ease forwards;
   }
 
+<<<<<<< HEAD
+=======
+  /* Dark gradient overlay — same technique as ACC's __media::after */
+>>>>>>> parent of 3445629 (index slideshow)
   .hero__overlay {
     position: absolute; inset: 0; z-index: 1;
     background: linear-gradient(
@@ -65,6 +84,10 @@
     );
   }
 
+<<<<<<< HEAD
+=======
+  /* ── NAV lives inside hero, z-index above overlay ── */
+>>>>>>> parent of 3445629 (index slideshow)
   .hero__nav {
     position: relative; z-index: 10;
     width: 100%;
@@ -73,6 +96,10 @@
     align-items: center;
     justify-content: center;
     padding: 0 40px;
+<<<<<<< HEAD
+=======
+    /* Transparent — image shows through, just like ACC */
+>>>>>>> parent of 3445629 (index slideshow)
     background: transparent;
     flex-shrink: 0;
   }
@@ -92,6 +119,10 @@
     .nav-links a { font-size: 0.6rem; letter-spacing: 1.5px; }
   }
 
+<<<<<<< HEAD
+=======
+  /* ── Hero content sits at the bottom, above overlay ── */
+>>>>>>> parent of 3445629 (index slideshow)
   .hero__content {
     position: relative; z-index: 2;
     flex: 1;
@@ -150,7 +181,11 @@
     color: #fff; letter-spacing: 1px;
   }
 
+<<<<<<< HEAD
   /* SLIDESHOW */
+=======
+  /* ── SLIDESHOW ── */
+>>>>>>> parent of 3445629 (index slideshow)
   .slideshow-section { position: relative; z-index: 1; background: #ffffff; padding: 72px 0 80px; scroll-margin-top: 0; }
   .slideshow-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; }
   .ss-label { font-size: 0.62rem; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 400; text-align: center; margin-bottom: 12px; }
@@ -183,7 +218,11 @@
   .ss-loading-dots span:nth-child(3) { animation-delay: 0.4s; }
   .ss-no-images { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; background: #d8e8ee; color: rgba(26,58,74,0.5); font-size: 0.82rem; letter-spacing: 1px; padding: 40px; text-align: center; }
 
+<<<<<<< HEAD
   /* BIO */
+=======
+  /* ── BIO ── */
+>>>>>>> parent of 3445629 (index slideshow)
   .bio-teaser { position: relative; z-index: 1; background: radial-gradient(circle at 50% 25%, #1f5c63 0%, #0d2a38 55%, #071e22 100%); padding: 80px 24px 90px; }
   .bio-inner { max-width: 860px; margin: 0 auto; }
   .bio-header { text-align: center; margin-bottom: 56px; }
@@ -195,8 +234,13 @@
   .bio-read-more-link { display: inline-flex; align-items: center; gap: 10px; font-size: 0.68rem; letter-spacing: 2.5px; color: var(--accent); text-transform: uppercase; text-decoration: none; font-weight: 400; border: 1px solid var(--accent); border-radius: 3px; padding: 12px 24px; transition: all 0.3s; }
   .bio-read-more-link:hover { background: rgba(122,184,200,0.1); }
 
+<<<<<<< HEAD
   /* TRIBUTE */
   .tribute-preview { position: relative; z-index: 1; background: #082026; padding: 80px 24px 90px; }
+=======
+  /* ── TRIBUTE ── */
+  .tribute-preview { position: relative; z-index: 1; background: #082026; padding: 80px 24px 90px; border-top: none; }
+>>>>>>> parent of 3445629 (index slideshow)
   .tribute-preview-inner { max-width: 1060px; margin: 0 auto; }
   .tp-header { text-align: center; margin-bottom: 48px; }
   .tp-label { font-size: 0.62rem; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 400; margin-bottom: 14px; }
@@ -222,11 +266,22 @@
   .tp-cta:hover { background: rgba(122,184,200,0.1); }
   .tp-empty { text-align: center; padding: 60px 20px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.05rem; color: var(--muted); line-height: 1.9; }
 
+<<<<<<< HEAD
   /* FOOTER */
+=======
+  /* ── FOOTER ── */
+>>>>>>> parent of 3445629 (index slideshow)
   footer { text-align: center; padding: 48px 24px; border-top: 1px solid var(--border); position: relative; z-index: 1; }
   .footer-text { font-weight: 300; color: var(--muted); font-size: 0.9rem; letter-spacing: 1px; font-style: italic; }
   .footer-name { font-weight: 500; color: var(--accent); font-size: 0.82rem; letter-spacing: 2px; margin-top: 12px; text-transform: uppercase; }
 
+<<<<<<< HEAD
+=======
+  /* ── FADE-IN (borrowed from reference) ── */
+  .fade-in { opacity: 0; transform: translateY(20px); transition: 0.8s ease; }
+  .fade-in.show { opacity: 1; transform: translateY(0); }
+
+>>>>>>> parent of 3445629 (index slideshow)
   @keyframes bgFade   { from { opacity:0; } to { opacity:1; } }
   @keyframes fadeUp   { from { opacity:0; transform:translateY(22px); } to { opacity:1; transform:translateY(0); } }
   @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
@@ -237,6 +292,7 @@
   }
 </style>
 
+<<<<<<< HEAD
 <meta property="og:type"        content="website" />
 <meta property="og:url"         content="https://drphilemonyugi.1fr.io/index.html" />
 <meta property="og:title"       content="In Loving Memory of Dr. Philemon Odiwuor Yugi" />
@@ -251,12 +307,42 @@
 <meta name="twitter:description" content="May 25, 1968 – March 19, 2026. Be of good comfort in the hope of the resurrection morning." />
 <meta name="twitter:image"       content="https://drphilemougugi.1fr.io/Images/philemon.jpeg" />
 <meta name="description" content="In Loving Memory of Dr. Philemon Odiwuor Yugi. May 25, 1968 – March 19, 2026. Burial Date: April 7, 2026." />
+=======
+  <!-- ── Open Graph / Social Share Thumbnail ── -->
+  <!-- Replace the og:image URL with the direct URL to Dr. Philemon's photo on your server -->
+  <!-- e.g. https://drphilemonyugi.1fr.io/Images/Drphilemonyugi.jpg -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content="https://drphilemonyugi.1fr.io/index.html" />
+  <meta property="og:title"       content="In Loving Memory of Dr. Philemon Odiwuor Yugi" />
+  <meta property="og:description" content="May 25, 1968 – March 19, 2026. Be of good comfort in the hope of the resurrection morning." />
+  <meta property="og:image"       content="https://drphilemonyugi.1fr.io/Images/philemon.jpeg" />
+  <meta property="og:image:width"  content="1080" />
+  <meta property="og:image:height" content="1080" />
+  <meta property="og:image:alt"   content="Dr. Philemon Odiwuor Yugi — In Loving Memory" />
+  <meta property="og:site_name"   content="In Loving Memory — Dr. Philemon Odiwuor Yugi" />
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="In Loving Memory of Dr. Philemon Odiwuor Yugi" />
+  <meta name="twitter:description" content="May 25, 1968 – March 19, 2026. Be of good comfort in the hope of the resurrection morning." />
+  <meta name="twitter:image"       content="https://drphilemonyugi.1fr.io/Images/philemon.jpeg" />
+
+  <!-- WhatsApp also reads og: tags above, but this description helps -->
+  <meta name="description" content="In Loving Memory of Dr. Philemon Odiwuor Yugi. May 25, 1968 – March 19, 2026. Burial Date: April 7, 2026." />
+>>>>>>> parent of 3445629 (index slideshow)
 </head>
 <body>
 
 <canvas id="particles"></canvas>
 
+<<<<<<< HEAD
 <!-- HERO -->
+=======
+<!-- ═══════════════════════════════════════════════════
+     HERO — image IS the background (ACC pattern)
+     Nav lives INSIDE the hero above the overlay
+═══════════════════════════════════════════════════ -->
+>>>>>>> parent of 3445629 (index slideshow)
 <section class="hero" id="home">
   <img class="hero__bg"
     src="Images/philemon.jpeg"
@@ -293,7 +379,11 @@
 <!-- SLIDESHOW -->
 <section class="slideshow-section" id="slideshow">
   <div class="slideshow-inner">
+<<<<<<< HEAD
     <p class="ss-label">A Life Beautifully Lived</p>
+=======
+    <p class="ss-label">✦ A Life Beautifully Lived</p>
+>>>>>>> parent of 3445629 (index slideshow)
     <h2 class="ss-title">Memories &amp; Moments</h2>
     <div class="ss-stage-wrap">
       <div class="ss-stage" id="ss-stage">
@@ -403,15 +493,14 @@
 </script>
 
 <script>
-/* SLIDESHOW */
+/* ── SLIDESHOW ── */
 (function () {
+  var IMAGE_NAMES = ['hero','Drphilemonyugi','Drphilemonyugi2','Drphilemonyugi3','Drphilemonyugi4','Drphilemonyugi5','Drphilemonyugi6','Drphilemonyugi7','Drphilemonyugi8'];
+  var FOLDERS = ['images/', 'Images/'];
+  var EXTS    = ['.jpg','.jpeg','.JPG','.JPEG','.png','.PNG','.webp','.WEBP'];
   var INTERVAL = 5000;
-  var IMAGE_DIR = 'images';
-  var IMAGE_PATTERN = 'Dr Philemon Yugi';
-  var MAX_SCAN = 200;
-  var STOP_AFTER_MISSES = 12;
-  var EXTS = ['.jpg', '.jpeg', '.png', '.webp', '.JPG', '.JPEG', '.PNG', '.WEBP'];
 
+<<<<<<< HEAD
   var stage = document.getElementById('ss-stage');
   var loading = document.getElementById('ss-loading');
   var dotsEl = document.getElementById('ss-dots');
@@ -530,10 +619,80 @@
     if (loading) loading.remove();
     stage.innerHTML = '<div class="ss-no-images"><span>Unable to load slideshow images</span></div>';
   });
+=======
+  function discover(name) {
+    return new Promise(function(resolve) {
+      var fi=0,ei=0;
+      function next() {
+        if(fi>=FOLDERS.length){resolve(null);return;}
+        if(ei>=EXTS.length){fi++;ei=0;next();return;}
+        var src=FOLDERS[fi]+name+EXTS[ei];
+        var img=new Image();
+        img.onload=function(){resolve(src);};
+        img.onerror=function(){ei++;next();};
+        img.src=src;
+      }
+      next();
+    });
+  }
+
+  function formatName(n){ return n.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/(\D)(\d+)$/,'$1 $2').replace(/^\w/,function(c){return c.toUpperCase();}).trim(); }
+
+  var stage=document.getElementById('ss-stage');
+  var loading=document.getElementById('ss-loading');
+  var dotsEl=document.getElementById('ss-dots');
+  var counter=document.getElementById('ss-counter');
+  var bar=document.getElementById('ss-progress-bar');
+  var slides=[],cur=0,timer;
+
+  Promise.all(IMAGE_NAMES.map(function(name){
+    return discover(name).then(function(src){return{name:name,src:src};});
+  })).then(function(results){
+    var valid=results.filter(function(r){return r.src!==null;});
+    if(loading)loading.remove();
+    if(!valid.length){
+      stage.innerHTML='<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#6a8e9a;font-size:0.8rem;letter-spacing:2px;background:#d8e8ee;">No images found — add photos to the images/ folder</div>';
+      return;
+    }
+    valid.forEach(function(item){
+      var slide=document.createElement('div'); slide.className='ss-slide';
+      var img=document.createElement('img'); img.src=item.src; img.alt=formatName(item.name);
+      var caption=document.createElement('div'); caption.className='ss-caption'; caption.textContent=formatName(item.name);
+      slide.appendChild(img); slide.appendChild(caption); stage.appendChild(slide); slides.push(slide);
+    });
+    slides[0].classList.add('active');
+    buildDots(valid.length); updateCounter(); startProgress();
+    document.getElementById('ss-prev').addEventListener('click',function(){goTo(cur-1);});
+    document.getElementById('ss-next').addEventListener('click',function(){goTo(cur+1);});
+  });
+
+  function buildDots(total){
+    dotsEl.innerHTML='';
+    for(var i=0;i<total;i++){
+      var dot=document.createElement('div'); dot.className='ss-dot'+(i===0?' active':''); dot.dataset.i=i;
+      dot.addEventListener('click',(function(idx){return function(){goTo(idx);};})(i));
+      dotsEl.appendChild(dot);
+    }
+  }
+  function updateCounter(){counter.textContent=(cur+1)+' / '+slides.length;}
+  function goTo(n){
+    var prev=cur; cur=(n+slides.length)%slides.length;
+    slides[prev].classList.remove('active'); dotsEl.querySelectorAll('.ss-dot')[prev].classList.remove('active');
+    slides[cur].classList.add('active'); dotsEl.querySelectorAll('.ss-dot')[cur].classList.add('active');
+    updateCounter(); startProgress();
+  }
+  function startProgress(){
+    clearTimeout(timer); bar.style.transition='none'; bar.style.width='0%';
+    void bar.offsetWidth;
+    bar.style.transition='width '+INTERVAL+'ms linear'; bar.style.width='100%';
+    if(slides.length>1) timer=setTimeout(function(){goTo(cur+1);},INTERVAL);
+  }
+>>>>>>> parent of 3445629 (index slideshow)
 })();
 </script>
 
 <script>
+<<<<<<< HEAD
 /* TRIBUTE PREVIEW – Using localStorage (Static Site) */
 (function () {
   var PER_PAGE = 3;
@@ -543,14 +702,23 @@
   var pageLbl = document.getElementById('tp-page-label');
   var bar = document.getElementById('tp-progress-bar');
   var allTributes = [], curPage = 0, totalPages = 1, timer;
+=======
+/* ── TRIBUTE PREVIEW ── */
+(function () {
+  var PER_PAGE=3, DURATION=15000;
+  var stage=document.getElementById('tp-stage');
+  var navRow=document.getElementById('tp-nav');
+  var pageLabel=document.getElementById('tp-page-label');
+  var bar=document.getElementById('tp-progress-bar');
+  var allTributes=[],curPage=0,totalPages=1,timer;
+>>>>>>> parent of 3445629 (index slideshow)
 
-  function timeAgo(d) {
-    var s = Math.floor((Date.now() - new Date(d).getTime()) / 1000);
-    if (s < 60) return 'just now';
-    if (s < 3600) return Math.floor(s / 60) + 'm ago';
-    if (s < 86400) return Math.floor(s / 3600) + 'h ago';
-    return Math.floor(s / 86400) + 'd ago';
+  function timeAgo(d){
+    var s=Math.floor((Date.now()-new Date(d).getTime())/1000);
+    if(s<60)return 'just now'; if(s<3600)return Math.floor(s/60)+'m ago';
+    if(s<86400)return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago';
   }
+<<<<<<< HEAD
 
   function esc(str) {
     return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -575,14 +743,25 @@
     slide.innerHTML = slice.map(function(t, i) { return cardHTML(t, i * 0.08); }).join('');
     stage.appendChild(slide);
     pageLbl.textContent = (curPage + 1) + ' / ' + totalPages;
+=======
+  function cardHTML(t,delay){
+    return '<div class="tp-card" style="animation-delay:'+delay+'s">'+(t.relation?'<div class="tp-card-relation">'+t.relation+'</div>':'')+'<p class="tp-card-text">'+t.message+'</p><div class="tp-card-meta"><span class="tp-card-name">'+(t.name||'Anonymous')+'</span><span class="tp-card-time">'+timeAgo(t.created_at)+'</span></div></div>';
+  }
+  function showPage(page){
+    curPage=(page+totalPages)%totalPages;
+    var slice=allTributes.slice(curPage*PER_PAGE,curPage*PER_PAGE+PER_PAGE);
+    stage.querySelectorAll('.tp-slide').forEach(function(el){el.remove();});
+    var slide=document.createElement('div'); slide.className='tp-slide active';
+    slide.innerHTML=slice.map(function(t,i){return cardHTML(t,i*0.08);}).join('');
+    stage.appendChild(slide);
+    pageLabel.textContent=(curPage+1)+' / '+totalPages;
+>>>>>>> parent of 3445629 (index slideshow)
     startProgress();
   }
-
-  function startProgress() {
-    clearTimeout(timer);
-    bar.style.transition = 'none';
-    bar.style.width = '0%';
+  function startProgress(){
+    clearTimeout(timer); bar.style.transition='none'; bar.style.width='0%';
     void bar.offsetWidth;
+<<<<<<< HEAD
     bar.style.transition = 'width ' + DURATION + 'ms linear';
     bar.style.width = '100%';
     if (totalPages > 1) timer = setTimeout(function() { showPage(curPage + 1); }, DURATION);
@@ -595,11 +774,21 @@
       stage.innerHTML = '<div class="tp-empty">No tributes yet — be the first to share a memory.<br><a href="tributes.html" style="color:var(--accent);text-decoration:none;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">Leave a Tribute →</a></div>';
       navRow.style.display = 'none';
       return;
-    }
-    totalPages = Math.ceil(tributes.length / PER_PAGE);
-    navRow.style.display = 'flex';
-    showPage(0);
+=======
+    bar.style.transition='width '+DURATION+'ms linear'; bar.style.width='100%';
+    if(totalPages>1) timer=setTimeout(function(){showPage(curPage+1);},DURATION);
   }
+  function render(tributes){
+    allTributes=tributes; stage.innerHTML='';
+    if(!tributes.length){
+      stage.innerHTML='<div class="tp-empty">No tributes yet — be the first to share a memory.<br><a href="tributes.html" style="color:var(--accent);text-decoration:none;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">Leave a Tribute →</a></div>';
+      navRow.style.display='none'; return;
+>>>>>>> parent of 3445629 (index slideshow)
+    }
+    totalPages=Math.ceil(tributes.length/PER_PAGE);
+    navRow.style.display='flex'; showPage(0);
+  }
+<<<<<<< HEAD
 
   /* Load from localStorage */
   function loadTributes() {
@@ -615,8 +804,106 @@
   }
 
   loadTributes();
+=======
+  fetch('/api/tributes').then(function(r){return r.json();}).then(function(data){render(data);}).catch(function(){
+    stage.innerHTML='<div class="tp-empty">Tributes could not be loaded at this time.<br><a href="tributes.html" style="color:var(--accent);text-decoration:none;">Visit the tributes page →</a></div>';
+  });
+>>>>>>> parent of 3445629 (index slideshow)
 })();
 </script>
 
 </body>
+<<<<<<< HEAD
+=======
+</html>
+
+</body>
+</html>
+
+<script>
+(function () {
+  var c = document.getElementById('particles');
+  if (!c) return;
+  var ctx = c.getContext('2d'), W, H, pts = [];
+  for (var i = 0; i < 55; i++) pts.push({ x: Math.random()*1920, y: Math.random()*1080, r: Math.random()*1.2+0.2, s: Math.random()*0.2+0.06, o: Math.random()*0.28+0.05, d: (Math.random()-0.5)*0.12 });
+  function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  (function draw() { ctx.clearRect(0,0,W,H); pts.forEach(function(p){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(122,184,200,'+p.o+')'; ctx.fill(); p.y-=p.s; p.x+=p.d; if(p.y<-10){p.y=H+10;p.x=Math.random()*W;} }); requestAnimationFrame(draw); })();
+})();
+(function () {
+  var els = document.querySelectorAll('.bio-chapter, .bio-read-more');
+  if (!els.length) return;
+  var delay = 0;
+  var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ var el=e.target,d=delay; setTimeout(function(){el.classList.add('visible');},d); delay=Math.min(delay+80,400); obs.unobserve(el); } }); }, { threshold: 0.08 });
+  els.forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
+
+</body>
+</html>
+
+</body>
+</html>
+
+
+
+<script>
+/* Particles */
+(function () {
+  var c = document.getElementById('particles');
+  if (!c) return;
+  var ctx = c.getContext('2d'), W, H, pts = [];
+  for (var i = 0; i < 50; i++) pts.push({ x: Math.random()*1920, y: Math.random()*1080, r: Math.random()*1.2+0.2, s: Math.random()*0.2+0.06, o: Math.random()*0.28+0.05, d: (Math.random()-0.5)*0.12 });
+  function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  (function draw() { ctx.clearRect(0,0,W,H); pts.forEach(function(p){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(127,212,219,'+p.o+')'; ctx.fill(); p.y-=p.s; p.x+=p.d; if(p.y<-10){p.y=H+10;p.x=Math.random()*W;} }); requestAnimationFrame(draw); })();
+})();
+
+/* Fade-in on scroll (borrowed from reference) */
+(function () {
+  var els = document.querySelectorAll('.fade-in, .bio-chapter, .bio-read-more');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show');
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el) { obs.observe(el); });
+})();
+</script>
+
+
+<script>
+/* Particles */
+(function () {
+  var c = document.getElementById('particles');
+  if (!c) return;
+  var ctx = c.getContext('2d'), W, H, pts = [];
+  for (var i = 0; i < 50; i++) pts.push({ x: Math.random()*1920, y: Math.random()*1080, r: Math.random()*1.2+0.2, s: Math.random()*0.2+0.06, o: Math.random()*0.25+0.05, d: (Math.random()-0.5)*0.12 });
+  function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
+  resize(); window.addEventListener('resize', resize);
+  (function draw() { ctx.clearRect(0,0,W,H); pts.forEach(function(p){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(127,212,219,'+p.o+')'; ctx.fill(); p.y-=p.s; p.x+=p.d; if(p.y<-10){p.y=H+10;p.x=Math.random()*W;} }); requestAnimationFrame(draw); })();
+})();
+
+/* Fade-in on scroll */
+(function () {
+  var els = document.querySelectorAll('.fade-in, .bio-chapter, .bio-read-more');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('show', 'visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  els.forEach(function(el) { obs.observe(el); });
+})();
+</script>
+
+</body>
+>>>>>>> parent of 3445629 (index slideshow)
 </html>
