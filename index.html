@@ -430,84 +430,30 @@
 </script>
 
 <script>
-/* ── SLIDESHOW ── */
-(function () {
-  var IMAGE_NAMES = ['hero','Drphilemonyugi','Drphilemonyugi2','Drphilemonyugi3','Drphilemonyugi4','Drphilemonyugi5','Drphilemonyugi6','Drphilemonyugi7','Drphilemonyugi8'];
-  var FOLDERS = ['images/', 'Images/'];
-  var EXTS    = ['.jpg','.jpeg','.JPG','.JPEG','.png','.PNG','.webp','.WEBP'];
-  var INTERVAL = 5000;
+/* SLIDESHOW */
+  .slideshow-section { position: relative; z-index: 1; background: #ffffff; padding: 72px 0 80px; }
+  .slideshow-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  .ss-label { font-size: 0.62rem; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 400; text-align: center; margin-bottom: 12px; }
+  .ss-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 400; font-style: italic; color: var(--teal-deep); text-align: center; margin-bottom: 40px; }
+  .ss-stage-wrap { position: relative; border-radius: 6px; overflow: hidden; box-shadow: 0 20px 60px rgba(9,24,32,0.18); }
+  .ss-stage { position: relative; width: 100%; background: #d8e8ee; min-height: 300px; aspect-ratio: 16/10; }
+  .ss-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; display: flex; align-items: center; justify-content: center; }
+  .ss-slide.active { opacity: 1; z-index: 2; }
+  .ss-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ss-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(9,24,32,0.45) 0%, transparent 45%); pointer-events: none; }
+  .ss-caption { position: absolute; bottom: 0; left: 0; right: 0; z-index: 3; padding: 20px 24px 18px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: rgba(240,248,250,0.9); }
+  
+  .ss-progress { height: 3px; background: rgba(26,58,74,0.12); }
+  .ss-progress-bar { height: 100%; width: 0%; background: var(--teal-mid); transition: width linear; }
+  
+  .ss-controls { display: flex; align-items: center; justify-content: space-between; padding: 18px 4px 0; }
+  .ss-btn { background: transparent; border: 1px solid rgba(26,58,74,0.25); color: var(--teal-mid); width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
+  .ss-btn:hover { background: rgba(26,58,74,0.08); }
+  .ss-dots { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; justify-content: center; }
+  .ss-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(26,58,74,0.2); cursor: pointer; transition: all 0.3s; }
+  .ss-dot.active { background: var(--teal-mid); transform: scale(1.35); }
+  .ss-counter { font-size: 0.6rem; letter-spacing: 2px; color: var(--teal-mid); font-weight: 400; min-width: 38px; text-align: right; }
 
-  function discover(name) {
-    return new Promise(function(resolve) {
-      var fi=0,ei=0;
-      function next() {
-        if(fi>=FOLDERS.length){resolve(null);return;}
-        if(ei>=EXTS.length){fi++;ei=0;next();return;}
-        var src=FOLDERS[fi]+name+EXTS[ei];
-        var img=new Image();
-        img.onload=function(){resolve(src);};
-        img.onerror=function(){ei++;next();};
-        img.src=src;
-      }
-      next();
-    });
-  }
-
-  function formatName(n){ return n.replace(/([a-z])([A-Z])/g,'$1 $2').replace(/(\D)(\d+)$/,'$1 $2').replace(/^\w/,function(c){return c.toUpperCase();}).trim(); }
-
-  var stage=document.getElementById('ss-stage');
-  var loading=document.getElementById('ss-loading');
-  var dotsEl=document.getElementById('ss-dots');
-  var counter=document.getElementById('ss-counter');
-  var bar=document.getElementById('ss-progress-bar');
-  var slides=[],cur=0,timer;
-
-  Promise.all(IMAGE_NAMES.map(function(name){
-    return discover(name).then(function(src){return{name:name,src:src};});
-  })).then(function(results){
-    var valid=results.filter(function(r){return r.src!==null;});
-    if(loading)loading.remove();
-    if(!valid.length){
-      stage.innerHTML='<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#6a8e9a;font-size:0.8rem;letter-spacing:2px;background:#d8e8ee;">No images found — add photos to the images/ folder</div>';
-      return;
-    }
-    valid.forEach(function(item){
-      var slide=document.createElement('div'); slide.className='ss-slide';
-      var img=document.createElement('img'); img.src=item.src; img.alt=formatName(item.name);
-      var caption=document.createElement('div'); caption.className='ss-caption'; caption.textContent=formatName(item.name);
-      slide.appendChild(img); slide.appendChild(caption); stage.appendChild(slide); slides.push(slide);
-    });
-    slides[0].classList.add('active');
-    buildDots(valid.length); updateCounter(); startProgress();
-    document.getElementById('ss-prev').addEventListener('click',function(){goTo(cur-1);});
-    document.getElementById('ss-next').addEventListener('click',function(){goTo(cur+1);});
-  });
-
-  function buildDots(total){
-    dotsEl.innerHTML='';
-    for(var i=0;i<total;i++){
-      var dot=document.createElement('div'); dot.className='ss-dot'+(i===0?' active':''); dot.dataset.i=i;
-      dot.addEventListener('click',(function(idx){return function(){goTo(idx);};})(i));
-      dotsEl.appendChild(dot);
-    }
-  }
-  function updateCounter(){counter.textContent=(cur+1)+' / '+slides.length;}
-  function goTo(n){
-    var prev=cur; cur=(n+slides.length)%slides.length;
-    slides[prev].classList.remove('active'); dotsEl.querySelectorAll('.ss-dot')[prev].classList.remove('active');
-    slides[cur].classList.add('active'); dotsEl.querySelectorAll('.ss-dot')[cur].classList.add('active');
-    updateCounter(); startProgress();
-  }
-  function startProgress(){
-    clearTimeout(timer); bar.style.transition='none'; bar.style.width='0%';
-    void bar.offsetWidth;
-    bar.style.transition='width '+INTERVAL+'ms linear'; bar.style.width='100%';
-    if(slides.length>1) timer=setTimeout(function(){goTo(cur+1);},INTERVAL);
-  }
-})();
-</script>
-
-<script>
 /* ── TRIBUTE PREVIEW ── */
 (function () {
   var PER_PAGE=3, DURATION=15000;
