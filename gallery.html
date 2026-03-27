@@ -281,10 +281,10 @@
       overflow: hidden;
       background: #111621;
       display: grid;
-      grid-template-rows: 1fr auto;
       transform: scale(0.97);
       transition: transform 0.38s var(--ease);
       box-shadow: 0 18px 56px rgba(0, 0, 0, 0.42);
+      padding: clamp(12px, 1.8vw, 20px);
     }
 
     .lightbox.open .lightbox-panel {
@@ -296,65 +296,40 @@
       place-items: center;
       background: #0e131d;
       min-height: 280px;
-      padding: 10px;
+      padding: clamp(8px, 1.6vw, 14px);
+      border-radius: 10px;
     }
 
-    .lightbox-media img {
+    .photo-shot {
+      position: relative;
+      display: inline-block;
       max-width: 100%;
-      max-height: 74vh;
+      line-height: 0;
+    }
+
+    .photo-shot img {
+      max-width: 100%;
+      max-height: 78vh;
       width: auto;
       height: auto;
       object-fit: contain;
       display: block;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42);
+      border-radius: 2px;
     }
 
-    .lightbox-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-      padding: 14px 16px;
-      background: linear-gradient(to top, #151c2a, #121825);
-      color: #efe8dc;
+    .shot-corner {
+      position: absolute;
+      width: clamp(18px, 2.3vw, 30px);
+      height: clamp(18px, 2.3vw, 30px);
+      border-color: rgba(236, 224, 196, 0.96);
+      border-style: solid;
+      pointer-events: none;
     }
-
-    .lightbox-caption {
-      margin: 0;
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1rem;
-    }
-
-    .lightbox-meta {
-      margin: 4px 0 0;
-      color: #c9c1b2;
-      font-size: 0.78rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .btns {
-      display: flex;
-      gap: 8px;
-    }
-
-    .btn {
-      border: 1px solid rgba(255, 255, 255, 0.24);
-      background: rgba(255, 255, 255, 0.06);
-      color: #f6f2e8;
-      border-radius: 10px;
-      padding: 8px 11px;
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .btn:hover,
-    .btn:focus-visible {
-      background: rgba(255, 255, 255, 0.16);
-      border-color: rgba(255, 255, 255, 0.42);
-      outline: none;
-    }
+    .shot-corner.tl { top: -8px; left: -8px; border-width: 3px 0 0 3px; }
+    .shot-corner.tr { top: -8px; right: -8px; border-width: 3px 3px 0 0; }
+    .shot-corner.bl { bottom: -8px; left: -8px; border-width: 0 0 3px 3px; }
+    .shot-corner.br { bottom: -8px; right: -8px; border-width: 0 3px 3px 0; }
 
     footer {
       text-align: center;
@@ -419,20 +394,15 @@
     <p class="status" id="status" aria-live="polite">Preparing memories...</p>
   </main>
 
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-describedby="lightbox-meta">
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview" tabindex="-1">
     <div class="lightbox-panel">
       <div class="lightbox-media">
-        <img id="lightbox-image" src="" alt="" />
-      </div>
-      <div class="lightbox-footer">
-        <div>
-          <p class="lightbox-caption" id="lightbox-caption"></p>
-          <p class="lightbox-meta" id="lightbox-meta"></p>
-        </div>
-        <div class="btns">
-          <button type="button" class="btn" id="prev-btn" aria-label="Previous image">Prev</button>
-          <button type="button" class="btn" id="next-btn" aria-label="Next image">Next</button>
-          <button type="button" class="btn" id="close-btn" aria-label="Close lightbox">Close</button>
+        <div class="photo-shot">
+          <span class="shot-corner tl"></span>
+          <span class="shot-corner tr"></span>
+          <span class="shot-corner bl"></span>
+          <span class="shot-corner br"></span>
+          <img id="lightbox-image" src="" alt="" />
         </div>
       </div>
     </div>
@@ -466,12 +436,7 @@
         status: document.getElementById('status'),
         count: document.getElementById('header-count'),
         lightbox: document.getElementById('lightbox'),
-        lbImage: document.getElementById('lightbox-image'),
-        lbCaption: document.getElementById('lightbox-caption'),
-        lbMeta: document.getElementById('lightbox-meta'),
-        prev: document.getElementById('prev-btn'),
-        next: document.getElementById('next-btn'),
-        close: document.getElementById('close-btn')
+        lbImage: document.getElementById('lightbox-image')
       };
 
       function prettify(name) {
@@ -557,8 +522,6 @@
         state.currentIndex = index;
         els.lbImage.src = photo.src;
         els.lbImage.alt = photo.alt;
-        els.lbCaption.textContent = photo.label;
-        els.lbMeta.textContent = `Photo ${index + 1} of ${state.photos.length}`;
       }
 
       function openLightbox(index) {
@@ -566,7 +529,7 @@
         updateLightbox(index);
         els.lightbox.classList.add('open');
         document.body.style.overflow = 'hidden';
-        els.close.focus();
+        els.lightbox.focus();
       }
 
       function closeLightbox() {
@@ -574,16 +537,6 @@
         document.body.style.overflow = '';
         els.lbImage.src = '';
         if (state.lastFocused) state.lastFocused.focus();
-      }
-
-      function nextImage() {
-        const next = (state.currentIndex + 1) % state.photos.length;
-        updateLightbox(next);
-      }
-
-      function prevImage() {
-        const prev = (state.currentIndex - 1 + state.photos.length) % state.photos.length;
-        updateLightbox(prev);
       }
 
       function initObserver() {
@@ -599,10 +552,6 @@
       }
 
       function initEvents() {
-        els.close.addEventListener('click', closeLightbox);
-        els.next.addEventListener('click', nextImage);
-        els.prev.addEventListener('click', prevImage);
-
         els.lightbox.addEventListener('click', (e) => {
           if (e.target === els.lightbox) closeLightbox();
         });
@@ -610,8 +559,6 @@
         document.addEventListener('keydown', (e) => {
           if (!els.lightbox.classList.contains('open')) return;
           if (e.key === 'Escape') closeLightbox();
-          if (e.key === 'ArrowRight') nextImage();
-          if (e.key === 'ArrowLeft') prevImage();
         });
       }
 
