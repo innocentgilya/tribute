@@ -275,6 +275,7 @@
     }
 
     .lightbox-panel {
+      position: relative;
       width: min(1040px, 96vw);
       max-height: 92vh;
       border-radius: 14px;
@@ -285,6 +286,30 @@
       transition: transform 0.38s var(--ease);
       box-shadow: 0 18px 56px rgba(0, 0, 0, 0.42);
       padding: clamp(12px, 1.8vw, 20px);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      background: rgba(5, 10, 18, 0.68);
+      color: #f5efe2;
+      font-size: 1.05rem;
+      line-height: 1;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      z-index: 3;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-close:focus-visible {
+      background: rgba(255, 255, 255, 0.18);
+      outline: none;
     }
 
     .lightbox.open .lightbox-panel {
@@ -396,7 +421,8 @@
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview" tabindex="-1">
     <div class="lightbox-panel">
-      <div class="lightbox-media">
+      <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
+      <div class="lightbox-media" id="lightbox-media">
         <div class="photo-shot">
           <span class="shot-corner tl"></span>
           <span class="shot-corner tr"></span>
@@ -436,7 +462,15 @@
         status: document.getElementById('status'),
         count: document.getElementById('header-count'),
         lightbox: document.getElementById('lightbox'),
-        lbImage: document.getElementById('lightbox-image')
+        lbImage: document.getElementById('lightbox-image'),
+        lbMedia: document.getElementById('lightbox-media'),
+        lbClose: document.getElementById('lightbox-close')
+      };
+
+      const swipe = {
+        startX: 0,
+        startY: 0,
+        active: false
       };
 
       function prettify(name) {
@@ -539,6 +573,18 @@
         if (state.lastFocused) state.lastFocused.focus();
       }
 
+      function nextImage() {
+        if (!state.photos.length) return;
+        const next = (state.currentIndex + 1) % state.photos.length;
+        updateLightbox(next);
+      }
+
+      function prevImage() {
+        if (!state.photos.length) return;
+        const prev = (state.currentIndex - 1 + state.photos.length) % state.photos.length;
+        updateLightbox(prev);
+      }
+
       function initObserver() {
         state.observer = new IntersectionObserver((entries, obs) => {
           entries.forEach((entry) => {
@@ -552,13 +598,50 @@
       }
 
       function initEvents() {
+        if (els.lbClose) {
+          els.lbClose.addEventListener('click', closeLightbox);
+        }
+
         els.lightbox.addEventListener('click', (e) => {
           if (e.target === els.lightbox) closeLightbox();
         });
 
+        if (els.lbMedia) {
+          els.lbMedia.addEventListener('touchstart', (e) => {
+            if (!els.lightbox.classList.contains('open')) return;
+            const t = e.changedTouches && e.changedTouches[0];
+            if (!t) return;
+            swipe.startX = t.clientX;
+            swipe.startY = t.clientY;
+            swipe.active = true;
+          }, { passive: true });
+
+          els.lbMedia.addEventListener('touchend', (e) => {
+            if (!swipe.active || !els.lightbox.classList.contains('open')) return;
+            const t = e.changedTouches && e.changedTouches[0];
+            if (!t) return;
+
+            const dx = t.clientX - swipe.startX;
+            const dy = t.clientY - swipe.startY;
+            const absX = Math.abs(dx);
+            const absY = Math.abs(dy);
+            swipe.active = false;
+
+            if (absX < 44 || absX <= absY) return;
+            if (dx < 0) nextImage();
+            else prevImage();
+          }, { passive: true });
+
+          els.lbMedia.addEventListener('touchcancel', () => {
+            swipe.active = false;
+          }, { passive: true });
+        }
+
         document.addEventListener('keydown', (e) => {
           if (!els.lightbox.classList.contains('open')) return;
           if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowRight') nextImage();
+          if (e.key === 'ArrowLeft') prevImage();
         });
       }
 
