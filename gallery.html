@@ -289,9 +289,9 @@
     }
 
     .lightbox-close {
-      position: absolute;
-      top: 10px;
-      right: 10px;
+      position: fixed;
+      top: 14px;
+      right: 14px;
       width: 30px;
       height: 30px;
       border: 1px solid rgba(255, 255, 255, 0.35);
@@ -303,7 +303,7 @@
       cursor: pointer;
       display: grid;
       place-items: center;
-      z-index: 3;
+      z-index: 1002;
     }
 
     .lightbox-close:hover,
@@ -424,8 +424,8 @@
   </main>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview" tabindex="-1">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
     <div class="lightbox-panel">
-      <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
       <div class="lightbox-media" id="lightbox-media">
         <div class="photo-shot">
           <span class="shot-corner tl"></span>
