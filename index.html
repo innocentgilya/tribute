@@ -166,12 +166,14 @@
   .ss-label { font-size: 0.62rem; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 400; text-align: center; margin-bottom: 12px; }
   .ss-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 400; font-style: italic; color: var(--teal-deep); text-align: center; margin-bottom: 40px; }
   .ss-stage-wrap { position: relative; border-radius: 6px; overflow: hidden; box-shadow: 0 20px 60px rgba(9,24,32,0.18); }
-  .ss-stage { position: relative; width: 100%; background: #d8e8ee; min-height: 300px; }
+  .ss-stage { position: relative; width: 100%; background: #d8e8ee; min-height: 220px; aspect-ratio: 4 / 3; transition: aspect-ratio 0.35s ease; }
   .ss-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; display: flex; align-items: center; justify-content: center; }
   .ss-slide.active { opacity: 1; position: relative; inset: auto; }
-  .ss-slide img { width: 100%; height: auto; display: block; max-height: 82vh; object-fit: contain; }
+  .ss-slide img { width: 100%; height: 100%; display: block; object-position: center; }
+  .ss-slide.fit-cover img { object-fit: cover; }
+  .ss-slide.fit-contain img { object-fit: contain; }
   .ss-slide:not(.active) { position: absolute; inset: 0; }
-  .ss-slide:not(.active) img { width: 100%; height: 100%; object-fit: cover; }
+  .ss-slide:not(.active) { pointer-events: none; }
   .ss-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(9,24,32,0.45) 0%, transparent 45%); pointer-events: none; }
   .ss-caption { position: absolute; bottom: 0; left: 0; right: 0; z-index: 2; padding: 20px 24px 18px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: rgba(240,248,250,0.9); }
   .ss-progress { height: 3px; background: rgba(26,58,74,0.12); }
@@ -179,9 +181,6 @@
   .ss-controls { display: flex; align-items: center; justify-content: space-between; padding: 18px 4px 0; }
   .ss-btn { background: transparent; border: 1px solid rgba(26,58,74,0.25); color: var(--teal-mid); width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
   .ss-btn:hover { background: rgba(26,58,74,0.08); }
-  .ss-dots { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; justify-content: center; }
-  .ss-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(26,58,74,0.2); cursor: pointer; transition: all 0.3s; }
-  .ss-dot.active { background: var(--teal-mid); transform: scale(1.35); }
   .ss-counter { font-size: 0.6rem; letter-spacing: 2px; color: var(--teal-mid); font-weight: 400; white-space: nowrap; min-width: 38px; text-align: right; }
   .ss-footer { text-align: center; margin-top: 28px; }
   .ss-gallery-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.68rem; letter-spacing: 2.5px; color: var(--teal-mid); text-transform: uppercase; text-decoration: none; font-weight: 400; border-bottom: 1px solid rgba(26,58,74,0.25); padding-bottom: 3px; transition: all 0.3s; }
@@ -350,7 +349,6 @@
     </div>
     <div class="ss-controls">
       <button class="ss-btn" id="ss-prev">&#8592;</button>
-      <div class="ss-dots" id="ss-dots"></div>
       <button class="ss-btn" id="ss-next">&#8594;</button>
     </div>
     <div class="ss-footer">
@@ -470,12 +468,11 @@
   (function () {
     var stage = document.getElementById('ss-stage');
     var loading = document.getElementById('ss-loading');
-    var dotsWrap = document.getElementById('ss-dots');
     var prevBtn = document.getElementById('ss-prev');
     var nextBtn = document.getElementById('ss-next');
     var counter = document.getElementById('ss-counter');
     var progress = document.getElementById('ss-progress-bar');
-    if (!stage || !dotsWrap || !prevBtn || !nextBtn || !counter || !progress) return;
+    if (!stage || !prevBtn || !nextBtn || !counter || !progress) return;
 
     var CFG = {
       imageDir: 'Memories',
@@ -493,8 +490,10 @@
     function probe(src) {
       return new Promise(function (resolve) {
         var img = new Image();
-        img.onload = function () { resolve(true); };
-        img.onerror = function () { resolve(false); };
+        img.onload = function () {
+          resolve({ width: img.naturalWidth || 0, height: img.naturalHeight || 0 });
+        };
+        img.onerror = function () { resolve(null); };
         img.src = src;
       });
     }
@@ -515,13 +514,15 @@
       for (var i = 1; i <= CFG.maxScan; i++) {
         var baseName = CFG.pattern + ' (' + i + ')';
         var src = CFG.imageDir + '/' + baseName + '.jpg';
-        var ok = await probe(src);
-        if (ok) {
+        var meta = await probe(src);
+        if (meta) {
           misses = 0;
           found.push({
             src: src,
             caption: 'Memory ' + i,
-            alt: 'Photo ' + i + ' of Dr. Philemon Odiwuor Yugi'
+            alt: 'Photo ' + i + ' of Dr. Philemon Odiwuor Yugi',
+            width: meta.width,
+            height: meta.height
           });
         } else {
           misses += 1;
@@ -533,30 +534,33 @@
 
     function renderSlides() {
       stage.querySelectorAll('.ss-slide').forEach(function (n) { n.remove(); });
-      dotsWrap.innerHTML = '';
 
       slides.forEach(function (item, idx) {
+        var ratio = (item.width && item.height) ? (item.width / item.height) : 1.33;
+        var fitClass = ratio >= 1.15 ? 'fit-cover' : 'fit-contain';
         var slide = document.createElement('article');
-        slide.className = 'ss-slide' + (idx === 0 ? ' active' : '');
+        slide.className = 'ss-slide ' + fitClass + (idx === 0 ? ' active' : '');
         slide.innerHTML =
           '<img src="' + item.src + '" alt="' + item.alt + '" ' + (idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"') + '>' +
           '<p class="ss-caption">' + item.caption + '</p>';
         stage.appendChild(slide);
-
-        var dot = document.createElement('button');
-        dot.className = 'ss-dot' + (idx === 0 ? ' active' : '');
-        dot.type = 'button';
-        dot.setAttribute('aria-label', 'Go to slide ' + (idx + 1));
-        dot.addEventListener('click', function () { show(idx, true); });
-        dotsWrap.appendChild(dot);
       });
+    }
+
+    function updateStageAspect() {
+      var item = slides[current];
+      if (!item) return;
+      if (item.width && item.height) {
+        stage.style.aspectRatio = item.width + ' / ' + item.height;
+      } else {
+        stage.style.aspectRatio = '4 / 3';
+      }
     }
 
     function updateUI() {
       var items = stage.querySelectorAll('.ss-slide');
-      var dots = dotsWrap.querySelectorAll('.ss-dot');
       items.forEach(function (el, i) { el.classList.toggle('active', i === current); });
-      dots.forEach(function (el, i) { el.classList.toggle('active', i === current); });
+      updateStageAspect();
       counter.textContent = (current + 1) + ' / ' + slides.length;
 
       progress.style.transition = 'none';
@@ -602,7 +606,6 @@
 
       if (!slides.length) {
         stage.innerHTML = '<div class="ss-slide active"><p class="ss-caption">Memories will appear here soon.</p></div>';
-        dotsWrap.innerHTML = '';
         counter.textContent = '0 / 0';
         return;
       }
