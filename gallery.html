@@ -317,8 +317,10 @@
     }
 
     .lightbox-media {
-      display: grid;
-      place-items: center;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: #0e131d;
       min-height: 280px;
       padding: clamp(8px, 1.6vw, 14px);
@@ -330,6 +332,7 @@
       display: inline-block;
       max-width: 100%;
       line-height: 0;
+      margin-inline: auto;
     }
 
     .photo-shot img {
@@ -339,6 +342,7 @@
       height: auto;
       object-fit: contain;
       display: block;
+      margin-inline: auto;
       box-shadow: 0 18px 40px rgba(0, 0, 0, 0.42);
       border-radius: 2px;
     }
