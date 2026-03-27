@@ -9,18 +9,18 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --bg: #f8f5ef;
-    --surface: #ffffff;
-    --surface-soft: #fcfaf6;
-    --text: #22252c;
-    --muted: #656c78;
-    --line: #e7e0d3;
+    --bg: #071e22;
+    --surface: #152535;
+    --surface-soft: #0f2230;
+    --text: #e8f1f2;
+    --muted: #7a9eaa;
+    --line: rgba(122,184,200,0.2);
     --teal-light: #7fd4db;
-    --accent: #8f7a52;
-    --accent-soft: #b59f74;
-    --focus: #7e9db3;
-    --shadow: 0 14px 30px rgba(20, 28, 40, 0.08);
-    --shadow-hover: 0 18px 36px rgba(20, 28, 40, 0.11);
+    --accent: #7ab8c8;
+    --accent-soft: #b0d8e4;
+    --focus: #7fd4db;
+    --shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+    --shadow-hover: 0 20px 44px rgba(0, 0, 0, 0.34);
     --radius-lg: 16px;
     --radius-md: 12px;
     --nav-h: 64px;
@@ -31,9 +31,7 @@
   body {
     min-height: 100vh;
     background:
-      radial-gradient(circle at 10% -10%, #fffefb 0%, transparent 38%),
-      radial-gradient(circle at 90% 120%, #efe6d7 0%, transparent 35%),
-      var(--bg);
+      radial-gradient(circle at 50% 25%, #1f5c63 0%, #0d2a38 55%, #071e22 100%);
     color: var(--text);
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
@@ -110,7 +108,7 @@
     font-family: 'Playfair Display', serif;
     font-size: clamp(2rem, 4.4vw, 3.1rem);
     line-height: 1.15;
-    color: #1f2430;
+    color: var(--text);
     margin-bottom: 10px;
   }
 
@@ -150,7 +148,7 @@
   .panel-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.45rem;
-    color: #242b37;
+    color: var(--text);
     margin-bottom: 8px;
   }
 
@@ -191,7 +189,7 @@
   .textarea:focus {
     border-color: var(--focus);
     box-shadow: 0 0 0 3px rgba(126, 157, 179, 0.18);
-    background: #fff;
+    background: var(--surface);
   }
 
   .float-wrap {
@@ -217,7 +215,7 @@
     transform: translateY(0);
     font-size: 0.73rem;
     color: var(--focus);
-    background: #fff;
+    background: var(--surface);
     padding: 0 4px;
     left: 10px;
   }
@@ -283,8 +281,8 @@
   }
 
   .tribute-card {
-    background: #fff;
-    border: 1px solid #ebe3d5;
+    background: var(--surface);
+    border: 1px solid var(--line);
     border-radius: 14px;
     padding: 16px 16px 14px;
     box-shadow: 0 8px 20px rgba(20, 28, 40, 0.05);
@@ -330,7 +328,7 @@
 
   .tribute-name {
     font-weight: 600;
-    color: #252c38;
+    color: var(--text);
     font-size: 0.98rem;
   }
 
@@ -346,15 +344,15 @@
     font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 1.6px;
-    color: #7f6a43;
-    background: #f6efe1;
-    border: 1px solid #e8dcc6;
+    color: var(--accent-soft);
+    background: rgba(122,184,200,0.14);
+    border: 1px solid rgba(122,184,200,0.3);
     border-radius: 999px;
     padding: 3px 8px;
   }
 
   .tribute-message {
-    color: #2e3542;
+    color: var(--accent-soft);
     line-height: 1.82;
     font-size: 0.95rem;
     white-space: pre-line;
@@ -375,7 +373,7 @@
 
   .empty-state {
     text-align: center;
-    background: #fff;
+    background: var(--surface);
     border: 1px dashed #d8cfbc;
     border-radius: 14px;
     padding: 44px 18px;
@@ -389,8 +387,8 @@
     bottom: 20px;
     z-index: 50;
     max-width: 360px;
-    background: #28303d;
-    color: #f3f6fa;
+    background: #0b1d26;
+    color: var(--teal-light);
     padding: 12px 14px;
     border-radius: 10px;
     box-shadow: 0 10px 24px rgba(0,0,0,0.24);
@@ -411,6 +409,7 @@
     padding: 32px 20px 36px;
     color: var(--muted);
     font-size: 0.9rem;
+    background: rgba(8,32,38,0.65);
   }
 
   .footer-name {
@@ -712,7 +711,7 @@
 })();
 </script>
 <script>
-/* Nav hide on scroll up */
+/* Nav hide on scroll down */
 (function () {
   var nav = document.getElementById('navbar') || document.querySelector('nav');
   if (!nav) return;
@@ -727,7 +726,7 @@
       return;
     }
 
-    if (y < lastY) {
+    if (y > lastY) {
       nav.classList.add('nav-hidden');
     } else {
       nav.classList.remove('nav-hidden');
@@ -739,6 +738,9 @@
 </script>
 </body>
 </html>
+
+
+
 
 
 

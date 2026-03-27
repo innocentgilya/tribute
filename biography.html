@@ -402,7 +402,7 @@
 })();
 </script>
 <script>
-/* Nav hide on scroll up */
+/* Nav hide on scroll down */
 (function () {
   var nav = document.getElementById('navbar') || document.querySelector('nav');
   if (!nav) return;
@@ -417,7 +417,7 @@
       return;
     }
 
-    if (y < lastY) {
+    if (y > lastY) {
       nav.classList.add('nav-hidden');
     } else {
       nav.classList.remove('nav-hidden');
@@ -429,6 +429,8 @@
 </script>
 </body>
 </html>
+
+
 
 
 
