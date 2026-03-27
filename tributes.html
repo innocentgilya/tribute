@@ -23,7 +23,7 @@
     --shadow-hover: 0 20px 44px rgba(0, 0, 0, 0.34);
     --radius-lg: 16px;
     --radius-md: 12px;
-    --nav-h: 64px;
+    --nav-h: 58px;
   }
 
   html { scroll-behavior: smooth; }
@@ -36,8 +36,7 @@
     font-family: 'Inter', sans-serif;
     line-height: 1.6;
   }
-
-  .hero__nav {
+  .topbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -47,52 +46,46 @@
     height: var(--nav-h);
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 0 40px;
-    background: transparent;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    justify-content: space-between;
+    padding: 0 10px;
+    background: rgba(232, 226, 205, 0.96);
+    border-bottom: 1px solid rgba(101, 87, 55, 0.18);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
   }
 
-
-
-  .nav-links {
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 34px;
-  }
-
-  .nav-links a {
-    font-size: 0.72rem;
-    letter-spacing: 2.5px;
-    color: rgba(255,255,255,0.82);
+  .topbar-back {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+    color: #23324a;
     text-decoration: none;
-    text-transform: uppercase;
-    font-weight: 400;
-    transition: color 0.3s;
-    position: relative;
-    padding-bottom: 4px;
   }
 
-  .nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 1px;
-    background: var(--teal-light);
-    transition: width 0.3s;
+  .topbar-back:hover,
+  .topbar-back:focus-visible {
+    background: rgba(34, 52, 78, 0.08);
+    outline: none;
   }
 
-  .nav-links a:hover,
-  .nav-links a.active { color: var(--teal-light); }
+  .topbar-title {
+    font-size: 2rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    color: #23324a;
+    margin: 0;
+  }
 
-  .nav-links a:hover::after,
-  .nav-links a.active::after { width: 100%; }
+  .topbar-spacer {
+    width: 36px;
+    height: 36px;
+  }
 
   .page-header {
-    padding: calc(var(--nav-h) + 56px) 20px 36px;
+    padding: calc(var(--nav-h) + 18px) 20px 22px;
     text-align: center;
   }
 
@@ -491,33 +484,27 @@
   }
 
   @media (max-width: 600px) {
-    .hero__nav { padding: 0 16px; }
-    .nav-links { gap: 14px; flex-wrap: wrap; justify-content: center; }
-    .nav-links a { font-size: 0.6rem; letter-spacing: 1.5px; }
-
+    .topbar-title { font-size: 2rem; }
     .page-wrap { width: 94vw; }
     .form-panel, .list-panel { padding: 18px 14px; }
     .tribute-card { padding: 14px; }
     .floating-share { right: 12px; bottom: 14px; padding: 11px 14px; font-size: 0.95rem; }
   }
-
-  .nav-hidden { transform: translateY(-110%); opacity: 0; }
 </style>
 </head>
 <body>
 
-<nav class="hero__nav" id="navbar" aria-label="Primary">
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="gallery.html">Gallery</a></li>
-    <li><a href="biography.html">Biography</a></li>
-    <li><a href="tributes.html" class="active">Tributes</a></li>
-  </ul>
-</nav>
+<header class="topbar" aria-label="Page header">
+  <a class="topbar-back" href="index.html" aria-label="Back to Home">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" aria-hidden="true">
+      <path d="M15 18l-6-6 6-6"></path>
+    </svg>
+  </a>
+  <h1 class="topbar-title">Tributes</h1>
+  <span class="topbar-spacer" aria-hidden="true"></span>
+</header>
 
 <header class="page-header">
-  <p class="page-header-label">In Loving Memory</p>
-  <h1 class="page-header-title">Tributes &amp; Messages</h1>
   <p class="page-header-sub">Share your memories, condolences, or words of comfort.</p>
 </header>
 
@@ -777,34 +764,10 @@
   loadTributes();
 })();
 </script>
-<script>
-/* Nav hide on scroll down */
-(function () {
-  var nav = document.getElementById('navbar') || document.querySelector('nav');
-  if (!nav) return;
-  var lastY = window.scrollY || 0;
-
-  window.addEventListener('scroll', function () {
-    var y = window.scrollY || 0;
-
-    if (y <= 12) {
-      nav.classList.remove('nav-hidden');
-      lastY = y;
-      return;
-    }
-
-    if (y > lastY) {
-      nav.classList.add('nav-hidden');
-    } else {
-      nav.classList.remove('nav-hidden');
-    }
-
-    lastY = y;
-  }, { passive: true });
-})();
-</script>
 </body>
 </html>
+
+
 
 
 
