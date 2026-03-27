@@ -411,186 +411,286 @@
 
 <script>
 (function () {
-  var c = document.getElementById('particles');
-  if (!c) return;
-  var ctx = c.getContext('2d'), W, H, pts = [];
-  for (var i = 0; i < 55; i++) pts.push({ x: Math.random()*1920, y: Math.random()*1080, r: Math.random()*1.2+0.2, s: Math.random()*0.2+0.06, o: Math.random()*0.28+0.05, d: (Math.random()-0.5)*0.12 });
-  function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-  (function draw() { ctx.clearRect(0,0,W,H); pts.forEach(function(p){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(122,184,200,'+p.o+')'; ctx.fill(); p.y-=p.s; p.x+=p.d; if(p.y<-10){p.y=H+10;p.x=Math.random()*W;} }); requestAnimationFrame(draw); })();
-})();
+  'use strict';
 
-(function () {
-  var els = document.querySelectorAll('.bio-chapter, .bio-read-more');
-  if (!els.length) return;
-  var delay = 0;
-  var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ var el=e.target,d=delay; setTimeout(function(){el.classList.add('visible');},d); delay=Math.min(delay+80,400); obs.unobserve(el); } }); }, { threshold: 0.08 });
-  els.forEach(function(el){ obs.observe(el); });
-})();
-</script>
-
-<script>
-/* SLIDESHOW */
-  .slideshow-section { position: relative; z-index: 1; background: #ffffff; padding: 72px 0 80px; }
-  .slideshow-inner { max-width: 860px; margin: 0 auto; padding: 0 24px; }
-  .ss-label { font-size: 0.62rem; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; font-weight: 400; text-align: center; margin-bottom: 12px; }
-  .ss-title { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 400; font-style: italic; color: var(--teal-deep); text-align: center; margin-bottom: 40px; }
-  .ss-stage-wrap { position: relative; border-radius: 6px; overflow: hidden; box-shadow: 0 20px 60px rgba(9,24,32,0.18); }
-  .ss-stage { position: relative; width: 100%; background: #d8e8ee; min-height: 300px; aspect-ratio: 16/10; }
-  .ss-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s ease; display: flex; align-items: center; justify-content: center; }
-  .ss-slide.active { opacity: 1; z-index: 2; }
-  .ss-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .ss-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(9,24,32,0.45) 0%, transparent 45%); pointer-events: none; }
-  .ss-caption { position: absolute; bottom: 0; left: 0; right: 0; z-index: 3; padding: 20px 24px 18px; font-family: 'Playfair Display', serif; font-style: italic; font-size: 1rem; color: rgba(240,248,250,0.9); }
-  
-  .ss-progress { height: 3px; background: rgba(26,58,74,0.12); }
-  .ss-progress-bar { height: 100%; width: 0%; background: var(--teal-mid); transition: width linear; }
-  
-  .ss-controls { display: flex; align-items: center; justify-content: space-between; padding: 18px 4px 0; }
-  .ss-btn { background: transparent; border: 1px solid rgba(26,58,74,0.25); color: var(--teal-mid); width: 38px; height: 38px; border-radius: 50%; cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center; transition: all 0.3s; }
-  .ss-btn:hover { background: rgba(26,58,74,0.08); }
-  .ss-dots { display: flex; gap: 7px; align-items: center; flex-wrap: wrap; justify-content: center; }
-  .ss-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(26,58,74,0.2); cursor: pointer; transition: all 0.3s; }
-  .ss-dot.active { background: var(--teal-mid); transform: scale(1.35); }
-  .ss-counter { font-size: 0.6rem; letter-spacing: 2px; color: var(--teal-mid); font-weight: 400; min-width: 38px; text-align: right; }
-
-/* ── TRIBUTE PREVIEW ── */
-(function () {
-  var PER_PAGE=3, DURATION=15000;
-  var stage=document.getElementById('tp-stage');
-  var navRow=document.getElementById('tp-nav');
-  var pageLabel=document.getElementById('tp-page-label');
-  var bar=document.getElementById('tp-progress-bar');
-  var allTributes=[],curPage=0,totalPages=1,timer;
-
-  function timeAgo(d){
-    var s=Math.floor((Date.now()-new Date(d).getTime())/1000);
-    if(s<60)return 'just now'; if(s<3600)return Math.floor(s/60)+'m ago';
-    if(s<86400)return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago';
-  }
-  function cardHTML(t,delay){
-    return '<div class="tp-card" style="animation-delay:'+delay+'s">'+(t.relation?'<div class="tp-card-relation">'+t.relation+'</div>':'')+'<p class="tp-card-text">'+t.message+'</p><div class="tp-card-meta"><span class="tp-card-name">'+(t.name||'Anonymous')+'</span><span class="tp-card-time">'+timeAgo(t.created_at)+'</span></div></div>';
-  }
-  function showPage(page){
-    curPage=(page+totalPages)%totalPages;
-    var slice=allTributes.slice(curPage*PER_PAGE,curPage*PER_PAGE+PER_PAGE);
-    stage.querySelectorAll('.tp-slide').forEach(function(el){el.remove();});
-    var slide=document.createElement('div'); slide.className='tp-slide active';
-    slide.innerHTML=slice.map(function(t,i){return cardHTML(t,i*0.08);}).join('');
-    stage.appendChild(slide);
-    pageLabel.textContent=(curPage+1)+' / '+totalPages;
-    startProgress();
-  }
-  function startProgress(){
-    clearTimeout(timer); bar.style.transition='none'; bar.style.width='0%';
-    void bar.offsetWidth;
-    bar.style.transition='width '+DURATION+'ms linear'; bar.style.width='100%';
-    if(totalPages>1) timer=setTimeout(function(){showPage(curPage+1);},DURATION);
-  }
-  function render(tributes){
-    allTributes=tributes; stage.innerHTML='';
-    if(!tributes.length){
-      stage.innerHTML='<div class="tp-empty">No tributes yet — be the first to share a memory.<br><a href="tributes.html" style="color:var(--accent);text-decoration:none;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">Leave a Tribute →</a></div>';
-      navRow.style.display='none'; return;
+  /* Particles */
+  (function () {
+    var c = document.getElementById('particles');
+    if (!c) return;
+    var ctx = c.getContext('2d'), W, H, pts = [];
+    for (var i = 0; i < 55; i++) {
+      pts.push({ x: Math.random() * 1920, y: Math.random() * 1080, r: Math.random() * 1.2 + 0.2, s: Math.random() * 0.2 + 0.06, o: Math.random() * 0.28 + 0.05, d: (Math.random() - 0.5) * 0.12 });
     }
-    totalPages=Math.ceil(tributes.length/PER_PAGE);
-    navRow.style.display='flex'; showPage(0);
-  }
-  fetch('/api/tributes').then(function(r){return r.json();}).then(function(data){render(data);}).catch(function(){
-    stage.innerHTML='<div class="tp-empty">Tributes could not be loaded at this time.<br><a href="tributes.html" style="color:var(--accent);text-decoration:none;">Visit the tributes page →</a></div>';
-  });
-})();
-</script>
+    function resize() {
+      W = c.width = window.innerWidth;
+      H = c.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+    (function draw() {
+      ctx.clearRect(0, 0, W, H);
+      pts.forEach(function (p) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(122,184,200,' + p.o + ')';
+        ctx.fill();
+        p.y -= p.s;
+        p.x += p.d;
+        if (p.y < -10) {
+          p.y = H + 10;
+          p.x = Math.random() * W;
+        }
+      });
+      requestAnimationFrame(draw);
+    })();
+  })();
 
-</body>
-</html>
-
-</body>
-</html>
-
-<script>
-(function () {
-  var c = document.getElementById('particles');
-  if (!c) return;
-  var ctx = c.getContext('2d'), W, H, pts = [];
-  for (var i = 0; i < 55; i++) pts.push({ x: Math.random()*1920, y: Math.random()*1080, r: Math.random()*1.2+0.2, s: Math.random()*0.2+0.06, o: Math.random()*0.28+0.05, d: (Math.random()-0.5)*0.12 });
-  function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-  (function draw() { ctx.clearRect(0,0,W,H); pts.forEach(function(p){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(122,184,200,'+p.o+')'; ctx.fill(); p.y-=p.s; p.x+=p.d; if(p.y<-10){p.y=H+10;p.x=Math.random()*W;} }); requestAnimationFrame(draw); })();
-})();
-(function () {
-  var els = document.querySelectorAll('.bio-chapter, .bio-read-more');
-  if (!els.length) return;
-  var delay = 0;
-  var obs = new IntersectionObserver(function(entries){ entries.forEach(function(e){ if(e.isIntersecting){ var el=e.target,d=delay; setTimeout(function(){el.classList.add('visible');},d); delay=Math.min(delay+80,400); obs.unobserve(el); } }); }, { threshold: 0.08 });
-  els.forEach(function(el){ obs.observe(el); });
-})();
-</script>
-
-
-</body>
-</html>
-
-</body>
-</html>
-
-
-
-<script>
-/* Particles */
-(function () {
-  var c = document.getElementById('particles');
-  if (!c) return;
-  var ctx = c.getContext('2d'), W, H, pts = [];
-  for (var i = 0; i < 50; i++) pts.push({ x: Math.random()*1920, y: Math.random()*1080, r: Math.random()*1.2+0.2, s: Math.random()*0.2+0.06, o: Math.random()*0.28+0.05, d: (Math.random()-0.5)*0.12 });
-  function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-  (function draw() { ctx.clearRect(0,0,W,H); pts.forEach(function(p){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(127,212,219,'+p.o+')'; ctx.fill(); p.y-=p.s; p.x+=p.d; if(p.y<-10){p.y=H+10;p.x=Math.random()*W;} }); requestAnimationFrame(draw); })();
-})();
-
-/* Fade-in on scroll (borrowed from reference) */
-(function () {
-  var els = document.querySelectorAll('.fade-in, .bio-chapter, .bio-read-more');
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show');
-        entry.target.classList.add('visible');
+  /* Fade / reveal */
+  (function () {
+    var els = document.querySelectorAll('.fade-in, .bio-chapter, .bio-read-more');
+    if (!els.length) return;
+    var delay = 0;
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        var d = delay;
+        setTimeout(function () {
+          entry.target.classList.add('show');
+          entry.target.classList.add('visible');
+        }, d);
+        delay = Math.min(delay + 80, 400);
         obs.unobserve(entry.target);
+      });
+    }, { threshold: 0.08 });
+    els.forEach(function (el) { obs.observe(el); });
+  })();
+
+  /* Slideshow: auto-discover local gallery images */
+  (function () {
+    var stage = document.getElementById('ss-stage');
+    var loading = document.getElementById('ss-loading');
+    var dotsWrap = document.getElementById('ss-dots');
+    var prevBtn = document.getElementById('ss-prev');
+    var nextBtn = document.getElementById('ss-next');
+    var counter = document.getElementById('ss-counter');
+    var progress = document.getElementById('ss-progress-bar');
+    if (!stage || !dotsWrap || !prevBtn || !nextBtn || !counter || !progress) return;
+
+    var CFG = {
+      imageDir: 'images',
+      pattern: 'Dr Philemon Yugi',
+      maxScan: 200,
+      stopAfterMisses: 24,
+      maxSlides: 14,
+      durationMs: 7000
+    };
+
+    var slides = [];
+    var current = 0;
+    var timer = null;
+
+    function probe(src) {
+      return new Promise(function (resolve) {
+        var img = new Image();
+        img.onload = function () { resolve(true); };
+        img.onerror = function () { resolve(false); };
+        img.src = src;
+      });
+    }
+
+    function pickSubset(list, max) {
+      if (list.length <= max) return list.slice();
+      var picked = [];
+      var step = (list.length - 1) / (max - 1);
+      for (var i = 0; i < max; i++) {
+        picked.push(list[Math.round(i * step)]);
       }
+      return picked;
+    }
+
+    async function discover() {
+      var found = [];
+      var misses = 0;
+      for (var i = 1; i <= CFG.maxScan; i++) {
+        var baseName = CFG.pattern + ' (' + i + ')';
+        var src = CFG.imageDir + '/' + baseName + '.jpg';
+        var ok = await probe(src);
+        if (ok) {
+          misses = 0;
+          found.push({
+            src: src,
+            caption: 'Memory ' + i,
+            alt: 'Photo ' + i + ' of Dr. Philemon Odiwuor Yugi'
+          });
+        } else {
+          misses += 1;
+          if (misses >= CFG.stopAfterMisses) break;
+        }
+      }
+      return pickSubset(found, CFG.maxSlides);
+    }
+
+    function renderSlides() {
+      stage.querySelectorAll('.ss-slide').forEach(function (n) { n.remove(); });
+      dotsWrap.innerHTML = '';
+
+      slides.forEach(function (item, idx) {
+        var slide = document.createElement('article');
+        slide.className = 'ss-slide' + (idx === 0 ? ' active' : '');
+        slide.innerHTML =
+          '<img src="' + item.src + '" alt="' + item.alt + '" ' + (idx === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"') + '>' +
+          '<p class="ss-caption">' + item.caption + '</p>';
+        stage.appendChild(slide);
+
+        var dot = document.createElement('button');
+        dot.className = 'ss-dot' + (idx === 0 ? ' active' : '');
+        dot.type = 'button';
+        dot.setAttribute('aria-label', 'Go to slide ' + (idx + 1));
+        dot.addEventListener('click', function () { show(idx, true); });
+        dotsWrap.appendChild(dot);
+      });
+    }
+
+    function updateUI() {
+      var items = stage.querySelectorAll('.ss-slide');
+      var dots = dotsWrap.querySelectorAll('.ss-dot');
+      items.forEach(function (el, i) { el.classList.toggle('active', i === current); });
+      dots.forEach(function (el, i) { el.classList.toggle('active', i === current); });
+      counter.textContent = (current + 1) + ' / ' + slides.length;
+
+      progress.style.transition = 'none';
+      progress.style.width = '0%';
+      void progress.offsetWidth;
+      progress.style.transition = 'width ' + CFG.durationMs + 'ms linear';
+      progress.style.width = '100%';
+    }
+
+    function stopAuto() {
+      if (timer) clearTimeout(timer);
+    }
+
+    function startAuto() {
+      stopAuto();
+      if (slides.length < 2) return;
+      timer = setTimeout(function () { show(current + 1, false); }, CFG.durationMs);
+    }
+
+    function show(index, userInitiated) {
+      if (!slides.length) return;
+      current = (index + slides.length) % slides.length;
+      updateUI();
+      startAuto();
+      if (userInitiated) {
+        progress.style.transition = 'width ' + CFG.durationMs + 'ms linear';
+      }
+    }
+
+    prevBtn.addEventListener('click', function () { show(current - 1, true); });
+    nextBtn.addEventListener('click', function () { show(current + 1, true); });
+
+    stage.addEventListener('mouseenter', stopAuto);
+    stage.addEventListener('mouseleave', startAuto);
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) stopAuto();
+      else startAuto();
     });
-  }, { threshold: 0.08 });
-  els.forEach(function(el) { obs.observe(el); });
+
+    discover().then(function (result) {
+      slides = result;
+      if (loading) loading.style.display = 'none';
+
+      if (!slides.length) {
+        stage.innerHTML = '<div class="ss-slide active"><p class="ss-caption">Memories will appear here soon.</p></div>';
+        dotsWrap.innerHTML = '';
+        counter.textContent = '0 / 0';
+        return;
+      }
+
+      renderSlides();
+      show(0, false);
+    }).catch(function () {
+      if (loading) loading.style.display = 'none';
+      stage.innerHTML = '<div class="ss-slide active"><p class="ss-caption">Unable to load slideshow images right now.</p></div>';
+      counter.textContent = '0 / 0';
+    });
+  })();
+
+  /* Tribute preview */
+  (function () {
+    var PER_PAGE = 3;
+    var DURATION = 15000;
+    var stage = document.getElementById('tp-stage');
+    var navRow = document.getElementById('tp-nav');
+    var pageLabel = document.getElementById('tp-page-label');
+    var bar = document.getElementById('tp-progress-bar');
+    if (!stage || !navRow || !pageLabel || !bar) return;
+
+    var allTributes = [];
+    var curPage = 0;
+    var totalPages = 1;
+    var timer;
+
+    function timeAgo(d) {
+      var s = Math.floor((Date.now() - new Date(d).getTime()) / 1000);
+      if (s < 60) return 'just now';
+      if (s < 3600) return Math.floor(s / 60) + 'm ago';
+      if (s < 86400) return Math.floor(s / 3600) + 'h ago';
+      return Math.floor(s / 86400) + 'd ago';
+    }
+
+    function cardHTML(t, delay) {
+      return '<div class="tp-card" style="animation-delay:' + delay + 's">' +
+        (t.relation ? '<div class="tp-card-relation">' + t.relation + '</div>' : '') +
+        '<p class="tp-card-text">' + t.message + '</p>' +
+        '<div class="tp-card-meta"><span class="tp-card-name">' + (t.name || 'Anonymous') + '</span><span class="tp-card-time">' + timeAgo(t.created_at) + '</span></div>' +
+      '</div>';
+    }
+
+    function startProgress() {
+      clearTimeout(timer);
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      void bar.offsetWidth;
+      bar.style.transition = 'width ' + DURATION + 'ms linear';
+      bar.style.width = '100%';
+      if (totalPages > 1) {
+        timer = setTimeout(function () { showPage(curPage + 1); }, DURATION);
+      }
+    }
+
+    function showPage(page) {
+      curPage = (page + totalPages) % totalPages;
+      var slice = allTributes.slice(curPage * PER_PAGE, curPage * PER_PAGE + PER_PAGE);
+      stage.querySelectorAll('.tp-slide').forEach(function (el) { el.remove(); });
+      var slide = document.createElement('div');
+      slide.className = 'tp-slide active';
+      slide.innerHTML = slice.map(function (t, i) { return cardHTML(t, i * 0.08); }).join('');
+      stage.appendChild(slide);
+      pageLabel.textContent = (curPage + 1) + ' / ' + totalPages;
+      startProgress();
+    }
+
+    function render(tributes) {
+      allTributes = tributes;
+      stage.innerHTML = '';
+      if (!tributes.length) {
+        stage.innerHTML = '<div class="tp-empty">No tributes yet — be the first to share a memory.<br><a href="tributes.html" style="color:var(--accent);text-decoration:none;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">Leave a Tribute →</a></div>';
+        navRow.style.display = 'none';
+        return;
+      }
+      totalPages = Math.ceil(tributes.length / PER_PAGE);
+      navRow.style.display = 'flex';
+      showPage(0);
+    }
+
+    fetch('/api/tributes')
+      .then(function (r) { return r.json(); })
+      .then(function (data) { render(data); })
+      .catch(function () {
+        stage.innerHTML = '<div class="tp-empty">Tributes could not be loaded at this time.<br><a href="tributes.html" style="color:var(--accent);text-decoration:none;">Visit the tributes page →</a></div>';
+      });
+  })();
 })();
 </script>
-
-
-<script>
-/* Particles */
-(function () {
-  var c = document.getElementById('particles');
-  if (!c) return;
-  var ctx = c.getContext('2d'), W, H, pts = [];
-  for (var i = 0; i < 50; i++) pts.push({ x: Math.random()*1920, y: Math.random()*1080, r: Math.random()*1.2+0.2, s: Math.random()*0.2+0.06, o: Math.random()*0.25+0.05, d: (Math.random()-0.5)*0.12 });
-  function resize() { W = c.width = window.innerWidth; H = c.height = window.innerHeight; }
-  resize(); window.addEventListener('resize', resize);
-  (function draw() { ctx.clearRect(0,0,W,H); pts.forEach(function(p){ ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fillStyle='rgba(127,212,219,'+p.o+')'; ctx.fill(); p.y-=p.s; p.x+=p.d; if(p.y<-10){p.y=H+10;p.x=Math.random()*W;} }); requestAnimationFrame(draw); })();
-})();
-
-/* Fade-in on scroll */
-(function () {
-  var els = document.querySelectorAll('.fade-in, .bio-chapter, .bio-read-more');
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('show', 'visible');
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
-  els.forEach(function(el) { obs.observe(el); });
-})();
-</script>
-
 </body>
 </html>
