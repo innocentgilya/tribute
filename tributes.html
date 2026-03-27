@@ -1,124 +1,469 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Tributes — Dr. Philemon Odiwuor Yugi</title>
+<title>Tributes &amp; Messages &mdash; Dr. Philemon Odiwuor Yugi</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
   :root {
-    --teal:        #1f5c63;
-    --teal-deep:   #071e22;
-    --teal-mid:    #3c8d94;
-    --teal-light:  #7fd4db;
-    --accent:      #7ab8c8;
-    --border:      #d0dfe3;
-    --text:        #0d1f24;
-    --muted:       #4a6b75;
-    --bg:          #ffffff;
-    --card-bg:     #ffffff;
-    --nav-h:       64px;
+    --bg: #f8f5ef;
+    --surface: #ffffff;
+    --surface-soft: #fcfaf6;
+    --text: #22252c;
+    --muted: #656c78;
+    --line: #e7e0d3;
+    --teal-light: #7fd4db;
+    --accent: #8f7a52;
+    --accent-soft: #b59f74;
+    --focus: #7e9db3;
+    --shadow: 0 14px 30px rgba(20, 28, 40, 0.08);
+    --shadow-hover: 0 18px 36px rgba(20, 28, 40, 0.11);
+    --radius-lg: 16px;
+    --radius-md: 12px;
+    --nav-h: 64px;
   }
 
   html { scroll-behavior: smooth; }
-  body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-weight: 400; min-height: 100vh; overflow-x: hidden; }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 100;
-    display: flex; align-items: center; justify-content: center; padding: 0 40px;
-    background: rgba(7,30,34,0.95); backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(127,212,219,0.15);
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 10% -10%, #fffefb 0%, transparent 38%),
+      radial-gradient(circle at 90% 120%, #efe6d7 0%, transparent 35%),
+      var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
   }
-  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
-  .nav-links a { font-size: 0.72rem; letter-spacing: 2px; color: rgba(255,255,255,0.65); text-decoration: none; text-transform: uppercase; transition: color 0.3s; position: relative; padding-bottom: 4px; font-weight: 300; }
-  .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--teal-light); transition: width 0.3s; }
-  .nav-links a:hover, .nav-links a.active { color: var(--teal-light); }
-  .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-  @media (max-width: 680px) { nav { padding: 0 16px; } .nav-links { gap: 18px; flex-wrap: wrap; justify-content: center; } .nav-links a { font-size: 0.62rem; } }
 
-  /* PAGE HEADER */
+  .hero__nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    width: 100%;
+    height: var(--nav-h);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 40px;
+    background: transparent;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 34px;
+  }
+
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 2.5px;
+    color: rgba(255,255,255,0.82);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.3s;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--teal-light);
+    transition: width 0.3s;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active { color: var(--teal-light); }
+
+  .nav-links a:hover::after,
+  .nav-links a.active::after { width: 100%; }
+
   .page-header {
-    background: linear-gradient(135deg, var(--teal-deep) 0%, var(--teal) 100%);
-    padding: calc(var(--nav-h) + 48px) 24px 48px;
-    text-align: center; color: #fff;
+    padding: calc(var(--nav-h) + 56px) 20px 36px;
+    text-align: center;
   }
-  .page-header-label { font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--teal-light); margin-bottom: 12px; opacity: 0.9; }
-  .page-header-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 600; margin-bottom: 8px; }
-  .page-header-dates { font-size: 0.85rem; letter-spacing: 3px; opacity: 0.7; text-transform: uppercase; }
 
-  /* MAIN */
-  .page-body { max-width: 860px; margin: 0 auto; padding: 48px 24px 80px; }
+  .page-header-label {
+    font-size: 0.68rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
 
-  .memories-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px; flex-wrap: wrap; gap: 12px; }
-  .memories-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: var(--text); }
-  .memories-count { font-size: 0.78rem; color: var(--muted); letter-spacing: 1px; }
+  .page-header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4.4vw, 3.1rem);
+    line-height: 1.15;
+    color: #1f2430;
+    margin-bottom: 10px;
+  }
 
-  /* TRIBUTE CARDS */
-  .tribute-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 48px; }
+  .page-header-sub {
+    max-width: 720px;
+    margin: 0 auto;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .page-wrap {
+    width: min(1200px, 92vw);
+    margin: 0 auto;
+    padding: 10px 0 84px;
+  }
+
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(320px, 390px) minmax(0, 1fr);
+    gap: 26px;
+    align-items: start;
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+  }
+
+  .form-panel {
+    position: sticky;
+    top: calc(var(--nav-h) + 20px);
+    padding: 26px 22px 22px;
+  }
+
+  .panel-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.45rem;
+    color: #242b37;
+    margin-bottom: 8px;
+  }
+
+  .panel-sub {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .field,
+  .select,
+  .textarea {
+    width: 100%;
+    border: 1.5px solid #ddd4c4;
+    border-radius: var(--radius-md);
+    background: var(--surface-soft);
+    color: var(--text);
+    font: inherit;
+    padding: 14px 14px 12px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .textarea {
+    min-height: 170px;
+    resize: vertical;
+    line-height: 1.75;
+  }
+
+  .field:focus,
+  .select:focus,
+  .textarea:focus {
+    border-color: var(--focus);
+    box-shadow: 0 0 0 3px rgba(126, 157, 179, 0.18);
+    background: #fff;
+  }
+
+  .float-wrap {
+    position: relative;
+  }
+
+  .float-wrap label {
+    position: absolute;
+    left: 13px;
+    top: 12px;
+    color: #7f8792;
+    font-size: 0.92rem;
+    pointer-events: none;
+    background: transparent;
+    transition: transform 0.16s ease, font-size 0.16s ease, color 0.16s ease, top 0.16s ease;
+  }
+
+  .float-wrap .field:focus + label,
+  .float-wrap .field:not(:placeholder-shown) + label,
+  .float-wrap .textarea:focus + label,
+  .float-wrap .textarea:not(:placeholder-shown) + label {
+    top: -8px;
+    transform: translateY(0);
+    font-size: 0.73rem;
+    color: var(--focus);
+    background: #fff;
+    padding: 0 4px;
+    left: 10px;
+  }
+
+  .char-row {
+    margin-top: 6px;
+    text-align: right;
+    color: var(--muted);
+    font-size: 0.75rem;
+  }
+
+  .submit-btn {
+    margin-top: 4px;
+    width: 100%;
+    border: 0;
+    border-radius: 12px;
+    padding: 13px 16px;
+    background: linear-gradient(135deg, #8f7a52 0%, #a99368 100%);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    cursor: pointer;
+    transition: transform 0.14s ease, filter 0.2s ease;
+  }
+
+  .submit-btn:hover { filter: brightness(1.04); transform: translateY(-1px); }
+  .submit-btn:focus-visible {
+    outline: 3px solid rgba(126, 157, 179, 0.35);
+    outline-offset: 2px;
+  }
+  .submit-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+  .list-panel {
+    padding: 24px 22px;
+  }
+
+  .list-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+
+  .list-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: #232a35;
+  }
+
+  .list-count {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .tribute-list {
+    display: grid;
+    gap: 14px;
+  }
 
   .tribute-card {
-    background: var(--card-bg); border: 1px solid #c8d8dc; border-radius: 12px;
-    padding: 28px 28px 24px; display: grid; grid-template-columns: 52px 1fr; gap: 0 20px;
-    box-shadow: 0 2px 12px rgba(31,92,99,0.08);
-    opacity: 0; transform: translateY(16px);
-    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s;
+    background: #fff;
+    border: 1px solid #ebe3d5;
+    border-radius: 14px;
+    padding: 16px 16px 14px;
+    box-shadow: 0 8px 20px rgba(20, 28, 40, 0.05);
+    display: grid;
+    grid-template-columns: 46px 1fr;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.42s ease, transform 0.42s ease, box-shadow 0.24s ease;
   }
-  .tribute-card.visible { opacity: 1; transform: translateY(0); }
-  .tribute-card:hover { box-shadow: 0 4px 24px rgba(31,92,99,0.12); }
+
+  .tribute-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .tribute-card:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);
+  }
 
   .tribute-avatar {
-    width: 52px; height: 52px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
-    display: flex; align-items: center; justify-content: center;
-    color: #fff; font-weight: 600; font-size: 1.1rem; flex-shrink: 0; align-self: flex-start;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.98rem;
+    background: linear-gradient(135deg, #7d8ea1 0%, #5f7389 100%);
+    user-select: none;
   }
-  .tribute-body { min-width: 0; }
-  .tribute-header-row { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px; margin-bottom: 4px; }
-  .tribute-name { font-weight: 600; font-size: 1rem; color: var(--text); }
-  .tribute-time { font-size: 0.75rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
-  .tribute-relation { font-size: 0.72rem; color: var(--teal-mid); font-weight: 500; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; }
-  .tribute-message { font-size: 0.95rem; line-height: 1.85; color: #0d1f24; font-weight: 400; white-space: pre-line; }
-  .tribute-message.clamped { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
-  .tribute-read-more { background: none; border: none; cursor: pointer; color: var(--teal-mid); font-size: 0.82rem; font-weight: 500; padding: 6px 0 0; display: inline-block; text-decoration: underline; font-family: 'Inter', sans-serif; }
 
-  .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); font-size: 1rem; line-height: 1.8; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; }
-  .empty-state p { margin-bottom: 8px; }
+  .tribute-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
 
-  /* DIVIDER */
-  .section-divider { display: flex; align-items: center; gap: 16px; margin: 48px 0 36px; }
-  .section-divider-line { flex: 1; height: 1px; background: var(--border); }
-  .section-divider-label { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text); white-space: nowrap; font-style: italic; }
+  .tribute-name {
+    font-weight: 600;
+    color: #252c38;
+    font-size: 0.98rem;
+  }
 
-  /* FORM */
-  .story-form-wrap { background: var(--card-bg); border: 1px solid #c8d8dc; border-radius: 12px; padding: 36px; box-shadow: 0 2px 12px rgba(31,92,99,0.08); }
-  .story-form-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-  .story-form-subtitle { font-size: 0.88rem; color: var(--muted); margin-bottom: 28px; line-height: 1.6; }
-  .form-row { display: flex; gap: 16px; flex-wrap: wrap; }
-  .form-group { flex: 1; min-width: 200px; display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
-  .form-group label { font-size: 0.72rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
-  .form-group input, .form-group textarea, .form-group select { background: var(--bg); border: 1.5px solid var(--border); border-radius: 8px; color: var(--text); font-family: 'Inter', sans-serif; font-weight: 400; font-size: 0.95rem; padding: 11px 14px; outline: none; transition: border-color 0.25s, box-shadow 0.25s; width: 100%; }
-  .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--teal-mid); box-shadow: 0 0 0 3px rgba(60,141,148,0.12); }
-  .form-group textarea { resize: vertical; min-height: 130px; line-height: 1.7; }
-  .form-group select option { background: #fff; }
-  .char-count { font-size: 0.72rem; color: var(--muted); text-align: right; margin-top: 4px; }
-  .submit-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--teal); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; padding: 13px 32px; transition: background 0.25s, transform 0.15s; margin-top: 4px; }
-  .submit-btn:hover { background: var(--teal-mid); transform: translateY(-1px); }
+  .tribute-date {
+    color: #7a818d;
+    font-size: 0.75rem;
+    white-space: nowrap;
+  }
 
-  /* TOAST */
-  .toast { position: fixed; bottom: 28px; right: 28px; background: var(--teal-deep); color: var(--teal-light); padding: 14px 24px; border-radius: 8px; font-size: 0.88rem; font-weight: 400; z-index: 999; opacity: 0; transform: translateY(16px); transition: all 0.35s; pointer-events: none; box-shadow: 0 4px 20px rgba(0,0,0,0.25); max-width: 360px; line-height: 1.5; }
-  .toast.show { opacity: 1; transform: translateY(0); }
+  .relation {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 1.6px;
+    color: #7f6a43;
+    background: #f6efe1;
+    border: 1px solid #e8dcc6;
+    border-radius: 999px;
+    padding: 3px 8px;
+  }
 
-  /* FOOTER */
-  footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); background: var(--card-bg); }
-  .footer-text { color: var(--muted); font-size: 0.88rem; letter-spacing: 0.5px; font-style: italic; }
-  .footer-name { font-weight: 600; color: var(--teal); font-size: 0.82rem; letter-spacing: 1px; margin-top: 8px; text-transform: uppercase; }
+  .tribute-message {
+    color: #2e3542;
+    line-height: 1.82;
+    font-size: 0.95rem;
+    white-space: pre-line;
+    position: relative;
+    padding-left: 12px;
+  }
+
+  .tribute-message::before {
+    content: '\201C';
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    color: #cfbe9b;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.35rem;
+    line-height: 1;
+  }
+
+  .empty-state {
+    text-align: center;
+    background: #fff;
+    border: 1px dashed #d8cfbc;
+    border-radius: 14px;
+    padding: 44px 18px;
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+
+  .toast {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 50;
+    max-width: 360px;
+    background: #28303d;
+    color: #f3f6fa;
+    padding: 12px 14px;
+    border-radius: 10px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.24);
+    opacity: 0;
+    transform: translateY(10px);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  footer {
+    border-top: 1px solid var(--line);
+    text-align: center;
+    padding: 32px 20px 36px;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .footer-name {
+    margin-top: 8px;
+    font-size: 0.76rem;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    color: #7b7f88;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  @media (max-width: 980px) {
+    .layout {
+      grid-template-columns: 1fr;
+    }
+
+    .form-panel {
+      position: static;
+      order: 1;
+    }
+
+    .list-panel {
+      order: 2;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero__nav { padding: 0 16px; }
+    .nav-links { gap: 14px; flex-wrap: wrap; justify-content: center; }
+    .nav-links a { font-size: 0.6rem; letter-spacing: 1.5px; }
+
+    .page-wrap { width: 94vw; }
+    .form-panel, .list-panel { padding: 18px 14px; }
+    .tribute-card { grid-template-columns: 40px 1fr; padding: 14px; }
+    .tribute-avatar { width: 40px; height: 40px; font-size: 0.88rem; }
+  }
+
+  .nav-hidden { transform: translateY(-110%); opacity: 0; }
 </style>
 </head>
 <body>
 
-<nav id="navbar">
+<nav class="hero__nav" id="navbar" aria-label="Primary">
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="gallery.html">Gallery</a></li>
@@ -127,206 +472,274 @@
   </ul>
 </nav>
 
-<div class="page-header">
+<header class="page-header">
   <p class="page-header-label">In Loving Memory</p>
-  <h1 class="page-header-title">Dr. Philemon Odiwuor Yugi</h1>
-  <p class="page-header-dates">May 25, 1968 &nbsp;&ndash;&nbsp; March 19, 2026</p>
-</div>
+  <h1 class="page-header-title">Tributes &amp; Messages</h1>
+  <p class="page-header-sub">Share your memories, condolences, or words of comfort.</p>
+</header>
 
-<main class="page-body">
+<main class="page-wrap">
+  <section class="layout" aria-label="Tributes page content">
 
-  <div class="memories-header">
-    <h2 class="memories-title">Memories &amp; Tributes</h2>
-    <span class="memories-count" id="memories-count"></span>
-  </div>
+    <aside class="panel form-panel" aria-labelledby="form-title">
+      <h2 class="panel-title" id="form-title">Leave a Tribute</h2>
+      <p class="panel-sub">Your message will be received with care and shown once approved.</p>
 
-  <div class="tribute-list" id="tribute-list">
-    <div class="empty-state"><p>Loading tributes&hellip;</p></div>
-  </div>
+      <form id="tribute-form" novalidate>
+        <div class="form-group float-wrap">
+          <input class="field" id="t-name" name="name" type="text" maxlength="60" placeholder=" " autocomplete="name" aria-describedby="name-help"/>
+          <label for="t-name">Name</label>
+          <span id="name-help" class="sr-only">Optional</span>
+        </div>
 
-  <div class="section-divider">
-    <div class="section-divider-line"></div>
-    <span class="section-divider-label">Share a Story</span>
-    <div class="section-divider-line"></div>
-  </div>
+        <div class="form-group">
+          <label for="t-relation" class="sr-only">Relationship (optional)</label>
+          <select class="select" id="t-relation" name="relation" aria-label="Relationship (optional)">
+            <option value="">Relationship (Optional)</option>
+            <option>Family Member</option>
+            <option>Friend</option>
+            <option>Colleague</option>
+            <option>Neighbour</option>
+            <option>Fellow Worshipper</option>
+            <option>Former Student</option>
+            <option>Other</option>
+          </select>
+        </div>
 
-  <div class="story-form-wrap">
-    <h3 class="story-form-title">Leave a Memory or Message</h3>
-    <p class="story-form-subtitle">Share a fond memory, a word of comfort, or a message to the family. Your tribute will appear here once approved.</p>
+        <div class="form-group float-wrap">
+          <textarea class="textarea" id="t-message" name="message" maxlength="600" placeholder=" " required aria-describedby="char-count"></textarea>
+          <label for="t-message">Tribute message</label>
+          <div class="char-row"><span id="char-used">0</span><span id="char-count"> / 600</span></div>
+        </div>
 
-    <div class="form-row">
-      <div class="form-group">
-        <label for="t-name">Your Name</label>
-        <input type="text" id="t-name" placeholder="e.g. Sarah Odhiambo" maxlength="60"/>
+        <button class="submit-btn" id="submit-tribute" type="submit">Leave a Tribute</button>
+      </form>
+    </aside>
+
+    <section class="panel list-panel" aria-labelledby="list-title">
+      <div class="list-head">
+        <h2 class="list-title" id="list-title">Tributes &amp; Messages</h2>
+        <span class="list-count" id="memories-count" aria-live="polite"></span>
       </div>
-      <div class="form-group">
-        <label for="t-relation">Your Relationship</label>
-        <select id="t-relation">
-          <option value="">— Select —</option>
-          <option>Family Member</option>
-          <option>Friend</option>
-          <option>Colleague</option>
-          <option>Neighbour</option>
-          <option>Fellow Worshipper</option>
-          <option>Former Student</option>
-          <option>Other</option>
-        </select>
+
+      <div class="tribute-list" id="tribute-list" aria-live="polite">
+        <div class="empty-state">Loading tributes...</div>
       </div>
-    </div>
+    </section>
 
-    <div class="form-group">
-      <label for="t-message">Your Tribute or Memory</label>
-      <textarea id="t-message" placeholder="Share a memory, a kind word, or a message to the family&hellip;" maxlength="600"></textarea>
-      <div class="char-count"><span id="char-used">0</span> / 600</div>
-    </div>
-
-    <button class="submit-btn" id="submit-tribute">Submit Your Tribute</button>
-  </div>
-
+  </section>
 </main>
 
 <footer>
-  <p class="footer-text">&ldquo;Be of good comfort in the hope of the resurrection morning&rdquo;</p>
-  <p class="footer-name">Dr. Philemon Odiwuor Yugi &nbsp;&mdash;&nbsp; May 25, 1968 &ndash; March 19, 2026</p>
+  <p>&ldquo;Be of good comfort in the hope of the resurrection morning&rdquo;</p>
+  <p class="footer-name">Dr. Philemon Odiwuor Yugi &mdash; May 25, 1968 &ndash; March 19, 2026</p>
 </footer>
 
-<div class="toast" id="toast"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
 (function () {
-  var list    = document.getElementById('tribute-list');
+  'use strict';
+
+  var list = document.getElementById('tribute-list');
   var countEl = document.getElementById('memories-count');
-  var msg     = document.getElementById('t-message');
-  var btn     = document.getElementById('submit-tribute');
-  var toast   = document.getElementById('toast');
+  var form = document.getElementById('tribute-form');
+  var nameInput = document.getElementById('t-name');
+  var relationInput = document.getElementById('t-relation');
+  var msg = document.getElementById('t-message');
+  var submitBtn = document.getElementById('submit-tribute');
+  var used = document.getElementById('char-used');
+  var toast = document.getElementById('toast');
 
-  function timeAgo(d) {
-    var s = Math.floor((Date.now() - new Date(d).getTime()) / 1000);
-    if (s < 60)    return 'just now';
-    if (s < 3600)  return Math.floor(s/60) + 'm ago';
-    if (s < 86400) return Math.floor(s/3600) + 'h ago';
-    var days = Math.floor(s/86400);
-    if (days < 30) return days + 'd ago';
-    var months = Math.floor(days/30);
-    if (months < 12) return months + ' month' + (months > 1 ? 's' : '') + ' ago';
-    return Math.floor(months/12) + ' year' + (Math.floor(months/12) > 1 ? 's' : '') + ' ago';
-  }
-
-  function getInitials(name) {
-    if (!name || !name.trim()) return '?';
-    var parts = name.trim().split(/\s+/);
-    return parts.length === 1 ? parts[0][0].toUpperCase() : (parts[0][0] + parts[parts.length-1][0]).toUpperCase();
-  }
-
-  var avatarColors = [
-    'linear-gradient(135deg,#1f5c63,#3c8d94)',
-    'linear-gradient(135deg,#0d2535,#1e4a5c)',
-    'linear-gradient(135deg,#2a7a82,#56b0b8)',
-    'linear-gradient(135deg,#143845,#2a6070)',
-    'linear-gradient(135deg,#1a4a55,#4a9aa5)'
+  var avatarGradients = [
+    'linear-gradient(135deg,#8f7a52 0%,#a99368 100%)',
+    'linear-gradient(135deg,#6f879a 0%,#5c7287 100%)',
+    'linear-gradient(135deg,#7f8a9a 0%,#677384 100%)',
+    'linear-gradient(135deg,#8d8a82 0%,#736f67 100%)'
   ];
 
-  function makeCard(t, idx) {
-    var name     = t.name || 'Anonymous';
-    var initials = getInitials(name);
-    var color    = avatarColors[idx % avatarColors.length];
-    var relation = t.relation || '';
-    var message  = t.message  || '';
-    var timeStr  = t.created_at ? timeAgo(t.created_at) : '';
-    var isLong   = message.length > 280;
+  function escapeHtml(str) {
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/\"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
 
-    var card = document.createElement('div');
+  function initialsFrom(name) {
+    if (!name || !name.trim()) return '?';
+    var parts = name.trim().split(/\s+/);
+    if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+    return (parts[0].charAt(0) + parts[parts.length - 1].charAt(0)).toUpperCase();
+  }
+
+  function formatDate(value) {
+    if (!value) return '';
+    var date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '';
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    }).format(date);
+  }
+
+  function createCard(item, index) {
+    var name = item.name && item.name.trim() ? item.name.trim() : 'Anonymous';
+    var relation = item.relation && item.relation.trim() ? item.relation.trim() : '';
+    var message = item.message && item.message.trim() ? item.message.trim() : '';
+    var dateText = formatDate(item.created_at);
+    var initials = initialsFrom(name);
+
+    var card = document.createElement('article');
     card.className = 'tribute-card';
     card.innerHTML =
-      '<div class="tribute-avatar" style="background:' + color + '">' + initials + '</div>' +
-      '<div class="tribute-body">' +
-        '<div class="tribute-header-row">' +
-          '<span class="tribute-name">' + name + '</span>' +
-          (timeStr ? '<span class="tribute-time">' + timeStr + '</span>' : '') +
+      '<div class="tribute-avatar" style="background:' + avatarGradients[index % avatarGradients.length] + '">' + escapeHtml(initials) + '</div>' +
+      '<div>' +
+        '<div class="tribute-meta">' +
+          '<p class="tribute-name">' + escapeHtml(name) + '</p>' +
+          (dateText ? '<time class="tribute-date">' + escapeHtml(dateText) + '</time>' : '') +
         '</div>' +
-        (relation ? '<div class="tribute-relation">' + relation + '</div>' : '') +
-        '<p class="tribute-message' + (isLong ? ' clamped' : '') + '">' + message + '</p>' +
-        (isLong ? '<button class="tribute-read-more" onclick="this.previousSibling.classList.toggle(\'clamped\');this.textContent=this.previousSibling.classList.contains(\'clamped\')?\'Read more\':\'Show less\'">Read more</button>' : '') +
+        (relation ? '<span class="relation">' + escapeHtml(relation) + '</span>' : '') +
+        '<p class="tribute-message">' + escapeHtml(message) + '</p>' +
       '</div>';
+
     return card;
   }
 
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  function revealCards(cards) {
+    cards.forEach(function (card, i) {
+      setTimeout(function () {
+        card.classList.add('visible');
+      }, i * 35);
     });
-  }, { threshold: 0.06 });
+  }
 
-  function render(tributes) {
+  function renderTributes(items) {
     list.innerHTML = '';
-    if (!tributes.length) {
-      list.innerHTML = '<div class="empty-state"><p>No tributes yet.</p><p>Be the first to share a memory below.</p></div>';
+
+    if (!items || !items.length) {
+      list.innerHTML = '<div class="empty-state">No tributes yet. Be the first to leave a message of comfort.</div>';
       countEl.textContent = '';
       return;
     }
-    countEl.textContent = tributes.length + ' ' + (tributes.length === 1 ? 'memory' : 'memories');
-    tributes.forEach(function(t, i) {
-      var card = makeCard(t, i);
-      list.appendChild(card);
-      setTimeout(function() { observer.observe(card); }, i * 30);
+
+    countEl.textContent = items.length + ' ' + (items.length === 1 ? 'Tribute' : 'Tributes');
+
+    var frag = document.createDocumentFragment();
+    var cards = items.map(function (item, i) {
+      var card = createCard(item, i);
+      frag.appendChild(card);
+      return card;
     });
+
+    list.appendChild(frag);
+    revealCards(cards);
   }
 
-  fetch('/api/tributes')
-    .then(function(r) { return r.json(); })
-    .then(function(data) { render(data); })
-    .catch(function() {
-      list.innerHTML = '<div class="empty-state"><p>Could not load tributes.</p><p>Please refresh the page to try again.</p></div>';
-    });
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(function () {
+      toast.classList.remove('show');
+    }, 4500);
+  }
 
-  msg.addEventListener('input', function() {
-    document.getElementById('char-used').textContent = msg.value.length;
+  function loadTributes() {
+    fetch('/api/tributes')
+      .then(function (res) { return res.json(); })
+      .then(function (data) { renderTributes(data); })
+      .catch(function () {
+        list.innerHTML = '<div class="empty-state">Could not load tributes at the moment. Please refresh and try again.</div>';
+      });
+  }
+
+  msg.addEventListener('input', function () {
+    used.textContent = String(msg.value.length);
   });
 
-  function showToast(m) {
-    toast.textContent = m;
-    toast.classList.add('show');
-    setTimeout(function() { toast.classList.remove('show'); }, 5000);
-  }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-  btn.addEventListener('click', function() {
-    var name     = document.getElementById('t-name').value.trim();
-    var relation = document.getElementById('t-relation').value;
-    var message  = msg.value.trim();
-    if (!message) {
-      msg.style.borderColor = '#c0392b';
+    var payload = {
+      name: nameInput.value.trim(),
+      relation: relationInput.value,
+      message: msg.value.trim()
+    };
+
+    if (!payload.message) {
       msg.focus();
-      setTimeout(function() { msg.style.borderColor = ''; }, 1500);
+      msg.style.borderColor = '#bf6b6b';
+      setTimeout(function () { msg.style.borderColor = ''; }, 1200);
+      showToast('Please write a tribute message before submitting.');
       return;
     }
-    btn.disabled = true;
-    btn.textContent = 'Submitting\u2026';
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
 
     fetch('/api/tributes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: name, relation: relation, message: message })
+      body: JSON.stringify(payload)
     })
-    .then(function(r) { return r.json().then(function(d) { return { ok: r.ok, data: d }; }); })
-    .then(function(res) {
-      if (res.ok) {
-        document.getElementById('t-name').value = '';
-        document.getElementById('t-relation').value = '';
-        msg.value = '';
-        document.getElementById('char-used').textContent = '0';
-        showToast('Thank you \u2014 your tribute has been received and will appear once approved.');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        showToast(res.data.error || 'Something went wrong. Please try again.');
-      }
-    })
-    .catch(function() { showToast('Could not connect. Please check your internet and try again.'); })
-    .finally(function() {
-      btn.disabled = false;
-      btn.textContent = 'Submit Your Tribute';
-    });
+      .then(function (res) {
+        return res.json().then(function (data) {
+          return { ok: res.ok, data: data };
+        });
+      })
+      .then(function (result) {
+        if (!result.ok) {
+          showToast((result.data && result.data.error) || 'Something went wrong. Please try again.');
+          return;
+        }
+
+        form.reset();
+        used.textContent = '0';
+        showToast('Thank you. Your tribute has been received and will appear once approved.');
+      })
+      .catch(function () {
+        showToast('Could not connect right now. Please try again in a moment.');
+      })
+      .finally(function () {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Leave a Tribute';
+      });
   });
+
+  loadTributes();
+})();
+</script>
+<script>
+/* Nav hide on scroll up */
+(function () {
+  var nav = document.getElementById('navbar') || document.querySelector('nav');
+  if (!nav) return;
+  var lastY = window.scrollY || 0;
+
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY || 0;
+
+    if (y <= 12) {
+      nav.classList.remove('nav-hidden');
+      lastY = y;
+      return;
+    }
+
+    if (y < lastY) {
+      nav.classList.add('nav-hidden');
+    } else {
+      nav.classList.remove('nav-hidden');
+    }
+
+    lastY = y;
+  }, { passive: true });
 })();
 </script>
 </body>
 </html>
+
+
+
+

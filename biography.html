@@ -43,19 +43,23 @@
     z-index: 0;
   }
 
-  nav {
+  .hero__nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: var(--nav-h);
     z-index: 20;
+    width: 100%;
+    height: var(--nav-h);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0 40px;
     background: transparent;
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
+
+
 
   .nav-links {
     display: flex;
@@ -287,7 +291,7 @@
   }
 
   @media (max-width: 680px) {
-    nav { padding: 0 16px; }
+    .hero__nav { padding: 0 16px; }
     .nav-links { gap: 14px; flex-wrap: wrap; justify-content: center; }
     .nav-links a { font-size: 0.6rem; letter-spacing: 1.5px; }
   }
@@ -296,11 +300,12 @@
     .bio-chapter { padding: 24px; }
     .bio-closing { padding: 36px 24px; }
   }
+  .nav-hidden { transform: translateY(-110%); opacity: 0; }
 </style>
 </head>
 <body>
 
-<nav>
+<nav class="hero__nav" id="navbar">
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="gallery.html">Gallery</a></li>
@@ -396,5 +401,34 @@
   els.forEach(function(el) { obs.observe(el); });
 })();
 </script>
+<script>
+/* Nav hide on scroll up */
+(function () {
+  var nav = document.getElementById('navbar') || document.querySelector('nav');
+  if (!nav) return;
+  var lastY = window.scrollY || 0;
+
+  window.addEventListener('scroll', function () {
+    var y = window.scrollY || 0;
+
+    if (y <= 12) {
+      nav.classList.remove('nav-hidden');
+      lastY = y;
+      return;
+    }
+
+    if (y < lastY) {
+      nav.classList.add('nav-hidden');
+    } else {
+      nav.classList.remove('nav-hidden');
+    }
+
+    lastY = y;
+  }, { passive: true });
+})();
+</script>
 </body>
 </html>
+
+
+
