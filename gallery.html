@@ -18,8 +18,12 @@
       --shadow: 0 8px 24px rgba(15,21,32,0.12);
       --shadow-hover: 0 16px 40px rgba(15,21,32,0.22);
       --radius: 12px;
-      --nav-h: 64px;
+      --nav-h: 62px;
       --ease: cubic-bezier(.22,.61,.36,1);
+      --topbar-bg: #faf8f5;
+      --topbar-text: #1c1a17;
+      --topbar-muted: #8a8278;
+      --topbar-border: #e8e0d0;
     }
 
     *, *::before, *::after { box-sizing: border-box; }
@@ -32,74 +36,63 @@
       min-height: 100vh;
     }
 
-    /* ── NAV ── */
-    .hero__nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    /* ── TOPBAR NAV ── */
+    .topbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 40;
       height: var(--nav-h);
-      display: flex; align-items: center; justify-content: center;
-      padding: 0 40px;
-      transition: transform .3s ease, opacity .3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: rgba(250,248,245,0.95);
+      border-bottom: 1px solid var(--topbar-border);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
-    .nav-links {
-      display: flex; align-items: center; gap: 36px;
-      list-style: none; margin: 0; padding: 0;
-    }
-    .nav-links a {
-      font-size: .72rem; letter-spacing: 2.5px;
-      color: rgba(255,255,255,.82); text-decoration: none;
-      text-transform: uppercase; font-weight: 400;
-      transition: color .3s;
-      position: relative; padding-bottom: 4px;
-    }
-    .nav-links a::after {
-      content: ""; position: absolute; bottom: 0; left: 0;
-      width: 0; height: 1px; background: var(--teal-light);
-      transition: width .3s;
-    }
-    .nav-links a:hover { color: var(--teal-light); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-hidden { transform: translateY(-110%); opacity: 0; }
 
-    /* ── HEADER ── */
-    .page-header {
-      margin-top: var(--nav-h);
-      text-align: center;
-      padding: 58px 22px 34px;
+    .topbar-back {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      display: grid; place-items: center;
+      color: var(--topbar-muted);
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
     }
-    .header-label {
-      margin: 0; text-transform: uppercase;
-      letter-spacing: .2em; font-size: .68rem; color: var(--gold);
+    .topbar-back:hover { background: #f4f0e8; border-color: var(--topbar-border); }
+
+    .topbar-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
     }
-    .header-title {
-      margin: 12px 0 10px;
+    .topbar-title {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(2rem, 4vw, 3.1rem);
-      line-height: 1.14; color: var(--deep); font-weight: 500;
+      font-size: 1.35rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--topbar-text);
+      line-height: 1;
     }
-    .header-sub {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-style: italic; color: #b0d8e4;
-      font-size: clamp(.98rem, 1.7vw, 1.2rem);
+    .topbar-sub {
+      font-size: 0.68rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--topbar-muted);
     }
-    .header-quote {
-      max-width: 760px; margin: 20px auto 0;
-      color: var(--muted); font-size: 1.03rem; font-style: italic;
-    }
-    .header-count {
-      margin-top: 20px;
-      display: inline-flex; gap: 8px; align-items: center;
-      padding: 8px 18px;
-      border-radius: 999px;
-      border: 1px solid rgba(157,135,92,.3);
-      color: var(--gold); font-size: .66rem;
-      text-transform: uppercase; letter-spacing: .18em;
-    }
+
+    .topbar-spacer { width: 38px; }
+
+
 
     /* ── GALLERY WRAP ── */
     .gallery-wrap {
       width: min(1160px, 92vw);
       margin: 0 auto;
-      padding: 24px 0 78px;
+      padding: calc(var(--nav-h) + 32px) 0 78px;
     }
 
     /* ── MASONRY GRID ── */
@@ -266,9 +259,7 @@
     }
 
     @media (max-width:600px){
-      .hero__nav{padding:0 16px;}
-      .nav-links{gap:14px;flex-wrap:wrap;justify-content:center;}
-      .nav-links a{font-size:.6rem;letter-spacing:1.5px;}
+      .topbar{padding:0 16px;}
       .gallery-grid{column-gap:10px;}
       .gallery-card{margin-bottom:10px;}
     }
@@ -279,22 +270,21 @@
 </head>
 <body>
 
-<nav class="hero__nav" id="navbar">
-  <ul class="nav-links">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="gallery.html">Gallery</a></li>
-    <li><a href="biography.html">Biography</a></li>
-    <li><a href="tributes.html">Tributes</a></li>
-  </ul>
-</nav>
-
-<header class="page-header">
-  <p class="header-label">Photo Gallery</p>
-  <h1 class="header-title">Memories &amp; Moments</h1>
-  <p class="header-sub">Dr. Philemon Odiwuor Yugi</p>
-  <p class="header-quote">In gratitude and remembrance, we hold each moment close, honoring a life of grace, wisdom, and love.</p>
-  <div class="header-count" id="header-count">Loading photos…</div>
+<!-- TOPBAR NAV -->
+<header class="topbar" aria-label="Page navigation">
+  <a class="topbar-back" href="index.html" aria-label="Back to home">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+      <path d="M15 18l-6-6 6-6"/>
+    </svg>
+  </a>
+  <div class="topbar-center">
+    <span class="topbar-title">Memories &amp; Moments</span>
+    <span class="topbar-sub">Dr. Philemon Odiwuor Yugi</span>
+  </div>
+  <span class="topbar-spacer" aria-hidden="true"></span>
 </header>
+
+
 
 <main class="gallery-wrap">
   <section class="gallery-grid" id="gallery-grid" aria-label="Photo gallery"></section>
@@ -348,7 +338,6 @@
   const els = {
     grid:    document.getElementById('gallery-grid'),
     status:  document.getElementById('status'),
-    count:   document.getElementById('header-count'),
     lightbox: document.getElementById('lightbox'),
     lbImage:  document.getElementById('lightbox-image'),
     lbClose:  document.getElementById('lightbox-close')
@@ -440,9 +429,6 @@
           const card = createCard(r, slotIndex);
           state.cards.push(card);
           els.grid.appendChild(card);
-
-          /* Update counter live */
-          els.count.textContent = `${state.totalFound} Photo${state.totalFound !== 1 ? 's' : ''}`;
         } else {
           misses++;
           if (misses >= CONFIG.stopAfterMisses) break;
@@ -457,7 +443,6 @@
 
     if (state.photos.length === 0) {
       els.status.textContent = 'No photos found in the images folder.';
-      els.count.textContent = '0 Photos';
     } else {
       els.status.textContent = '';
     }
@@ -527,18 +512,6 @@
     if (e.key === 'ArrowRight') nextImage();
     if (e.key === 'ArrowLeft')  prevImage();
   });
-
-  /* Nav hide on scroll */
-  (function () {
-    const nav = document.getElementById('navbar');
-    let lastY = window.scrollY;
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      if (y <= 12) { nav.classList.remove('nav-hidden'); lastY = y; return; }
-      y > lastY ? nav.classList.add('nav-hidden') : nav.classList.remove('nav-hidden');
-      lastY = y;
-    }, { passive: true });
-  })();
 
   /* ─── KICK OFF ───────────────────────────────────────── */
   els.status.textContent = 'Loading memories…';
