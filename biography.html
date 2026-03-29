@@ -1,426 +1,475 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Biography &mdash; Dr. Philemon Odiwuor Yugi</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biography &mdash; Dr. Philemon Odiwuor Yugi</title>
+  <meta name="description" content="Biography of Dr. Philemon Odiwuor Yugi (May 25, 1968 — March 19, 2026)." />
+  <meta property="og:title" content="Biography &mdash; Dr. Philemon Odiwuor Yugi" />
+  <meta property="og:description" content="Be of good comfort in the hope of the resurrection morning." />
+  <meta property="og:type" content="profile" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-  :root {
-    --teal:        #1f5c63;
-    --teal-deep:   #071e22;
-    --teal-mid:    #3c8d94;
-    --teal-light:  #7fd4db;
-    --accent-soft: #b0d8e4;
-    --gold:        #c9a96e;
-    --text:        #1c1a17;
-    --muted:       #8a8278;
-    --card:        #ffffff;
-    --card-border: #efefef;
-    --nav-h:       62px;
-    --topbar-bg: #faf8f5;
-    --topbar-text: #1c1a17;
-    --topbar-muted: #8a8278;
-    --topbar-border: #e8e0d0;
-    --bg-page:     #ffffff;
-  }
+    :root {
+      --teal: #1f5c63;
+      --teal-deep: #071e22;
+      --teal-mid: #3c8d94;
+      --teal-light: #7fd4db;
+      --accent-soft: #b0d8e4;
+      --gold: #c9a96e;
+      --text: #1c1a17;
+      --muted: #8a8278;
+      --card: #ffffff;
+      --card-border: #efefef;
+      --nav-h: 62px;
+      --topbar-bg: #faf8f5;
+      --topbar-text: #1c1a17;
+      --topbar-muted: #8a8278;
+      --topbar-border: #e8e0d0;
+      --bg-page: #ffffff;
+    }
 
-  html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+    }
 
-  body {
-    background: var(--bg-page);
-    color: var(--text);
-    font-family: 'Inter', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+    body {
+      background: var(--bg-page);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
 
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: none;
-    z-index: 0;
-  }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: none;
+      z-index: 0;
+    }
 
-  /* ── TOPBAR NAV ── */
-  .topbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 20;
-    width: 100%;
-    height: var(--nav-h);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    background: rgba(250,248,245,0.95);
-    border-bottom: 1px solid var(--topbar-border);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-  }
+    /* ── TOPBAR NAV ── */
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      width: 100%;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      background: rgba(250, 248, 245, 0.95);
+      border-bottom: 1px solid var(--topbar-border);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
 
-  .topbar-back {
-    width: 38px; height: 38px;
-    border-radius: 10px;
-    display: grid; place-items: center;
-    color: var(--topbar-muted);
-    text-decoration: none;
-    border: 1px solid transparent;
-    transition: background 0.15s, border-color 0.15s;
-  }
-  .topbar-back:hover { background: #f4f0e8; border-color: var(--topbar-border); }
+    .topbar-back {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      color: var(--topbar-muted);
+      text-decoration: none;
+      border: 1px solid transparent;
+      transition: background 0.15s, border-color 0.15s;
+    }
 
-  .topbar-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1px;
-  }
-  .topbar-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: 1.35rem;
-    font-weight: 500;
-    letter-spacing: 0.01em;
-    color: var(--topbar-text);
-    line-height: 1;
-  }
-  .topbar-sub {
-    font-size: 0.68rem;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--topbar-muted);
-  }
+    .topbar-back:hover {
+      background: #f4f0e8;
+      border-color: var(--topbar-border);
+    }
 
-  .topbar-spacer { width: 38px; }
+    .topbar-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1px;
+    }
 
-  /* ── HERO BAND ── */
-  .hero-band {
-    margin-top: var(--nav-h);
-    background: linear-gradient(135deg, #2a5050 0%, #3d7a7a 40%, #4e6b4a 100%);
-    color: #fff;
-    text-align: center;
-    padding: 52px 24px 44px;
-    position: relative;
-    overflow: hidden;
-  }
+    .topbar-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      color: var(--topbar-text);
+      line-height: 1;
+    }
 
-  .hero-band::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 70%),
-      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-    pointer-events: none;
-  }
+    .topbar-sub {
+      font-size: 0.68rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--topbar-muted);
+    }
 
-  .hero-eyebrow {
-    font-size: 0.68rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 10px;
-    position: relative;
-    z-index: 1;
-  }
+    .topbar-spacer {
+      width: 44px;
+    }
 
-  .hero-name {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.9rem, 4vw, 2.8rem);
-    font-weight: 600;
-    color: #fff;
-    line-height: 1.15;
-    margin-bottom: 8px;
-    position: relative;
-    z-index: 1;
-  }
+    /* ── HERO BAND ── */
+    .hero-band {
+      margin-top: var(--nav-h);
+      background: linear-gradient(135deg, #2a5050 0%, #3d7a7a 40%, #4e6b4a 100%);
+      color: #fff;
+      text-align: center;
+      padding: 52px 24px 44px;
+      position: relative;
+      overflow: hidden;
+    }
 
-  .hero-dates {
-    font-size: 0.88rem;
-    letter-spacing: 1.5px;
-    color: rgba(255,255,255,0.6);
-    margin-bottom: 14px;
-    position: relative;
-    z-index: 1;
-  }
+    .hero-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255, 255, 255, 0.06) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
 
-  .hero-line {
-    width: 48px;
-    height: 1px;
-    background: rgba(255,255,255,0.3);
-    margin: 0 auto 14px;
-    position: relative;
-    z-index: 1;
-  }
+    .hero-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
 
-  .hero-desc {
-    max-width: 580px;
-    margin: 0 auto;
-    color: rgba(255,255,255,0.75);
-    font-size: 0.98rem;
-    line-height: 1.7;
-    position: relative;
-    z-index: 1;
-  }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      font-weight: 600;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
 
-  .page-body {
-    position: relative;
-    z-index: 1;
-    max-width: 980px;
-    margin: 0 auto;
-    padding: 36px 24px 96px;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-  }
+    .hero-dates {
+      font-size: 0.88rem;
+      letter-spacing: 1.5px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
 
-  .bio-chapter {
-    background: var(--card);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    padding: 28px 24px 24px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-  }
+    .hero-line {
+      width: 48px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.3);
+      margin: 0 auto 14px;
+      position: relative;
+      z-index: 1;
+    }
 
-  .bio-chapter.visible { opacity: 1; transform: translateY(0); }
+    .hero-desc {
+      max-width: 580px;
+      margin: 0 auto;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
 
-  .bio-chapter:hover {
-    border-color: #d0d0d0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  }
+    .page-body {
+      position: relative;
+      z-index: 1;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 36px 24px 96px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
 
-  .bio-chapter-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.2rem;
-    font-weight: 600;
-    color: rgba(28,26,23,0.12);
-    line-height: 1;
-    margin-bottom: 6px;
-    user-select: none;
-  }
+    .bio-chapter {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 28px 24px 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
 
-  .bio-chapter-tag {
-    font-size: 0.62rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: #3d7a7a;
-    margin-bottom: 12px;
-  }
+    .bio-chapter.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  .bio-chapter-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #1c1a17;
-    margin-bottom: 12px;
-    line-height: 1.35;
-  }
+    .bio-chapter:hover {
+      border-color: #d0d0d0;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
 
-  .bio-chapter-body {
-    font-size: 0.95rem;
-    line-height: 1.85;
-    color: #4a4540;
-  }
+    .bio-chapter-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      font-weight: 600;
+      color: rgba(28, 26, 23, 0.12);
+      line-height: 1;
+      margin-bottom: 6px;
+      user-select: none;
+    }
 
-  .bio-chapter-body p { margin-bottom: 14px; }
-  .bio-chapter-body p:last-child { margin-bottom: 0; }
+    .bio-chapter-tag {
+      font-size: 0.62rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 600;
+      color: #3d7a7a;
+      margin-bottom: 12px;
+    }
 
-  .updating {
-    font-size: 0.9rem;
-    font-style: italic;
-    color: #8a8278;
-    letter-spacing: 0.2px;
-  }
+    .bio-chapter-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #1c1a17;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
 
-  .bio-closing {
-    grid-column: 1 / -1;
-    background: #ffffff;
-    border: 1px solid #efefef;
-    border-radius: 16px;
-    padding: 46px 30px;
-    text-align: center;
-    margin-top: 4px;
-    opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.25s ease;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  }
+    .bio-chapter-body {
+      font-size: 0.95rem;
+      line-height: 1.85;
+      color: #4a4540;
+    }
 
-  .bio-closing.visible { opacity: 1; transform: translateY(0); }
+    .bio-chapter-body p {
+      margin-bottom: 14px;
+    }
 
-  .bio-closing-quote {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(1.1rem, 2.5vw, 1.45rem);
-    font-style: italic;
-    color: #1c1a17;
-    line-height: 1.85;
-    max-width: 620px;
-    margin: 0 auto 14px;
-  }
+    .bio-chapter-body p:last-child {
+      margin-bottom: 0;
+    }
 
-  .bio-closing-attr {
-    font-size: 0.72rem;
-    letter-spacing: 2.8px;
-    text-transform: uppercase;
-    color: #8a8278;
-    font-weight: 500;
-  }
+    .updating {
+      font-size: 0.9rem;
+      font-style: italic;
+      color: #8a8278;
+      letter-spacing: 0.2px;
+    }
 
-  footer {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    padding: 40px 24px;
-    border-top: 1px solid #efefef;
-    background: #ffffff;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
+    .bio-closing {
+      grid-column: 1 / -1;
+      background: #ffffff;
+      border: 1px solid #efefef;
+      border-radius: 16px;
+      padding: 46px 30px;
+      text-align: center;
+      margin-top: 4px;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease, box-shadow 0.25s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
 
-  .footer-text {
-    color: #8a8278;
-    font-size: 0.88rem;
-    letter-spacing: 0.5px;
-    font-style: italic;
-  }
+    .bio-closing.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  .footer-name {
-    font-weight: 500;
-    color: #3d7a7a;
-    font-size: 0.82rem;
-    letter-spacing: 1.8px;
-    margin-top: 8px;
-    text-transform: uppercase;
-  }
+    .bio-closing-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+      font-style: italic;
+      color: #1c1a17;
+      line-height: 1.85;
+      max-width: 620px;
+      margin: 0 auto 14px;
+    }
 
-  @media (max-width: 900px) {
-    .page-body { grid-template-columns: 1fr; max-width: 760px; }
-  }
+    .bio-closing-attr {
+      font-size: 0.72rem;
+      letter-spacing: 2.8px;
+      text-transform: uppercase;
+      color: #8a8278;
+      font-weight: 500;
+    }
 
-  @media (max-width: 680px) {
-    .topbar { padding: 0 16px; }
-  }
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid #efefef;
+      background: #ffffff;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
 
-  @media (max-width: 600px) {
-    .bio-chapter { padding: 24px; }
-    .bio-closing { padding: 36px 24px; }
-  }
-</style>
+    .footer-text {
+      color: #8a8278;
+      font-size: 0.88rem;
+      letter-spacing: 0.5px;
+      font-style: italic;
+    }
+
+    .footer-name {
+      font-weight: 500;
+      color: #3d7a7a;
+      font-size: 0.82rem;
+      letter-spacing: 1.8px;
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .page-body {
+        grid-template-columns: 1fr;
+        max-width: 760px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .topbar {
+        padding: 0 16px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .bio-chapter {
+        padding: 24px;
+      }
+
+      .bio-closing {
+        padding: 36px 24px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<!-- TOPBAR NAV -->
-<header class="topbar" aria-label="Page navigation">
-  <a class="topbar-back" href="index.html" aria-label="Back to home">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-      <path d="M15 18l-6-6 6-6"/>
-    </svg>
-  </a>
-  <div class="topbar-center">
-    <span class="topbar-title">Biography</span>
-    <span class="topbar-sub">Dr. Philemon Odiwuor Yugi</span>
-  </div>
-  <span class="topbar-spacer" aria-hidden="true"></span>
-</header>
-
-<section class="hero-band" aria-label="Memorial header">
-  <p class="hero-eyebrow">His Story</p>
-  <h1 class="hero-name">Dr. Philemon Odiwuor Yugi</h1>
-  <p class="hero-dates">May 25, 1968 — March 19, 2026</p>
-  <div class="hero-line" aria-hidden="true"></div>
-  <p class="hero-desc">Be of good comfort in the hope of the resurrection morning</p>
-</section>
-
-<main class="page-body">
-
-  <div class="bio-chapter">
-    <div class="bio-chapter-num">01</div>
-    <p class="bio-chapter-tag">Birth &amp; Early Life</p>
-    <h2 class="bio-chapter-title">A Child Full of Promise</h2>
-    <div class="bio-chapter-body">
-      <p class="updating">This section is currently being updated.</p>
+  <!-- TOPBAR NAV -->
+  <header class="topbar" aria-label="Page navigation">
+    <a class="topbar-back" href="index.html" aria-label="Back to home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+        aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </a>
+    <div class="topbar-center">
+      <span class="topbar-title">Biography</span>
+      <span class="topbar-sub">Dr. Philemon Odiwuor Yugi</span>
     </div>
-  </div>
+    <span class="topbar-spacer" aria-hidden="true"></span>
+  </header>
 
-  <div class="bio-chapter">
-    <div class="bio-chapter-num">02</div>
-    <p class="bio-chapter-tag">Education &amp; Schooling</p>
-    <h2 class="bio-chapter-title">A Pursuit of Knowledge</h2>
-    <div class="bio-chapter-body">
-      <p class="updating">This section is currently being updated.</p>
+  <section class="hero-band" aria-label="Memorial header">
+    <p class="hero-eyebrow">His Story</p>
+    <h1 class="hero-name">Dr. Philemon Odiwuor Yugi</h1>
+    <p class="hero-dates">May 25, 1968 — March 19, 2026</p>
+    <div class="hero-line" aria-hidden="true"></div>
+    <p class="hero-desc">Be of good comfort in the hope of the resurrection morning</p>
+  </section>
+
+  <main class="page-body">
+
+    <div id="chapter-1-birth" class="bio-chapter">
+      <div class="bio-chapter-num">01</div>
+      <p class="bio-chapter-tag">Birth &amp; Early Life</p>
+      <h2 class="bio-chapter-title">A Child Full of Promise</h2>
+      <div class="bio-chapter-body">
+        <p class="updating">This section is currently being updated.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="bio-chapter">
-    <div class="bio-chapter-num">03</div>
-    <p class="bio-chapter-tag">Faith &amp; Christian Life</p>
-    <h2 class="bio-chapter-title">Rooted in Faith</h2>
-    <div class="bio-chapter-body">
-      <p class="updating">This section is currently being updated.</p>
+    <div id="chapter-2-education" class="bio-chapter">
+      <div class="bio-chapter-num">02</div>
+      <p class="bio-chapter-tag">Education &amp; Schooling</p>
+      <h2 class="bio-chapter-title">A Pursuit of Knowledge</h2>
+      <div class="bio-chapter-body">
+        <p class="updating">This section is currently being updated.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="bio-chapter">
-    <div class="bio-chapter-num">04</div>
-    <p class="bio-chapter-tag">Family &amp; Home</p>
-    <h2 class="bio-chapter-title">A Devoted Family Man</h2>
-    <div class="bio-chapter-body">
-      <p class="updating">This section is currently being updated.</p>
+    <div id="chapter-3-faith" class="bio-chapter">
+      <div class="bio-chapter-num">03</div>
+      <p class="bio-chapter-tag">Faith &amp; Christian Life</p>
+      <h2 class="bio-chapter-title">Rooted in Faith</h2>
+      <div class="bio-chapter-body">
+        <p class="updating">This section is currently being updated.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="bio-chapter">
-    <div class="bio-chapter-num">05</div>
-    <p class="bio-chapter-tag">Career &amp; Service</p>
-    <h2 class="bio-chapter-title">A Life of Purpose &amp; Impact</h2>
-    <div class="bio-chapter-body">
-      <p class="updating">This section is currently being updated.</p>
+    <div id="chapter-4-family" class="bio-chapter">
+      <div class="bio-chapter-num">04</div>
+      <p class="bio-chapter-tag">Family &amp; Home</p>
+      <h2 class="bio-chapter-title">A Devoted Family Man</h2>
+      <div class="bio-chapter-body">
+        <p class="updating">This section is currently being updated.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="bio-chapter">
-    <div class="bio-chapter-num">06</div>
-    <p class="bio-chapter-tag">Passing &amp; Legacy</p>
-    <h2 class="bio-chapter-title">Gone But Never Forgotten</h2>
-    <div class="bio-chapter-body">
-      <p class="updating">This section is currently being updated.</p>
+    <div id="chapter-5-career" class="bio-chapter">
+      <div class="bio-chapter-num">05</div>
+      <p class="bio-chapter-tag">Career &amp; Service</p>
+      <h2 class="bio-chapter-title">A Life of Purpose &amp; Impact</h2>
+      <div class="bio-chapter-body">
+        <p class="updating">This section is currently being updated.</p>
+      </div>
     </div>
-  </div>
 
-  <div class="bio-closing">
-    <p class="bio-closing-quote">&ldquo;Be of good comfort in the hope of the resurrection morning&rdquo;</p>
-    <p class="bio-closing-attr">May 25, 1968 &mdash; March 19, 2026</p>
-  </div>
+    <div id="chapter-6-legacy" class="bio-chapter">
+      <div class="bio-chapter-num">06</div>
+      <p class="bio-chapter-tag">Passing &amp; Legacy</p>
+      <h2 class="bio-chapter-title">Gone But Never Forgotten</h2>
+      <div class="bio-chapter-body">
+        <p class="updating">This section is currently being updated.</p>
+      </div>
+    </div>
 
-</main>
+    <div class="bio-closing">
+      <p class="bio-closing-quote">&ldquo;Be of good comfort in the hope of the resurrection morning&rdquo;</p>
+      <p class="bio-closing-attr">May 25, 1968 &mdash; March 19, 2026</p>
+    </div>
 
-<footer>
-  <p class="footer-text">&ldquo;Be of good comfort in the hope of the resurrection morning&rdquo;</p>
-  <p class="footer-name">Dr. Philemon Odiwuor Yugi &nbsp;&mdash;&nbsp; May 25, 1968 &ndash; March 19, 2026</p>
-</footer>
+  </main>
 
-<script>
-(function () {
-  var els = document.querySelectorAll('.bio-chapter, .bio-closing');
-  var obs = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-    });
-  }, { threshold: 0.07 });
-  els.forEach(function(el) { obs.observe(el); });
-})();
-</script>
+  <footer>
+    <p class="footer-text">&ldquo;Be of good comfort in the hope of the resurrection morning&rdquo;</p>
+    <p class="footer-name">Dr. Philemon Odiwuor Yugi &nbsp;&mdash;&nbsp; May 25, 1968 &ndash; March 19, 2026</p>
+  </footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.bio-chapter, .bio-closing');
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.07 });
+      els.forEach(function (el) { obs.observe(el); });
+    })();
+  </script>
 </body>
+
 </html>
