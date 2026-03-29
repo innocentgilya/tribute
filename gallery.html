@@ -1,10 +1,19 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Memories &amp; Moments | Dr. Philemon Odiwuor Yugi</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400;500&display=swap" rel="stylesheet" />
+  <meta name="description"
+    content="A gallery of memories and moments celebrating the life of Dr. Philemon Odiwuor Yugi." />
+  <meta property="og:title" content="Memories &amp; Moments | Dr. Philemon Odiwuor Yugi" />
+  <meta property="og:description"
+    content="A gallery of memories and moments celebrating the life of Dr. Philemon Odiwuor Yugi." />
+  <meta property="og:type" content="website" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400;500&display=swap"
+    rel="stylesheet" />
   <style>
     :root {
       --bg: #071e22;
@@ -13,23 +22,29 @@
       --muted: #b7c9d0;
       --deep: #f0f8fa;
       --gold: #c9a96e;
-      --line: rgba(122,184,200,0.2);
+      --line: rgba(122, 184, 200, 0.2);
       --teal-light: #7fd4db;
-      --shadow: 0 8px 24px rgba(15,21,32,0.12);
-      --shadow-hover: 0 16px 40px rgba(15,21,32,0.22);
+      --shadow: 0 8px 24px rgba(15, 21, 32, 0.12);
+      --shadow-hover: 0 16px 40px rgba(15, 21, 32, 0.22);
       --radius: 12px;
       --nav-h: 62px;
-      --ease: cubic-bezier(.22,.61,.36,1);
+      --ease: cubic-bezier(.22, .61, .36, 1);
       --topbar-bg: #faf8f5;
       --topbar-text: #1c1a17;
       --topbar-muted: #8a8278;
       --topbar-border: #e8e0d0;
     }
 
-    *, *::before, *::after { box-sizing: border-box; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
-    html, body {
-      margin: 0; padding: 0;
+    html,
+    body {
+      margin: 0;
+      padding: 0;
       color: var(--text);
       background: radial-gradient(circle at 50% 25%, #1f5c63 0%, #0d2a38 55%, #071e22 100%);
       font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
@@ -39,29 +54,37 @@
     /* ── TOPBAR NAV ── */
     .topbar {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 40;
       height: var(--nav-h);
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 20px;
-      background: rgba(250,248,245,0.95);
+      background: rgba(250, 248, 245, 0.95);
       border-bottom: 1px solid var(--topbar-border);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
 
     .topbar-back {
-      width: 38px; height: 38px;
+      width: 44px;
+      height: 44px;
       border-radius: 10px;
-      display: grid; place-items: center;
+      display: grid;
+      place-items: center;
       color: var(--topbar-muted);
       text-decoration: none;
       border: 1px solid transparent;
       transition: background 0.15s, border-color 0.15s;
     }
-    .topbar-back:hover { background: #f4f0e8; border-color: var(--topbar-border); }
+
+    .topbar-back:hover {
+      background: #f4f0e8;
+      border-color: var(--topbar-border);
+    }
 
     .topbar-center {
       display: flex;
@@ -69,6 +92,7 @@
       align-items: center;
       gap: 1px;
     }
+
     .topbar-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.35rem;
@@ -77,6 +101,7 @@
       color: var(--topbar-text);
       line-height: 1;
     }
+
     .topbar-sub {
       font-size: 0.68rem;
       letter-spacing: 2.5px;
@@ -84,7 +109,9 @@
       color: var(--topbar-muted);
     }
 
-    .topbar-spacer { width: 38px; }
+    .topbar-spacer {
+      width: 44px;
+    }
 
 
 
@@ -100,15 +127,26 @@
       columns: 5 220px;
       column-gap: 16px;
     }
-    @media (max-width: 900px) { .gallery-grid { columns: 3 180px; } }
-    @media (max-width: 580px) { .gallery-grid { columns: 2 150px; } }
+
+    @media (max-width: 900px) {
+      .gallery-grid {
+        columns: 3 180px;
+      }
+    }
+
+    @media (max-width: 580px) {
+      .gallery-grid {
+        columns: 2 150px;
+      }
+    }
 
     /* ── CARD ── */
     .gallery-card {
       display: block;
       break-inside: avoid;
       margin-bottom: 16px;
-      border: 0; padding: 0;
+      border: 0;
+      padding: 0;
       background: var(--paper);
       border-radius: var(--radius);
       overflow: hidden;
@@ -120,45 +158,69 @@
       opacity: 0;
       transition: opacity .35s ease, box-shadow .3s ease, transform .3s var(--ease);
     }
+
     .gallery-card.loaded {
       opacity: 1;
     }
+
     .gallery-card:hover {
       box-shadow: var(--shadow-hover);
       transform: translateY(-3px);
     }
+
     .gallery-card:focus-visible {
-      outline: 2px solid var(--gold); outline-offset: 3px;
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
     }
 
     /* ── IMAGE WRAPPER ── */
     .card-img-wrap {
       position: relative;
       overflow: hidden;
-      background: #d4cfc6; /* warm placeholder */
+      background: #d4cfc6;
+      /* warm placeholder */
     }
+
     /* Shimmer skeleton */
     .card-img-wrap::before {
       content: "";
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       background: linear-gradient(90deg, #d4cfc6 25%, #e8e2d9 50%, #d4cfc6 75%);
       background-size: 200% 100%;
       animation: shimmer 1.4s infinite;
       z-index: 1;
       transition: opacity .3s;
     }
-    .gallery-card.loaded .card-img-wrap::before { opacity: 0; pointer-events: none; }
-    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+
+    .gallery-card.loaded .card-img-wrap::before {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: 200% 0
+      }
+
+      100% {
+        background-position: -200% 0
+      }
+    }
 
     .card-img-wrap img {
-      display: block; width: 100%;
-      height: auto; /* natural height — no forced aspect ratio */
+      display: block;
+      width: 100%;
+      height: auto;
+      /* natural height — no forced aspect ratio */
       object-fit: cover;
       filter: grayscale(18%);
       transition: filter .45s ease, transform .45s var(--ease);
-      position: relative; z-index: 2;
+      position: relative;
+      z-index: 2;
       /* Reserve no space initially — image dictates height */
     }
+
     .gallery-card:hover img {
       filter: grayscale(0%);
       transform: scale(1.04);
@@ -166,213 +228,326 @@
 
     /* overlay */
     .card-overlay {
-      position: absolute; inset: 0; z-index: 3;
-      display: grid; align-content: end;
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      display: grid;
+      align-content: end;
       padding: 12px;
-      background: linear-gradient(to top, rgba(18,22,30,.6), transparent 60%);
+      background: linear-gradient(to top, rgba(18, 22, 30, .6), transparent 60%);
       color: #f8f5ee;
-      opacity: 0; transition: opacity .35s ease;
+      opacity: 0;
+      transition: opacity .35s ease;
     }
-    .gallery-card:hover .card-overlay { opacity: 1; }
-    .card-caption { margin: 0; font-family: 'Playfair Display', Georgia, serif; font-size: .9rem; line-height: 1.3; }
-    .card-meta { margin: 3px 0 0; font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: #ddd6c8; }
+
+    .gallery-card:hover .card-overlay {
+      opacity: 1;
+    }
+
+    .card-caption {
+      margin: 0;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: .9rem;
+      line-height: 1.3;
+    }
+
+    .card-meta {
+      margin: 3px 0 0;
+      font-size: .7rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #ddd6c8;
+    }
 
     /* ── STATUS ── */
     .status {
-      text-align: center; color: var(--muted);
-      padding: 20px 12px; font-size: .96rem; min-height: 40px;
+      text-align: center;
+      color: var(--muted);
+      padding: 20px 12px;
+      font-size: .96rem;
+      min-height: 40px;
     }
 
     /* ── LIGHTBOX ── */
     .lightbox {
-      position: fixed; inset: 0; z-index: 999;
-      display: grid; place-items: center;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: grid;
+      place-items: center;
       padding: 18px;
-      background: rgba(10,13,20,.78);
-      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-      opacity: 0; pointer-events: none;
+      background: rgba(10, 13, 20, .78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      pointer-events: none;
       transition: opacity .3s ease;
     }
-    .lightbox.open { opacity: 1; pointer-events: auto; }
+
+    .lightbox.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     .lightbox-panel {
       position: relative;
-      width: min(1040px, 96vw); max-height: 92vh;
-      border-radius: 14px; overflow: hidden;
+      width: min(1040px, 96vw);
+      max-height: 92vh;
+      border-radius: 14px;
+      overflow: hidden;
       background: #111621;
       display: grid;
       transform: scale(.97);
       transition: transform .35s var(--ease);
-      box-shadow: 0 18px 56px rgba(0,0,0,.45);
-      padding: clamp(12px,1.8vw,20px);
+      box-shadow: 0 18px 56px rgba(0, 0, 0, .45);
+      padding: clamp(12px, 1.8vw, 20px);
     }
-    .lightbox.open .lightbox-panel { transform: scale(1); }
+
+    .lightbox.open .lightbox-panel {
+      transform: scale(1);
+    }
+
     .lightbox-close {
-      position: fixed; top: 14px; right: 14px;
-      width: 30px; height: 30px;
-      border: 1px solid rgba(255,255,255,.35);
-      border-radius: 50%; background: rgba(5,10,18,.68);
-      color: #f5efe2; font-size: 1.05rem; cursor: pointer;
-      display: grid; place-items: center; z-index: 1002;
+      position: fixed;
+      top: 14px;
+      right: 14px;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(255, 255, 255, .35);
+      border-radius: 50%;
+      background: rgba(5, 10, 18, .68);
+      color: #f5efe2;
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      z-index: 1002;
     }
-    .lightbox-close:hover { background: rgba(255,255,255,.18); outline: none; }
+
+    .lightbox-close:hover {
+      background: rgba(255, 255, 255, .18);
+      outline: none;
+    }
+
     .lightbox-media {
-      width: 100%; display: flex; align-items: center; justify-content: center;
-      background: #0e131d; min-height: 280px;
-      padding: clamp(8px,1.6vw,14px); border-radius: 10px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0e131d;
+      min-height: 280px;
+      padding: clamp(8px, 1.6vw, 14px);
+      border-radius: 10px;
     }
+
     .photo-shot {
-      position: relative; display: inline-block;
-      max-width: 100%; line-height: 0; margin-inline: auto;
+      position: relative;
+      display: inline-block;
+      max-width: 100%;
+      line-height: 0;
+      margin-inline: auto;
     }
+
     .photo-shot img {
-      max-width: 100%; max-height: 78vh;
-      width: auto; height: auto; object-fit: contain;
-      display: block; margin-inline: auto;
-      box-shadow: 0 18px 40px rgba(0,0,0,.42);
+      max-width: 100%;
+      max-height: 78vh;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+      margin-inline: auto;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, .42);
       border-radius: 2px;
     }
+
     .shot-corner {
       position: absolute;
-      width: clamp(18px,2.3vw,30px); height: clamp(18px,2.3vw,30px);
-      border-color: rgba(236,224,196,.96); border-style: solid;
+      width: clamp(18px, 2.3vw, 30px);
+      height: clamp(18px, 2.3vw, 30px);
+      border-color: rgba(236, 224, 196, .96);
+      border-style: solid;
       pointer-events: none;
     }
-    .shot-corner.tl{top:-8px;left:-8px;border-width:3px 0 0 3px}
-    .shot-corner.tr{top:-8px;right:-8px;border-width:3px 3px 0 0}
-    .shot-corner.bl{bottom:-8px;left:-8px;border-width:0 0 3px 3px}
-    .shot-corner.br{bottom:-8px;right:-8px;border-width:0 3px 3px 0}
+
+    .shot-corner.tl {
+      top: -8px;
+      left: -8px;
+      border-width: 3px 0 0 3px
+    }
+
+    .shot-corner.tr {
+      top: -8px;
+      right: -8px;
+      border-width: 3px 3px 0 0
+    }
+
+    .shot-corner.bl {
+      bottom: -8px;
+      left: -8px;
+      border-width: 0 0 3px 3px
+    }
+
+    .shot-corner.br {
+      bottom: -8px;
+      right: -8px;
+      border-width: 0 3px 3px 0
+    }
 
     /* ── FOOTER ── */
     footer {
       text-align: center;
       border-top: 1px solid var(--line);
       padding: 32px 12px 40px;
-      background: rgba(8,32,38,.58);
-    }
-    .footer-quote {
-      margin: 0; font-family: 'Playfair Display', Georgia, serif;
-      font-style: italic; color: #d7e8ed;
-    }
-    .footer-name {
-      margin: 10px 0 0; font-size: .74rem;
-      letter-spacing: .12em; text-transform: uppercase; color: var(--gold);
+      background: rgba(8, 32, 38, .58);
     }
 
-    @media (max-width:600px){
-      .topbar{padding:0 16px;}
-      .gallery-grid{column-gap:10px;}
-      .gallery-card{margin-bottom:10px;}
+    .footer-quote {
+      margin: 0;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      color: #d7e8ed;
     }
-    @media(prefers-reduced-motion:reduce){
-      *,*::before,*::after{animation:none!important;transition:none!important;}
+
+    .footer-name {
+      margin: 10px 0 0;
+      font-size: .74rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    @media (max-width:600px) {
+      .topbar {
+        padding: 0 16px;
+      }
+
+      .gallery-grid {
+        column-gap: 10px;
+      }
+
+      .gallery-card {
+        margin-bottom: 10px;
+      }
+    }
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<!-- TOPBAR NAV -->
-<header class="topbar" aria-label="Page navigation">
-  <a class="topbar-back" href="index.html" aria-label="Back to home">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-      <path d="M15 18l-6-6 6-6"/>
-    </svg>
-  </a>
-  <div class="topbar-center">
-    <span class="topbar-title">Memories &amp; Moments</span>
-    <span class="topbar-sub">Dr. Philemon Odiwuor Yugi</span>
-  </div>
-  <span class="topbar-spacer" aria-hidden="true"></span>
-</header>
+  <!-- TOPBAR NAV -->
+  <header class="topbar" aria-label="Page navigation">
+    <a class="topbar-back" href="index.html" aria-label="Back to home">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+        aria-hidden="true">
+        <path d="M15 18l-6-6 6-6" />
+      </svg>
+    </a>
+    <div class="topbar-center">
+      <span class="topbar-title">Memories &amp; Moments</span>
+      <span class="topbar-sub">Dr. Philemon Odiwuor Yugi</span>
+    </div>
+    <span class="topbar-spacer" aria-hidden="true"></span>
+  </header>
 
 
 
-<main class="gallery-wrap">
-  <section class="gallery-grid" id="gallery-grid" aria-label="Photo gallery"></section>
-  <p class="status" id="status" aria-live="polite"></p>
-</main>
+  <main class="gallery-wrap">
+    <section class="gallery-grid" id="gallery-grid" aria-label="Photo gallery"></section>
+    <p class="status" id="status" aria-live="polite"></p>
+  </main>
 
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview" tabindex="-1">
-  <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
-  <div class="lightbox-panel">
-    <div class="lightbox-media" id="lightbox-media">
-      <div class="photo-shot">
-        <span class="shot-corner tl"></span>
-        <span class="shot-corner tr"></span>
-        <span class="shot-corner bl"></span>
-        <span class="shot-corner br"></span>
-        <img id="lightbox-image" src="" alt="" />
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview" tabindex="-1">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
+    <div class="lightbox-panel">
+      <div class="lightbox-media" id="lightbox-media">
+        <div class="photo-shot">
+          <span class="shot-corner tl"></span>
+          <span class="shot-corner tr"></span>
+          <span class="shot-corner bl"></span>
+          <span class="shot-corner br"></span>
+          <img id="lightbox-image" src="" alt="" />
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<footer>
-  <p class="footer-quote">"Be of good comfort in the hope of the resurrection morning"</p>
-  <p class="footer-name">Dr. Philemon Odiwuor Yugi · 1968 – 2026</p>
-</footer>
+  <footer>
+    <p class="footer-quote">"Be of good comfort in the hope of the resurrection morning"</p>
+    <p class="footer-name">Dr. Philemon Odiwuor Yugi · 1968 – 2026</p>
+  </footer>
 
-<script>
-(function () {
-  'use strict';
+  <script>
+    (function () {
+      'use strict';
 
-  /* ─── CONFIG ─────────────────────────────────────────── */
-  const CONFIG = {
-    imageDir: 'images',
-    base: 'Dr Philemon Yugi',
-    maxScan: 200,
-    stopAfterMisses: 24,
-    /* Pinterest trick: probe N images simultaneously */
-    batchSize: 12
-  };
+      /* ─── CONFIG ─────────────────────────────────────────── */
+      const CONFIG = {
+        imageDir: 'images',
+        base: 'Dr Philemon Yugi',
+        maxScan: 200,
+        stopAfterMisses: 24,
+        /* Pinterest trick: probe N images simultaneously */
+        batchSize: 12
+      };
 
-  const state = {
-    photos: [],          // confirmed photos
-    cards: [],           // DOM card elements (index-matched)
-    currentIndex: 0,
-    lastFocused: null,
-    scanning: true,
-    totalFound: 0
-  };
+      const state = {
+        photos: [],          // confirmed photos
+        cards: [],           // DOM card elements (index-matched)
+        currentIndex: 0,
+        lastFocused: null,
+        scanning: true,
+        totalFound: 0
+      };
 
-  const els = {
-    grid:    document.getElementById('gallery-grid'),
-    status:  document.getElementById('status'),
-    lightbox: document.getElementById('lightbox'),
-    lbImage:  document.getElementById('lightbox-image'),
-    lbClose:  document.getElementById('lightbox-close')
-  };
+      const els = {
+        grid: document.getElementById('gallery-grid'),
+        status: document.getElementById('status'),
+        lightbox: document.getElementById('lightbox'),
+        lbImage: document.getElementById('lightbox-image'),
+        lbClose: document.getElementById('lightbox-close')
+      };
 
-  const swipe = { startX: 0, startY: 0, active: false };
+      const swipe = { startX: 0, startY: 0, active: false };
 
-  /* ─── HELPERS ────────────────────────────────────────── */
-  function prettify(name) {
-    return name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
-  }
+      /* ─── HELPERS ────────────────────────────────────────── */
+      function prettify(name) {
+        return name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
+      }
 
-  /* Probe a single URL; resolves with { exists, src, index } */
-  function probe(index) {
-    return new Promise(resolve => {
-      const baseName = `${CONFIG.base} (${index})`;
-      const src = `${CONFIG.imageDir}/${baseName}.jpg`;
-      const img = new Image();
-      img.onload  = () => resolve({ exists: true,  src, index, baseName });
-      img.onerror = () => resolve({ exists: false, src, index, baseName });
-      img.src = src;
-    });
-  }
+      /* Probe a single URL; resolves with { exists, src, index } */
+      function probe(index) {
+        return new Promise(resolve => {
+          const baseName = `${CONFIG.base} (${index})`;
+          const src = `${CONFIG.imageDir}/${baseName}.jpg`;
+          const img = new Image();
+          img.onload = () => resolve({ exists: true, src, index, baseName });
+          img.onerror = () => resolve({ exists: false, src, index, baseName });
+          img.src = src;
+        });
+      }
 
-  /* ─── CARD FACTORY ───────────────────────────────────── */
-  function createCard(photo, slotIndex) {
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'gallery-card';
-    btn.setAttribute('aria-label', `Open photo ${slotIndex + 1}`);
-    btn.dataset.index = String(slotIndex);
+      /* ─── CARD FACTORY ───────────────────────────────────── */
+      function createCard(photo, slotIndex) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'gallery-card';
+        btn.setAttribute('aria-label', `Open photo ${slotIndex + 1}`);
+        btn.dataset.index = String(slotIndex);
 
-    const label = prettify(photo.baseName) || `Memory ${slotIndex + 1}`;
+        const label = prettify(photo.baseName) || `Memory ${slotIndex + 1}`;
 
-    btn.innerHTML = `
+        btn.innerHTML = `
       <div class="card-img-wrap">
         <img
           src="${photo.src}"
@@ -386,138 +561,139 @@
         </div>
       </div>`;
 
-    const img = btn.querySelector('img');
+        const img = btn.querySelector('img');
 
-    /* Mark card visible the moment its image finishes loading */
-    img.addEventListener('load', () => btn.classList.add('loaded'), { once: true });
-    /* If the image is already cached, load fires synchronously before the listener — check */
-    if (img.complete && img.naturalWidth > 0) btn.classList.add('loaded');
+        /* Mark card visible the moment its image finishes loading */
+        img.addEventListener('load', () => btn.classList.add('loaded'), { once: true });
+        /* If the image is already cached, load fires synchronously before the listener — check */
+        if (img.complete && img.naturalWidth > 0) btn.classList.add('loaded');
 
-    btn.addEventListener('click', () => openLightbox(slotIndex));
+        btn.addEventListener('click', () => openLightbox(slotIndex));
 
-    return btn;
-  }
-
-  /* ─── PARALLEL BATCH SCAN ───────────────────────────── */
-  /*
-   * Pinterest strategy: fire N probes simultaneously.
-   * Each result that comes back is appended to the grid immediately —
-   * the user sees photos appearing in parallel rather than one by one.
-   * We track consecutive misses across batches to know when to stop.
-   */
-  async function scan() {
-    let misses = 0;
-    let i = 1;
-
-    while (i <= CONFIG.maxScan && misses < CONFIG.stopAfterMisses) {
-      /* Build a batch of up to batchSize probes */
-      const batch = [];
-      for (let b = 0; b < CONFIG.batchSize && i <= CONFIG.maxScan; b++, i++) {
-        batch.push(probe(i));
+        return btn;
       }
 
-      /* Wait for ALL in this batch simultaneously */
-      const results = await Promise.all(batch);
+      /* ─── PARALLEL BATCH SCAN ───────────────────────────── */
+      /*
+       * Pinterest strategy: fire N probes simultaneously.
+       * Each result that comes back is appended to the grid immediately —
+       * the user sees photos appearing in parallel rather than one by one.
+       * We track consecutive misses across batches to know when to stop.
+       */
+      async function scan() {
+        let misses = 0;
+        let i = 1;
 
-      for (const r of results) {
-        if (r.exists) {
-          misses = 0;  // reset miss-streak on any hit
-          const slotIndex = state.photos.length;
-          state.photos.push(r);
-          state.totalFound++;
+        while (i <= CONFIG.maxScan && misses < CONFIG.stopAfterMisses) {
+          /* Build a batch of up to batchSize probes */
+          const batch = [];
+          for (let b = 0; b < CONFIG.batchSize && i <= CONFIG.maxScan; b++, i++) {
+            batch.push(probe(i));
+          }
 
-          const card = createCard(r, slotIndex);
-          state.cards.push(card);
-          els.grid.appendChild(card);
+          /* Wait for ALL in this batch simultaneously */
+          const results = await Promise.all(batch);
+
+          for (const r of results) {
+            if (r.exists) {
+              misses = 0;  // reset miss-streak on any hit
+              const slotIndex = state.photos.length;
+              state.photos.push(r);
+              state.totalFound++;
+
+              const card = createCard(r, slotIndex);
+              state.cards.push(card);
+              els.grid.appendChild(card);
+            } else {
+              misses++;
+              if (misses >= CONFIG.stopAfterMisses) break;
+            }
+          }
+
+          /* Small yield so the browser can paint between batches */
+          await new Promise(r => setTimeout(r, 0));
+        }
+
+        state.scanning = false;
+
+        if (state.photos.length === 0) {
+          els.status.textContent = 'No photos found in the images folder.';
         } else {
-          misses++;
-          if (misses >= CONFIG.stopAfterMisses) break;
+          els.status.textContent = '';
         }
       }
 
-      /* Small yield so the browser can paint between batches */
-      await new Promise(r => setTimeout(r, 0));
-    }
+      /* ─── LIGHTBOX ───────────────────────────────────────── */
+      function updateLightbox(index) {
+        const photo = state.photos[index];
+        if (!photo) return;
+        state.currentIndex = index;
+        els.lbImage.src = photo.src;
+        els.lbImage.alt = `Photo ${index + 1} – Dr. Philemon Odiwuor Yugi`;
+      }
 
-    state.scanning = false;
+      function openLightbox(index) {
+        state.lastFocused = document.activeElement;
+        updateLightbox(index);
+        els.lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        els.lightbox.focus();
+      }
 
-    if (state.photos.length === 0) {
-      els.status.textContent = 'No photos found in the images folder.';
-    } else {
-      els.status.textContent = '';
-    }
-  }
+      function closeLightbox() {
+        els.lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        els.lbImage.src = '';
+        if (state.lastFocused) state.lastFocused.focus();
+      }
 
-  /* ─── LIGHTBOX ───────────────────────────────────────── */
-  function updateLightbox(index) {
-    const photo = state.photos[index];
-    if (!photo) return;
-    state.currentIndex = index;
-    els.lbImage.src   = photo.src;
-    els.lbImage.alt   = `Photo ${index + 1} – Dr. Philemon Odiwuor Yugi`;
-  }
+      function nextImage() {
+        if (!state.photos.length) return;
+        updateLightbox((state.currentIndex + 1) % state.photos.length);
+      }
 
-  function openLightbox(index) {
-    state.lastFocused = document.activeElement;
-    updateLightbox(index);
-    els.lightbox.classList.add('open');
-    document.body.style.overflow = 'hidden';
-    els.lightbox.focus();
-  }
+      function prevImage() {
+        if (!state.photos.length) return;
+        updateLightbox((state.currentIndex - 1 + state.photos.length) % state.photos.length);
+      }
 
-  function closeLightbox() {
-    els.lightbox.classList.remove('open');
-    document.body.style.overflow = '';
-    els.lbImage.src = '';
-    if (state.lastFocused) state.lastFocused.focus();
-  }
+      /* ─── EVENTS ──────────────────────────────────────────── */
+      els.lbClose.addEventListener('click', closeLightbox);
 
-  function nextImage() {
-    if (!state.photos.length) return;
-    updateLightbox((state.currentIndex + 1) % state.photos.length);
-  }
+      els.lightbox.addEventListener('click', e => {
+        if (e.target === els.lightbox) closeLightbox();
+      });
 
-  function prevImage() {
-    if (!state.photos.length) return;
-    updateLightbox((state.currentIndex - 1 + state.photos.length) % state.photos.length);
-  }
+      /* Swipe */
+      els.lightbox.addEventListener('touchstart', e => {
+        const t = e.changedTouches[0];
+        if (!t) return;
+        swipe.startX = t.clientX; swipe.startY = t.clientY; swipe.active = true;
+      }, { passive: true });
 
-  /* ─── EVENTS ──────────────────────────────────────────── */
-  els.lbClose.addEventListener('click', closeLightbox);
+      els.lightbox.addEventListener('touchend', e => {
+        if (!swipe.active || !els.lightbox.classList.contains('open')) return;
+        const t = e.changedTouches[0]; if (!t) return;
+        const dx = t.clientX - swipe.startX;
+        const dy = t.clientY - swipe.startY;
+        swipe.active = false;
+        if (Math.abs(dx) < 44 || Math.abs(dx) <= Math.abs(dy)) return;
+        dx < 0 ? nextImage() : prevImage();
+      }, { passive: true });
 
-  els.lightbox.addEventListener('click', e => {
-    if (e.target === els.lightbox) closeLightbox();
-  });
+      document.addEventListener('keydown', e => {
+        if (!els.lightbox.classList.contains('open')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowRight') nextImage();
+        if (e.key === 'ArrowLeft') prevImage();
+      });
 
-  /* Swipe */
-  els.lightbox.addEventListener('touchstart', e => {
-    const t = e.changedTouches[0];
-    if (!t) return;
-    swipe.startX = t.clientX; swipe.startY = t.clientY; swipe.active = true;
-  }, { passive: true });
+      /* ─── KICK OFF ───────────────────────────────────────── */
+      els.status.textContent = 'Loading memories…';
+      scan();
 
-  els.lightbox.addEventListener('touchend', e => {
-    if (!swipe.active || !els.lightbox.classList.contains('open')) return;
-    const t = e.changedTouches[0]; if (!t) return;
-    const dx = t.clientX - swipe.startX;
-    const dy = t.clientY - swipe.startY;
-    swipe.active = false;
-    if (Math.abs(dx) < 44 || Math.abs(dx) <= Math.abs(dy)) return;
-    dx < 0 ? nextImage() : prevImage();
-  }, { passive: true });
-
-  document.addEventListener('keydown', e => {
-    if (!els.lightbox.classList.contains('open')) return;
-    if (e.key === 'Escape')     closeLightbox();
-    if (e.key === 'ArrowRight') nextImage();
-    if (e.key === 'ArrowLeft')  prevImage();
-  });
-
-  /* ─── KICK OFF ───────────────────────────────────────── */
-  els.status.textContent = 'Loading memories…';
-  scan();
-
-})();
-</script>
+    })();
+  </script>
 </body>
+
 </html>
