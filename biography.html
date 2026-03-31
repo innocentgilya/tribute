@@ -1,699 +1,409 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Memories &amp; Moments | Dr. Philemon Odiwuor Yugi</title>
-  <meta name="description"
-    content="A gallery of memories and moments celebrating the life of Dr. Philemon Odiwuor Yugi." />
-  <meta property="og:title" content="Memories &amp; Moments | Dr. Philemon Odiwuor Yugi" />
-  <meta property="og:description"
-    content="A gallery of memories and moments celebrating the life of Dr. Philemon Odiwuor Yugi." />
-  <meta property="og:type" content="website" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Source+Sans+3:wght@300;400;500&display=swap"
-    rel="stylesheet" />
+  <title>Biography — Dr. Philemon Odiwuor Yugi</title>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
   <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     :root {
-      --bg: #071e22;
-      --paper: #f8f6f1;
-      --text: #e8f1f2;
-      --muted: #b7c9d0;
-      --deep: #f0f8fa;
-      --gold: #c9a96e;
-      --line: rgba(122, 184, 200, 0.2);
-      --teal-light: #7fd4db;
-      --shadow: 0 8px 24px rgba(15, 21, 32, 0.12);
-      --shadow-hover: 0 16px 40px rgba(15, 21, 32, 0.22);
-      --radius: 12px;
-      --nav-h: 62px;
-      --ease: cubic-bezier(.22, .61, .36, 1);
-      --topbar-bg: #faf8f5;
-      --topbar-text: #1c1a17;
-      --topbar-muted: #8a8278;
-      --topbar-border: #e8e0d0;
+      --ink:        #18140f;
+      --ink-mid:    #38322a;
+      --ink-soft:   #655c50;
+      --ink-faint:  #9c8f7e;
+      --rule:       #c4bbb0;
+      --rule-light: #ddd7ce;
+      --teal:       #1f5c63;
+      --page:       #faf8f4;
+      --nav-h:      56px;
     }
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
+    html { scroll-behavior: smooth; }
 
-    html,
     body {
-      margin: 0;
-      padding: 0;
-      color: var(--text);
-      background: radial-gradient(circle at 50% 25%, #1f5c63 0%, #0d2a38 55%, #071e22 100%);
-      font-family: 'Source Sans 3', 'Segoe UI', sans-serif;
-      min-height: 100vh;
+      background: var(--page);
+      color: var(--ink);
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 17.5px;
+      line-height: 1.9;
+      overflow-x: hidden;
     }
 
-    /* ── TOPBAR NAV ── */
+    /* ── NAV ── */
     .topbar {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 40;
+      top: 0; left: 0; right: 0;
+      z-index: 20;
       height: var(--nav-h);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 20px;
-      background: rgba(250, 248, 245, 0.95);
-      border-bottom: 1px solid var(--topbar-border);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      padding: 0 28px;
+      background: rgba(250, 248, 244, 0.97);
+      border-bottom: 1px solid var(--rule-light);
+      backdrop-filter: blur(8px);
     }
-
     .topbar-back {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display: grid;
-      place-items: center;
-      color: var(--topbar-muted);
+      width: 36px; height: 36px;
+      border-radius: 7px;
+      display: grid; place-items: center;
+      color: var(--ink-faint);
       text-decoration: none;
       border: 1px solid transparent;
       transition: background 0.15s, border-color 0.15s;
     }
-
-    .topbar-back:hover {
-      background: #f4f0e8;
-      border-color: var(--topbar-border);
+    .topbar-back:hover { background: #ede8df; border-color: var(--rule); }
+    .topbar-center { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+    .topbar-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: 0.03em;
     }
-
-    .topbar-center {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1px;
-    }
-
-    .topbar-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.35rem;
-      font-weight: 500;
-      letter-spacing: 0.01em;
-      color: var(--topbar-text);
-      line-height: 1;
-    }
-
     .topbar-sub {
-      font-size: 0.68rem;
-      letter-spacing: 2.5px;
+      font-size: 0.58rem;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--topbar-muted);
+      color: var(--ink-faint);
+    }
+    .topbar-spacer { width: 36px; }
+
+    /* ── PAGE ── */
+    .page {
+      margin-top: var(--nav-h);
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 80px 48px 100px;
     }
 
-    .topbar-spacer {
-      width: 44px;
-    }
-
-
-
-    /* ── GALLERY WRAP ── */
-    .gallery-wrap {
-      width: min(1160px, 92vw);
-      margin: 0 auto;
-      padding: calc(var(--nav-h) + 32px) 0 78px;
-    }
-
-    /* ── MASONRY GRID ── */
-    .gallery-grid {
-      columns: 5 220px;
-      column-gap: 16px;
-    }
-
-    @media (max-width: 900px) {
-      .gallery-grid {
-        columns: 3 180px;
-      }
-    }
-
-    @media (max-width: 580px) {
-      .gallery-grid {
-        columns: 2 150px;
-      }
-    }
-
-    /* ── CARD ── */
-    .gallery-card {
-      display: block;
-      break-inside: avoid;
-      margin-bottom: 16px;
-      border: 0;
-      padding: 0;
-      background: var(--paper);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-      cursor: pointer;
-      text-align: left;
-      width: 100%;
-      /* Start invisible; flip to visible once img is loaded */
-      opacity: 0;
-      transition: opacity .35s ease, box-shadow .3s ease, transform .3s var(--ease);
-    }
-
-    .gallery-card.loaded {
-      opacity: 1;
-    }
-
-    .gallery-card:hover {
-      box-shadow: var(--shadow-hover);
-      transform: translateY(-3px);
-    }
-
-    .gallery-card:focus-visible {
-      outline: 2px solid var(--gold);
-      outline-offset: 3px;
-    }
-
-    /* ── IMAGE WRAPPER ── */
-    .card-img-wrap {
-      position: relative;
-      overflow: hidden;
-      background: #d4cfc6;
-      /* warm placeholder */
-    }
-
-    /* Shimmer skeleton */
-    .card-img-wrap::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, #d4cfc6 25%, #e8e2d9 50%, #d4cfc6 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.4s infinite;
-      z-index: 1;
-      transition: opacity .3s;
-    }
-
-    .gallery-card.loaded .card-img-wrap::before {
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    @keyframes shimmer {
-      0% {
-        background-position: 200% 0
-      }
-
-      100% {
-        background-position: -200% 0
-      }
-    }
-
-    .card-img-wrap img {
-      display: block;
-      width: 100%;
-      height: auto;
-      /* natural height — no forced aspect ratio */
-      object-fit: cover;
-      filter: grayscale(18%);
-      transition: filter .45s ease, transform .45s var(--ease);
-      position: relative;
-      z-index: 2;
-      /* Reserve no space initially — image dictates height */
-    }
-
-    .gallery-card:hover img {
-      filter: grayscale(0%);
-      transform: scale(1.04);
-    }
-
-    /* overlay */
-    .card-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      display: grid;
-      align-content: end;
-      padding: 12px;
-      background: linear-gradient(to top, rgba(18, 22, 30, .6), transparent 60%);
-      color: #f8f5ee;
-      opacity: 0;
-      transition: opacity .35s ease;
-    }
-
-    .gallery-card:hover .card-overlay {
-      opacity: 1;
-    }
-
-    .card-caption {
-      margin: 0;
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: .9rem;
-      line-height: 1.3;
-    }
-
-    .card-meta {
-      margin: 3px 0 0;
-      font-size: .7rem;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: #ddd6c8;
-    }
-
-    /* ── STATUS ── */
-    .status {
+    /* ── MASTHEAD ── */
+    .masthead {
       text-align: center;
-      color: var(--muted);
-      padding: 20px 12px;
-      font-size: .96rem;
-      min-height: 40px;
+      margin-bottom: 56px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--rule);
     }
-
-    /* ── LIGHTBOX ── */
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 999;
-      display: grid;
-      place-items: center;
-      padding: 18px;
-      background: rgba(10, 13, 20, .78);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .3s ease;
+    .masthead-eyebrow {
+      font-size: 0.62rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 20px;
     }
-
-    .lightbox.open {
-      opacity: 1;
-      pointer-events: auto;
+    .masthead-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 10px;
     }
-
-    .lightbox-panel {
-      position: relative;
-      width: min(1040px, 96vw);
-      max-height: 92vh;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #111621;
-      display: grid;
-      transform: scale(.97);
-      transition: transform .35s var(--ease);
-      box-shadow: 0 18px 56px rgba(0, 0, 0, .45);
-      padding: clamp(12px, 1.8vw, 20px);
+    .masthead-dates {
+      font-size: 1rem;
+      font-style: italic;
+      color: var(--ink-soft);
+      margin-bottom: 26px;
+      letter-spacing: 0.3px;
     }
-
-    .lightbox.open .lightbox-panel {
-      transform: scale(1);
-    }
-
-    .lightbox-close {
-      position: fixed;
-      top: 14px;
-      right: 14px;
-      width: 30px;
-      height: 30px;
-      border: 1px solid rgba(255, 255, 255, .35);
-      border-radius: 50%;
-      background: rgba(5, 10, 18, .68);
-      color: #f5efe2;
-      font-size: 1.05rem;
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      z-index: 1002;
-    }
-
-    .lightbox-close:hover {
-      background: rgba(255, 255, 255, .18);
-      outline: none;
-    }
-
-    .lightbox-media {
-      width: 100%;
+    .masthead-rule {
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #0e131d;
-      min-height: 280px;
-      padding: clamp(8px, 1.6vw, 14px);
-      border-radius: 10px;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .masthead-rule-line { width: 52px; height: 1px; background: var(--rule); }
+    .masthead-rule-mark { color: var(--teal); font-size: 0.85rem; }
+    .masthead-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-soft);
+      line-height: 1.7;
     }
 
-    .photo-shot {
-      position: relative;
-      display: inline-block;
-      max-width: 100%;
-      line-height: 0;
-      margin-inline: auto;
+    /* ── SECTION ── */
+    .bio-section {
+      margin-bottom: 44px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
+    .bio-section.visible { opacity: 1; transform: translateY(0); }
 
-    .photo-shot img {
-      max-width: 100%;
-      max-height: 78vh;
-      width: auto;
-      height: auto;
-      object-fit: contain;
+    .section-label {
+      font-size: 0.58rem;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--teal);
       display: block;
-      margin-inline: auto;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, .42);
-      border-radius: 2px;
+      margin-bottom: 6px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 14px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--rule-light);
     }
 
-    .shot-corner {
-      position: absolute;
-      width: clamp(18px, 2.3vw, 30px);
-      height: clamp(18px, 2.3vw, 30px);
-      border-color: rgba(236, 224, 196, .96);
-      border-style: solid;
-      pointer-events: none;
+    .bio-body {
+      font-size: 1.02rem;
+      color: var(--ink-mid);
+      line-height: 1.95;
     }
+    .bio-body p { margin-bottom: 16px; }
+    .bio-body p:last-child { margin-bottom: 0; }
+    .bio-body strong { color: var(--ink); font-weight: 500; }
 
-    .shot-corner.tl {
-      top: -8px;
-      left: -8px;
-      border-width: 3px 0 0 3px
+    /* ── SURVIVORS ── */
+    .survivors { margin-top: 14px; }
+    .survivor-group { margin-bottom: 18px; }
+    .survivor-group:last-child { margin-bottom: 0; }
+    .survivor-group-label {
+      font-size: 0.58rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      display: block;
+      margin-bottom: 5px;
     }
-
-    .shot-corner.tr {
-      top: -8px;
-      right: -8px;
-      border-width: 3px 3px 0 0
+    .survivor-group p {
+      font-size: 1rem;
+      color: var(--ink-mid);
+      line-height: 1.85;
+      padding-left: 16px;
+      border-left: 1px solid var(--rule-light);
     }
+    .survivor-group p strong { color: var(--ink); font-weight: 500; }
 
-    .shot-corner.bl {
-      bottom: -8px;
-      left: -8px;
-      border-width: 0 0 3px 3px
+    /* ── EVENTS ── */
+    .events { margin-top: 20px; border-top: 1px solid var(--rule-light); padding-top: 20px; }
+    .event { display: grid; grid-template-columns: 130px 1fr; gap: 0 20px; margin-bottom: 16px; font-size: 0.98rem; }
+    .event:last-child { margin-bottom: 0; }
+    .event-label {
+      font-size: 0.58rem;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--teal);
+      padding-top: 4px;
     }
+    .event-detail { color: var(--ink-mid); line-height: 1.7; }
+    .event-detail strong { color: var(--ink); font-weight: 500; display: block; }
 
-    .shot-corner.br {
-      bottom: -8px;
-      right: -8px;
-      border-width: 0 3px 3px 0
+    /* ── CLOSING ── */
+    .closing {
+      margin-top: 56px;
+      padding-top: 48px;
+      border-top: 1px solid var(--rule);
+      text-align: center;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .closing.visible { opacity: 1; transform: translateY(0); }
+    .closing-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.98rem, 2vw, 1.2rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 2;
+      max-width: 520px;
+      margin: 0 auto 10px;
+    }
+    .closing-ref {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 28px;
+    }
+    .closing-dates {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.92rem;
+      font-style: italic;
+      color: var(--ink-faint);
     }
 
     /* ── FOOTER ── */
     footer {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 32px 48px 56px;
+      border-top: 1px solid var(--rule-light);
       text-align: center;
-      border-top: 1px solid var(--line);
-      padding: 32px 12px 40px;
-      background: rgba(8, 32, 38, .58);
     }
-
-    .footer-quote {
-      margin: 0;
-      font-family: 'Playfair Display', Georgia, serif;
+    .footer-verse {
+      font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      color: #d7e8ed;
+      font-weight: 300;
+      font-size: 0.98rem;
+      color: var(--ink-faint);
+      margin-bottom: 8px;
     }
-
     .footer-name {
-      margin: 10px 0 0;
-      font-size: .74rem;
-      letter-spacing: .12em;
+      font-size: 0.6rem;
+      letter-spacing: 3px;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--teal);
     }
 
-    @media (max-width:600px) {
-      .topbar {
-        padding: 0 16px;
-      }
-
-      .gallery-grid {
-        column-gap: 10px;
-      }
-
-      .gallery-card {
-        margin-bottom: 10px;
-      }
-    }
-
-    @media(prefers-reduced-motion:reduce) {
-
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
+    @media (max-width: 620px) {
+      .page { padding: 48px 24px 80px; }
+      footer { padding: 28px 24px 48px; }
+      .topbar { padding: 0 16px; }
+      .event { grid-template-columns: 1fr; gap: 2px; }
+      .event-label { margin-bottom: 2px; }
     }
   </style>
 </head>
-
 <body>
 
-  <!-- TOPBAR NAV -->
-  <header class="topbar" aria-label="Page navigation">
+  <header class="topbar">
     <a class="topbar-back" href="index.html" aria-label="Back to home">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-        aria-hidden="true">
-        <path d="M15 18l-6-6 6-6" />
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6"/>
       </svg>
     </a>
     <div class="topbar-center">
-      <span class="topbar-title">Memories &amp; Moments</span>
+      <span class="topbar-label">Biography</span>
       <span class="topbar-sub">Dr. Philemon Odiwuor Yugi</span>
     </div>
-    <span class="topbar-spacer" aria-hidden="true"></span>
+    <span class="topbar-spacer"></span>
   </header>
 
+  <div class="page">
 
-
-  <main class="gallery-wrap">
-    <section class="gallery-grid" id="gallery-grid" aria-label="Photo gallery"></section>
-    <p class="status" id="status" aria-live="polite"></p>
-  </main>
-
-  <!-- LIGHTBOX -->
-  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo preview" tabindex="-1">
-    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
-    <div class="lightbox-panel">
-      <div class="lightbox-media" id="lightbox-media">
-        <div class="photo-shot">
-          <span class="shot-corner tl"></span>
-          <span class="shot-corner tr"></span>
-          <span class="shot-corner bl"></span>
-          <span class="shot-corner br"></span>
-          <img id="lightbox-image" src="" alt="" />
-        </div>
+    <header class="masthead">
+      <p class="masthead-eyebrow">In Loving Memory</p>
+      <h1 class="masthead-name">Dr. Philemon Odiwuor Yugi</h1>
+      <p class="masthead-dates">25 May 1968 &mdash; 19 March 2026</p>
+      <div class="masthead-rule">
+        <span class="masthead-rule-line"></span>
+        <span class="masthead-rule-mark">✦</span>
+        <span class="masthead-rule-line"></span>
       </div>
-    </div>
+      <p class="masthead-tagline">Be of good comfort in the hope of the resurrection morning</p>
+    </header>
+
+    <main>
+
+      <section class="bio-section">
+        <span class="section-label">Announcement</span>
+        <h2 class="section-title">It is with profound sorrow&hellip;</h2>
+        <div class="bio-body">
+          <p>It is with profound sorrow, and in humble acceptance of God's sovereign will, that we announce the passing of Dr. Philemon Odiwuor Yugi. He departed this life on 19 March 2026, leaving behind a legacy of scholarship, faithful service, and deep love for family and community.</p>
+        </div>
+      </section>
+
+      <section class="bio-section">
+        <span class="section-label">Birth &amp; Family Background</span>
+        <h2 class="section-title">Son of Pr. Tukiko Yugi Koyo and Risanael Ataro Yugi</h2>
+        <div class="bio-body">
+          <p>Dr. Yugi was born to the late Pr. Tukiko Yugi Koyo and the late Risanael Ataro Yugi. He was a beloved son-in-law of the late Jackton Osara and Dorcas Osara. Raised in faith and grounded in community, he embodied the values of his family throughout his life.</p>
+        </div>
+      </section>
+
+      <section class="bio-section">
+        <span class="section-label">Career &amp; Service</span>
+        <h2 class="section-title">Senior Lecturer, Institute of Policy and Development Studies — Daystar University</h2>
+        <div class="bio-body">
+          <p>Dr. Yugi served with distinction as a Senior Lecturer at the Institute of Policy and Development Studies, Daystar University, where he was widely respected as an expert in Monitoring and Evaluation (M&amp;E). His dedication to nurturing the next generation of scholars and practitioners left an indelible mark on all who learned under his guidance.</p>
+        </div>
+      </section>
+
+      <section class="bio-section">
+        <span class="section-label">Faith &amp; Character</span>
+        <h2 class="section-title">Devout Member, SDA Church Polyview, Kisumu</h2>
+        <div class="bio-body">
+          <p>A devout member of the Seventh Day Adventist Church, Polyview, Kisumu, he integrated his faith with every dimension of his professional and personal life. Throughout his years, he was known above all for his unwavering commitment to family, friendship, and mentorship.</p>
+        </div>
+      </section>
+
+      <section class="bio-section">
+        <span class="section-label">Survivors</span>
+        <h2 class="section-title">Those He Leaves Behind</h2>
+        <div class="bio-body">
+          <p>Dr. Yugi is survived by his beloved wife <strong>Benter Osara</strong>, his sons <strong>Paul Ataro Yugi</strong> and <strong>Patton Yugi</strong>, and his daughter <strong>Peggy Odiwuor</strong>.</p>
+        </div>
+        <div class="survivors">
+          <div class="survivor-group">
+            <span class="survivor-group-label">Brothers</span>
+            <p>He is deeply mourned by his brothers <strong>Moses Yugi</strong> and <strong>James Yugi</strong> and <strong>Lida Nyaoke</strong>, and remembered fondly alongside the late Peter Yugi and family.</p>
+          </div>
+          <div class="survivor-group">
+            <span class="survivor-group-label">Sisters</span>
+            <p>He leaves behind five sisters: <strong>Rose Yugi-Aol</strong>, <strong>Florence Yugi-Okinyi</strong>, <strong>Mary Tukiko-Maganya</strong> and <strong>Emily Yugi-Rao</strong>, and the memory of the late <strong>Linet Yugi-Awuor</strong>.</p>
+          </div>
+          <div class="survivor-group">
+            <span class="survivor-group-label">Extended Family</span>
+            <p>He was also a dear nephew of <strong>Isaiah Otieno Koyo</strong>, <strong>David Koyo</strong>, <strong>Joshua Koyo</strong>, and <strong>Samuel Koyo</strong> of Kamanga Village, and of <strong>Dan Okech</strong> of Kamolo, Kanyaluo, among many others who cherished him.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="bio-section">
+        <span class="section-label">Memorial &amp; Burial</span>
+        <h2 class="section-title">Services</h2>
+        <div class="bio-body">
+          <p>The family and friends of Dr. Philemon Odiwuor Yugi are invited to attend the following services:</p>
+        </div>
+        <div class="events">
+          <div class="event">
+            <span class="event-label">Memorial Service</span>
+            <div class="event-detail">
+              <strong>Thursday, 2 April 2026 &mdash; 11:00 AM</strong>
+              Daystar University, Valley Road Campus, Nairobi
+            </div>
+          </div>
+          <div class="event">
+            <span class="event-label">Burial</span>
+            <div class="event-detail">
+              <strong>Tuesday, 7 April 2026</strong>
+              Kamanga Village, Central Karachuonyo Location, Homa Bay County
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="closing">
+        <p class="closing-quote">
+          &ldquo;To the believer, death is but a small matter. Christ speaks of it as if it were of little moment. &lsquo;If a man keeps My saying, he shall never see death,&rsquo; &lsquo;he shall never taste of death.&rsquo; To the Christian, death is but a sleep, a moment of silence and darkness. The life is hidden with Christ in God, and &lsquo;when Christ, who is our life, shall appear, then shall ye also appear with Him in glory.&rsquo;&rdquo;
+        </p>
+        <p class="closing-ref">The Desire of Ages, p.&nbsp;787 &nbsp;&middot;&nbsp; John 8:51&ndash;52 &nbsp;&middot;&nbsp; Colossians 3:3&ndash;4</p>
+        <p class="closing-dates">25 May 1968 &mdash; 19 March 2026</p>
+      </div>
+
+    </main>
   </div>
 
   <footer>
-    <p class="footer-quote">"Be of good comfort in the hope of the resurrection morning"</p>
-    <p class="footer-name">Dr. Philemon Odiwuor Yugi · 1968 – 2026</p>
+    <p class="footer-verse">&ldquo;Be of good comfort in the hope of the resurrection morning&rdquo;</p>
+    <p class="footer-name">Dr. Philemon Odiwuor Yugi &nbsp;&mdash;&nbsp; 25 May 1968 &ndash; 19 March 2026</p>
   </footer>
 
   <script>
     (function () {
-      'use strict';
-
-      /* ─── CONFIG ─────────────────────────────────────────── */
-      const CONFIG = {
-        imageDir: 'images',
-        base: 'Dr Philemon Yugi',
-        maxScan: 200,
-        stopAfterMisses: 24,
-        /* Pinterest trick: probe N images simultaneously */
-        batchSize: 12
-      };
-
-      const state = {
-        photos: [],          // confirmed photos
-        cards: [],           // DOM card elements (index-matched)
-        currentIndex: 0,
-        lastFocused: null,
-        scanning: true,
-        totalFound: 0
-      };
-
-      const els = {
-        grid: document.getElementById('gallery-grid'),
-        status: document.getElementById('status'),
-        lightbox: document.getElementById('lightbox'),
-        lbImage: document.getElementById('lightbox-image'),
-        lbClose: document.getElementById('lightbox-close')
-      };
-
-      const swipe = { startX: 0, startY: 0, active: false };
-
-      /* ─── HELPERS ────────────────────────────────────────── */
-      function prettify(name) {
-        return name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
-      }
-
-      /* Probe a single URL; resolves with { exists, src, index } */
-      function probe(index) {
-        return new Promise(resolve => {
-          const baseName = `${CONFIG.base} (${index})`;
-          const src = `${CONFIG.imageDir}/${baseName}.jpg`;
-          const img = new Image();
-          img.onload = () => resolve({ exists: true, src, index, baseName });
-          img.onerror = () => resolve({ exists: false, src, index, baseName });
-          img.src = src;
+      const els = document.querySelectorAll('.bio-section, .closing');
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
         });
-      }
-
-      /* ─── CARD FACTORY ───────────────────────────────────── */
-      function createCard(photo, slotIndex) {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'gallery-card';
-        btn.setAttribute('aria-label', `Open photo ${slotIndex + 1}`);
-        btn.dataset.index = String(slotIndex);
-
-        const label = prettify(photo.baseName) || `Memory ${slotIndex + 1}`;
-
-        btn.innerHTML = `
-      <div class="card-img-wrap">
-        <img
-          src="${photo.src}"
-          alt="Photo ${slotIndex + 1} – Dr. Philemon Odiwuor Yugi"
-          loading="lazy"
-          decoding="async"
-        />
-        <div class="card-overlay">
-          <p class="card-caption">${label}</p>
-          <p class="card-meta">Memory ${String(slotIndex + 1).padStart(2, '0')}</p>
-        </div>
-      </div>`;
-
-        const img = btn.querySelector('img');
-
-        /* Mark card visible the moment its image finishes loading */
-        img.addEventListener('load', () => btn.classList.add('loaded'), { once: true });
-        /* If the image is already cached, load fires synchronously before the listener — check */
-        if (img.complete && img.naturalWidth > 0) btn.classList.add('loaded');
-
-        btn.addEventListener('click', () => openLightbox(slotIndex));
-
-        return btn;
-      }
-
-      /* ─── PARALLEL BATCH SCAN ───────────────────────────── */
-      /*
-       * Pinterest strategy: fire N probes simultaneously.
-       * Each result that comes back is appended to the grid immediately —
-       * the user sees photos appearing in parallel rather than one by one.
-       * We track consecutive misses across batches to know when to stop.
-       */
-      async function scan() {
-        let misses = 0;
-        let i = 1;
-
-        while (i <= CONFIG.maxScan && misses < CONFIG.stopAfterMisses) {
-          /* Build a batch of up to batchSize probes */
-          const batch = [];
-          for (let b = 0; b < CONFIG.batchSize && i <= CONFIG.maxScan; b++, i++) {
-            batch.push(probe(i));
-          }
-
-          /* Wait for ALL in this batch simultaneously */
-          const results = await Promise.all(batch);
-
-          for (const r of results) {
-            if (r.exists) {
-              misses = 0;  // reset miss-streak on any hit
-              const slotIndex = state.photos.length;
-              state.photos.push(r);
-              state.totalFound++;
-
-              const card = createCard(r, slotIndex);
-              state.cards.push(card);
-              els.grid.appendChild(card);
-            } else {
-              misses++;
-              if (misses >= CONFIG.stopAfterMisses) break;
-            }
-          }
-
-          /* Small yield so the browser can paint between batches */
-          await new Promise(r => setTimeout(r, 0));
-        }
-
-        state.scanning = false;
-
-        if (state.photos.length === 0) {
-          els.status.textContent = 'No photos found in the images folder.';
-        } else {
-          els.status.textContent = '';
-        }
-      }
-
-      /* ─── LIGHTBOX ───────────────────────────────────────── */
-      function updateLightbox(index) {
-        const photo = state.photos[index];
-        if (!photo) return;
-        state.currentIndex = index;
-        els.lbImage.src = photo.src;
-        els.lbImage.alt = `Photo ${index + 1} – Dr. Philemon Odiwuor Yugi`;
-      }
-
-      function openLightbox(index) {
-        state.lastFocused = document.activeElement;
-        updateLightbox(index);
-        els.lightbox.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        els.lightbox.focus();
-      }
-
-      function closeLightbox() {
-        els.lightbox.classList.remove('open');
-        document.body.style.overflow = '';
-        els.lbImage.src = '';
-        if (state.lastFocused) state.lastFocused.focus();
-      }
-
-      function nextImage() {
-        if (!state.photos.length) return;
-        updateLightbox((state.currentIndex + 1) % state.photos.length);
-      }
-
-      function prevImage() {
-        if (!state.photos.length) return;
-        updateLightbox((state.currentIndex - 1 + state.photos.length) % state.photos.length);
-      }
-
-      /* ─── EVENTS ──────────────────────────────────────────── */
-      els.lbClose.addEventListener('click', closeLightbox);
-
-      els.lightbox.addEventListener('click', e => {
-        if (e.target === els.lightbox) closeLightbox();
-      });
-
-      /* Swipe */
-      els.lightbox.addEventListener('touchstart', e => {
-        const t = e.changedTouches[0];
-        if (!t) return;
-        swipe.startX = t.clientX; swipe.startY = t.clientY; swipe.active = true;
-      }, { passive: true });
-
-      els.lightbox.addEventListener('touchend', e => {
-        if (!swipe.active || !els.lightbox.classList.contains('open')) return;
-        const t = e.changedTouches[0]; if (!t) return;
-        const dx = t.clientX - swipe.startX;
-        const dy = t.clientY - swipe.startY;
-        swipe.active = false;
-        if (Math.abs(dx) < 44 || Math.abs(dx) <= Math.abs(dy)) return;
-        dx < 0 ? nextImage() : prevImage();
-      }, { passive: true });
-
-      document.addEventListener('keydown', e => {
-        if (!els.lightbox.classList.contains('open')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowRight') nextImage();
-        if (e.key === 'ArrowLeft') prevImage();
-      });
-
-      /* ─── KICK OFF ───────────────────────────────────────── */
-      els.status.textContent = 'Loading memories…';
-      scan();
-
+      }, { threshold: 0.06 });
+      els.forEach(el => obs.observe(el));
     })();
   </script>
-</body>
 
+</body>
 </html>
