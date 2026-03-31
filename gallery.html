@@ -35,14 +35,9 @@
       --topbar-border: #e8e0d0;
     }
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-    }
+    *, *::before, *::after { box-sizing: border-box; }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       padding: 0;
       color: var(--text);
@@ -54,9 +49,7 @@
     /* ── TOPBAR NAV ── */
     .topbar {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      top: 0; left: 0; right: 0;
       z-index: 40;
       height: var(--nav-h);
       display: flex;
@@ -70,17 +63,14 @@
     }
 
     .topbar-back {
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       border-radius: 10px;
-      display: grid;
-      place-items: center;
+      display: grid; place-items: center;
       color: var(--topbar-muted);
       text-decoration: none;
       border: 1px solid transparent;
       transition: background 0.15s, border-color 0.15s;
     }
-
     .topbar-back:hover {
       background: #f4f0e8;
       border-color: var(--topbar-border);
@@ -92,7 +82,6 @@
       align-items: center;
       gap: 1px;
     }
-
     .topbar-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.35rem;
@@ -101,19 +90,13 @@
       color: var(--topbar-text);
       line-height: 1;
     }
-
     .topbar-sub {
       font-size: 0.68rem;
       letter-spacing: 2.5px;
       text-transform: uppercase;
       color: var(--topbar-muted);
     }
-
-    .topbar-spacer {
-      width: 44px;
-    }
-
-
+    .topbar-spacer { width: 44px; }
 
     /* ── GALLERY WRAP ── */
     .gallery-wrap {
@@ -122,22 +105,10 @@
       padding: calc(var(--nav-h) + 32px) 0 78px;
     }
 
-    /* ── MASONRY GRID ── */
+    /* ── MASONRY GRID — desktop & tablet ── */
     .gallery-grid {
       columns: 5 220px;
       column-gap: 16px;
-    }
-
-    @media (max-width: 900px) {
-      .gallery-grid {
-        columns: 3 180px;
-      }
-    }
-
-    @media (max-width: 580px) {
-      .gallery-grid {
-        columns: 2 150px;
-      }
     }
 
     /* ── CARD ── */
@@ -154,20 +125,14 @@
       cursor: pointer;
       text-align: left;
       width: 100%;
-      /* Start invisible; flip to visible once img is loaded */
       opacity: 0;
       transition: opacity .35s ease, box-shadow .3s ease, transform .3s var(--ease);
     }
-
-    .gallery-card.loaded {
-      opacity: 1;
-    }
-
+    .gallery-card.loaded { opacity: 1; }
     .gallery-card:hover {
       box-shadow: var(--shadow-hover);
       transform: translateY(-3px);
     }
-
     .gallery-card:focus-visible {
       outline: 2px solid var(--gold);
       outline-offset: 3px;
@@ -178,7 +143,6 @@
       position: relative;
       overflow: hidden;
       background: #d4cfc6;
-      /* warm placeholder */
     }
 
     /* Shimmer skeleton */
@@ -192,35 +156,25 @@
       z-index: 1;
       transition: opacity .3s;
     }
-
     .gallery-card.loaded .card-img-wrap::before {
       opacity: 0;
       pointer-events: none;
     }
-
     @keyframes shimmer {
-      0% {
-        background-position: 200% 0
-      }
-
-      100% {
-        background-position: -200% 0
-      }
+      0%   { background-position: 200% 0 }
+      100% { background-position: -200% 0 }
     }
 
     .card-img-wrap img {
       display: block;
       width: 100%;
       height: auto;
-      /* natural height — no forced aspect ratio */
       object-fit: cover;
       filter: grayscale(18%);
       transition: filter .45s ease, transform .45s var(--ease);
       position: relative;
       z-index: 2;
-      /* Reserve no space initially — image dictates height */
     }
-
     .gallery-card:hover img {
       filter: grayscale(0%);
       transform: scale(1.04);
@@ -239,10 +193,7 @@
       opacity: 0;
       transition: opacity .35s ease;
     }
-
-    .gallery-card:hover .card-overlay {
-      opacity: 1;
-    }
+    .gallery-card:hover .card-overlay { opacity: 1; }
 
     .card-caption {
       margin: 0;
@@ -250,7 +201,6 @@
       font-size: .9rem;
       line-height: 1.3;
     }
-
     .card-meta {
       margin: 3px 0 0;
       font-size: .7rem;
@@ -283,7 +233,6 @@
       pointer-events: none;
       transition: opacity .3s ease;
     }
-
     .lightbox.open {
       opacity: 1;
       pointer-events: auto;
@@ -302,20 +251,15 @@
       box-shadow: 0 18px 56px rgba(0, 0, 0, .45);
       padding: clamp(12px, 1.8vw, 20px);
     }
-
-    .lightbox.open .lightbox-panel {
-      transform: scale(1);
-    }
+    .lightbox.open .lightbox-panel { transform: scale(1); }
 
     .lightbox-close {
       position: fixed;
-      top: 14px;
-      right: 14px;
-      width: 30px;
-      height: 30px;
-      border: 1px solid rgba(255, 255, 255, .35);
+      top: 14px; right: 14px;
+      width: 30px; height: 30px;
+      border: 1px solid rgba(255,255,255,.35);
       border-radius: 50%;
-      background: rgba(5, 10, 18, .68);
+      background: rgba(5,10,18,.68);
       color: #f5efe2;
       font-size: 1.05rem;
       cursor: pointer;
@@ -323,10 +267,8 @@
       place-items: center;
       z-index: 1002;
     }
-
     .lightbox-close:hover {
-      background: rgba(255, 255, 255, .18);
-      outline: none;
+      background: rgba(255,255,255,.18);
     }
 
     .lightbox-media {
@@ -347,16 +289,14 @@
       line-height: 0;
       margin-inline: auto;
     }
-
     .photo-shot img {
       max-width: 100%;
       max-height: 78vh;
-      width: auto;
-      height: auto;
+      width: auto; height: auto;
       object-fit: contain;
       display: block;
       margin-inline: auto;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, .42);
+      box-shadow: 0 18px 40px rgba(0,0,0,.42);
       border-radius: 2px;
     }
 
@@ -368,30 +308,10 @@
       border-style: solid;
       pointer-events: none;
     }
-
-    .shot-corner.tl {
-      top: -8px;
-      left: -8px;
-      border-width: 3px 0 0 3px
-    }
-
-    .shot-corner.tr {
-      top: -8px;
-      right: -8px;
-      border-width: 3px 3px 0 0
-    }
-
-    .shot-corner.bl {
-      bottom: -8px;
-      left: -8px;
-      border-width: 0 0 3px 3px
-    }
-
-    .shot-corner.br {
-      bottom: -8px;
-      right: -8px;
-      border-width: 0 3px 3px 0
-    }
+    .shot-corner.tl { top: -8px; left: -8px;   border-width: 3px 0 0 3px }
+    .shot-corner.tr { top: -8px; right: -8px;   border-width: 3px 3px 0 0 }
+    .shot-corner.bl { bottom: -8px; left: -8px; border-width: 0 0 3px 3px }
+    .shot-corner.br { bottom: -8px; right: -8px;border-width: 0 3px 3px 0 }
 
     /* ── FOOTER ── */
     footer {
@@ -400,14 +320,12 @@
       padding: 32px 12px 40px;
       background: rgba(8, 32, 38, .58);
     }
-
     .footer-quote {
       margin: 0;
       font-family: 'Playfair Display', Georgia, serif;
       font-style: italic;
       color: #d7e8ed;
     }
-
     .footer-name {
       margin: 10px 0 0;
       font-size: .74rem;
@@ -416,25 +334,57 @@
       color: var(--gold);
     }
 
-    @media (max-width:600px) {
-      .topbar {
-        padding: 0 16px;
-      }
-
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
       .gallery-grid {
+        columns: 3 180px;
+      }
+    }
+
+    /* Tablet: 2 columns */
+    @media (max-width: 640px) {
+      .gallery-grid {
+        columns: 2;
         column-gap: 10px;
       }
-
       .gallery-card {
         margin-bottom: 10px;
       }
     }
 
-    @media(prefers-reduced-motion:reduce) {
+    /* Mobile: single full-width column — no cramped grid */
+    @media (max-width: 480px) {
+      .gallery-wrap {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+      }
 
-      *,
-      *::before,
-      *::after {
+      .gallery-grid {
+        columns: 1;
+        column-gap: 0;
+        padding: 0 16px;
+      }
+
+      .gallery-card {
+        margin-bottom: 14px;
+        border-radius: 10px;
+        /* Full-width cards — image fills the screen width naturally */
+      }
+
+      /* On mobile, always show the caption overlay (no hover) */
+      .card-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(18, 22, 30, .55), transparent 50%);
+      }
+
+      .topbar {
+        padding: 0 16px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
         animation: none !important;
         transition: none !important;
       }
@@ -447,8 +397,7 @@
   <!-- TOPBAR NAV -->
   <header class="topbar" aria-label="Page navigation">
     <a class="topbar-back" href="index.html" aria-label="Back to home">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-        aria-hidden="true">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
         <path d="M15 18l-6-6 6-6" />
       </svg>
     </a>
@@ -458,8 +407,6 @@
     </div>
     <span class="topbar-spacer" aria-hidden="true"></span>
   </header>
-
-
 
   <main class="gallery-wrap">
     <section class="gallery-grid" id="gallery-grid" aria-label="Photo gallery"></section>
@@ -491,19 +438,17 @@
     (function () {
       'use strict';
 
-      /* ─── CONFIG ─────────────────────────────────────────── */
       const CONFIG = {
         imageDir: 'images',
         base: 'Dr Philemon Yugi',
         maxScan: 200,
         stopAfterMisses: 24,
-        /* Pinterest trick: probe N images simultaneously */
         batchSize: 12
       };
 
       const state = {
-        photos: [],          // confirmed photos
-        cards: [],           // DOM card elements (index-matched)
+        photos: [],
+        cards: [],
         currentIndex: 0,
         lastFocused: null,
         scanning: true,
@@ -520,24 +465,21 @@
 
       const swipe = { startX: 0, startY: 0, active: false };
 
-      /* ─── HELPERS ────────────────────────────────────────── */
       function prettify(name) {
         return name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ').replace(/\s+/g, ' ').trim();
       }
 
-      /* Probe a single URL; resolves with { exists, src, index } */
       function probe(index) {
         return new Promise(resolve => {
           const baseName = `${CONFIG.base} (${index})`;
           const src = `${CONFIG.imageDir}/${baseName}.jpg`;
           const img = new Image();
-          img.onload = () => resolve({ exists: true, src, index, baseName });
+          img.onload  = () => resolve({ exists: true,  src, index, baseName });
           img.onerror = () => resolve({ exists: false, src, index, baseName });
           img.src = src;
         });
       }
 
-      /* ─── CARD FACTORY ───────────────────────────────────── */
       function createCard(photo, slotIndex) {
         const btn = document.createElement('button');
         btn.type = 'button';
@@ -548,59 +490,45 @@
         const label = prettify(photo.baseName) || `Memory ${slotIndex + 1}`;
 
         btn.innerHTML = `
-      <div class="card-img-wrap">
-        <img
-          src="${photo.src}"
-          alt="Photo ${slotIndex + 1} – Dr. Philemon Odiwuor Yugi"
-          loading="lazy"
-          decoding="async"
-        />
-        <div class="card-overlay">
-          <p class="card-caption">${label}</p>
-          <p class="card-meta">Memory ${String(slotIndex + 1).padStart(2, '0')}</p>
-        </div>
-      </div>`;
+          <div class="card-img-wrap">
+            <img
+              src="${photo.src}"
+              alt="Photo ${slotIndex + 1} – Dr. Philemon Odiwuor Yugi"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="card-overlay">
+              <p class="card-caption">${label}</p>
+              <p class="card-meta">Memory ${String(slotIndex + 1).padStart(2, '0')}</p>
+            </div>
+          </div>`;
 
         const img = btn.querySelector('img');
-
-        /* Mark card visible the moment its image finishes loading */
         img.addEventListener('load', () => btn.classList.add('loaded'), { once: true });
-        /* If the image is already cached, load fires synchronously before the listener — check */
         if (img.complete && img.naturalWidth > 0) btn.classList.add('loaded');
 
         btn.addEventListener('click', () => openLightbox(slotIndex));
-
         return btn;
       }
 
-      /* ─── PARALLEL BATCH SCAN ───────────────────────────── */
-      /*
-       * Pinterest strategy: fire N probes simultaneously.
-       * Each result that comes back is appended to the grid immediately —
-       * the user sees photos appearing in parallel rather than one by one.
-       * We track consecutive misses across batches to know when to stop.
-       */
       async function scan() {
         let misses = 0;
         let i = 1;
 
         while (i <= CONFIG.maxScan && misses < CONFIG.stopAfterMisses) {
-          /* Build a batch of up to batchSize probes */
           const batch = [];
           for (let b = 0; b < CONFIG.batchSize && i <= CONFIG.maxScan; b++, i++) {
             batch.push(probe(i));
           }
 
-          /* Wait for ALL in this batch simultaneously */
           const results = await Promise.all(batch);
 
           for (const r of results) {
             if (r.exists) {
-              misses = 0;  // reset miss-streak on any hit
+              misses = 0;
               const slotIndex = state.photos.length;
               state.photos.push(r);
               state.totalFound++;
-
               const card = createCard(r, slotIndex);
               state.cards.push(card);
               els.grid.appendChild(card);
@@ -610,20 +538,15 @@
             }
           }
 
-          /* Small yield so the browser can paint between batches */
           await new Promise(r => setTimeout(r, 0));
         }
 
         state.scanning = false;
-
-        if (state.photos.length === 0) {
-          els.status.textContent = 'No photos found in the images folder.';
-        } else {
-          els.status.textContent = '';
-        }
+        els.status.textContent = state.photos.length === 0
+          ? 'No photos found in the images folder.'
+          : '';
       }
 
-      /* ─── LIGHTBOX ───────────────────────────────────────── */
       function updateLightbox(index) {
         const photo = state.photos[index];
         if (!photo) return;
@@ -657,17 +580,13 @@
         updateLightbox((state.currentIndex - 1 + state.photos.length) % state.photos.length);
       }
 
-      /* ─── EVENTS ──────────────────────────────────────────── */
       els.lbClose.addEventListener('click', closeLightbox);
-
       els.lightbox.addEventListener('click', e => {
         if (e.target === els.lightbox) closeLightbox();
       });
 
-      /* Swipe */
       els.lightbox.addEventListener('touchstart', e => {
-        const t = e.changedTouches[0];
-        if (!t) return;
+        const t = e.changedTouches[0]; if (!t) return;
         swipe.startX = t.clientX; swipe.startY = t.clientY; swipe.active = true;
       }, { passive: true });
 
@@ -683,17 +602,14 @@
 
       document.addEventListener('keydown', e => {
         if (!els.lightbox.classList.contains('open')) return;
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowRight') nextImage();
-        if (e.key === 'ArrowLeft') prevImage();
+        if (e.key === 'Escape')      closeLightbox();
+        if (e.key === 'ArrowRight')  nextImage();
+        if (e.key === 'ArrowLeft')   prevImage();
       });
 
-      /* ─── KICK OFF ───────────────────────────────────────── */
       els.status.textContent = 'Loading memories…';
       scan();
-
     })();
   </script>
 </body>
-
 </html>
