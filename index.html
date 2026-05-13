@@ -1,9 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>In Loving Memory — Dr. Philemon Odiwuor Yugi</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>In Loving Memory — Dr. Philemon Odiwuor Yugi</title>
+  <meta name="description" content="In Loving Memory of Dr. Philemon Odiwuor Yugi. May 25, 1968 – March 19, 2026. Senior Lecturer at Daystar University, devout SDA member, beloved husband and father." />
+  <meta name="keywords" content="Dr Philemon Odiwuor Yugi, memorial, Daystar University, SDA Church, Kisumu, in loving memory, tribute" />
+  <meta name="author" content="Philemon Odiwuor Yugi Memorial" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://drphilemonyugi.1fr.io/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://drphilemonyugi.1fr.io/" />
+  <meta property="og:title" content="In Loving Memory — Dr. Philemon Odiwuor Yugi" />
+  <meta property="og:description" content="In Loving Memory of Dr. Philemon Odiwuor Yugi. May 25, 1968 – March 19, 2026. Senior Lecturer at Daystar University, devout SDA member, beloved husband and father." />
+  <meta property="og:image" content="https://drphilemonyugi.1fr.io/Images/philemon.jpeg" />
+  <meta property="og:image:width" content="1080" />
+  <meta property="og:image:height" content="1080" />
+  <meta property="og:image:alt" content="Dr. Philemon Odiwuor Yugi — In Loving Memory" />
+  <meta property="og:site_name" content="In Loving Memory — Dr. Philemon Odiwuor Yugi" />
+  <meta property="og:locale" content="en_KE" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="In Loving Memory — Dr. Philemon Odiwuor Yugi" />
+  <meta name="twitter:description" content="In Loving Memory of Dr. Philemon Odiwuor Yugi. May 25, 1968 – March 19, 2026. Senior Lecturer at Daystar University, devout SDA member, beloved husband and father." />
+  <meta name="twitter:image" content="https://drphilemonyugi.1fr.io/Images/philemon.jpeg" />
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -310,10 +333,10 @@
   <!-- Nav floats inside hero, above overlay -->
   <nav class="hero__nav" id="navbar">
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
-      <li><a href="biography.html">Biography</a></li>
-      <li><a href="tributes.html">Tributes</a></li>
+      <li><a href="index">Home</a></li>
+      <li><a href="gallery">Gallery</a></li>
+      <li><a href="biography">Biography</a></li>
+      <li><a href="tributes">Tributes</a></li>
     </ul>
   </nav>
 
@@ -353,7 +376,7 @@
     </div>
     <div class="ss-footer">
       <span class="ss-counter" id="ss-counter"></span>
-      <a class="ss-gallery-link" href="gallery.html">
+      <a class="ss-gallery-link" href="gallery">
         View Full Gallery
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -387,7 +410,7 @@
       <p class="bio-read-more-text">
         Read the full biography of Dr. Philemon Odiwuor Yugi — his family, career at <strong>Daystar University</strong>, faith at <strong>SDA Church Polyview Kisumu</strong>, and those he leaves behind.
       </p>
-      <a class="bio-read-more-link" href="biography.html">
+      <a class="bio-read-more-link" href="biography">
         Read Full Biography
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -413,7 +436,7 @@
       <div class="tp-progress-wrap">
         <div class="tp-progress-bar" id="tp-progress-bar"></div>
       </div>
-      <a class="tp-cta" href="tributes.html">
+      <a class="tp-cta" href="tributes">
         Leave a Tribute
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
@@ -694,7 +717,7 @@
       allTributes = tributes;
       stage.innerHTML = '';
       if (!tributes.length) {
-        stage.innerHTML = '<div class="tp-empty">No tributes yet — be the first to share a memory.<br><a href="tributes.html" style="color:var(--accent);text-decoration:none;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">Leave a Tribute →</a></div>';
+        stage.innerHTML = '<div class="tp-empty">No tributes yet — be the first to share a memory.<br><a href="tributes" style="color:var(--accent);text-decoration:none;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">Leave a Tribute →</a></div>';
         navRow.style.display = 'none';
         return;
       }
@@ -707,7 +730,7 @@
       .then(function (r) { return r.json(); })
       .then(function (data) { render(data); })
       .catch(function () {
-        stage.innerHTML = '<div class="tp-empty">Tributes could not be loaded at this time.<br><a href="tributes.html" style="color:var(--accent);text-decoration:none;">Visit the tributes page →</a></div>';
+        stage.innerHTML = '<div class="tp-empty">Tributes could not be loaded at this time.<br><a href="tributes" style="color:var(--accent);text-decoration:none;">Visit the tributes page →</a></div>';
       });
   })();
 })();
